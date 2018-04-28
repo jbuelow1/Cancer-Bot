@@ -1,7 +1,5 @@
 import discord
 from discord.ext import commands
-from io import BytesIO
-from PIL import Image
 
 bot = commands.Bot(command_prefix='ifr.')
 
