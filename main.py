@@ -18,7 +18,7 @@ async def on_message(message):
         return
     if message.attachments != []:
         print('[DEBUG] Message has attachments.')
-        print(Image)
+        
         return
     else:
         print('[DEBUG] Message does not have attachments, exiting...')
