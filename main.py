@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import ConfigParser
 
 bot = commands.Bot(command_prefix='ifr.')
 
@@ -18,11 +19,14 @@ async def on_message(message):
         return
     if message.attachments != []:
         print('[DEBUG] Message has attachments.')
-        
+
         return
     else:
         print('[DEBUG] Message does not have attachments, exiting...')
         return
 
+config = ConfigParser.ConfigParser()
+config.read("config.cfg")
+token = config.get("basic", "token")
 
-bot.run('NDM5ODUxNDU0MjAzNjkxMDE5.DcZQxA.bCCmSP2Q6WkJWFAfFZoGFdXyQ7g')
+bot.run(token)
