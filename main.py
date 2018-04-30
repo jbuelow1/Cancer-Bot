@@ -1,6 +1,19 @@
 import discord
 from discord.ext import commands
-import ConfigParser
+from six.moves import configparser
+import os
+
+version = '1'
+blankvar = ''
+
+def loglog(message):
+    print(blankvar.join(('[LOG]', message)))
+
+def debuglog(message):
+    print(blankvar.join(('[LOG]', '[DEBUG]', message)))
+
+def errorlog(message):
+    print(blankvar.join(('[LOG]', '[ERROR]', message)))
 
 bot = commands.Bot(command_prefix='ifr.')
 
@@ -15,18 +28,25 @@ async def on_ready():
 async def on_message(message):
     print('[DEBUG] New Message.')
     if message.author == bot.user:
-        print('[DEBUG] Message is by me, exiting...')
+        debuglog('Message is by me, exiting...')
         return
     if message.attachments != []:
-        print('[DEBUG] Message has attachments.')
+        debuglog('Message has attachments.')
 
         return
     else:
-        print('[DEBUG] Message does not have attachments, exiting...')
+        debuglog('Message does not have attachments, exiting...')
         return
 
-config = ConfigParser.ConfigParser()
-config.read("config.cfg")
-token = config.get("basic", "token")
+loglog(blankvar.join(('Starting iFukkie Rapist v.', version, '...')))
+
+filename = "C:\\Users\\jdbue\\Documents\\GitHub\\ifukkie-rapist\\ifr.cfg"
+if os.path.isfile(filename):
+    config = configparser.ConfigParser()
+    config.read(filename)
+    token = config.get("config", "token")
+else:
+    errorlog('Could not find a config file!')
+    exit(1)
 
 bot.run(token)
