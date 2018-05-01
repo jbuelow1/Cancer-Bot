@@ -1,4 +1,4 @@
-#!/bin/python3
+
 import discord
 from six.moves import configparser
 import os
@@ -6,10 +6,16 @@ from time import sleep
 import cv2 as cv
 import numpy as np
 import json
-import urllib
+import urllib.request
+import requests
+import shutil
 
 version = '1'
 blankvar = ''
+workingdir = 'C:/Users/jdbue/Documents/GitHub/ifukkie-rapist/'
+headers={
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
+}
 
 def loglog(message):
     print(blankvar.join(('[LOG] [ ] [ ] ', message)))
@@ -26,18 +32,19 @@ def ifukkie_check(suspect):
     template = cv.imread('sample.jpg',0)
     w, h = template.shape[::-1]
     res = cv.matchTemplate(img_gray,template,cv.TM_CCOEFF_NORMED)
-    threshold = 0.8
+    threshold = 0.4
     loc = np.where( res >= threshold)
     if str(loc) != "(array([], dtype=int32), array([], dtype=int32))":
         return True
     else:
         return False
 
+
+
 print("")
 loglog(blankvar.join(('Starting iFukkie Rapist v', version, '...')))
 
 bot = discord.Client()
-testfile = urllib.URLopener()
 
 @bot.event
 async def on_ready():
@@ -52,16 +59,31 @@ async def on_message(message):
         debuglog('Message is by me, exiting...')
         return
     if message.attachments != []:
-        debuglog('Message has attachments.')
-        attachments = json.loads(message.attachments)
-        testfile.retrieve(attachments['url'], "suspect.jpg")
-        
+        debuglog('Message has attachments. Scanning for cancer...')
+        attach = str(message.attachments)
+        url = attach.split("'")
+        path = url[5].split("/")
+
+        r = requests.get(url[5], stream=True)
+        if r.status_code == 200:
+            with open(path[6], 'wb') as f:
+                for chunk in r:
+                    f.write(chunk)
+
+        cancerous = ifukkie_check(path[6])
+        if cancerous:
+            await bot.delete_message(message)
+            await bot.send_message(message.channel, '<:nope:432913100144902146>')
+            loglog('Message was cancerous and was deleted.')
+        else:
+            debuglog('False Alarm. Message was fine.')
+        os.remove(path[6])
         return
     else:
         debuglog('Message does not have attachments, exiting...')
         return
 
-loglog('Attempting to login to discord...')
+loglog('Attempting to login to Discord...')
 
 filename = "C:\\Users\\jdbue\\Documents\\GitHub\\ifukkie-rapist\\ifr.cfg"
 if os.path.isfile(filename):
