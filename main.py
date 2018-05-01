@@ -21,9 +21,7 @@ silent = False
 debug = True
 
 def loglog(message):
-    if silent:
-    else:
-        print(blankvar.join(('[LOG] [ ] [ ] ', message)))
+    print(blankvar.join(('[LOG] [ ] [ ] ', message)))
 
 def debuglog(message):
     if debug:
@@ -38,16 +36,13 @@ def ifukkie_check(suspect):
     template = cv.imread('sample.jpg',0)
     w, h = template.shape[::-1]
     res = cv.matchTemplate(img_gray,template,cv.TM_CCOEFF_NORMED)
-    threshold = 0.4
+    threshold = 0.8
     loc = np.where( res >= threshold)
     if str(loc) != "(array([], dtype=int32), array([], dtype=int32))":
         return True
     else:
         return False
 
-
-
-print("")
 loglog(blankvar.join(('Starting iFukkie Rapist v', version, '...')))
 
 bot = discord.Client()
@@ -76,10 +71,14 @@ async def on_message(message):
                 for chunk in r:
                     f.write(chunk)
 
-        cancerous = ifukkie_check(path[6])
+        ifukkie = ifukkie_check(path[6])
+        #ilolifukker =ilolifukker_checker(path[6])
+        #memecuck = memecuck_check(path[6])
+        #instashit = instashit_check(path[6])
+        cancerous = ifukkie
         if cancerous:
             await bot.delete_message(message)
-            await bot.send_message(message.channel, '<:nope:432913100144902146>')
+            await bot.send_message(message.channel, '<:nope:432913100144902146> <a:danceD:440893333460746240><a:danceE:440893333204762625><a:danceL:440893333544501258><a:danceE:440893333204762625><a:danceT:440893333523398667> <a:danceD:440893333460746240><a:danceI:440893333586575380><a:danceS:440893333636775946> <:nope:432913100144902146>')
             loglog('Message was cancerous and was deleted.')
         else:
             debuglog('False Alarm. Message was fine.')
