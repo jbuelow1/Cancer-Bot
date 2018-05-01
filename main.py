@@ -1,9 +1,12 @@
+#!/bin/python3
 import discord
 from six.moves import configparser
 import os
 from time import sleep
 import cv2 as cv
 import numpy as np
+import json
+import urllib
 
 version = '1'
 blankvar = ''
@@ -17,8 +20,8 @@ def debuglog(message):
 def errorlog(message):
     print(blankvar.join(('[LOG] [ ] [E] ', message)))
 
-def ifukkie_check():
-    img_rgb = cv.imread('test.jpg')
+def ifukkie_check(suspect):
+    img_rgb = cv.imread(suspect)
     img_gray = cv.cvtColor(img_rgb, cv.COLOR_BGR2GRAY)
     template = cv.imread('sample.jpg',0)
     w, h = template.shape[::-1]
@@ -34,6 +37,7 @@ print("")
 loglog(blankvar.join(('Starting iFukkie Rapist v', version, '...')))
 
 bot = discord.Client()
+testfile = urllib.URLopener()
 
 @bot.event
 async def on_ready():
@@ -49,12 +53,9 @@ async def on_message(message):
         return
     if message.attachments != []:
         debuglog('Message has attachments.')
-        if (int(message.author.id) == 95274427171733504) and (int(message.channel.id) == 426605575669940234):
-            loglog('Message is from a cunt. Delet dis! ( ͠° ͟ʖ ͠°)')
-            sleep(2)
-            await bot.delete_message(message)
-            await bot.send_message(message.channel, '<:nope:432913100144902146>')
-            loglog(blankvar.join(('Message was deleted with id ', message.id, ' from channel ', message.channel.id)))
+        attachments = json.loads(message.attachments)
+        testfile.retrieve(attachments['url'], "suspect.jpg")
+        
         return
     else:
         debuglog('Message does not have attachments, exiting...')
