@@ -9,6 +9,7 @@ import json
 import urllib.request
 import requests
 import shutil
+import random
 
 version = '1'
 blankvar = ''
@@ -33,7 +34,7 @@ def errorlog(message):
 def ifukkie_check(suspect):
     img_rgb = cv.imread(suspect)
     img_gray = cv.cvtColor(img_rgb, cv.COLOR_BGR2GRAY)
-    template = cv.imread('sample.jpg',0)
+    template = cv.imread('ifukkie.png',0)
     w, h = template.shape[::-1]
     res = cv.matchTemplate(img_gray,template,cv.TM_CCOEFF_NORMED)
     threshold = 0.8
@@ -59,6 +60,15 @@ async def on_message(message):
     if message.author == bot.user:
         debuglog('Message is by me, exiting...')
         return
+
+    if (('heck' in message.content) or ('Heck' in message.content) or ('HECK' in message.content) or ('hek' in message.content) or ('Hek' in message.content) or ('HEK' in message.content)):
+        debuglog(blankvar.join((str(message.author), ' just said h*ck!')))
+        await bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,4)),'.jpg')))
+
+    if '@everyone' in message.content:
+        debuglog(blankvar.join((str(message.author), ' pinged! REEEE!!!')))
+        await bot.send_file(message.channel, 'ping.png')
+
     if message.attachments != []:
         debuglog('Message has attachments. Scanning for cancer...')
         attach = str(message.attachments)
@@ -85,12 +95,16 @@ async def on_message(message):
         os.remove(path[6])
         return
     else:
-        debuglog('Message does not have attachments, exiting...')
+        debuglog('Message does not have attachments.')
+        if 'ifunny.co/' in message.content:
+            await bot.delete_message(message)
+            await bot.send_message(message.channel, '<:nope:432913100144902146> <a:danceD:440893333460746240><a:danceE:440893333204762625><a:danceL:440893333544501258><a:danceE:440893333204762625><a:danceT:440893333523398667> <a:danceD:440893333460746240><a:danceI:440893333586575380><a:danceS:440893333636775946> <:nope:432913100144902146>')
+            loglog('Message was cancerous and was deleted.')
         return
 
 loglog('Attempting to login to Discord...')
 
-filename = "C:\\Users\\jdbue\\Documents\\GitHub\\ifukkie-rapist\\ifr.cfg"
+filename = "ifr.cfg"
 if os.path.isfile(filename):
     debuglog(blankvar.join(('Found config file: "', filename, '".')))
     config = configparser.ConfigParser()
