@@ -69,6 +69,10 @@ async def on_message(message):
         debuglog(blankvar.join((str(message.author), ' pinged! REEEE!!!')))
         await bot.send_file(message.channel, 'madping.png')
 
+    if (('die' in message.content) or ('Die' in message.content)):
+        debuglog(blankvar.join((str(message.author), ' wants to die. helping...')))
+        await bot.send_file(message.channel, 'bleach.png')
+
     if message.attachments != []:
         debuglog('Message has attachments. Scanning for cancer...')
         attach = str(message.attachments)
