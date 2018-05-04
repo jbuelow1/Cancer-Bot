@@ -63,11 +63,11 @@ async def on_message(message):
 
     if (('heck' in message.content) or ('Heck' in message.content) or ('HECK' in message.content) or ('hek' in message.content) or ('Hek' in message.content) or ('HEK' in message.content)):
         debuglog(blankvar.join((str(message.author), ' just said h*ck!')))
-        await bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
+        await bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')), content="heck")
 
     if '@everyone' in message.content:
         debuglog(blankvar.join((str(message.author), ' pinged! REEEE!!!')))
-        await bot.send_file(message.channel, 'madping.png')
+        await bot.send_file(message.channel, 'madping.png', content="@everyone")
 
     if (('die' in message.content) or ('Die' in message.content) or ('DIE' in message.content) or ('kys' in message.content) or ('Kys' in message.content) or ('KYS' in message.content) or ('kms' in message.content) or ('Kms' in message.content) or ('KMS' in message.content)):
         debuglog(blankvar.join((str(message.author), ' wants to die. helping...')))
