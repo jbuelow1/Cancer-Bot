@@ -94,10 +94,10 @@ def ifukkie_check(suspect):
     template = cv.imread('ifukkie.png',0)
     w, h = template.shape[::-1]
     res = cv.matchTemplate(img_gray,template,cv.TM_CCOEFF_NORMED)
-    threshold = 1
+    threshold = 0.9
     loc = np.where( res >= threshold)
     print(str(loc))
-    if str(loc) != "(array([], dtype=int32), array([], dtype=int32))":
+    if str(loc) != "(array([], dtype=int64), array([], dtype=int64))":
         return True
     else:
         return False
