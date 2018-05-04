@@ -153,7 +153,7 @@ async def on_message(message):
         cancerous = ifukkie
         if cancerous:
             await bot.delete_message(message)
-            await bot.send_message(message.channel, '<:shooter:441972276901052416> '.join((dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
+            await bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
             loglog('Message was cancerous and was deleted.')
         else:
             debuglog('False Alarm. Message was fine.')
@@ -163,7 +163,7 @@ async def on_message(message):
         debuglog('Message does not have attachments.')
         if 'ifunny.co/' in message.content:
             await bot.delete_message(message)
-            await bot.send_message(message.channel, '<:shooter:441972276901052416> '.join((dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
+            await bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
             loglog('Message was cancerous and was deleted.')
         return
 
