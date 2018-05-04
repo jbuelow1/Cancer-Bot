@@ -133,15 +133,7 @@ async def on_message(message):
         await bot.send_message(message.channel, random.choice(pingemojis))
 
     debuglog('checking for "die", "kys" and "kms"...')
-    try:
-        if findWholeWord('die')(message.content.lower()):
-            bleach = True
-    except:
-        bleach = False
-
-    print(bleach)
-
-    if bleach:
+    if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
         debuglog(blankvar.join((str(message.author), ' wants to die. helping...')))
         await bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
 
