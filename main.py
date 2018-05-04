@@ -57,9 +57,9 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     debuglog(blankvar.join(('New Message by ', str(message.author), ' with ID ', str(message.id), ' in channel ', str(message.channel.id), '.')))
-    if message.author == bot.user:
-        debuglog('Message is by me, exiting...')
-        return
+    #if message.author == bot.user:
+    #    debuglog('Message is by me, exiting...')
+    #    return
 
     if (('heck' in message.content) or ('Heck' in message.content) or ('HECK' in message.content) or ('hek' in message.content) or ('Hek' in message.content) or ('HEK' in message.content)):
         debuglog(blankvar.join((str(message.author), ' just said h*ck!')))
