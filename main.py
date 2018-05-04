@@ -13,7 +13,7 @@ import random
 import re
 import ast
 
-version = '1'
+version = '3'
 blankvar = ''
 workingdir = 'C:/Users/jdbue/Documents/GitHub/ifukkie-rapist/'
 headers={
