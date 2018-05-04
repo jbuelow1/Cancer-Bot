@@ -75,6 +75,7 @@ async def on_message(message):
         url = attach.split("'")
         path = url[5].split("/")
 
+        print(url[5])
         r = requests.get(url[5], stream=True)
         if r.status_code == 200:
             with open(path[6], 'wb') as f:
