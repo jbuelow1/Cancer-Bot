@@ -52,10 +52,11 @@ bot = discord.Client()
 async def on_ready():
     loglog('Connected to Discord!')
     loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
-    print("")
+    await bot.change_status(game=discord.Game(name='Anal rape of ifunny'))
 
 @bot.event
 async def on_message(message):
+    await bot.change_nickname(bot.user)
     debuglog(blankvar.join(('New Message by ', str(message.author), ' with ID ', str(message.id), ' in channel ', str(message.channel.id), '.')))
     if message.author == bot.user:
         debuglog('Message is by me, exiting...')
