@@ -67,7 +67,7 @@ async def on_message(message):
 
     if '@everyone' in message.content:
         debuglog(blankvar.join((str(message.author), ' pinged! REEEE!!!')))
-        await bot.send_file(message.channel, 'ping.png')
+        await bot.send_file(message.channel, 'ping.jpg')
 
     if message.attachments != []:
         debuglog('Message has attachments. Scanning for cancer...')
