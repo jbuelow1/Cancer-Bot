@@ -76,8 +76,8 @@ async def on_message(message):
         path = url[5].split("/")
 
         print(str(url))
-        print(url[6])
-        r = requests.get(url[6], stream=True)
+        print(url[9])
+        r = requests.get(url[9], stream=True)
         if r.status_code == 200:
             with open(path[6], 'wb') as f:
                 for chunk in r:
