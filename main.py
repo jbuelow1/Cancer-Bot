@@ -117,19 +117,25 @@ async def on_message(message):
         debuglog('Message is by me, exiting...')
         return
 
+    debuglog('Checking for trigger words...')
+    debuglog('checing for "heck"...')
     if (('heck' in message.content.lower()) or ('hek' in message.content.lower())):
         debuglog(blankvar.join((str(message.author), ' just said h*ck!')))
         await bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
 
+    debuglog('checking for "@everyone"...')
     if '@everyone' in message.content:
         debuglog(blankvar.join((str(message.author), ' pinged! REEEE!!!')))
         await bot.send_message(message.channel, random.choice(pingemojis))
 
+    debuglog('checking for "die", "kys" and "kms"...')
     try:
         if (str1.index('die') == 0 or str1.index(' die ')) or (str1.index('kys') == 0 or str1.index(' kys ')) or (str1.index('kms') == 0 or str1.index(' kms ')):
             bleach = True
     except:
         bleach = False
+
+    print(bleach)
 
     if bleach:
         debuglog(blankvar.join((str(message.author), ' wants to die. helping...')))
