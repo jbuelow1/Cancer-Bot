@@ -26,7 +26,6 @@ pingemojis = [
 '<:pingthink:441962932784332811>',
 '<:PingReee1:441962933099167745>',
 '<:ping:441804270698758155>',
-'<:mokou_ping:441962933623324690>',
 '<:hyperpinged:441962933187248148>',
 '<:GWnoneAngryPing:441962933199831040>',
 '<:FeelsTooPingedMan:441962933199568906>',
@@ -140,6 +139,8 @@ async def on_message(message):
     if message.attachments != []:
         debuglog('Message has attachments. Scanning for cancer...')
         attach = str(message.attachments)
+        print(type(message.attachments))
+        print(message.attachments)
         print(message.attachments['url'])
         url = attach.split("'")
         path = url[5].split("/")
