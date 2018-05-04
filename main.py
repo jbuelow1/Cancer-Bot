@@ -69,13 +69,14 @@ async def on_message(message):
         debuglog(blankvar.join((str(message.author), ' pinged! REEEE!!!')))
         await bot.send_file(message.channel, 'madping.png')
 
-    if (('die' in message.content) or ('Die' in message.content)):
+    if (('die' in message.content) or ('Die' in message.content) or ('DIE' in message.content) or ('kys' in message.content) or ('Kys' in message.content) or ('KYS' in message.content) or ('kms' in message.content) or ('Kms' in message.content) or ('KMS' in message.content)):
         debuglog(blankvar.join((str(message.author), ' wants to die. helping...')))
-        await bot.send_file(message.channel, 'bleach.png')
+        await bot.send_file(message.channel, 'bleach.png', content="I can help! ")
 
     if message.attachments != []:
         debuglog('Message has attachments. Scanning for cancer...')
         attach = str(message.attachments)
+        print(message.attachments['url'])
         url = attach.split("'")
         path = url[5].split("/")
 
