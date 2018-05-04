@@ -11,6 +11,7 @@ import requests
 import shutil
 import random
 import re
+import ast
 
 version = '1'
 blankvar = ''
@@ -138,18 +139,10 @@ async def on_message(message):
 
     if message.attachments != []:
         debuglog('Message has attachments. Scanning for cancer...')
-        attach = str(message.attachments)
-        print(type(message.attachments))
-        print(type(dancefont))
-        print(message.attachments)
-        print(message.attachments.url)
-        print(message.attachments['url'])
-        url = attach.split("'")
-        path = url[5].split("/")
+        url = ast.literal_eval(str(message.attachments).split("[")[1].split("]")[0])
 
-        print(str(url))
-        print(url[9])
-        r = requests.get(url[9], stream=True)
+
+        r = requests.get(url['url'], stream=True)
         if r.status_code == 200:
             with open(path[6], 'wb') as f:
                 for chunk in r:
