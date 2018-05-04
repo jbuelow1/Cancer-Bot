@@ -52,7 +52,7 @@ bot = discord.Client()
 async def on_ready():
     loglog('Connected to Discord!')
     loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
-    await bot.change_status(game=discord.Game(name='Anal rape of ifunny'))
+    await bot.change_status(game=discord.Game(name='with my cock in ifunny\'s ass'))
 
 @bot.event
 async def on_message(message):
