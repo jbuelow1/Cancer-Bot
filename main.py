@@ -140,6 +140,7 @@ async def on_message(message):
         debuglog('Message has attachments. Scanning for cancer...')
         attach = str(message.attachments)
         print(type(message.attachments))
+        print(type(dancefont))
         print(message.attachments)
         print(message.attachments['url'])
         url = attach.split("'")
