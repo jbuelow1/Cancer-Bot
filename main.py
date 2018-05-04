@@ -147,6 +147,11 @@ async def on_message(message):
         debuglog(blankvar.join((str(message.author),' said hi!')))
         await bot.send_message(message.channel, 'H- Hewwo?!')
 
+    debuglog('looking for XD...')
+    if findWholeWord('xd')(message.content.lower()):
+        debuglog(blankvar.join((str(message.author),' just XD\'d')))
+        await bot.send_message(message.channel, '<a:xd:442034831690301461>')
+
     if message.attachments != []:
         debuglog('Message has attachments. Scanning for cancer...')
         url = ast.literal_eval(str(message.attachments).split("[")[1].split("]")[0])
