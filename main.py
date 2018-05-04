@@ -112,7 +112,7 @@ bot = discord.Client()
 async def on_ready():
     loglog('Connected to Discord!')
     loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
-    await bot.change_status(game=discord.Game(name='with my cock in ifunny\'s ass'))
+    await bot.change_status(game=discord.Game(name='with little children'))
 
 @bot.event
 async def on_message(message):
@@ -141,6 +141,11 @@ async def on_message(message):
     if message.content.lower() == 'shitpost plez':
         debuglog(blankvar.join((str(message.author),' wants a shitpost.')))
         await bot.send_message(message.channel, '💩')
+
+    debuglog('checking for my mentions...')
+    if '<@439851454203691019>' in message.content.lower():
+        debuglog(blankvar.join((str(message.author),' said hi!')))
+        await bot.send_message(message.channel, 'H- Hewwo?!')
 
     if message.attachments != []:
         debuglog('Message has attachments. Scanning for cancer...')
