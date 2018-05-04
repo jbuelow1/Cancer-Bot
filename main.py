@@ -96,7 +96,6 @@ def ifukkie_check(suspect):
     res = cv.matchTemplate(img_gray,template,cv.TM_CCOEFF_NORMED)
     threshold = 0.9
     loc = np.where( res >= threshold)
-    print(str(loc))
     if str(loc) != "(array([], dtype=int64), array([], dtype=int64))":
         return True
     else:
