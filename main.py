@@ -137,6 +137,11 @@ async def on_message(message):
         debuglog(blankvar.join((str(message.author), ' wants to die. helping...')))
         await bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
 
+    debuglog('checking for shitpost trigger...')
+    if message.content.lower() == 'shitpost plez':
+        debuglog(blankvar.join((str(message.author),' wants a shitpost.')))
+        await bot.send_message(message.channel, '💩')
+
     if message.attachments != []:
         debuglog('Message has attachments. Scanning for cancer...')
         url = ast.literal_eval(str(message.attachments).split("[")[1].split("]")[0])
