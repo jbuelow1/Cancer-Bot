@@ -10,6 +10,7 @@ import urllib.request
 import requests
 import shutil
 import random
+import re
 
 version = '1'
 blankvar = ''
@@ -100,6 +101,9 @@ def ifukkie_check(suspect):
     else:
         return False
 
+def findWholeWord(w):
+    return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search
+
 loglog(blankvar.join(('Starting iFukkie Rapist v', version, '...')))
 
 bot = discord.Client()
@@ -130,7 +134,7 @@ async def on_message(message):
 
     debuglog('checking for "die", "kys" and "kms"...')
     try:
-        if (str1.index('die') == 0 or str1.index(' die ')) or (str1.index('kys') == 0 or str1.index(' kys ')) or (str1.index('kms') == 0 or str1.index(' kms ')):
+        if findWholeWord('die')(message.content.lower()):
             bleach = True
     except:
         bleach = False
