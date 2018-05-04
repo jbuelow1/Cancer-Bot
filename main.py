@@ -140,15 +140,13 @@ async def on_message(message):
     if message.attachments != []:
         debuglog('Message has attachments. Scanning for cancer...')
         url = ast.literal_eval(str(message.attachments).split("[")[1].split("]")[0])
-
-
         r = requests.get(url['url'], stream=True)
         if r.status_code == 200:
-            with open(path[6], 'wb') as f:
+            with open(url['filename'], 'wb') as f:
                 for chunk in r:
                     f.write(chunk)
 
-        ifukkie = ifukkie_check(path[6])
+        ifukkie = ifukkie_check(url['filename'])
         #ilolifukker =ilolifukker_checker(path[6])
         #memecuck = memecuck_check(path[6])
         #instashit = instashit_check(path[6])
