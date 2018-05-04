@@ -142,6 +142,7 @@ async def on_message(message):
         print(type(message.attachments))
         print(type(dancefont))
         print(message.attachments)
+        print(message.attachments.url)
         print(message.attachments['url'])
         url = attach.split("'")
         path = url[5].split("/")
