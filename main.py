@@ -157,7 +157,7 @@ async def on_message(message):
             loglog('Message was cancerous and was deleted.')
         else:
             debuglog('False Alarm. Message was fine.')
-        os.remove(path[6])
+        os.remove(url['filename'])
         return
     else:
         debuglog('Message does not have attachments.')
