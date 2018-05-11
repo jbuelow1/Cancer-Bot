@@ -143,7 +143,7 @@ async def on_message(message):
         await bot.send_message(message.channel, '💩')
 
     debuglog('checking for my mentions...')
-    if '<@439851454203691019>' in message.content.lower():
+    if ('<@439851454203691019>' in message.content) or ('<@!439851454203691019>' in message.content):
         debuglog(blankvar.join((str(message.author),' said hi!')))
         await bot.send_message(message.channel, 'H- Hewwo?!')
 
