@@ -182,6 +182,14 @@ async def on_message(message):
             loglog('Message was cancerous and was deleted.')
         return
 
+@bot.event
+async def on_message_delete(message):
+    if message.author == bot.user:
+        debuglog('Someone deleted my post! REEEEEEEE Spamming...')
+        await bot.send_message(message.channel, message.content)
+        await bot.send_message(message.channel, message.content)
+        await bot.send_message(message.channel, message.content)
+
 loglog('Attempting to login to Discord...')
 
 filename = "ifr.cfg"
