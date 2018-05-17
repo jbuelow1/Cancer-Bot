@@ -88,6 +88,13 @@ global kys
 global hewwo
 global xd
 
+ifunny = False
+heck = False
+ping = False
+kys = False
+hewwo = False
+xd = False
+
 def loglog(message):
     print(blankvar.join(('[LOG] [ ] [ ] ', message)))
 
