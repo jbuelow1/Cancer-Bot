@@ -241,7 +241,7 @@ async def on_message(message):
     tChHewwo.start()
     tChXd.start()
 
-    ttChIfunny.join()
+    tChIfunny.join()
     tChHeck.join()
     tChPing.join()
     tChKys.join()
