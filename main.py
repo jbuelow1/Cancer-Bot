@@ -13,6 +13,7 @@ import random
 import re
 import ast
 import threading
+import time
 
 version = '3'
 blankvar = ''
