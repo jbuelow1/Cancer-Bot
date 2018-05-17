@@ -81,6 +81,12 @@ debug = True
 
 bot = discord.Client()
 
+global ifunny
+global heck
+global ping
+global kys
+global hewwo
+global xd
 
 def loglog(message):
     print(blankvar.join(('[LOG] [ ] [ ] ', message)))
