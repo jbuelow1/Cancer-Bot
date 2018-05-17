@@ -96,14 +96,17 @@ hewwo = False
 xd = False
 
 def loglog(message):
-    print(blankvar.join(('[LOG] [ ] [ ] ', message)))
+    ts = time.gmtime()
+    print(blankvar.join(('[', time.strftime("%Y-%m-%d %H:%M:%S", ts), '] ', '[LOG] [ ] [ ] ', message)))
 
 def debuglog(message):
     if debug:
-        print(blankvar.join(('[LOG] [D] [ ] ', message)))
+        ts = time.gmtime()
+        print(blankvar.join(('[', time.strftime("%Y-%m-%d %H:%M:%S", ts), '] ', '[LOG] [D] [ ] ', message)))
 
 def errorlog(message):
-    print(blankvar.join(('[LOG] [ ] [E] ', message)))
+    ts = time.gmtime()
+    print(blankvar.join(('[', time.strftime("%Y-%m-%d %H:%M:%S", ts), '] ', '[LOG] [ ] [E] ', message)))
 
 def image_check(suspect,template):
     img_rgb = cv.imread(suspect)
@@ -143,7 +146,7 @@ def processImage(infile):
 def chHeck(message):
     debuglog('Checking for trigger words...')
     debuglog('checing for "heck"...')
-    if (('heck' in message.content.lower()) or ('hek' in message.content.lower())):
+    if (findWholeWord('heck' in message.content.lower())) or findWholeWord('hek' in message.content.lower()) or findWholeWord('hecking' in message.content.lower()):
         debuglog(blankvar.join((str(message.author), ' just said h*ck!')))
         bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
         global heck
