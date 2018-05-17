@@ -145,7 +145,7 @@ def chKys(message):
 
 def chHewwo(message):
     debuglog('checking for my mentions...')
-    if ('<@439851454203691019>' in message.content) or ('<@!439851454203691019>' in message.content):
+    if (blankvar.join(('<@', bot.user.id, '>')) in message.content) or (blankvar.join(('<!@', bot.user.id, '>')) in message.content):
         debuglog(blankvar.join((str(message.author),' said hi!')))
         await bot.send_message(message.channel, 'H- Hewwo?!')
 
