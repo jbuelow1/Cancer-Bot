@@ -97,7 +97,7 @@ def image_check(suspect,template):
     res = cv.matchTemplate(img_gray,template,cv.TM_CCOEFF_NORMED)
     threshold = 0.8
     loc = np.where( res >= threshold)
-    if str(loc) != "(array([], dtype=int64), array([], dtype=int64))":
+    if str(loc) != ("(array([], dtype=int64), array([], dtype=int64))" or "(array([], dtype=int32), array([], dtype=int32))"):
         return True
     else:
         return False
