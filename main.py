@@ -205,12 +205,12 @@ async def on_message(message):
         debuglog('Message is by me, exiting...')
         return
 
-    tChIfunny = threading.Thread(target=chIfunny, args=(message))
-    tChHeck = threading.Thread(target=chHeck, args=(message))
-    tChPing = threading.Thread(target=chPing, args=(message))
-    tChKys = threading.Thread(target=chKys, args=(message))
-    tChHewwo = threading.Thread(target=chHewwo, args=(message))
-    tChXd = threading.Thread(target=chXd, args=(message))
+    tChIfunny = threading.Thread(target=chIfunny, args=(message,))
+    tChHeck = threading.Thread(target=chHeck, args=(message,))
+    tChPing = threading.Thread(target=chPing, args=(message,))
+    tChKys = threading.Thread(target=chKys, args=(message,))
+    tChHewwo = threading.Thread(target=chHewwo, args=(message,))
+    tChXd = threading.Thread(target=chXd, args=(message,))
 
     tChIfunny.start()
     tChHeck.start()
