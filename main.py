@@ -79,6 +79,8 @@ dancefont = {
 
 debug = True
 
+bot = discord.Client()
+
 def loglog(message):
     print(blankvar.join(('[LOG] [ ] [ ] ', message)))
 
@@ -188,7 +190,6 @@ def chIfunny(message):
 #DEFINES:
 loglog(blankvar.join(('Starting iFukkie Rapist v', version, '...')))
 
-bot = discord.Client()
 
 #ASYNCROUS EVENTS:
 @bot.event
