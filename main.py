@@ -12,6 +12,7 @@ import shutil
 import random
 import re
 import ast
+import threading
 
 version = '3'
 blankvar = ''
@@ -88,10 +89,10 @@ def debuglog(message):
 def errorlog(message):
     print(blankvar.join(('[LOG] [ ] [E] ', message)))
 
-def ifukkie_check(suspect):
+def image_check(suspect,template):
     img_rgb = cv.imread(suspect)
     img_gray = cv.cvtColor(img_rgb, cv.COLOR_BGR2GRAY)
-    template = cv.imread('ifukkie.png',0)
+    template = cv.imread(template,0)
     w, h = template.shape[::-1]
     res = cv.matchTemplate(img_gray,template,cv.TM_CCOEFF_NORMED)
     threshold = 0.8
@@ -104,10 +105,92 @@ def ifukkie_check(suspect):
 def findWholeWord(w):
     return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search
 
+def processImage(infile):
+    try:
+        im = Image.open(infile)
+    except IOError:
+        print "Cant load", infile
+        sys.exit(1)
+    i = 0
+    mypalette = im.getpalette()
+    try:
+        while 1:
+            im.putpalette(mypalette)
+            new_im = Image.new("RGBA", im.size)
+            new_im.paste(im)
+            new_im.save('foo'+str(i)+'.png')
+            i += 1
+            im.seek(im.tell() + 1)
+    except EOFError:
+        pass # end of sequence
+
+def chHeck(message):
+    debuglog('Checking for trigger words...')
+    debuglog('checing for "heck"...')
+    if (('heck' in message.content.lower()) or ('hek' in message.content.lower())):
+        debuglog(blankvar.join((str(message.author), ' just said h*ck!')))
+        await bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
+
+def chPing(message):
+    debuglog('checking for "@everyone"...')
+    if '@everyone' in message.content:
+        debuglog(blankvar.join((str(message.author), ' pinged! REEEE!!!')))
+        await bot.send_message(message.channel, random.choice(pingemojis))
+
+def chKys(message):
+    debuglog('checking for "die", "kys" and "kms"...')
+    if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
+        debuglog(blankvar.join((str(message.author), ' wants to die. helping...')))
+        await bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
+
+def chHewwo(message):
+    debuglog('checking for my mentions...')
+    if ('<@439851454203691019>' in message.content) or ('<@!439851454203691019>' in message.content):
+        debuglog(blankvar.join((str(message.author),' said hi!')))
+        await bot.send_message(message.channel, 'H- Hewwo?!')
+
+def chXd(message):
+    debuglog('looking for XD...')
+    if findWholeWord('xd')(message.content.lower()):
+        debuglog(blankvar.join((str(message.author),' just XD\'d')))
+        await bot.send_message(message.channel, '<a:xd:442034831690301461>')
+
+def chIfunny(message):
+    if message.attachments != []:
+        debuglog('Message has attachments. Scanning for cancer...')
+        url = ast.literal_eval(str(message.attachments).split("[")[1].split("]")[0])
+        r = requests.get(url['url'], stream=True)
+        if r.status_code == 200:
+            with open(blankvar.join(('tmp/', url['filename'])), 'wb') as f:
+                for chunk in r:
+                    f.write(chunk)
+
+        ifukkie = image_check(blankvar.join(('tmp/', url['filename'])), 'ifukkie.png')
+        if ifukkie:
+            await bot.delete_message(message)
+            await bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
+            loglog('Message was cancerous and was deleted.')
+        else:
+            debuglog('False Alarm. Message was fine.')
+        os.remove(blankvar.join(('tmp/', url['filename'])))
+        return
+    else:
+        debuglog('Message does not have attachments.')
+        if 'ifunny.co/' in message.content:
+            await bot.delete_message(message)
+            await bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
+            loglog('Message was cancerous and was deleted.')
+        return
+
+
+
+#END OF FUNCTIONS
+#DEFINES:
 loglog(blankvar.join(('Starting iFukkie Rapist v', version, '...')))
 
 bot = discord.Client()
 
+#ASYNCROUS EVENTS:
 @bot.event
 async def on_ready():
     loglog('Connected to Discord!')
@@ -121,66 +204,29 @@ async def on_message(message):
         debuglog('Message is by me, exiting...')
         return
 
-    debuglog('Checking for trigger words...')
-    debuglog('checing for "heck"...')
-    if (('heck' in message.content.lower()) or ('hek' in message.content.lower())):
-        debuglog(blankvar.join((str(message.author), ' just said h*ck!')))
-        await bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
+    tChIfunny = threading.Thread(target=chIfunny, args=(message))
+    tChHeck = threading.Thread(target=chHeck, args=(message))
+    tChPing = threading.Thread(target=chPing, args=(message))
+    tChKys = threading.Thread(target=chKys, args=(message))
+    tChHewwo = threading.Thread(target=chHewwo, args=(message))
+    tChXd = threading.Thread(target=chXd, args=(message))
 
-    debuglog('checking for "@everyone"...')
-    if '@everyone' in message.content:
-        debuglog(blankvar.join((str(message.author), ' pinged! REEEE!!!')))
-        await bot.send_message(message.channel, random.choice(pingemojis))
+    tChIfunny.start()
+    tChHeck.start()
+    tChPing.start()
+    tChKys.start()
+    tChHewwo.start()
+    tChXd.start()
 
-    debuglog('checking for "die", "kys" and "kms"...')
-    if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
-        debuglog(blankvar.join((str(message.author), ' wants to die. helping...')))
-        await bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
+    tChIfunny.join()
+    tChHeck.join()
+    tChPing.join()
+    tChKys.join()
+    tChHewwo.join()
+    tChXd.join()
 
-    debuglog('checking for shitpost trigger...')
-    if message.content.lower() == 'shitpost plez':
-        debuglog(blankvar.join((str(message.author),' wants a shitpost.')))
-        await bot.send_message(message.channel, '💩')
+    debuglog(blankvar.join(('Message #', message.id, ' has finished processing.')))
 
-    debuglog('checking for my mentions...')
-    if ('<@439851454203691019>' in message.content) or ('<@!439851454203691019>' in message.content):
-        debuglog(blankvar.join((str(message.author),' said hi!')))
-        await bot.send_message(message.channel, 'H- Hewwo?!')
-
-    debuglog('looking for XD...')
-    if findWholeWord('xd')(message.content.lower()):
-        debuglog(blankvar.join((str(message.author),' just XD\'d')))
-        await bot.send_message(message.channel, '<a:xd:442034831690301461>')
-
-    if message.attachments != []:
-        debuglog('Message has attachments. Scanning for cancer...')
-        url = ast.literal_eval(str(message.attachments).split("[")[1].split("]")[0])
-        r = requests.get(url['url'], stream=True)
-        if r.status_code == 200:
-            with open(url['filename'], 'wb') as f:
-                for chunk in r:
-                    f.write(chunk)
-
-        ifukkie = ifukkie_check(url['filename'])
-        #ilolifukker =ilolifukker_checker(path[6])
-        #memecuck = memecuck_check(path[6])
-        #instashit = instashit_check(path[6])
-        cancerous = ifukkie
-        if cancerous:
-            await bot.delete_message(message)
-            await bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
-            loglog('Message was cancerous and was deleted.')
-        else:
-            debuglog('False Alarm. Message was fine.')
-        os.remove(url['filename'])
-        return
-    else:
-        debuglog('Message does not have attachments.')
-        if 'ifunny.co/' in message.content:
-            await bot.delete_message(message)
-            await bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
-            loglog('Message was cancerous and was deleted.')
-        return
 
 @bot.event
 async def on_message_delete(message):
