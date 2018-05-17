@@ -263,23 +263,23 @@ async def on_message(message):
 
 
         if ifunny:
-            bot.delete_message(message)
-            bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
+            await bot.delete_message(message)
+            await bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
 
         if heck:
-            bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
+            await bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
 
         if ping:
-            bot.send_message(message.channel, random.choice(pingemojis))
+            await bot.send_message(message.channel, random.choice(pingemojis))
 
         if kys:
-            bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
+            await bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
 
         if hewwo:
-            bot.send_message(message.channel, 'H- Hewwo?!')
+            await bot.send_message(message.channel, 'H- Hewwo?!')
 
         if xd:
-            bot.send_message(message.channel, '<a:xd:442034831690301461>')
+            await bot.send_message(message.channel, '<a:xd:442034831690301461>')
 
 
         debuglog(blankvar.join(('Message #', message.id, ' has finished processing.')))
