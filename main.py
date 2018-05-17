@@ -151,45 +151,55 @@ def chHeck(message):
     if (('heck' in message.content.lower()) or ('hek' in message.content.lower())):
         debuglog(blankvar.join((str(message.author), ' just said h*ck!')))
         bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
-        global heck = True
+        global heck
+        heck = True
     else:
-        global heck = False
+        global heck
+        heck = False
 
 def chPing(message):
     debuglog('checking for "@everyone"...')
     if '@everyone' in message.content:
         debuglog(blankvar.join((str(message.author), ' pinged! REEEE!!!')))
         bot.send_message(message.channel, random.choice(pingemojis))
-        global ping = True
+        global ping
+        ping = True
     else:
-        global ping = False
+        global ping
+        ping = False
 
 def chKys(message):
     debuglog('checking for "die", "kys" and "kms"...')
     if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
         debuglog(blankvar.join((str(message.author), ' wants to die. helping...')))
         bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
-        global kys = True
+        global kys
+        kys = True
     else:
-        global kys = False
+        global kys
+        kys = False
 
 def chHewwo(message):
     debuglog('checking for my mentions...')
     if (blankvar.join(('<@', bot.user.id, '>')) in message.content) or (blankvar.join(('<!@', bot.user.id, '>')) in message.content):
         debuglog(blankvar.join((str(message.author),' said hi!')))
         bot.send_message(message.channel, 'H- Hewwo?!')
-        global hewwo = True
+        global hewwo
+        hewwo = True
     else:
-        global hewwo = False
+        global hewwo
+        hewwo = False
 
 def chXd(message):
     debuglog('looking for XD...')
     if findWholeWord('xd')(message.content.lower()):
         debuglog(blankvar.join((str(message.author),' just XD\'d')))
         bot.send_message(message.channel, '<a:xd:442034831690301461>')
-        global xd = True
+        global xd
+        xd = True
     else:
-        global xd = False
+        global xd
+        xd = False
 
 def chIfunny(message):
     if message.attachments != []:
@@ -205,12 +215,14 @@ def chIfunny(message):
         if ifukkie or ('ifunny.co/' in message.content):
             bot.delete_message(message)
             bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
-            global ifunny = True
+            global ifunny
+            ifunny = True
             loglog('Message was cancerous and was deleted.')
         else:
             debuglog('False Alarm. Message was fine.')
         os.remove(blankvar.join(('tmp/', url['filename'])))
-        global ifunny = False
+        global ifunny
+        ifunny = False
 
 
 
