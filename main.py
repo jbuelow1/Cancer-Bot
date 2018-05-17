@@ -12,7 +12,7 @@ import shutil
 import random
 import re
 import ast
-from threading
+import threading
 
 version = '3'
 blankvar = ''
