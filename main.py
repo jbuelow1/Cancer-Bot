@@ -131,7 +131,7 @@ def chHeck(message):
     debuglog('checing for "heck"...')
     if (('heck' in message.content.lower()) or ('hek' in message.content.lower())):
         debuglog(blankvar.join((str(message.author), ' just said h*ck!')))
-        await bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
+        bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
 
 def chPing(message):
     debuglog('checking for "@everyone"...')
