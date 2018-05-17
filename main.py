@@ -12,7 +12,7 @@ import shutil
 import random
 import re
 import ast
-from threading import Thread
+from threading
 
 version = '3'
 blankvar = ''
@@ -151,45 +151,45 @@ def chHeck(message):
     if (('heck' in message.content.lower()) or ('hek' in message.content.lower())):
         debuglog(blankvar.join((str(message.author), ' just said h*ck!')))
         bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
-        return True
+        global heck = True
     else:
-        return False
+        global heck = False
 
 def chPing(message):
     debuglog('checking for "@everyone"...')
     if '@everyone' in message.content:
         debuglog(blankvar.join((str(message.author), ' pinged! REEEE!!!')))
         bot.send_message(message.channel, random.choice(pingemojis))
-        return True
+        global ping = True
     else:
-        return False
+        global ping = False
 
 def chKys(message):
     debuglog('checking for "die", "kys" and "kms"...')
     if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
         debuglog(blankvar.join((str(message.author), ' wants to die. helping...')))
         bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
-        return True
+        global kys = True
     else:
-        return False
+        global kys = False
 
 def chHewwo(message):
     debuglog('checking for my mentions...')
     if (blankvar.join(('<@', bot.user.id, '>')) in message.content) or (blankvar.join(('<!@', bot.user.id, '>')) in message.content):
         debuglog(blankvar.join((str(message.author),' said hi!')))
         bot.send_message(message.channel, 'H- Hewwo?!')
-        return True
+        global hewwo = True
     else:
-        return False
+        global hewwo = False
 
 def chXd(message):
     debuglog('looking for XD...')
     if findWholeWord('xd')(message.content.lower()):
         debuglog(blankvar.join((str(message.author),' just XD\'d')))
         bot.send_message(message.channel, '<a:xd:442034831690301461>')
-        return True
+        global xd = True
     else:
-        return False
+        global xd = False
 
 def chIfunny(message):
     if message.attachments != []:
@@ -205,12 +205,12 @@ def chIfunny(message):
         if ifukkie or ('ifunny.co/' in message.content):
             bot.delete_message(message)
             bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
-            return True
+            global ifunny = True
             loglog('Message was cancerous and was deleted.')
         else:
             debuglog('False Alarm. Message was fine.')
         os.remove(blankvar.join(('tmp/', url['filename'])))
-        return False
+        global ifunny = False
 
 
 
@@ -233,12 +233,12 @@ async def on_message(message):
         debuglog('Message is by me, exiting...')
         return
 
-    tChIfunny = ThreadWithReturnValue(target=chIfunny, args=(message,))
-    tChHeck = ThreadWithReturnValue(target=chHeck, args=(message,))
-    tChPing = ThreadWithReturnValue(target=chPing, args=(message,))
-    tChKys = ThreadWithReturnValue(target=chKys, args=(message,))
-    tChHewwo = ThreadWithReturnValue(target=chHewwo, args=(message,))
-    tChXd = ThreadWithReturnValue(target=chXd, args=(message,))
+    tChIfunny = threading.Thread(target=chIfunny, args=(message,))
+    tChHeck = threading.Thread(target=chHeck, args=(message,))
+    tChPing = threading.Thread(target=chPing, args=(message,))
+    tChKys = threading.Thread(target=chKys, args=(message,))
+    tChHewwo = threading.Thread(target=chHewwo, args=(message,))
+    tChXd = threading.Thread(target=chXd, args=(message,))
 
     tChIfunny.start()
     tChHeck.start()
@@ -247,12 +247,12 @@ async def on_message(message):
     tChHewwo.start()
     tChXd.start()
 
-    ifunny = tChIfunny.join()
-    heck = tChHeck.join()
-    ping = tChPing.join()
-    kys = tChKys.join()
-    hewwo = tChHewwo.join()
-    xd = tChXd.join()
+    ttChIfunny.join()
+    tChHeck.join()
+    tChPing.join()
+    tChKys.join()
+    tChHewwo.join()
+    tChXd.join()
 
 
     if ifunny:
