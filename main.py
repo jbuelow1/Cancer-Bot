@@ -147,7 +147,7 @@ def processImage(infile):
 def chHeck(message):
     debuglog('Checking for trigger words...')
     debuglog('checing for "heck"...')
-    if (findWholeWord('heck')(message.content.lower()) or (findWholeWord('hek')message.content.lower()) or (findWholeWord('hecking')message.content.lower()) or (findWholeWord('heckin')message.content.lower()):
+    if (findWholeWord('heck')(message.content.lower()) or (findWholeWord('hek')(message.content.lower()) or (findWholeWord('hecking')(message.content.lower()) or (findWholeWord('heckin')(message.content.lower()):
         debuglog(blankvar.join((str(message.author), ' just said h*ck!')))
         bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
         global heck
@@ -169,7 +169,7 @@ def chPing(message):
 
 def chKys(message):
     debuglog('checking for "die", "kys" and "kms"...')
-    if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
+    if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())) or (findWholeWord('hys')(message.content.lower()):
         debuglog(blankvar.join((str(message.author), ' wants to die. helping...')))
         bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
         global kys
