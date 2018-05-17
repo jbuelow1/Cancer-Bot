@@ -126,38 +126,38 @@ def processImage(infile):
     except EOFError:
         pass # end of sequence
 
-def chHeck(message):
+def chHeck(message, bot):
     debuglog('Checking for trigger words...')
     debuglog('checing for "heck"...')
     if (('heck' in message.content.lower()) or ('hek' in message.content.lower())):
         debuglog(blankvar.join((str(message.author), ' just said h*ck!')))
-        bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
+        await bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
 
-def chPing(message):
+def chPing(message, bot):
     debuglog('checking for "@everyone"...')
     if '@everyone' in message.content:
         debuglog(blankvar.join((str(message.author), ' pinged! REEEE!!!')))
-        bot.send_message(message.channel, random.choice(pingemojis))
+        await bot.send_message(message.channel, random.choice(pingemojis))
 
-def chKys(message):
+def chKys(message, bot):
     debuglog('checking for "die", "kys" and "kms"...')
     if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
         debuglog(blankvar.join((str(message.author), ' wants to die. helping...')))
-        bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
+        await bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
 
-def chHewwo(message):
+def chHewwo(message, bot):
     debuglog('checking for my mentions...')
     if (blankvar.join(('<@', bot.user.id, '>')) in message.content) or (blankvar.join(('<!@', bot.user.id, '>')) in message.content):
         debuglog(blankvar.join((str(message.author),' said hi!')))
-        bot.send_message(message.channel, 'H- Hewwo?!')
+        await bot.send_message(message.channel, 'H- Hewwo?!')
 
-def chXd(message):
+def chXd(message, bot):
     debuglog('looking for XD...')
     if findWholeWord('xd')(message.content.lower()):
         debuglog(blankvar.join((str(message.author),' just XD\'d')))
-        bot.send_message(message.channel, '<a:xd:442034831690301461>')
+        await bot.send_message(message.channel, '<a:xd:442034831690301461>')
 
-def chIfunny(message):
+def chIfunny(message, bot):
     if message.attachments != []:
         debuglog('Message has attachments. Scanning for cancer...')
         url = ast.literal_eval(str(message.attachments).split("[")[1].split("]")[0])
@@ -169,8 +169,8 @@ def chIfunny(message):
 
         ifukkie = image_check(blankvar.join(('tmp/', url['filename'])), 'ifukkie.png')
         if ifukkie:
-            bot.delete_message(message)
-            bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
+            await bot.delete_message(message)
+            await bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
             loglog('Message was cancerous and was deleted.')
         else:
             debuglog('False Alarm. Message was fine.')
@@ -179,8 +179,8 @@ def chIfunny(message):
     else:
         debuglog('Message does not have attachments.')
         if 'ifunny.co/' in message.content:
-            bot.delete_message(message)
-            bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
+            await bot.delete_message(message)
+            await bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
             loglog('Message was cancerous and was deleted.')
         return
 
@@ -205,12 +205,12 @@ async def on_message(message):
         debuglog('Message is by me, exiting...')
         return
 
-    tChIfunny = threading.Thread(target=chIfunny, args=(message,))
-    tChHeck = threading.Thread(target=chHeck, args=(message,))
-    tChPing = threading.Thread(target=chPing, args=(message,))
-    tChKys = threading.Thread(target=chKys, args=(message,))
-    tChHewwo = threading.Thread(target=chHewwo, args=(message,))
-    tChXd = threading.Thread(target=chXd, args=(message,))
+    tChIfunny = threading.Thread(target=chIfunny, args=(message, bot,))
+    tChHeck = threading.Thread(target=chHeck, args=(message, bot,))
+    tChPing = threading.Thread(target=chPing, args=(message, bot,))
+    tChKys = threading.Thread(target=chKys, args=(message, bot,))
+    tChHewwo = threading.Thread(target=chHewwo, args=(message, bot,))
+    tChXd = threading.Thread(target=chXd, args=(message, bot,))
 
     tChIfunny.start()
     tChHeck.start()
