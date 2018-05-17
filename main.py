@@ -109,7 +109,7 @@ def processImage(infile):
     try:
         im = Image.open(infile)
     except IOError:
-        print "Cant load", infile
+        print("Cant load", infile)
         sys.exit(1)
     i = 0
     mypalette = im.getpalette()
