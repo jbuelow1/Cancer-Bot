@@ -232,50 +232,50 @@ async def on_message(message):
     if message.author == bot.user:
         debuglog('Message is by me, exiting...')
         return
+    else:
+        tChIfunny = threading.Thread(target=chIfunny, args=(message,))
+        tChHeck = threading.Thread(target=chHeck, args=(message,))
+        tChPing = threading.Thread(target=chPing, args=(message,))
+        tChKys = threading.Thread(target=chKys, args=(message,))
+        tChHewwo = threading.Thread(target=chHewwo, args=(message,))
+        tChXd = threading.Thread(target=chXd, args=(message,))
 
-    tChIfunny = threading.Thread(target=chIfunny, args=(message,))
-    tChHeck = threading.Thread(target=chHeck, args=(message,))
-    tChPing = threading.Thread(target=chPing, args=(message,))
-    tChKys = threading.Thread(target=chKys, args=(message,))
-    tChHewwo = threading.Thread(target=chHewwo, args=(message,))
-    tChXd = threading.Thread(target=chXd, args=(message,))
+        tChIfunny.start()
+        tChHeck.start()
+        tChPing.start()
+        tChKys.start()
+        tChHewwo.start()
+        tChXd.start()
 
-    tChIfunny.start()
-    tChHeck.start()
-    tChPing.start()
-    tChKys.start()
-    tChHewwo.start()
-    tChXd.start()
-
-    tChIfunny.join()
-    tChHeck.join()
-    tChPing.join()
-    tChKys.join()
-    tChHewwo.join()
-    tChXd.join()
-
-
-    if ifunny:
-        bot.delete_message(message)
-        bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
-
-    if heck:
-        bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
-
-    if ping:
-        bot.send_message(message.channel, random.choice(pingemojis))
-
-    if kys:
-        bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
-
-    if hewwo:
-        bot.send_message(message.channel, 'H- Hewwo?!')
-
-    if xd:
-        bot.send_message(message.channel, '<a:xd:442034831690301461>')
+        tChIfunny.join()
+        tChHeck.join()
+        tChPing.join()
+        tChKys.join()
+        tChHewwo.join()
+        tChXd.join()
 
 
-    debuglog(blankvar.join(('Message #', message.id, ' has finished processing.')))
+        if ifunny:
+            bot.delete_message(message)
+            bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
+
+        if heck:
+            bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
+
+        if ping:
+            bot.send_message(message.channel, random.choice(pingemojis))
+
+        if kys:
+            bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
+
+        if hewwo:
+            bot.send_message(message.channel, 'H- Hewwo?!')
+
+        if xd:
+            bot.send_message(message.channel, '<a:xd:442034831690301461>')
+
+
+        debuglog(blankvar.join(('Message #', message.id, ' has finished processing.')))
 
 
 @bot.event
