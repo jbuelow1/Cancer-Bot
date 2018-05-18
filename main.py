@@ -167,7 +167,7 @@ def processImage(infile):
 def chHeck(message):
     debuglog('Checking for trigger words...')
     debuglog('checing for "heck"...')
-    if (findWholeWord('heck')(message.content.lower()) or findWholeWord('hek')(message.content.lower()) or findWholeWord('hecking')(message.content.lower()) or findWholeWord('heckin')(message.content.lower()) or ):
+    if (findWholeWord('heck')(message.content.lower()) or findWholeWord('hek')(message.content.lower()) or findWholeWord('hecking')(message.content.lower()) or findWholeWord('heckin')(message.content.lower())):
         debuglog(blankvar.join((str(message.author), ' just said h*ck!')))
         bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
         global heck
