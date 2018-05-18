@@ -223,6 +223,7 @@ def chXd(message):
 def chThink(message):
     debuglog('looking for thoughts...')
     if ':thinking:' in message.content:
+        debuglog(''.join((str(message.author), ' is thinking...')))
         global think
         think = True
     else:
