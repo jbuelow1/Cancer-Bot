@@ -305,7 +305,7 @@ async def on_message(message):
 
         if heck:
             emHeck.set_image(url=random.choice(hecks))
-            await bot.send_file(message.channel, embed=emHeck)
+            await bot.send_message(message.channel, embed=emHeck)
 
         if ping:
             await bot.send_message(message.channel, random.choice(pingemojis))
