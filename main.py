@@ -107,12 +107,12 @@ hewwo = False
 xd = False
 think = False
 
-emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), colour=0xDEADBF)
+emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), colour=0x121296)
 emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
 
-emHeck = discord.Embed(title='No Swearing!', colour=0xDEADBF)
+emHeck = discord.Embed(title='No Swearing!', colour=0x121296)
 
-emThink = discord.Embed(title=':thinking:', colour=0xDEADBF)
+emThink = discord.Embed(title=':thinking:', colour=0x121296)
 emThink.set_image(url="https://i.imgur.com/wHMWq1B.gifv")
 
 
