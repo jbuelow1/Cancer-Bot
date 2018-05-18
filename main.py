@@ -109,14 +109,11 @@ think = False
 
 emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), colour=0xDEADBF)
 emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
-emBleach.set_author(name=str(bot.user), icon_url=bot.user.default_avatar_url)
 
 emHeck = discord.embed(title='No Swearing!', colour=0xDEADBF)
-emHeck.set_author(name=str(bot.user), icon_url=bot.user.default_avatar_url)
 
 emThink = discord.embed(title=':thinking:', colour=0xDEADBF)
 emThink.set_image(url="https://i.imgur.com/wHMWq1B.gifv")
-emThink.set_author(name=str(bot.user), icon_url=bot.user.default_avatar_url)
 
 
 def loglog(message):
