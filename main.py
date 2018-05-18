@@ -13,11 +13,22 @@ import random
 import re
 import ast
 import threading
+import time
 
 version = '3'
 blankvar = ''
 headers={
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
+}
+
+hecks = {
+'https://i.imgur.com/ynS00JL.jpg',
+'https://i.imgur.com/YaFUVwE.jpg',
+'https://i.imgur.com/S6sqpoq.png',
+'https://i.imgur.com/zTxzouf.jpg',
+'https://i.imgur.com/z4u0Juo.png',
+'https://i.imgur.com/z4u0Juo.png',
+'https://i.imgur.com/vcTg4tO.jpg',
 }
 
 pingemojis = [
@@ -86,6 +97,7 @@ global ping
 global kys
 global hewwo
 global xd
+global think
 
 ifunny = False
 heck = False
@@ -93,6 +105,19 @@ ping = False
 kys = False
 hewwo = False
 xd = False
+think = False
+
+emBleach = bot.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), colour=0xDEADBF)
+emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
+emBleach.set_author(name=str(bot.user), icon_url=bot.user.default_avatar_url)
+
+emHeck = bot.embed(title='No Swearing!', colour=0xDEADBF)
+emHeck.set_author(name=str(bot.user), icon_url=bot.user.default_avatar_url)
+
+emThink = bot.embed(title=':thinking:', colour=0xDEADBF)
+emThink.set_image(url="https://i.imgur.com/wHMWq1B.gifv")
+emThink.set_author(name=str(bot.user), icon_url=bot.user.default_avatar_url)
+
 
 def loglog(message):
     ts = time.gmtime()
@@ -198,6 +223,15 @@ def chXd(message):
         global xd
         xd = False
 
+def chThink(message):
+    debuglog('looking for thoughts...')
+    if ':thinking:' in message.content:
+        global think
+        think = True
+    else:
+        global think
+        think = False
+
 def chIfunny(message):
     if message.attachments != []:
         debuglog('Message has attachments. Scanning for cancer...')
@@ -248,6 +282,7 @@ async def on_message(message):
         tChKys = threading.Thread(target=chKys, args=(message,))
         tChHewwo = threading.Thread(target=chHewwo, args=(message,))
         tChXd = threading.Thread(target=chXd, args=(message,))
+        tChThink = threading.Thread(target=chThink, args=(message,))
 
         tChIfunny.start()
         tChHeck.start()
@@ -255,6 +290,7 @@ async def on_message(message):
         tChKys.start()
         tChHewwo.start()
         tChXd.start()
+        tChThink.start()
 
         tChIfunny.join()
         tChHeck.join()
@@ -262,6 +298,7 @@ async def on_message(message):
         tChKys.join()
         tChHewwo.join()
         tChXd.join()
+        tChThink.join()
 
 
         if ifunny:
@@ -269,19 +306,23 @@ async def on_message(message):
             await bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
 
         if heck:
-            await bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
+            emHeck.set_image(url=random.choice(hecks))
+            await bot.send_file(message.channel, embed=emHeck)
 
         if ping:
             await bot.send_message(message.channel, random.choice(pingemojis))
 
         if kys:
-            await bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
+            await bot.send_message(message.channel, embed=emBleach)
 
         if hewwo:
             await bot.send_message(message.channel, 'H- Hewwo?!')
 
         if xd:
             await bot.send_message(message.channel, '<a:xd:442034831690301461>')
+
+        if think:
+            await bot.send_message(message.channel, embed=emThink)
 
 
         debuglog(blankvar.join(('Message #', message.id, ' has finished processing.')))
