@@ -21,7 +21,7 @@ headers={
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
 }
 
-hecks = {
+hecks = [
 'https://i.imgur.com/ynS00JL.jpg',
 'https://i.imgur.com/YaFUVwE.jpg',
 'https://i.imgur.com/S6sqpoq.png',
@@ -29,7 +29,7 @@ hecks = {
 'https://i.imgur.com/z4u0Juo.png',
 'https://i.imgur.com/z4u0Juo.png',
 'https://i.imgur.com/vcTg4tO.jpg',
-}
+]
 
 pingemojis = [
 '<:squidwardping:441962933208219658>',
