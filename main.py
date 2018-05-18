@@ -110,9 +110,9 @@ think = False
 emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), colour=0xDEADBF)
 emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
 
-emHeck = discord.embed(title='No Swearing!', colour=0xDEADBF)
+emHeck = discord.Embed(title='No Swearing!', colour=0xDEADBF)
 
-emThink = discord.embed(title=':thinking:', colour=0xDEADBF)
+emThink = discord.Embed(title=':thinking:', colour=0xDEADBF)
 emThink.set_image(url="https://i.imgur.com/wHMWq1B.gifv")
 
 
