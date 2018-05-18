@@ -264,7 +264,7 @@ loglog(blankvar.join(('Starting iFukkie Rapist v', version, '...')))
 @bot.event
 async def on_ready():
     loglog('Connected to Discord!')
-    await bot.edit_profile(username="A Good Christian")
+    await bot.edit_profile(username="Cancer Bot")
     loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
     await bot.change_presence(game=discord.Game(name='with little children'))
 
