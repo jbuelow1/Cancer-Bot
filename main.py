@@ -98,6 +98,9 @@ global kys
 global hewwo
 global xd
 global think
+global jpeg
+global jpegFail
+global jpegFile
 
 ifunny = False
 heck = False
@@ -106,6 +109,9 @@ kys = False
 hewwo = False
 xd = False
 think = False
+jpeg = False
+jpegFail = False
+jpegFile = ''
 
 emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), colour=0x121296)
 emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
@@ -222,7 +228,7 @@ def chXd(message):
 
 def chThink(message):
     debuglog('looking for thoughts...')
-    if ':thinking:' in message.content:
+    if '🤔' in message.content:
         debuglog(''.join((str(message.author), ' is thinking...')))
         global think
         think = True
@@ -253,6 +259,39 @@ def chIfunny(message):
         global ifunny
         ifunny = False
 
+def chJPEG(message):
+    if lower(message.content).startswith('?/jpeg'):
+        debuglog('JPEG command triggered.')
+        if message.attachments != []:
+            url = ast.literal_eval(str(message.attachments).split("[")[1].split("]")[0])
+            if lower(url['filename']).endswith('png') or lower(url['filename']).endswith('jpg') or lower(url['filename']).endswith('jpeg') or lower(url['filename']).endswith('bmp'):
+                r = requests.get(url['url'], stream=True)
+                if r.status_code == 200:
+                    with open(blankvar.join(('tmp/', url['filename'])), 'wb') as f:
+                        for chunk in r:
+                            f.write(chunk)
+
+                    filepath = os.path.join((os.getcwd(), 'tmp/', url['filename']))
+                    picture = Image.open(filepath)
+                    picture.save(url['filename'].join('.jpg'),"JPEG",optimize=False,quality=1)
+
+                    global jpegFile
+                    jpegFile = url['filename']
+                else:
+                    global jpegFail
+                    jpegFail = True
+                    return
+            else:
+                global jpegFail
+                jpegFail = True
+                return
+        else:
+            global jpegFail
+            jpegFail = True
+            return
+    else:
+        return
+
 
 
 #END OF FUNCTIONS
@@ -282,6 +321,7 @@ async def on_message(message):
         tChHewwo = threading.Thread(target=chHewwo, args=(message,))
         tChXd = threading.Thread(target=chXd, args=(message,))
         tChThink = threading.Thread(target=chThink, args=(message,))
+        tChJPEG = threading.Thread(target=chJPEG, args=(message,))
 
         tChIfunny.start()
         tChHeck.start()
@@ -290,6 +330,7 @@ async def on_message(message):
         tChHewwo.start()
         tChXd.start()
         tChThink.start()
+        tChJPEG.start()
 
         tChIfunny.join()
         tChHeck.join()
@@ -322,6 +363,11 @@ async def on_message(message):
 
         if think:
             await bot.send_message(message.channel, embed=emThink)
+
+
+        tChJPEG.join()
+        if jpeg:
+            pass
 
 
         debuglog(blankvar.join(('Message #', message.id, ' has finished processing.')))
