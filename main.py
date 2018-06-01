@@ -417,7 +417,10 @@ async def on_message(message):
             await bot.send_message(message.channel, embed=emHelp0)
 
         if cmdPing:
-            await bot.send_message(message.channel, ':ping_pong: Pong!\n\nCommand Latency: `' + round(bot.latency, 1) + ' ms`')
+            t1 = time.perf_counter()
+            await bot.send_typing(message.channel)
+            t2 = time.perf_counter()
+            await bot.send_message(message.channel, ':ping_pong: Pong! (`' + t2-t1 + '` ms)')
 
 
         tChJPEG.join()
