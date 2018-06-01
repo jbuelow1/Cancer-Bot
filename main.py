@@ -260,7 +260,7 @@ def chIfunny(message):
         ifunny = False
 
 def chJPEG(message):
-    if lower(message.content).startswith('?/jpeg'):
+    if message.content.lower().startswith('?/jpeg'):
         debuglog('JPEG command triggered.')
         if message.attachments != []:
             url = ast.literal_eval(str(message.attachments).split("[")[1].split("]")[0])
