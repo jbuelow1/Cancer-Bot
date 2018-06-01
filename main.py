@@ -132,6 +132,7 @@ emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
 emHelp0.set_author(name='Cancer Bot Help', icon_url='https://i.imgur.com/4fehjDz.png')
 emHelp0.add_field(name='?/help', value='Displays this help text', inline=True)
 emHelp0.add_field(name='?/jpeg', value='Adds jpeg compression to images', inline=True)
+emHelp0.add_field(name='?/ping', value='Tests the bot\'s ping time', inline=True)
 
 
 def loglog(message):
@@ -324,6 +325,14 @@ def chHelp(message):
         global help
         help = False
 
+def chPing(message):
+    if message.content.lower().startswith('?/ping'):
+        global ping
+        ping = True
+    else:
+        global ping
+        ping = False
+
 
 
 #END OF FUNCTIONS
@@ -355,6 +364,7 @@ async def on_message(message):
         tChThink = threading.Thread(target=chThink, args=(message,))
         tChJPEG = threading.Thread(target=chJPEG, args=(message,))
         tChHelp = threading.Thread(target=chHelp, args=(message,))
+        tChPing = threading.Thread(target=chPing, args=(message,))
 
         tChIfunny.start()
         tChHeck.start()
@@ -365,6 +375,7 @@ async def on_message(message):
         tChThink.start()
         tChJPEG.start()
         tChHelp.start()
+        tChPing.start()
 
         tChIfunny.join()
         tChHeck.join()
@@ -374,6 +385,7 @@ async def on_message(message):
         tChXd.join()
         tChThink.join()
         tChHelp.join()
+        tChPing.join()
 
 
         if ifunny:
@@ -401,6 +413,9 @@ async def on_message(message):
 
         if help:
             await bot.send_message(message.channel, embed=emHelp0)
+
+        if ping:
+            await bot.send_message(message.channel, ':ping_pong: Pong!\n\nCommand Latency: `' + round(bot.latency, 1) + ' ms`')
 
 
         tChJPEG.join()
