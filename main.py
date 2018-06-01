@@ -16,6 +16,8 @@ import threading
 import time
 from io import StringIO
 from PIL import Image
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 version = '3'
 blankvar = ''
@@ -277,10 +279,6 @@ def chJPEG(message):
                     picture = Image.open(filepath)
                     global jpegFile
                     jpegFile = url['filename'] + '.jpg'
-                    print(url['filename'])
-                    print(url['filename'].join('.jpg'))
-                    print(url['filename'] + '.jpg')
-                    print(jpegFile)
                     picture.save(jpegFile,"JPEG",optimize=False,quality=1)
 
                     global jpegFail
