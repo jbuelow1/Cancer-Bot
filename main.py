@@ -290,7 +290,7 @@ def chJPEG(message):
                     picture = Image.open(filepath)
                     global jpegFile
                     jpegFile = url['filename'] + '.jpg'
-                    picture.save(jpegFile,"JPEG",optimize=False,quality=1)
+                    picture.convert('RGB').save(jpegFile,"JPEG",optimize=False,quality=1)
 
                     global jpegFail
                     global jpeg
