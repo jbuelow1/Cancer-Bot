@@ -276,9 +276,10 @@ def chJPEG(message):
                     filepath = ''.join(('tmp/', str(url['filename'])))
                     picture = Image.open(filepath)
                     global jpegFile
-                    jpegFile = url['filename'].join('.jpg')
+                    jpegFile = url['filename'] + '.jpg'
                     print(url['filename'])
                     print(url['filename'].join('.jpg'))
+                    print(url['filename'] + '.jpg')
                     print(jpegFile)
                     picture.save(jpegFile,"JPEG",optimize=False,quality=1)
 
