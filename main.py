@@ -106,6 +106,7 @@ global jpeg
 global jpegFail
 global jpegFile
 global help
+global cmdPing
 
 ifunny = False
 heck = False
@@ -118,6 +119,7 @@ jpeg = False
 jpegFail = False
 jpegFile = ''
 help = False
+cmdPing = False
 
 emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), colour=0x121296)
 emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
@@ -327,11 +329,11 @@ def chHelp(message):
 
 def chCmdPing(message):
     if message.content.lower().startswith('?/ping'):
-        global ping
-        ping = True
+        global cmdPing
+        cmdPing = True
     else:
-        global ping
-        ping = False
+        global cmdPing
+        cmdPing = False
 
 
 
