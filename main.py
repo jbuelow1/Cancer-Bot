@@ -105,6 +105,7 @@ global think
 global jpeg
 global jpegFail
 global jpegFile
+global help
 
 ifunny = False
 heck = False
@@ -116,6 +117,7 @@ think = False
 jpeg = False
 jpegFail = False
 jpegFile = ''
+help = False
 
 emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), colour=0x121296)
 emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
@@ -124,6 +126,12 @@ emHeck = discord.Embed(title='No Swearing!', colour=0x121296)
 
 emThink = discord.Embed(title=':thinking::thinking::thinking::thinking::thinking:', colour=0x121296)
 emThink.set_image(url="https://i.imgur.com/wHMWq1B.gif")
+
+emHelp0 = discord.Embed(title=' ', description='This bot is under constand development, expect many changes!', colour=0x121296)
+emHelp0.set_author(name='Cancer Bot Help', icon_url=bot.user.avatar_url)
+emHelp0.add_field(name=' ', value=' ', inline=False)
+emHelp0.add_field(name='?/help', value='Displays this help text', inline=True)
+emHelp0.add_field(name='?/jpeg', value='Adds jpeg compression to images', inline=False)
 
 
 def loglog(message):
@@ -308,6 +316,14 @@ def chJPEG(message):
         jpeg = False
         return
 
+def chHelp(message):
+    if message.content.lower().startswith('?/help'):
+        global help
+        help = True
+    else:
+        global help
+        help = False
+
 
 
 #END OF FUNCTIONS
@@ -338,6 +354,7 @@ async def on_message(message):
         tChXd = threading.Thread(target=chXd, args=(message,))
         tChThink = threading.Thread(target=chThink, args=(message,))
         tChJPEG = threading.Thread(target=chJPEG, args=(message,))
+        tChHelp = threading.Thread(target=chHelp, args=(message,))
 
         tChIfunny.start()
         tChHeck.start()
@@ -347,6 +364,7 @@ async def on_message(message):
         tChXd.start()
         tChThink.start()
         tChJPEG.start()
+        tChHelp.start()
 
         tChIfunny.join()
         tChHeck.join()
@@ -355,6 +373,7 @@ async def on_message(message):
         tChHewwo.join()
         tChXd.join()
         tChThink.join()
+        tChHelp.join()
 
 
         if ifunny:
@@ -379,6 +398,9 @@ async def on_message(message):
 
         if think:
             await bot.send_message(message.channel, embed=emThink)
+
+        if help:
+            await bot.send_message(message.channel, embed=emHelp0)
 
 
         tChJPEG.join()
