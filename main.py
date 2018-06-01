@@ -127,7 +127,7 @@ emHeck = discord.Embed(title='No Swearing!', colour=0x121296)
 emThink = discord.Embed(title=':thinking::thinking::thinking::thinking::thinking:', colour=0x121296)
 emThink.set_image(url="https://i.imgur.com/wHMWq1B.gif")
 
-emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my owner, `Yamcha#4224`, or by ~~using my suggestion command.~~\n\nThis bot\'s command prefix is: `?/`\n\n', colour=0x121296)
+emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my owner, `Yamcha#4224`, or by ~~using my suggestion command.~~\n\nThis bot\'s command prefix is: `?/`\n\u200b', colour=0x121296)
 emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
 emHelp0.set_author(name='Cancer Bot Help', icon_url='https://i.imgur.com/4fehjDz.png')
 emHelp0.add_field(name='?/help', value='Displays this help text', inline=True)
