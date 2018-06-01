@@ -260,6 +260,8 @@ def chIfunny(message):
         ifunny = False
 
 def chJPEG(message):
+    print(message.content.lower())
+    print(message.content.lower().startswith('?/jpeg'))
     if message.content.lower().startswith('?/jpeg'):
         debuglog('JPEG command triggered.')
         if message.attachments != []:
