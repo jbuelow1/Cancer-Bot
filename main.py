@@ -264,7 +264,7 @@ def chJPEG(message):
         debuglog('JPEG command triggered.')
         if message.attachments != []:
             url = ast.literal_eval(str(message.attachments).split("[")[1].split("]")[0])
-            if lower(url['filename']).endswith('png') or lower(url['filename']).endswith('jpg') or lower(url['filename']).endswith('jpeg') or lower(url['filename']).endswith('bmp'):
+            if url['filename'].lower().endswith('png') or url['filename'].lower().endswith('jpg') or url['filename'].lower().endswith('jpeg') or url['filename'].lower().endswith('bmp'):
                 r = requests.get(url['url'], stream=True)
                 if r.status_code == 200:
                     with open(blankvar.join(('tmp/', url['filename'])), 'wb') as f:
