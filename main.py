@@ -280,7 +280,7 @@ def chJPEG(message):
                     global jpegFile
                     global jpegFail
                     global jpeg
-                    jpegFile = url['filename']
+                    jpegFile = url['filename'].join('.jpg')
                     jpegFail = False
                     jpeg = True
                 else:
