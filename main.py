@@ -14,6 +14,8 @@ import re
 import ast
 import threading
 import time
+import StringIO
+from PIL import Image
 
 version = '3'
 blankvar = ''
