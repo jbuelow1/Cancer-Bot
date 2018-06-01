@@ -325,7 +325,7 @@ def chHelp(message):
         global help
         help = False
 
-def chPing(message):
+def chCmdPing(message):
     if message.content.lower().startswith('?/ping'):
         global ping
         ping = True
@@ -364,7 +364,7 @@ async def on_message(message):
         tChThink = threading.Thread(target=chThink, args=(message,))
         tChJPEG = threading.Thread(target=chJPEG, args=(message,))
         tChHelp = threading.Thread(target=chHelp, args=(message,))
-        tChPing = threading.Thread(target=chPing, args=(message,))
+        tChCmdPing = threading.Thread(target=chPing, args=(message,))
 
         tChIfunny.start()
         tChHeck.start()
@@ -375,7 +375,7 @@ async def on_message(message):
         tChThink.start()
         tChJPEG.start()
         tChHelp.start()
-        tChPing.start()
+        tChCmdPing.start()
 
         tChIfunny.join()
         tChHeck.join()
@@ -385,7 +385,7 @@ async def on_message(message):
         tChXd.join()
         tChThink.join()
         tChHelp.join()
-        tChPing.join()
+        tChCmdPing.join()
 
 
         if ifunny:
@@ -414,7 +414,7 @@ async def on_message(message):
         if help:
             await bot.send_message(message.channel, embed=emHelp0)
 
-        if ping:
+        if cmdPing:
             await bot.send_message(message.channel, ':ping_pong: Pong!\n\nCommand Latency: `' + round(bot.latency, 1) + ' ms`')
 
 
