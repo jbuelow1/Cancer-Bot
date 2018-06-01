@@ -271,7 +271,7 @@ def chJPEG(message):
                         for chunk in r:
                             f.write(chunk)
 
-                    filepath = os.path.join((os.getcwd(), 'tmp/', url['filename']))
+                    filepath = os.path.join((str(os.getcwd()), 'tmp/', url['filename']))
                     picture = Image.open(filepath)
                     picture.save(url['filename'].join('.jpg'),"JPEG",optimize=False,quality=1)
 
