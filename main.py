@@ -366,7 +366,7 @@ async def on_message(message):
         tChThink = threading.Thread(target=chThink, args=(message,))
         tChJPEG = threading.Thread(target=chJPEG, args=(message,))
         tChHelp = threading.Thread(target=chHelp, args=(message,))
-        tChCmdPing = threading.Thread(target=chPing, args=(message,))
+        tChCmdPing = threading.Thread(target=chCmdPing, args=(message,))
 
         tChIfunny.start()
         tChHeck.start()
