@@ -14,13 +14,26 @@ import re
 import ast
 import threading
 import time
+from io import StringIO
+from PIL import Image
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 version = '3'
 blankvar = ''
-workingdir = 'C:/Users/jdbue/Documents/GitHub/ifukkie-rapist/'
 headers={
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
 }
+
+hecks = [
+'https://i.imgur.com/ynS00JL.jpg',
+'https://i.imgur.com/YaFUVwE.jpg',
+'https://i.imgur.com/S6sqpoq.png',
+'https://i.imgur.com/zTxzouf.jpg',
+'https://i.imgur.com/z4u0Juo.png',
+'https://i.imgur.com/z4u0Juo.png',
+'https://i.imgur.com/vcTg4tO.jpg',
+]
 
 pingemojis = [
 '<:squidwardping:441962933208219658>',
@@ -88,6 +101,12 @@ global ping
 global kys
 global hewwo
 global xd
+global think
+global jpeg
+global jpegFail
+global jpegFile
+global help
+global cmdPing
 
 ifunny = False
 heck = False
@@ -95,6 +114,28 @@ ping = False
 kys = False
 hewwo = False
 xd = False
+think = False
+jpeg = False
+jpegFail = False
+jpegFile = ''
+help = False
+cmdPing = False
+
+emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), colour=0x121296)
+emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
+
+emHeck = discord.Embed(title='No Swearing!', colour=0x121296)
+
+emThink = discord.Embed(title=':thinking::thinking::thinking::thinking::thinking:', colour=0x121296)
+emThink.set_image(url="https://i.imgur.com/wHMWq1B.gif")
+
+emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my owner, `Yamcha#4224`, or by ~~using my suggestion command.~~\n\nThis bot\'s command prefix is: `?/`\n\u200b', colour=0x121296)
+emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
+emHelp0.set_author(name='Cancer Bot Help', icon_url='https://i.imgur.com/4fehjDz.png')
+emHelp0.add_field(name='?/help', value='Displays this help text', inline=True)
+emHelp0.add_field(name='?/jpeg', value='Adds jpeg compression to images', inline=True)
+emHelp0.add_field(name='?/ping', value='Tests the bot\'s ping time', inline=True)
+
 
 def loglog(message):
     ts = time.gmtime()
@@ -169,7 +210,7 @@ def chPing(message):
 
 def chKys(message):
     debuglog('checking for "die", "kys" and "kms"...')
-    if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())) or (findWholeWord('hys')(message.content.lower())):
+    if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
         debuglog(blankvar.join((str(message.author), ' wants to die. helping...')))
         bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
         global kys
@@ -200,6 +241,16 @@ def chXd(message):
         global xd
         xd = False
 
+def chThink(message):
+    debuglog('looking for thoughts...')
+    if '🤔' in message.content:
+        debuglog(''.join((str(message.author), ' is thinking...')))
+        global think
+        think = True
+    else:
+        global think
+        think = False
+
 def chIfunny(message):
     if message.attachments != []:
         debuglog('Message has attachments. Scanning for cancer...')
@@ -223,19 +274,81 @@ def chIfunny(message):
         global ifunny
         ifunny = False
 
+def chJPEG(message):
+    if message.content.lower().startswith('?/jpeg'):
+        debuglog('JPEG command triggered.')
+        if message.attachments != []:
+            url = ast.literal_eval(str(message.attachments).split("[")[1].split("]")[0])
+            if url['filename'].lower().endswith('png') or url['filename'].lower().endswith('jpg') or url['filename'].lower().endswith('jpeg') or url['filename'].lower().endswith('bmp'):
+                r = requests.get(url['url'], stream=True)
+                if r.status_code == 200:
+                    with open(blankvar.join(('tmp/', url['filename'])), 'wb') as f:
+                        for chunk in r:
+                            f.write(chunk)
+
+                    filepath = ''.join(('tmp/', str(url['filename'])))
+                    picture = Image.open(filepath)
+                    global jpegFile
+                    jpegFile = url['filename'] + '.jpg'
+                    picture.convert('RGB').save(jpegFile,"JPEG",optimize=False,quality=1)
+
+                    global jpegFail
+                    global jpeg
+                    jpegFail = False
+                    jpeg = True
+                else:
+                    global jpegFail
+                    global jpeg
+                    jpegFail = True
+                    jpeg = True
+                    return
+            else:
+                global jpegFail
+                global jpeg
+                jpegFail = True
+                jpeg = True
+                return
+        else:
+            global jpegFail
+            global jpeg
+            jpegFail = True
+            jpeg = True
+            return
+    else:
+        global jpeg
+        jpeg = False
+        return
+
+def chHelp(message):
+    if message.content.lower().startswith('?/help'):
+        global help
+        help = True
+    else:
+        global help
+        help = False
+
+def chCmdPing(message):
+    if message.content.lower().startswith('?/ping'):
+        global cmdPing
+        cmdPing = True
+    else:
+        global cmdPing
+        cmdPing = False
+
 
 
 #END OF FUNCTIONS
 #DEFINES:
-loglog(blankvar.join(('Starting iFukkie Rapist v', version, '...')))
+loglog(blankvar.join(('Starting Cancer Bot v', version, '...')))
 
 
 #ASYNCROUS EVENTS:
 @bot.event
 async def on_ready():
     loglog('Connected to Discord!')
+    await bot.edit_profile(username="Cancer Bot")
     loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
-    await bot.change_status(game=discord.Game(name='with little children'))
+    await bot.change_presence(game=discord.Game(name='with little children'))
 
 @bot.event
 async def on_message(message):
@@ -250,6 +363,10 @@ async def on_message(message):
         tChKys = threading.Thread(target=chKys, args=(message,))
         tChHewwo = threading.Thread(target=chHewwo, args=(message,))
         tChXd = threading.Thread(target=chXd, args=(message,))
+        tChThink = threading.Thread(target=chThink, args=(message,))
+        tChJPEG = threading.Thread(target=chJPEG, args=(message,))
+        tChHelp = threading.Thread(target=chHelp, args=(message,))
+        tChCmdPing = threading.Thread(target=chCmdPing, args=(message,))
 
         tChIfunny.start()
         tChHeck.start()
@@ -257,6 +374,10 @@ async def on_message(message):
         tChKys.start()
         tChHewwo.start()
         tChXd.start()
+        tChThink.start()
+        tChJPEG.start()
+        tChHelp.start()
+        tChCmdPing.start()
 
         tChIfunny.join()
         tChHeck.join()
@@ -264,6 +385,9 @@ async def on_message(message):
         tChKys.join()
         tChHewwo.join()
         tChXd.join()
+        tChThink.join()
+        tChHelp.join()
+        tChCmdPing.join()
 
 
         if ifunny:
@@ -271,19 +395,42 @@ async def on_message(message):
             await bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
 
         if heck:
-            await bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
+            emHeck.set_image(url=random.choice(hecks))
+            await bot.send_message(message.channel, embed=emHeck)
 
         if ping:
             await bot.send_message(message.channel, random.choice(pingemojis))
 
         if kys:
-            await bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
+            await bot.send_message(message.channel, embed=emBleach)
 
         if hewwo:
             await bot.send_message(message.channel, 'H- Hewwo?!')
 
         if xd:
             await bot.send_message(message.channel, '<a:xd:442034831690301461>')
+
+        if think:
+            await bot.send_message(message.channel, embed=emThink)
+
+        if help:
+            await bot.send_message(message.channel, embed=emHelp0)
+
+        if cmdPing:
+            t1 = time.perf_counter()
+            await bot.send_typing(message.channel)
+            t2 = time.perf_counter()
+            emPing = discord.Embed(title=':ping_pong: Pong! :ping_pong:')
+            emPing.add_field(name='Typing ping', value=str(round((t2-t1)*1000, 1)) + ' ms', inline=True)
+            await bot.send_message(message.channel, embed=emPing)
+
+
+        tChJPEG.join()
+        if jpeg:
+            if jpegFail:
+                await bot.send_message(message.channel, ':warning: JPEG Failed! Either you didn\'t supply a file, or something went wrong on our end. :warning:')
+            else:
+                await bot.send_file(message.channel, jpegFile, content='✅ JPEG Complete! ✅')
 
 
         debuglog(blankvar.join(('Message #', message.id, ' has finished processing.')))
@@ -293,9 +440,9 @@ async def on_message(message):
 async def on_message_delete(message):
     if message.author == bot.user:
         debuglog('Someone deleted my post! REEEEEEEE Spamming...')
-        await bot.send_message(message.channel, message.content)
-        await bot.send_message(message.channel, message.content)
-        await bot.send_message(message.channel, message.content)
+        await bot.send_message(message.channel, message.content + ' -')
+        await bot.send_message(message.channel, message.content + ' -')
+        await bot.send_message(message.channel, message.content + ' -')
 
 loglog('Attempting to login to Discord...')
 
