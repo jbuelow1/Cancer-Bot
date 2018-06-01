@@ -260,8 +260,6 @@ def chIfunny(message):
         ifunny = False
 
 def chJPEG(message):
-    print(message.content.lower())
-    print(message.content.lower().startswith('?/jpeg'))
     if message.content.lower().startswith('?/jpeg'):
         debuglog('JPEG command triggered.')
         if message.attachments != []:
@@ -278,20 +276,32 @@ def chJPEG(message):
                     picture.save(url['filename'].join('.jpg'),"JPEG",optimize=False,quality=1)
 
                     global jpegFile
+                    global jpegFail
+                    global jpeg
                     jpegFile = url['filename']
+                    jpegFail = False
+                    jpeg = True
                 else:
                     global jpegFail
+                    global jpeg
                     jpegFail = True
+                    jpeg = True
                     return
             else:
                 global jpegFail
+                global jpeg
                 jpegFail = True
+                jpeg = True
                 return
         else:
             global jpegFail
+            global jpeg
             jpegFail = True
+            jpeg = True
             return
     else:
+        global jpeg
+        jpeg = False
         return
 
 
@@ -369,7 +379,10 @@ async def on_message(message):
 
         tChJPEG.join()
         if jpeg:
-            pass
+            if jpegFail:
+                await bot.send_message(message.channel, ':warning: JPEG Failed! Either you didn\'t supply a file, or something went wrong on our end. :warning:')
+            else:
+                await bot.send_file(message.channel, jpegFile, content='✅ JPEG Complete! ✅')
 
 
         debuglog(blankvar.join(('Message #', message.id, ' has finished processing.')))
