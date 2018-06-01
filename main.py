@@ -420,7 +420,9 @@ async def on_message(message):
             t1 = time.perf_counter()
             await bot.send_typing(message.channel)
             t2 = time.perf_counter()
-            await bot.send_message(message.channel, ':ping_pong: Pong! (`' + str(round((t2-t1)*1000, 1)) + '` ms)')
+            emPing = discord.Embed(title=':ping_pong: Pong! :ping_pong:')
+            emPing.add_field(name='Typing ping', value=str(round((t2-t1)*1000, 1)), inline=False)
+            await bot.send_message(message.channel, embed=emPing)
 
 
         tChJPEG.join()
