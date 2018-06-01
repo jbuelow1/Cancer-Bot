@@ -385,6 +385,7 @@ async def on_message(message):
                 await bot.send_message(message.channel, ':warning: JPEG Failed! Either you didn\'t supply a file, or something went wrong on our end. :warning:')
             else:
                 await bot.send_file(message.channel, jpegFile, content='✅ JPEG Complete! ✅')
+                print(jpegFile)
 
 
         debuglog(blankvar.join(('Message #', message.id, ' has finished processing.')))
