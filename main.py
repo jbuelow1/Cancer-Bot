@@ -17,7 +17,6 @@ import time
 from io import StringIO
 from PIL import Image
 from PIL import ImageFile
-import pyping
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 version = '3'
@@ -423,7 +422,6 @@ async def on_message(message):
             t2 = time.perf_counter()
             emPing = discord.Embed(title=':ping_pong: Pong! :ping_pong:')
             emPing.add_field(name='Typing ping', value=str(round((t2-t1)*1000, 1)) + ' ms', inline=True)
-            emPing.add_field(name='Google DNS ping', value=str(pyping.ping('8.8.8.8').avg_rtt) + ' ms', inline=True)
             await bot.send_message(message.channel, embed=emPing)
 
 
