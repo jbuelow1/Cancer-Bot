@@ -122,7 +122,7 @@ emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
 
 emHeck = discord.Embed(title='No Swearing!', colour=0x121296)
 
-emThink = discord.Embed(title=':thinking:', colour=0x121296)
+emThink = discord.Embed(title=':thinking::thinking::thinking::thinking::thinking:', colour=0x121296)
 emThink.set_image(url="https://i.imgur.com/wHMWq1B.gif")
 
 
