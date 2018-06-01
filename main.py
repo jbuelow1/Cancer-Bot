@@ -275,12 +275,15 @@ def chJPEG(message):
 
                     filepath = ''.join(('tmp/', str(url['filename'])))
                     picture = Image.open(filepath)
-                    picture.save(url['filename'].join('.jpg'),"JPEG",optimize=False,quality=1)
-
                     global jpegFile
+                    jpegFile = url['filename'].join('.jpg')
+                    print(url['filename'])
+                    print(url['filename'].join('.jpg'))
+                    print(jpegFile)
+                    picture.save(jpegFile,"JPEG",optimize=False,quality=1)
+
                     global jpegFail
                     global jpeg
-                    jpegFile = url['filename'].join('.jpg')
                     jpegFail = False
                     jpeg = True
                 else:
@@ -385,7 +388,6 @@ async def on_message(message):
                 await bot.send_message(message.channel, ':warning: JPEG Failed! Either you didn\'t supply a file, or something went wrong on our end. :warning:')
             else:
                 await bot.send_file(message.channel, jpegFile, content='✅ JPEG Complete! ✅')
-                print(jpegFile)
 
 
         debuglog(blankvar.join(('Message #', message.id, ' has finished processing.')))
