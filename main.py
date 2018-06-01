@@ -440,9 +440,9 @@ async def on_message(message):
 async def on_message_delete(message):
     if message.author == bot.user:
         debuglog('Someone deleted my post! REEEEEEEE Spamming...')
-        await bot.send_message(message.channel, message.content, embed=message.embed)
-        await bot.send_message(message.channel, message.content, embed=message.embed)
-        await bot.send_message(message.channel, message.content, embed=message.embed)
+        await bot.send_message(message.channel, message.content, embed=message.embeds)
+        await bot.send_message(message.channel, message.content, embed=message.embeds)
+        await bot.send_message(message.channel, message.content, embed=message.embeds)
 
 loglog('Attempting to login to Discord...')
 
