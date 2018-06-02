@@ -399,7 +399,7 @@ def chImgrape(message):
                         rapeExit = 3
                         return
                     global rapeFile
-                    jpegFile = url['filename'] + '.jpg'
+                    rapeFile = url['filename'] + '.jpg'
                     try:
                         picture = picture.filter(ImageFilter.UnsharpMask(2**30,2**30,0))
                         picture = picture.convert('RGB')
