@@ -143,6 +143,8 @@ emHelp0.set_author(name='Cancer Bot Help', icon_url='https://i.imgur.com/4fehjDz
 emHelp0.add_field(name='?/help', value='Displays this help text', inline=True)
 emHelp0.add_field(name='?/jpeg', value='Adds jpeg compression to images', inline=True)
 emHelp0.add_field(name='?/ping', value='Tests the bot\'s ping time', inline=True)
+emHelp0.add_field(name='?/rape', value='Utterly fucks an image', inline=True)
+emHelp0.add_field(name='?/deepfry', value=':b:eep fried :b:emes anyone? :joy:')
 
 
 def loglog(message):
