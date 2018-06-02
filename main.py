@@ -524,6 +524,7 @@ async def on_message(message):
 
         if kys and hewwo:
             await bot.send_message(message.channel, 'no u')
+            await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.')
             global kys
             kys = False
             global hewwo
