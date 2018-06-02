@@ -399,13 +399,9 @@ def chImgrape(message):
                         rapeExit = 3
                         return
                     global rapeFile
-                    rapeFile = url['filename'] + '.jpg'
-                    picture = picture.filter(ImageFilter.UnsharpMask(2**30,2**30,0))
-                    picture = picture.convert('RGB')
-                    picture.save(rapeFile,"JPEG",optimize=False,quality=1)
                     try:
-                        picture = picture.filter(ImageFilter.UnsharpMask(2**30,2**30,0))
                         picture = picture.convert('RGB')
+                        picture = picture.filter(ImageFilter.UnsharpMask(2**10,2**10,0))
                         picture.save(rapeFile,"JPEG",optimize=False,quality=1)
                     except:
                         global rapeFail
@@ -462,7 +458,7 @@ async def on_ready():
     loglog('Connected to Discord!')
     await bot.edit_profile(username="Cancer Bot")
     loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
-    await bot.change_presence(game=discord.Game(name='with little children'))
+    await bot.change_presence(game=discord.Game(name='with kids | ?/help'))
 
 @bot.event
 async def on_message(message):
