@@ -401,7 +401,7 @@ def chImgrape(message):
                     global rapeFile
                     try:
                         picture = picture.convert('RGB')
-                        picture = picture.filter(ImageFilter.UnsharpMask(2**10,2**10,0))
+                        picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
                         picture.save(rapeFile,"JPEG",optimize=False,quality=1)
                     except:
                         global rapeFail
