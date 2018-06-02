@@ -400,6 +400,9 @@ def chImgrape(message):
                         return
                     global rapeFile
                     rapeFile = url['filename'] + '.jpg'
+                    picture = picture.filter(ImageFilter.UnsharpMask(2**30,2**30,0))
+                    picture = picture.convert('RGB')
+                    picture.save(rapeFile,"JPEG",optimize=False,quality=1)
                     try:
                         picture = picture.filter(ImageFilter.UnsharpMask(2**30,2**30,0))
                         picture = picture.convert('RGB')
