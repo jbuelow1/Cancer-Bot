@@ -107,6 +107,9 @@ global jpegFail
 global jpegFile
 global help
 global cmdPing
+global rape
+global rapeFail
+global rapeFile
 
 ifunny = False
 heck = False
@@ -118,8 +121,13 @@ think = False
 jpeg = False
 jpegFail = False
 jpegFile = ''
+jpegExit = 0
 help = False
 cmdPing = False
+rape = False
+rapeFail = False
+rapeFile = ''
+rapeExit = 0
 
 emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), colour=0x121296)
 emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
@@ -287,10 +295,28 @@ def chJPEG(message):
                             f.write(chunk)
 
                     filepath = ''.join(('tmp/', str(url['filename'])))
-                    picture = Image.open(filepath)
+                    try:
+                        picture = Image.open(filepath)
+                    except:
+                        global jpegFail
+                        global jpeg
+                        global jpegExit
+                        jpegFail = True
+                        jpeg = True
+                        jpegExit = 3
+                        return
                     global jpegFile
                     jpegFile = url['filename'] + '.jpg'
-                    picture.convert('RGB').save(jpegFile,"JPEG",optimize=False,quality=1)
+                    try:
+                        picture.convert('RGB').save(jpegFile,"JPEG",optimize=False,quality=1)
+                    except:
+                        global jpegFail
+                        global jpeg
+                        global jpegExit
+                        jpegFail = True
+                        jpeg = True
+                        jpegExit = 4
+                        return
 
                     global jpegFail
                     global jpeg
@@ -299,20 +325,26 @@ def chJPEG(message):
                 else:
                     global jpegFail
                     global jpeg
+                    global jpegExit
                     jpegFail = True
                     jpeg = True
+                    jpegExit = 2
                     return
             else:
                 global jpegFail
                 global jpeg
+                global jpegExit
                 jpegFail = True
                 jpeg = True
+                jpegExit = 1
                 return
         else:
             global jpegFail
             global jpeg
+            global jpegExit
             jpegFail = True
             jpeg = True
+            jpegExit = 1
             return
     else:
         global jpeg
@@ -334,6 +366,85 @@ def chCmdPing(message):
     else:
         global cmdPing
         cmdPing = False
+
+def chDeepfry(message):
+    if message.content.lower().startswith('?/deepfry'):
+        global deepfry
+        deepfry = True
+    else:
+        global deepfry
+        deepfry = False
+
+def chImgrape(message):
+    if message.content.lower().startswith('?/rape'):
+        debuglog('rape command triggered.')
+        if message.attachments != []:
+            url = ast.literal_eval(str(message.attachments).split("[")[1].split("]")[0])
+            if url['filename'].lower().endswith('png') or url['filename'].lower().endswith('jpg') or url['filename'].lower().endswith('jpeg') or url['filename'].lower().endswith('bmp'):
+                r = requests.get(url['url'], stream=True)
+                if r.status_code == 200:
+                    with open(blankvar.join(('tmp/', url['filename'])), 'wb') as f:
+                        for chunk in r:
+                            f.write(chunk)
+
+                    filepath = ''.join(('tmp/', str(url['filename'])))
+                    try:
+                        picture = Image.open(filepath)
+                    except:
+                        global rapeFail
+                        global rape
+                        global rapeExit
+                        rapeFail = True
+                        rape = True
+                        rapeExit = 3
+                        return
+                    global rapeFile
+                    jpegFile = url['filename'] + '.jpg'
+                    try:
+                        picture = picture.filter(ImageFilter.UnsharpMask(2**30,2**30,0))
+                        picture = picture.convert('RGB')
+                        picture.save(rapeFile,"JPEG",optimize=False,quality=1)
+                    except:
+                        global rapeFail
+                        global rape
+                        global rapeExit
+                        rapeFail = True
+                        rape = True
+                        rapeExit = 4
+                        return
+
+                    global rapeFail
+                    global rape
+                    rapeFail = False
+                    rape = True
+                else:
+                    global rapeFail
+                    global rape
+                    global rapeExit
+                    rapeFail = True
+                    rape = True
+                    rapeExit = 2
+                    return
+            else:
+                global rapeFail
+                global rape
+                global rapeExit
+                rapeFail = True
+                rape = True
+                rapeExit = 1
+                return
+        else:
+            global rapeFail
+            global rape
+            global rapeExit
+            rapeFail = True
+            rape = True
+            rapeExit = 1
+            return
+    else:
+        global rape
+        rape = False
+        return
 
 
 
@@ -367,6 +478,8 @@ async def on_message(message):
         tChJPEG = threading.Thread(target=chJPEG, args=(message,))
         tChHelp = threading.Thread(target=chHelp, args=(message,))
         tChCmdPing = threading.Thread(target=chCmdPing, args=(message,))
+        tChDeepfry = threading.Thread(target=chDeepfry, args=(message,))
+        tChImgrape = threading.Thread(target=chImgrape, args=(message,))
 
         tChIfunny.start()
         tChHeck.start()
@@ -378,6 +491,8 @@ async def on_message(message):
         tChJPEG.start()
         tChHelp.start()
         tChCmdPing.start()
+        tChDeepfry.start()
+        tChImgrape.start()
 
         tChIfunny.join()
         tChHeck.join()
@@ -400,6 +515,13 @@ async def on_message(message):
 
         if ping:
             await bot.send_message(message.channel, random.choice(pingemojis))
+
+        if kys and hewwo:
+            await bot.send_message(message.channel, 'no u <a:phatdab:452584879738191882>')
+            global kys
+            kys = False
+            global hewwo
+            hewwo = False
 
         if kys:
             await bot.send_message(message.channel, embed=emBleach)
@@ -428,9 +550,38 @@ async def on_message(message):
         tChJPEG.join()
         if jpeg:
             if jpegFail:
-                await bot.send_message(message.channel, ':warning: JPEG Failed! Either you didn\'t supply a file, or something went wrong on our end. :warning:')
+                if jpegExit == 1:
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu You made a fucky wucky!! A wittle fucko boingo! You better be working **VEWY HAWD** to fix this! Please supply a `.png`, `.jpg`, `.jpeg` or `.bmp` file!\nError code: `YOUR_AUTISTIC`\n*Request by: `' + str(message.author) + '`*')
+                elif jpegExit == 2:
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `DOWNLOAD_FAILED`\n*Request by: `' + str(message.author) + '`*')
+                elif jpegExit == 3:
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FILE_OPEN_FAILURE`\n*Request by: `' + str(message.author) + '`*')
+                elif jpegExit == 4:
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `PROCESSING_FAILED`\n*Request by: `' + str(message.author) + '`*')
+                else:
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `OOPSIE_WOOPSIE`\n*Request by: `' + str(message.author) + '`*')
             else:
-                await bot.send_file(message.channel, jpegFile, content='✅ JPEG Complete! ✅')
+                await bot.send_file(message.channel, jpegFile, content='✅ **JPEG Complete!** ✅\n*Request by: `' + str(message.author) + '`*')
+
+        tChDeepfry.join()
+        if deepfry:
+            await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FEATURE_NOT_IMPLEMENTED`\n*Request by: `' + str(message.author) + '`*')
+
+        tChImgrape.join()
+        if imgrape:
+            if rapeFail:
+                if rapeExit == 1:
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu You made a fucky wucky!! A wittle fucko boingo! You better be working **VEWY HAWD** to fix this! Please supply a `.png`, `.jpg`, `.jpeg` or `.bmp` file!\nError code: `YOUR_AUTISTIC`\n*Request by: `' + str(message.author) + '`*')
+                elif rapeExit == 2:
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `DOWNLOAD_FAILED`\n*Request by: `' + str(message.author) + '`*')
+                elif rapeExit == 3:
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FILE_OPEN_FAILURE`\n*Request by: `' + str(message.author) + '`*')
+                elif rapeExit == 4:
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `PROCESSING_FAILED`\n*Request by: `' + str(message.author) + '`*')
+                else:
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `OOPSIE_WOOPSIE`\n*Request by: `' + str(message.author) + '`*')
+            else:
+                await bot.send_file(message.channel, rapeFile, content='✅ **Image has been fucked!** ✅\n*Request by: `' + str(message.author) + '`*')
 
 
         debuglog(blankvar.join(('Message #', message.id, ' has finished processing.')))
