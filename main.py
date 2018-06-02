@@ -399,6 +399,9 @@ def chImgrape(message):
                         rapeExit = 3
                         return
                     global rapeFile
+                    picture = picture.convert('RGB')
+                    picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
+                    picture.save(rapeFile,"JPEG",optimize=False,quality=1)
                     try:
                         picture = picture.convert('RGB')
                         picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
@@ -516,7 +519,7 @@ async def on_message(message):
             await bot.send_message(message.channel, random.choice(pingemojis))
 
         if kys and hewwo:
-            await bot.send_message(message.channel, 'no u <a:phatdab:452584879738191882>')
+            await bot.send_message(message.channel, 'no u')
             global kys
             kys = False
             global hewwo
