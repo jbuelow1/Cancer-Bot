@@ -400,9 +400,6 @@ def chImgrape(message):
                         return
                     global rapeFile
                     rapeFile = url['filename'] + '.jpg'
-                    picture = picture.convert('RGB')
-                    picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
-                    picture.save(rapeFile,"JPEG",optimize=False,quality=1)
                     try:
                         picture = picture.convert('RGB')
                         picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
@@ -449,6 +446,14 @@ def chImgrape(message):
         rape = False
         return
 
+def chNoU(message):
+    if 'no u' in message.content.lower():
+        global nou
+        nou = True
+    else:
+        global nou
+        nou = False
+
 
 
 #END OF FUNCTIONS
@@ -483,6 +488,7 @@ async def on_message(message):
         tChCmdPing = threading.Thread(target=chCmdPing, args=(message,))
         tChDeepfry = threading.Thread(target=chDeepfry, args=(message,))
         tChImgrape = threading.Thread(target=chImgrape, args=(message,))
+        tChNoU = threading.Thread(target=chNoU, args=(message,))
 
         tChIfunny.start()
         tChHeck.start()
@@ -496,8 +502,8 @@ async def on_message(message):
         tChCmdPing.start()
         tChDeepfry.start()
         tChImgrape.start()
+        tChNoU.start()
 
-        tChIfunny.join()
         tChHeck.join()
         tChPing.join()
         tChKys.join()
@@ -506,11 +512,8 @@ async def on_message(message):
         tChThink.join()
         tChHelp.join()
         tChCmdPing.join()
+        tChNoU.join()
 
-
-        if ifunny:
-            await bot.delete_message(message)
-            await bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
 
         if heck:
             emHeck.set_image(url=random.choice(hecks))
@@ -549,6 +552,9 @@ async def on_message(message):
             emPing.add_field(name='Typing ping', value=str(round((t2-t1)*1000, 1)) + ' ms', inline=True)
             await bot.send_message(message.channel, embed=emPing)
 
+        if nou:
+            await bot.send_message(message.channel, 'Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.')
+
 
         tChJPEG.join()
         if jpeg:
@@ -585,6 +591,11 @@ async def on_message(message):
                     await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `OOPSIE_WOOPSIE`\n*Request by: `' + str(message.author) + '`*')
             else:
                 await bot.send_file(message.channel, rapeFile, content='✅ **Image has been fucked!** ✅\n*Request by: `' + str(message.author) + '`*')
+
+        tChIfunny.join()
+        if ifunny:
+            await bot.delete_message(message)
+            await bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
 
 
         debuglog(blankvar.join(('Message #', message.id, ' has finished processing.')))
