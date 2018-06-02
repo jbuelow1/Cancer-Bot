@@ -16,7 +16,7 @@ import threading
 import time
 from io import StringIO
 from PIL import Image
-from PIL import ImageFile
+from PIL import ImageFile, ImageFilter
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 version = '3'
