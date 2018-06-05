@@ -298,7 +298,7 @@ async def on_message(message):
                 fail, exit, url = images.rape(message)
                 await bot.delete_message(message)
                 if not fail:
-                    target = bot.get_user_info(message.content.split(' ')[2])
+                    target = bot.get_user_info(message.content.split(' ')[1])
                     debuglog(target)
                     emRape.set_footer(icon_url=target.avatar_url, text=str(target) + ' requested this command')
                     emRape.set_image(url=url)
