@@ -296,7 +296,7 @@ async def on_message(message):
                 fail, exit, url = images.rape(message)
                 await bot.delete_message(message)
                 if not fail:
-                    target = bot.get_user_info(message.content.split(' ')[1])
+                    target = await bot.get_user_info(message.content.split(' ')[1])
                     emRape.set_footer(text=str(target) + ' requested this command')
                     emRape.set_image(url=url)
                     await bot.send_message(message.channel, embed=emRape)
