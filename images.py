@@ -11,7 +11,7 @@ def rape(message):
         if url['filename'].lower().endswith('png') or url['filename'].lower().endswith('jpg') or url['filename'].lower().endswith('jpeg') or url['filename'].lower().endswith('bmp'):
             r = requests.get(url['url'], stream=True)
             if r.status_code == 200:
-                with open(blankvar.join(('tmp/', url['filename'])), 'wb') as f:
+                with open(''.join(('tmp/', url['filename'])), 'wb') as f:
                     for chunk in r:
                         f.write(chunk)
 
@@ -43,7 +43,7 @@ def jpeg(message):
         if url['filename'].lower().endswith('png') or url['filename'].lower().endswith('jpg') or url['filename'].lower().endswith('jpeg') or url['filename'].lower().endswith('bmp'):
             r = requests.get(url['url'], stream=True)
             if r.status_code == 200:
-                with open(blankvar.join(('tmp/', url['filename'])), 'wb') as f:
+                with open(''.join(('tmp/', url['filename'])), 'wb') as f:
                     for chunk in r:
                         f.write(chunk)
 
