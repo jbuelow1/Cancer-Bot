@@ -113,6 +113,7 @@ emHelp0.add_field(name='?/rape', value='Utterly fucks an image', inline=True)
 emHelp0.add_field(name='?/deepfry', value=':b:eep fried :b:emes anyone? :joy:')
 
 emJpeg = discord.Embed(title='✅ JPEG Complete! ✅')
+emRape = discord.Embed(title='✅ Image Fucked!  ✅')
 
 
 def loglog(message):
@@ -231,7 +232,7 @@ async def on_message(message):
             fail, exit, url = images.jpeg(message)
             if fail:
                 if exit == 1:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu You made a fucky wucky!! A wittle fucko boingo! You better be working **VEWY HAWD** to fix this! Please supply a `.png`, `.jpg`, `.jpeg` or `.bmp` file!\nError code: `YOUR_AUTISTIC`\n*Request by: `' + str(message.author) + '`*')
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu You made a fucky wucky!! A wittle fucko boingo! You better be working **VEWY HAWD** to fix this! Please supply a `.png`, `.jpg`, `.jpeg` or `.bmp` file!\nError code: `YOURE_AUTISTIC`\n*Request by: `' + str(message.author) + '`*')
                 elif exit == 2:
                     await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `DOWNLOAD_FAILED`\n*Request by: `' + str(message.author) + '`*')
                 elif exit == 3:
@@ -245,10 +246,25 @@ async def on_message(message):
                 emJpeg.set_image(url=url)
                 await bot.send_message(message.channel, embed=emJpeg)
 
-        if message.content.lower().startswith('?/deepfry'):
-            await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FEATURE_NOT_IMPLEMENTED`\n*Request by: `' + str(message.author) + '`*')
-
         if message.content.lower().startswith('?/rape'):
+            fail, exit, url = images.rape(message)
+            if fail:
+                if exit == 1:
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu You made a fucky wucky!! A wittle fucko boingo! You better be working **VEWY HAWD** to fix this! Please supply a `.png`, `.jpg`, `.jpeg` or `.bmp` file!\nError code: `YOURE_AUTISTIC`\n*Request by: `' + str(message.author) + '`*')
+                elif exit == 2:
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `DOWNLOAD_FAILED`\n*Request by: `' + str(message.author) + '`*')
+                elif exit == 3:
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FILE_OPEN_FAILURE`\n*Request by: `' + str(message.author) + '`*')
+                elif exit == 4:
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `PROCESSING_FAILED`\n*Request by: `' + str(message.author) + '`*')
+                else:
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `OOPSIE_WOOPSIE`\n*Request by: `' + str(message.author) + '`*')
+            else:
+                emRape.set_footer(icon_url=message.author.avatar_url, text=str(message.author) + ' requested this command')
+                emRape.set_image(url=url)
+                await bot.send_message(message.channel, embed=emRape)
+
+        if message.content.lower().startswith('?/deepfry'):
             await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FEATURE_NOT_IMPLEMENTED`\n*Request by: `' + str(message.author) + '`*')
 
         #tChIfunny.join()
