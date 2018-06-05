@@ -24,7 +24,7 @@ def rape(message):
                 except:
                     traceback.print_exc()
                     return True, 3, ''
-                rand_discriminator = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=5))
+                rand_discriminator = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(5))
                 localfile = '/discordcdn/rape/' + message.channel.id + '/' + message.author.id + '/' + url['filename'].split('.')[:-1] + rand_discriminator + '.jpg'
                 if not os.path.exists('/discordcdn/rape/' + message.channel.id):
                     os.makedirs('/discordcdn/rape/' + message.channel.id)
@@ -63,7 +63,7 @@ def jpeg(message):
                 except:
                     traceback.print_exc()
                     return True, 3, ''
-                rand_discriminator = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=5))
+                rand_discriminator = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(5))
                 localfile = '/discordcdn/jpeg/' + message.channel.id + '/' + message.author.id + '/' + url['filename'].split('.')[:-1] + rand_discriminator + '.jpg'
                 if not os.path.exists('/discordcdn/jpeg/' + message.channel.id):
                     os.makedirs('/discordcdn/jpeg/' + message.channel.id)
