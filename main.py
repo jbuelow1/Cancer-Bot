@@ -293,7 +293,7 @@ async def on_message(message):
 
         if message.content.lower().startswith('?/!rapeas'):
             debuglog('bot owner command triggered')
-            if message.author.id == 273940917596061698:
+            if str(message.author.id) == '273940917596061698':
                 debuglog('bot owner has issued an owner command ?/!rapeas')
                 fail, exit, url = images.rape(message)
                 await bot.delete_message(message)
