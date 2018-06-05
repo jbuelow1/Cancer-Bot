@@ -29,8 +29,8 @@ def rape(message):
                 localfile = '/discordcdn/rape/' + message.channel.id + '/' + message.author.id + '/' + url['filename'] + str(rand_discriminator) + '.jpg'
                 if not os.path.exists('/discordcdn/rape/' + message.channel.id):
                     os.makedirs('/discordcdn/rape/' + message.channel.id)
-                if not os.path.exists('discordcdn/rape/' + message.channel.id + '/' + message.author.id):
-                    os.makedirs('discordcdn/rape/' + message.channel.id + '/' + message.author.id)
+                if not os.path.exists('/discordcdn/rape/' + message.channel.id + '/' + message.author.id):
+                    os.makedirs('/discordcdn/rape/' + message.channel.id + '/' + message.author.id)
                 try:
                     picture = picture.convert('RGB')
                     picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
@@ -68,8 +68,8 @@ def jpeg(message):
                 localfile = '/discordcdn/jpeg/' + message.channel.id + '/' + message.author.id + '/' + url['filename'] + str(rand_discriminator) + '.jpg'
                 if not os.path.exists('/discordcdn/jpeg/' + message.channel.id):
                     os.makedirs('/discordcdn/jpeg/' + message.channel.id)
-                if not os.path.exists('discordcdn/jpeg/' + message.channel.id + '/' + message.author.id):
-                    os.makedirs('discordcdn/jpeg/' + message.channel.id + '/' + message.author.id)
+                if not os.path.exists('/discordcdn/jpeg/' + message.channel.id + '/' + message.author.id):
+                    os.makedirs('/discordcdn/jpeg/' + message.channel.id + '/' + message.author.id)
                 try:
                     picture = picture.convert('RGB')
                     #picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
