@@ -292,11 +292,14 @@ async def on_message(message):
                     await bot.send_message(message.channel, embed=emJpeg)
 
         if message.content.lower().startswith('?/!rapeas'):
+            debuglog('bot owner command triggered')
             if message.author.id == 273940917596061698:
+                debuglog('bot owner has issued an owner command ?/!rapeas')
                 fail, exit, url = images.rape(message)
                 await bot.delete_message(message)
                 if not fail:
                     target = bot.get_user_info(message.content.split(' ')[2])
+                    debuglog(target)
                     emRape.set_footer(icon_url=target.avatar_url, text=str(target) + ' requested this command')
                     emRape.set_image(url=url)
                     await bot.send_message(message.channel, embed=emRape)
