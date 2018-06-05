@@ -1,6 +1,7 @@
 import requests
 import traceback
 import ast
+import os
 from PIL import Image
 from PIL import ImageFile, ImageFilter
 ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -22,12 +23,17 @@ def rape(message):
                 except:
                     traceback.print_exc()
                     return True, 3, ''
-                localfile = '/discordcdn/' + message.channel.id + '/' + message.author.id + '/' + url['filename'] + '.jpg'
+                rand_discriminator = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=5))
+                localfile = '/discordcdn/rape/' + message.channel.id + '/' + message.author.id + '/' + url['filename'].split('.')[:-1] + rand_discriminator + '.jpg'
+                if not os.path.exists('/discordcdn/rape/' + message.channel.id):
+                    os.makedirs('/discordcdn/rape/' + message.channel.id)
+                if not os.path.exists('discordcdn/rape/' + message.channel.id + '/' + message.author.id):
+                    os.makedirs('discordcdn/rape/' + message.channel.id + '/' + message.author.id)
                 try:
                     picture = picture.convert('RGB')
                     picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
                     picture.save(localfile,"JPEG",optimize=False,quality=1)
-                    remotefile = 'http://cdn.jplp.tk/' + message.channel.id + '/' + message.author.id + '/' + url['filename'] + '.jpg'
+                    remotefile = 'http://cdn.jplp.tk/rape/' + message.channel.id + '/' + message.author.id + '/' + url['filename'].split('.')[:-1] + rand_discriminator + '.jpg'
                 except:
                     traceback.print_exc()
                     return True, 4, ''
@@ -56,12 +62,17 @@ def jpeg(message):
                 except:
                     traceback.print_exc()
                     return True, 3, ''
-                localfile = '/discordcdn/' + message.channel.id + '/' + message.author.id + '/' + url['filename'] + '.jpg'
+                rand_discriminator = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=5))
+                localfile = '/discordcdn/jpeg/' + message.channel.id + '/' + message.author.id + '/' + url['filename'].split('.')[:-1] + rand_discriminator + '.jpg'
+                if not os.path.exists('/discordcdn/jpeg/' + message.channel.id):
+                    os.makedirs('/discordcdn/jpeg/' + message.channel.id)
+                if not os.path.exists('discordcdn/jpeg/' + message.channel.id + '/' + message.author.id):
+                    os.makedirs('discordcdn/jpeg/' + message.channel.id + '/' + message.author.id)
                 try:
                     picture = picture.convert('RGB')
                     #picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
                     picture.save(localfile,"JPEG",optimize=False,quality=1)
-                    remotefile = 'http://cdn.jplp.tk/' + message.channel.id + '/' + message.author.id + '/' + url['filename'] + '.jpg'
+                    remotefile = 'http://cdn.jplp.tk/jpeg/' + message.channel.id + '/' + message.author.id + '/' + url['filename'].split('.')[:-1] + rand_discriminator + '.jpg'
                 except:
                     traceback.print_exc()
                     return True, 4, ''
