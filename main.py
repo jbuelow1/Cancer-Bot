@@ -282,7 +282,7 @@ async def on_message(message):
 
         #bot owner commands
         if message.content.lower().startswith('?/;jpegas'):
-            if str(message.author.id) == '273940917596061698:
+            if str(message.author.id) == '273940917596061698':
                 fail, exit, url = images.jpeg(message)
                 await bot.delete_message(message)
                 if not fail:
@@ -300,6 +300,28 @@ async def on_message(message):
                     emRape.set_footer(icon_url=target.avatar_url, text=str(target) + ' requested this command')
                     emRape.set_image(url=url)
                     await bot.send_message(message.channel, embed=emRape)
+'''
+        if message.content.lower().startswith('?/;deepfryas'):
+            if str(message.author.id) == '273940917596061698':
+                fail, exit, url = images.deepfry(message)
+                await bot.delete_message(message)
+                if not fail:
+                    target = await bot.get_user_info(message.content.split(' ')[1])
+                    emDeepfry.set_footer(icon_url=target.avatar_url, text=str(target) + ' requested this command')
+                    emDeepfry.set_image(url=url)
+                    await bot.send_message(message.channel, embed=emDeepfry)
+'''
+        if message.content.lower().startswith('?/;delete'):
+            if str(message.author.id) == '273940917596061698':
+                await bot.delete_message(message)
+                target = await bot.get_message(message.channel, message.content.split('')[1])
+                await bot.delete_message(target)
+
+        if message.content.lower().startswith('?/;adelete'):
+            if str(message.author.id) == '273940917596061698':
+                await bot.delete_message(message)
+                target = await bot.get_message(message.content.split(' ')[1], message.content.split('')[2])
+                await bot.delete_message(target)
 
         #tChIfunny.join()
         #if ifunny:
@@ -309,14 +331,6 @@ async def on_message(message):
 
         debuglog(blankvar.join(('Message #', message.id, ' has finished processing.')))
 
-
-@bot.event
-async def on_message_delete(message):
-    if message.author == bot.user:
-        debuglog('Someone deleted my post! REEEEEEEE Spamming...')
-        await bot.send_message(message.channel, message.content + ' -')
-        await bot.send_message(message.channel, message.content + ' -')
-        await bot.send_message(message.channel, message.content + ' -')
 
 loglog('Attempting to login to Discord...')
 
