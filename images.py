@@ -1,6 +1,7 @@
 import requests
 import traceback
 import random
+import string
 import ast
 import os
 from PIL import Image
