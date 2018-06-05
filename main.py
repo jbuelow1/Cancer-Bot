@@ -286,7 +286,7 @@ async def on_message(message):
                 fail, exit, url = images.jpeg(message)
                 await bot.delete_message(message)
                 if not fail:
-                    target = await bot.get_user_info(message.content.split(' ')[2])
+                    target = await bot.get_user_info(message.content.split(' ')[1])
                     emJpeg.set_footer(icon_url=target.avatar_url, text=str(target) + ' requested this command')
                     emJpeg.set_image(url=url)
                     await bot.send_message(message.channel, embed=emJpeg)
