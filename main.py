@@ -15,9 +15,9 @@ import ast
 import threading
 import time
 from io import StringIO
-from PIL import Image
-from PIL import ImageFile, ImageFilter
-ImageFile.LOAD_TRUNCATED_IMAGES = True
+
+#modules
+import images
 
 version = '3'
 blankvar = ''
@@ -95,40 +95,6 @@ debug = True
 
 bot = discord.Client()
 
-global ifunny
-global heck
-global ping
-global kys
-global hewwo
-global xd
-global think
-global jpeg
-global jpegFail
-global jpegFile
-global help
-global cmdPing
-global rape
-global rapeFail
-global rapeFile
-
-ifunny = False
-heck = False
-ping = False
-kys = False
-hewwo = False
-xd = False
-think = False
-jpeg = False
-jpegFail = False
-jpegFile = ''
-jpegExit = 0
-help = False
-cmdPing = False
-rape = False
-rapeFail = False
-rapeFile = ''
-rapeExit = 0
-
 emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), colour=0x121296)
 emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
 
@@ -145,6 +111,8 @@ emHelp0.add_field(name='?/jpeg', value='Adds jpeg compression to images', inline
 emHelp0.add_field(name='?/ping', value='Tests the bot\'s ping time', inline=True)
 emHelp0.add_field(name='?/rape', value='Utterly fucks an image', inline=True)
 emHelp0.add_field(name='?/deepfry', value=':b:eep fried :b:emes anyone? :joy:')
+
+emJpeg = discord.Embed(title='✅ JPEG Complete! ✅')
 
 
 def loglog(message):
@@ -195,269 +163,6 @@ def processImage(infile):
     except EOFError:
         pass # end of sequence
 
-def chHeck(message):
-    debuglog('Checking for trigger words...')
-    debuglog('checing for "heck"...')
-    if (findWholeWord('heck')(message.content.lower()) or findWholeWord('hek')(message.content.lower()) or findWholeWord('hecking')(message.content.lower()) or findWholeWord('heckin')(message.content.lower())):
-        debuglog(blankvar.join((str(message.author), ' just said h*ck!')))
-        bot.send_file(message.channel, blankvar.join(('heck',str(random.randint(1,6)),'.jpg')))
-        global heck
-        heck = True
-    else:
-        global heck
-        heck = False
-
-def chPing(message):
-    debuglog('checking for "@everyone"...')
-    if '@everyone' in message.content:
-        debuglog(blankvar.join((str(message.author), ' pinged! REEEE!!!')))
-        bot.send_message(message.channel, random.choice(pingemojis))
-        global ping
-        ping = True
-    else:
-        global ping
-        ping = False
-
-def chKys(message):
-    debuglog('checking for "die", "kys" and "kms"...')
-    if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
-        debuglog(blankvar.join((str(message.author), ' wants to die. helping...')))
-        bot.send_file(message.channel, 'bleach.png', content=''.join((dancefont['k'],dancefont['y'],dancefont['s'])))
-        global kys
-        kys = True
-    else:
-        global kys
-        kys = False
-
-def chHewwo(message):
-    debuglog('checking for my mentions...')
-    if (blankvar.join(('<@', bot.user.id, '>')) in message.content) or (blankvar.join(('<!@', bot.user.id, '>')) in message.content):
-        debuglog(blankvar.join((str(message.author),' said hi!')))
-        bot.send_message(message.channel, 'H- Hewwo?!')
-        global hewwo
-        hewwo = True
-    else:
-        global hewwo
-        hewwo = False
-
-def chXd(message):
-    debuglog('looking for XD...')
-    if findWholeWord('xd')(message.content.lower()):
-        debuglog(blankvar.join((str(message.author),' just XD\'d')))
-        bot.send_message(message.channel, '<a:xd:442034831690301461>')
-        global xd
-        xd = True
-    else:
-        global xd
-        xd = False
-
-def chThink(message):
-    debuglog('looking for thoughts...')
-    if '🤔' in message.content:
-        debuglog(''.join((str(message.author), ' is thinking...')))
-        global think
-        think = True
-    else:
-        global think
-        think = False
-
-def chIfunny(message):
-    if message.attachments != []:
-        debuglog('Message has attachments. Scanning for cancer...')
-        url = ast.literal_eval(str(message.attachments).split("[")[1].split("]")[0])
-        r = requests.get(url['url'], stream=True)
-        if r.status_code == 200:
-            with open(blankvar.join(('tmp/', url['filename'])), 'wb') as f:
-                for chunk in r:
-                    f.write(chunk)
-
-        ifukkie = image_check(blankvar.join(('tmp/', url['filename'])), 'ifukkie.png')
-        if ifukkie or ('ifunny.co/' in message.content):
-            bot.delete_message(message)
-            bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
-            global ifunny
-            ifunny = True
-            loglog('Message was cancerous and was deleted.')
-        else:
-            debuglog('False Alarm. Message was fine.')
-        os.remove(blankvar.join(('tmp/', url['filename'])))
-        global ifunny
-        ifunny = False
-
-def chJPEG(message):
-    if message.content.lower().startswith('?/jpeg'):
-        debuglog('JPEG command triggered.')
-        if message.attachments != []:
-            url = ast.literal_eval(str(message.attachments).split("[")[1].split("]")[0])
-            if url['filename'].lower().endswith('png') or url['filename'].lower().endswith('jpg') or url['filename'].lower().endswith('jpeg') or url['filename'].lower().endswith('bmp'):
-                r = requests.get(url['url'], stream=True)
-                if r.status_code == 200:
-                    with open(blankvar.join(('tmp/', url['filename'])), 'wb') as f:
-                        for chunk in r:
-                            f.write(chunk)
-
-                    filepath = ''.join(('tmp/', str(url['filename'])))
-                    try:
-                        picture = Image.open(filepath)
-                    except:
-                        global jpegFail
-                        global jpeg
-                        global jpegExit
-                        jpegFail = True
-                        jpeg = True
-                        jpegExit = 3
-                        return
-                    global jpegFile
-                    jpegFile = url['filename'] + '.jpg'
-                    try:
-                        picture.convert('RGB').save(jpegFile,"JPEG",optimize=False,quality=1)
-                    except:
-                        global jpegFail
-                        global jpeg
-                        global jpegExit
-                        jpegFail = True
-                        jpeg = True
-                        jpegExit = 4
-                        return
-
-                    global jpegFail
-                    global jpeg
-                    jpegFail = False
-                    jpeg = True
-                else:
-                    global jpegFail
-                    global jpeg
-                    global jpegExit
-                    jpegFail = True
-                    jpeg = True
-                    jpegExit = 2
-                    return
-            else:
-                global jpegFail
-                global jpeg
-                global jpegExit
-                jpegFail = True
-                jpeg = True
-                jpegExit = 1
-                return
-        else:
-            global jpegFail
-            global jpeg
-            global jpegExit
-            jpegFail = True
-            jpeg = True
-            jpegExit = 1
-            return
-    else:
-        global jpeg
-        jpeg = False
-        return
-
-def chHelp(message):
-    if message.content.lower().startswith('?/help'):
-        global help
-        help = True
-    else:
-        global help
-        help = False
-
-def chCmdPing(message):
-    if message.content.lower().startswith('?/ping'):
-        global cmdPing
-        cmdPing = True
-    else:
-        global cmdPing
-        cmdPing = False
-
-def chDeepfry(message):
-    if message.content.lower().startswith('?/deepfry'):
-        global deepfry
-        deepfry = True
-    else:
-        global deepfry
-        deepfry = False
-
-def chImgrape(message):
-    if message.content.lower().startswith('?/rape'):
-        debuglog('rape command triggered.')
-        if message.attachments != []:
-            url = ast.literal_eval(str(message.attachments).split("[")[1].split("]")[0])
-            if url['filename'].lower().endswith('png') or url['filename'].lower().endswith('jpg') or url['filename'].lower().endswith('jpeg') or url['filename'].lower().endswith('bmp'):
-                r = requests.get(url['url'], stream=True)
-                if r.status_code == 200:
-                    with open(blankvar.join(('tmp/', url['filename'])), 'wb') as f:
-                        for chunk in r:
-                            f.write(chunk)
-
-                    filepath = ''.join(('tmp/', str(url['filename'])))
-                    try:
-                        picture = Image.open(filepath)
-                    except:
-                        global rapeFail
-                        global rape
-                        global rapeExit
-                        rapeFail = True
-                        rape = True
-                        rapeExit = 3
-                        return
-                    global rapeFile
-                    rapeFile = url['filename'] + '.jpg'
-                    try:
-                        picture = picture.convert('RGB')
-                        picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
-                        picture.save(rapeFile,"JPEG",optimize=False,quality=1)
-                    except:
-                        global rapeFail
-                        global rape
-                        global rapeExit
-                        rapeFail = True
-                        rape = True
-                        rapeExit = 4
-                        return
-
-                    global rapeFail
-                    global rape
-                    rapeFail = False
-                    rape = True
-                else:
-                    global rapeFail
-                    global rape
-                    global rapeExit
-                    rapeFail = True
-                    rape = True
-                    rapeExit = 2
-                    return
-            else:
-                global rapeFail
-                global rape
-                global rapeExit
-                rapeFail = True
-                rape = True
-                rapeExit = 1
-                return
-        else:
-            global rapeFail
-            global rape
-            global rapeExit
-            rapeFail = True
-            rape = True
-            rapeExit = 1
-            return
-    else:
-        global rape
-        rape = False
-        return
-
-def chNoU(message):
-    if 'no u' in message.content.lower():
-        global nou
-        nou = True
-    else:
-        global nou
-        nou = False
-
-
-
 #END OF FUNCTIONS
 #DEFINES:
 loglog(blankvar.join(('Starting Cancer Bot v', version, '...')))
@@ -478,76 +183,40 @@ async def on_message(message):
         debuglog('Message is by me, exiting...')
         return
     else:
-        tChIfunny = threading.Thread(target=chIfunny, args=(message,))
-        tChHeck = threading.Thread(target=chHeck, args=(message,))
-        tChPing = threading.Thread(target=chPing, args=(message,))
-        tChKys = threading.Thread(target=chKys, args=(message,))
-        tChHewwo = threading.Thread(target=chHewwo, args=(message,))
-        tChXd = threading.Thread(target=chXd, args=(message,))
-        tChThink = threading.Thread(target=chThink, args=(message,))
-        tChJPEG = threading.Thread(target=chJPEG, args=(message,))
-        tChHelp = threading.Thread(target=chHelp, args=(message,))
-        tChCmdPing = threading.Thread(target=chCmdPing, args=(message,))
-        tChDeepfry = threading.Thread(target=chDeepfry, args=(message,))
-        tChImgrape = threading.Thread(target=chImgrape, args=(message,))
-        tChNoU = threading.Thread(target=chNoU, args=(message,))
-
-        tChIfunny.start()
-        tChHeck.start()
-        tChPing.start()
-        tChKys.start()
-        tChHewwo.start()
-        tChXd.start()
-        tChThink.start()
-        tChJPEG.start()
-        tChHelp.start()
-        tChCmdPing.start()
-        tChDeepfry.start()
-        tChImgrape.start()
-        tChNoU.start()
-
-        tChHeck.join()
-        tChPing.join()
-        tChKys.join()
-        tChHewwo.join()
-        tChXd.join()
-        tChThink.join()
-        tChHelp.join()
-        tChCmdPing.join()
-        tChNoU.join()
+        #tChIfunny = threading.Thread(target=chIfunny, args=(message,))
+        tJpeg = threading.Thread(target=images.jpeg, args=(message,))
 
 
-        if heck:
+        if (findWholeWord('heck')(message.content.lower()) or findWholeWord('hek')(message.content.lower()) or findWholeWord('hecking')(message.content.lower()) or findWholeWord('heckin')(message.content.lower())):
             emHeck.set_image(url=random.choice(hecks))
             await bot.send_message(message.channel, embed=emHeck)
 
-        if ping:
+        if '@everyone' in message.content:
             await bot.send_message(message.channel, random.choice(pingemojis))
 
-        if kys and hewwo:
-            await bot.send_message(message.channel, 'no u')
-            await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.')
-            global kys
-            kys = False
-            global hewwo
-            hewwo = False
+        if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
+            if (blankvar.join(('<@', bot.user.id, '>')) in message.content) or (blankvar.join(('<!@', bot.user.id, '>')) in message.content):
+                await bot.send_message(message.channel, 'no u')
+                await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.')
+            else:
+                await bot.send_message(message.channel, embed=emBleach)
+        elif (blankvar.join(('<@', bot.user.id, '>')) in message.content) or (blankvar.join(('<!@', bot.user.id, '>')) in message.content):
+            if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
+                await bot.send_message(message.channel, 'no u')
+                await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.')
+            else:
+                await bot.send_message(message.channel, 'H- Hewwo?!')
 
-        if kys:
-            await bot.send_message(message.channel, embed=emBleach)
-
-        if hewwo:
-            await bot.send_message(message.channel, 'H- Hewwo?!')
-
-        if xd:
+        if findWholeWord('xd')(message.content.lower()):
             await bot.send_message(message.channel, '<a:xd:442034831690301461>')
 
-        if think:
+        if '🤔' in message.content:
             await bot.send_message(message.channel, embed=emThink)
 
-        if help:
+        if message.content.lower().startswith('?/help'):
             await bot.send_message(message.channel, embed=emHelp0)
 
-        if cmdPing:
+        if message.content.lower().startswith('?/ping'):
             t1 = time.perf_counter()
             await bot.send_typing(message.channel)
             t2 = time.perf_counter()
@@ -555,50 +224,37 @@ async def on_message(message):
             emPing.add_field(name='Typing ping', value=str(round((t2-t1)*1000, 1)) + ' ms', inline=True)
             await bot.send_message(message.channel, embed=emPing)
 
-        if nou:
+        if 'no u' in message.content.lower():
             await bot.send_message(message.channel, 'Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.')
 
-
-        tChJPEG.join()
-        if jpeg:
-            if jpegFail:
-                if jpegExit == 1:
+        if message.content.lower().startswith('?/jpeg'):
+            fail, exit, url = images.jpeg(message)
+            if fail:
+                if exit == 1:
                     await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu You made a fucky wucky!! A wittle fucko boingo! You better be working **VEWY HAWD** to fix this! Please supply a `.png`, `.jpg`, `.jpeg` or `.bmp` file!\nError code: `YOUR_AUTISTIC`\n*Request by: `' + str(message.author) + '`*')
-                elif jpegExit == 2:
+                elif exit == 2:
                     await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `DOWNLOAD_FAILED`\n*Request by: `' + str(message.author) + '`*')
-                elif jpegExit == 3:
+                elif exit == 3:
                     await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FILE_OPEN_FAILURE`\n*Request by: `' + str(message.author) + '`*')
-                elif jpegExit == 4:
+                elif exit == 4:
                     await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `PROCESSING_FAILED`\n*Request by: `' + str(message.author) + '`*')
                 else:
                     await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `OOPSIE_WOOPSIE`\n*Request by: `' + str(message.author) + '`*')
             else:
-                await bot.send_file(message.channel, jpegFile, content='✅ **JPEG Complete!** ✅\n*Request by: `' + str(message.author) + '`*')
+                emJpeg.set_footer(icon_url=message.author.avatar_url, text=str(message.set_author) + ' requested this command')
+                emJpeg.set_image(url=url)
+                await bot.send_message(message.channel, embed=emJpeg)
 
-        tChDeepfry.join()
-        if deepfry:
+        if message.content.lower().startswith('?/deepfry'):
             await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FEATURE_NOT_IMPLEMENTED`\n*Request by: `' + str(message.author) + '`*')
 
-        tChImgrape.join()
-        if rape:
-            if rapeFail:
-                if rapeExit == 1:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu You made a fucky wucky!! A wittle fucko boingo! You better be working **VEWY HAWD** to fix this! Please supply a `.png`, `.jpg`, `.jpeg` or `.bmp` file!\nError code: `YOUR_AUTISTIC`\n*Request by: `' + str(message.author) + '`*')
-                elif rapeExit == 2:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `DOWNLOAD_FAILED`\n*Request by: `' + str(message.author) + '`*')
-                elif rapeExit == 3:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FILE_OPEN_FAILURE`\n*Request by: `' + str(message.author) + '`*')
-                elif rapeExit == 4:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `PROCESSING_FAILED`\n*Request by: `' + str(message.author) + '`*')
-                else:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `OOPSIE_WOOPSIE`\n*Request by: `' + str(message.author) + '`*')
-            else:
-                await bot.send_file(message.channel, rapeFile, content='✅ **Image has been fucked!** ✅\n*Request by: `' + str(message.author) + '`*')
+        if message.content.lower().startswith('?/rape'):
+            await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FEATURE_NOT_IMPLEMENTED`\n*Request by: `' + str(message.author) + '`*')
 
-        tChIfunny.join()
-        if ifunny:
-            await bot.delete_message(message)
-            await bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
+        #tChIfunny.join()
+        #if ifunny:
+    #        await bot.delete_message(message)
+#            await bot.send_message(message.channel, blankvar.join(('<:shooter:441972276901052416> ',dancefont['d'],dancefont['e'],dancefont['l'],dancefont['e'],dancefont['t'],' ',dancefont['d'],dancefont['i'],dancefont['s'],' <:shooter:441972276901052416>')))
 
 
         debuglog(blankvar.join(('Message #', message.id, ' has finished processing.')))
