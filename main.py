@@ -323,6 +323,14 @@ async def on_message(message):
                 target = await bot.get_message(message.content.split(' ')[1], message.content.split(' ')[2])
                 await bot.delete_message(target)
 
+        if message.content.lower().startswith('?/;say'):
+            if str(message.author.id) == '273940917596061698':
+                await bot.send_message(message.channel, message.content.split(' ', 1)[1])
+
+        if message.content.lower().startswith('?/;asay'):
+            if str(message.author.id) == '273940917596061698':
+                await bot.send_message(message.content.split(' ', 2)[1], message.content.split(' ', 2)[2])
+
         #tChIfunny.join()
         #if ifunny:
     #        await bot.delete_message(message)
