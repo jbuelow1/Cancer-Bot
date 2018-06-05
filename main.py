@@ -281,23 +281,23 @@ async def on_message(message):
             await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FEATURE_NOT_IMPLEMENTED`\n*Request by: `' + str(message.author) + '`*')
 
         #bot owner commands
-        if message.content.lower().startswith('?/!jpegas'):
-            if message.author.id == 273940917596061698:
+        if message.content.lower().startswith('?/;jpegas'):
+            if str(message.author.id) == '273940917596061698:
                 fail, exit, url = images.jpeg(message)
                 await bot.delete_message(message)
                 if not fail:
-                    target = bot.get_user_info(message.content.split(' ')[2])
+                    target = await bot.get_user_info(message.content.split(' ')[2])
                     emJpeg.set_footer(icon_url=target.avatar_url, text=str(target) + ' requested this command')
                     emJpeg.set_image(url=url)
                     await bot.send_message(message.channel, embed=emJpeg)
 
-        if message.content.lower().startswith('?/!rapeas'):
+        if message.content.lower().startswith('?/;rapeas'):
             if str(message.author.id) == '273940917596061698':
                 fail, exit, url = images.rape(message)
                 await bot.delete_message(message)
                 if not fail:
                     target = await bot.get_user_info(message.content.split(' ')[1])
-                    emRape.set_footer(text=str(target) + ' requested this command')
+                    emRape.set_footer(icon_url=target.avatar_url, text=str(target) + ' requested this command')
                     emRape.set_image(url=url)
                     await bot.send_message(message.channel, embed=emRape)
 
