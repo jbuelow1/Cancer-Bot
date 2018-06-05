@@ -179,7 +179,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    debuglog(blankvar.join(('New Message by ', str(message.author), ' with ID ', str(message.id), ' in channel ', str(message.channel.id), '.')))
+    debuglog(blankvar.join(('New Message by ', str(message.author), ' (', str(message.author.id), ') with message ID ', str(message.id), ' in channel ', str(message.channel.id), '.')))
     if message.author == bot.user:
         debuglog('Message is by me, exiting...')
         return
