@@ -300,8 +300,8 @@ async def on_message(message):
                     emRape.set_footer(icon_url=target.avatar_url, text=str(target) + ' requested this command')
                     emRape.set_image(url=url)
                     await bot.send_message(message.channel, embed=emRape)
-'''
-        if message.content.lower().startswith('?/;deepfryas'):
+
+        '''if message.content.lower().startswith('?/;deepfryas'):
             if str(message.author.id) == '273940917596061698':
                 fail, exit, url = images.deepfry(message)
                 await bot.delete_message(message)
@@ -309,8 +309,8 @@ async def on_message(message):
                     target = await bot.get_user_info(message.content.split(' ')[1])
                     emDeepfry.set_footer(icon_url=target.avatar_url, text=str(target) + ' requested this command')
                     emDeepfry.set_image(url=url)
-                    await bot.send_message(message.channel, embed=emDeepfry)
-'''
+                    await bot.send_message(message.channel, embed=emDeepfry)'''
+
         if message.content.lower().startswith('?/;delete'):
             if str(message.author.id) == '273940917596061698':
                 await bot.delete_message(message)
