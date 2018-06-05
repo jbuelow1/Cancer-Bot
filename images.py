@@ -1,4 +1,5 @@
 import requests
+import ast
 from PIL import Image
 from PIL import ImageFile, ImageFilter
 ImageFile.LOAD_TRUNCATED_IMAGES = True
