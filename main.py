@@ -189,19 +189,23 @@ async def on_message(message):
 
 
         if (findWholeWord('heck')(message.content.lower()) or findWholeWord('hek')(message.content.lower()) or findWholeWord('hecking')(message.content.lower()) or findWholeWord('heckin')(message.content.lower())):
+            await bot.send_typing(message.channel)
             emHeck.set_image(url=random.choice(hecks))
             await bot.send_message(message.channel, embed=emHeck)
 
         if '@everyone' in message.content:
+            await bot.send_typing(message.channel)
             await bot.send_message(message.channel, random.choice(pingemojis))
 
         if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
+            await bot.send_typing(message.channel)
             if (blankvar.join(('<@', bot.user.id, '>')) in message.content) or (blankvar.join(('<!@', bot.user.id, '>')) in message.content):
                 await bot.send_message(message.channel, 'no u')
                 await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.')
             else:
                 await bot.send_message(message.channel, embed=emBleach)
         elif (blankvar.join(('<@', bot.user.id, '>')) in message.content) or (blankvar.join(('<!@', bot.user.id, '>')) in message.content):
+            await bot.send_typing(message.channel)
             if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
                 await bot.send_message(message.channel, 'no u')
                 await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.')
@@ -209,12 +213,15 @@ async def on_message(message):
                 await bot.send_message(message.channel, 'H- Hewwo?!')
 
         if findWholeWord('xd')(message.content.lower()):
+            await bot.send_typing(message.channel)
             await bot.send_message(message.channel, '<a:xd:442034831690301461>')
 
         if '🤔' in message.content:
+            await bot.send_typing(message.channel)
             await bot.send_message(message.channel, embed=emThink)
 
         if message.content.lower().startswith('?/help'):
+            await bot.send_typing(message.channel)
             await bot.send_message(message.channel, embed=emHelp0)
 
         if message.content.lower().startswith('?/ping'):
@@ -226,10 +233,13 @@ async def on_message(message):
             await bot.send_message(message.channel, embed=emPing)
 
         if 'no u' in message.content.lower():
+            await bot.send_typing(message.channel)
             await bot.send_message(message.channel, 'Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.')
 
         if message.content.lower().startswith('?/jpeg'):
+            await bot.send_typing(message.channel)
             fail, exit, url = images.jpeg(message)
+            await bot.delete_message(message)
             if fail:
                 if exit == 1:
                     await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu You made a fucky wucky!! A wittle fucko boingo! You better be working **VEWY HAWD** to fix this! Please supply a `.png`, `.jpg`, `.jpeg` or `.bmp` file!\nError code: `YOURE_AUTISTIC`\n*Request by: `' + str(message.author) + '`*')
@@ -247,7 +257,9 @@ async def on_message(message):
                 await bot.send_message(message.channel, embed=emJpeg)
 
         if message.content.lower().startswith('?/rape'):
+            await bot.send_typing(message.channel)
             fail, exit, url = images.rape(message)
+            await bot.delete_message(message)
             if fail:
                 if exit == 1:
                     await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu You made a fucky wucky!! A wittle fucko boingo! You better be working **VEWY HAWD** to fix this! Please supply a `.png`, `.jpg`, `.jpeg` or `.bmp` file!\nError code: `YOURE_AUTISTIC`\n*Request by: `' + str(message.author) + '`*')
@@ -265,7 +277,29 @@ async def on_message(message):
                 await bot.send_message(message.channel, embed=emRape)
 
         if message.content.lower().startswith('?/deepfry'):
+            await bot.send_typing(message.channel)
             await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FEATURE_NOT_IMPLEMENTED`\n*Request by: `' + str(message.author) + '`*')
+
+        #bot owner commands
+        if message.content.lower().startswith('?/!jpegas'):
+            if message.author.id == 273940917596061698:
+                fail, exit, url = images.jpeg(message)
+                await bot.delete_message(message)
+                if not fail:
+                    target = bot.get_user_info(message.content.split(' ')[2])
+                    emJpeg.set_footer(icon_url=target.avatar_url, text=str(target) + ' requested this command')
+                    emJpeg.set_image(url=url)
+                    await bot.send_message(message.channel, embed=emJpeg)
+
+        if message.content.lower().startswith('?/!rapeas'):
+            if message.author.id == 273940917596061698:
+                fail, exit, url = images.rape(message)
+                await bot.delete_message(message)
+                if not fail:
+                    target = bot.get_user_info(message.content.split(' ')[2])
+                    emRape.set_footer(icon_url=target.avatar_url, text=str(target) + ' requested this command')
+                    emRape.set_image(url=url)
+                    await bot.send_message(message.channel, embed=emRape)
 
         #tChIfunny.join()
         #if ifunny:
