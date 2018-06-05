@@ -18,7 +18,8 @@ def rape(message):
                 filepath = ''.join(('tmp/', str(url['filename'])))
                 try:
                     picture = Image.open(filepath)
-                except:
+                except as e:
+                    print(e)
                     return True, 3, ''
                 localfile = '/discordcdn/' + message.channel.id + '/' + message.author.id + '/' + url['filename'] + '.jpg'
                 try:
@@ -26,7 +27,8 @@ def rape(message):
                     picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
                     picture.save(localfile,"JPEG",optimize=False,quality=1)
                     remotefile = 'http://cdn.jplp.tk/' + message.channel.id + '/' + message.author.id + '/' + url['filename'] + '.jpg'
-                except:
+                except as e:
+                    print(e)
                     return True, 4, ''
 
                 return False, 0, remotefile
@@ -50,7 +52,8 @@ def jpeg(message):
                 filepath = ''.join(('tmp/', str(url['filename'])))
                 try:
                     picture = Image.open(filepath)
-                except:
+                except as e:
+                    print(e)
                     return True, 3, ''
                 localfile = '/discordcdn/' + message.channel.id + '/' + message.author.id + '/' + url['filename'] + '.jpg'
                 try:
@@ -58,7 +61,8 @@ def jpeg(message):
                     #picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
                     picture.save(localfile,"JPEG",optimize=False,quality=1)
                     remotefile = 'http://cdn.jplp.tk/' + message.channel.id + '/' + message.author.id + '/' + url['filename'] + '.jpg'
-                except:
+                except as e:
+                    print(e)
                     return True, 4, ''
 
                 return False, 0, remotefile
