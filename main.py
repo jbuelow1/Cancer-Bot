@@ -315,14 +315,11 @@ async def on_message(message):
             if str(message.author.id) == '273940917596061698':
                 try:
                     await bot.delete_message(message)
-                target = await bot.get_message(message.channel, message.content.split(' ')[1])
-                await bot.delete_message(target)
-
-        if message.content.lower().startswith('?/;adelete'):
-            if str(message.author.id) == '273940917596061698':
-                try:
-                    await bot.delete_message(message)
-                target = await bot.get_message(message.content.split(' ')[1], message.content.split(' ')[2])
+                if len(message.content.split(' ')) >= 3:
+                    channel = await bot.get_channel(message.content.split(' ', 2)[1])
+                    target = await bot.get_message(channel, message.content.split(' ')[2])
+                else:
+                    target = await bot.get_message(message.channel, message.content.split(' ')[1])
                 await bot.delete_message(target)
 
         if message.content.lower().startswith('?/;say'):
@@ -335,7 +332,18 @@ async def on_message(message):
             if str(message.author.id) == '273940917596061698':
                 try:
                     await bot.delete_message(message)
-                await bot.send_message(message.content.split(' ', 2)[1], message.content.split(' ', 2)[2])
+                channel = await bot.get_channel(message.content.split(' ', 2)[1])
+                await bot.send_message(channel, message.content.split(' ', 2)[2])
+
+        if message.content.lower().startswith('?/;ban'):
+            if str(message.author.id) == '273940917596061698':
+                if len(message.content.split(' ')) >= 3:
+                    server = await bot.get_server(message.content.split(' ')[1])
+                    member = await server.get_member(message.content.split(' ')[2])
+                else:
+                    server = message.server
+                    member = await server.get_member(message.content.split(' ')[2])
+                await bot.ban(member)
 
         #tChIfunny.join()
         #if ifunny:
