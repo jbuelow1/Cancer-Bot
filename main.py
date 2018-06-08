@@ -257,9 +257,9 @@ async def on_message(message):
             await bot.send_typing(message.channel)
             t2 = time.perf_counter()
             typingPing = str(round((t2-t1)*1000, 1)) + ' ms'
-            dnsPing = math.floor(get_ping_time('8.8.8.8')) + ' ms'
-            googlePing = math.floor(get_ping_time('google.com')) + ' ms'
-            lanPing = math.floor(get_ping_time('192.168.1.1')) + ' ms'
+            dnsPing = str(math.floor(get_ping_time('8.8.8.8'))) + ' ms'
+            googlePing = str(math.floor(get_ping_time('google.com'))) + ' ms'
+            lanPing = str(math.floor(get_ping_time('192.168.1.1'))) + ' ms'
             emPing = discord.Embed(title=':ping_pong: Pong! :ping_pong:')
             emPing.add_field(name='Typing ping', value=typingPing, inline=True)
             emPing.add_field(name='DNS ping', value=dnsPing, inline=True)
