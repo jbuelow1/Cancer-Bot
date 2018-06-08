@@ -256,15 +256,17 @@ async def on_message(message):
             t1 = time.perf_counter()
             await bot.send_typing(message.channel)
             t2 = time.perf_counter()
+            await bot.delete_message(message)
             typingPing = str(math.floor((t2-t1)*1000)) + ' ms'
             dnsPing = str(math.floor(get_ping_time('8.8.8.8'))) + ' ms'
             googlePing = str(math.floor(get_ping_time('google.com'))) + ' ms'
             lanPing = str(math.floor(get_ping_time('192.168.1.1'))) + ' ms'
-            emPing = discord.Embed(title=':ping_pong: Pong! :ping_pong:', colour=0x121296)
+            emPing = discord.Embed(title=':ping_pong: Pong! :ping_pong:', description='Ping statistics for this bot', colour=0x121296)
             emPing.add_field(name='Typing ping', value=typingPing, inline=False)
             emPing.add_field(name='DNS (8.8.8.8) ping', value=dnsPing, inline=False)
             emPing.add_field(name='Google (google.com) ping', value=googlePing, inline=False)
             emPing.add_field(name='LAN (192.168.1.1) ping', value=lanPing, inline=False)
+            emPing.set_footer(icon_url=message.author.avatar_url, text=str(message.author) + ' requested this command')
             await bot.send_message(message.channel, embed=emPing)
 
         if 'no u' in message.content.lower():
