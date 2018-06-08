@@ -366,7 +366,7 @@ async def on_message(message):
                     member = await server.get_member(message.content.split(' ')[2])
                 else:
                     server = message.server
-                    member = await server.get_member(message.content.split(' ')[2])
+                    member = await server.get_member(message.content.split(' ')[1])
                 await bot.ban(member)
 
         #tChIfunny.join()
