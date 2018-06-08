@@ -290,7 +290,7 @@ async def on_message(message):
                 else:
                     await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `OOPSIE_WOOPSIE`\n*Request by: `' + str(message.author) + '`*')
             else:
-                emJpeg.set_footer(icon_url=message.author.avatar_url, text=str(message.author) + ' requested this command')
+                emJpeg.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
                 emJpeg.set_image(url=url)
                 await bot.send_message(message.channel, embed=emJpeg)
 
@@ -310,7 +310,7 @@ async def on_message(message):
                 else:
                     await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `OOPSIE_WOOPSIE`\n*Request by: `' + str(message.author) + '`*')
             else:
-                emRape.set_footer(icon_url=message.author.avatar_url, text=str(message.author) + ' requested this command')
+                emRape.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
                 emRape.set_image(url=url)
                 await bot.send_message(message.channel, embed=emRape)
 
