@@ -261,10 +261,10 @@ async def on_message(message):
             googlePing = str(math.floor(get_ping_time('google.com'))) + ' ms'
             lanPing = str(math.floor(get_ping_time('192.168.1.1'))) + ' ms'
             emPing = discord.Embed(title=':ping_pong: Pong! :ping_pong:')
-            emPing.add_field(name='Typing ping', value=typingPing, inline=False)
-            emPing.add_field(name='DNS ping', value=dnsPing, inline=True)
+            emPing.add_field(name='Typing ping', value=typingPing, inline=True)
+            emPing.add_field(name='DNS ping', value=dnsPing, inline=False)
             emPing.add_field(name='Google ping', value=googlePing, inline=True)
-            emPing.add_field(name='LAN ping', value=lanPing, inline=True)
+            emPing.add_field(name='LAN ping', value=lanPing, inline=False)
             await bot.send_message(message.channel, embed=emPing)
 
         if 'no u' in message.content.lower():
