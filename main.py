@@ -119,8 +119,8 @@ emHelp0.add_field(name='?/suggest <suggestion>', value='DMs my senpai any sugges
 
 #emHelp0.add_field(name='?/help advanced', value='Helpage for more advanced bot commands', inline=True)
 
-emJpeg = discord.Embed(title='✅ JPEG Complete! ✅')
-emRape = discord.Embed(title='✅ Image Fucked! ✅')
+emJpeg = discord.Embed(title='✅ JPEG Complete! ✅', colour=0x121296)
+emRape = discord.Embed(title='✅ Image Fucked! ✅', colour=0x121296)
 
 
 def loglog(message):
@@ -260,11 +260,11 @@ async def on_message(message):
             dnsPing = str(math.floor(get_ping_time('8.8.8.8'))) + ' ms'
             googlePing = str(math.floor(get_ping_time('google.com'))) + ' ms'
             lanPing = str(math.floor(get_ping_time('192.168.1.1'))) + ' ms'
-            emPing = discord.Embed(title=':ping_pong: Pong! :ping_pong:')
+            emPing = discord.Embed(title=':ping_pong: Pong! :ping_pong:', colour=0x121296)
             emPing.add_field(name='Typing ping', value=typingPing, inline=True)
-            emPing.add_field(name='DNS ping', value=dnsPing, inline=False)
+            emPing.add_field(name='DNS ping', value=dnsPing, inline=True)
             emPing.add_field(name='Google ping', value=googlePing, inline=True)
-            emPing.add_field(name='LAN ping', value=lanPing, inline=False)
+            emPing.add_field(name='LAN ping', value=lanPing, inline=True)
             await bot.send_message(message.channel, embed=emPing)
 
         if 'no u' in message.content.lower():
