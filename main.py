@@ -161,7 +161,7 @@ def get_simple_cmd_output(cmd, stderr=STDOUT):
 
 def get_ping_time(host):
     host = host.split(':')[0]
-    cmd = "fping {host} -C 3 -q".format(host=host)
+    cmd = "fping {host} -C 1 -q".format(host=host)
     # result = str(get_simple_cmd_output(cmd)).replace('\\','').split(':')[-1].split() if x != '-']
     result = str(get_simple_cmd_output(cmd)).replace('\\', '').split(':')[-1].replace("n'", '').replace("-",
                                                                                                         '').replace(
@@ -256,12 +256,9 @@ async def on_message(message):
             await bot.send_typing(message.channel)
             t2 = time.perf_counter()
             typingPing = str(round((t2-t1)*1000, 1)) + ' ms'
-            try:
-                dnsPing = get_ping_time('8.8.8.8')
-                googlePing = get_ping_time('google.com')
-                lanPing = get_ping_time('192.168.1.1')
-            except:
-                pass
+            dnsPing = get_ping_time('8.8.8.8').round(1) + ' ms'
+            googlePing = get_ping_time('google.com').round(1) + ' ms'
+            lanPing = get_ping_time('192.168.1.1').round(1) + ' ms'
             emPing = discord.Embed(title=':ping_pong: Pong! :ping_pong:')
             emPing.add_field(name='Typing ping', value=typingPing, inline=True)
             emPing.add_field(name='DNS ping', value=dnsPing, inline=True)
