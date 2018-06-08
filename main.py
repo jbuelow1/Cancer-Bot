@@ -353,6 +353,25 @@ async def on_message(message):
                 channel = await bot.get_channel(message.content.split(' ', 2)[1])
                 await bot.send_message(channel, message.content.split(' ', 2)[2])
 
+        if message.content.lower().startswith('?/;kick'):
+            debuglog('Owner command triggered.')
+            if str(message.author.id) == '273940917596061698':
+                loglog('Bot owner has issued a owner command.')
+                try:
+                    await bot.delete_message(message)
+                except:
+                    pass
+                if len(message.content.split(' ')) >= 3:
+                    server = bot.get_server(message.content.split(' ')[1])
+                    member = server.get_member(message.content.split(' ')[2])
+                else:
+                    server = message.server
+                    member = server.get_member(message.content.split(' ')[1])
+                try:
+                    await bot.kick(member)
+                except:
+                    bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, daddy.')
+
         if message.content.lower().startswith('?/;ban'):
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
@@ -367,7 +386,29 @@ async def on_message(message):
                 else:
                     server = message.server
                     member = server.get_member(message.content.split(' ')[1])
-                await bot.ban(member)
+                try:
+                    await bot.ban(member)
+                except:
+                    bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, daddy.')
+
+        if message.content.lower().startswith('?/;unban'):
+            debuglog('Owner command triggered.')
+            if str(message.author.id) == '273940917596061698':
+                loglog('Bot owner has issued a owner command.')
+                try:
+                    await bot.delete_message(message)
+                except:
+                    pass
+                if len(message.content.split(' ')) >= 3:
+                    server = bot.get_server(message.content.split(' ')[1])
+                    user = server.get_user(message.content.split(' ')[2])
+                else:
+                    server = message.server
+                    user = server.get_user(message.content.split(' ')[1])
+                try:
+                    await bot.unban(server, user)
+                except:
+                    bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, daddy.')
 
         #tChIfunny.join()
         #if ifunny:
