@@ -362,11 +362,11 @@ async def on_message(message):
                 except:
                     pass
                 if len(message.content.split(' ')) >= 3:
-                    server = await bot.get_server(message.content.split(' ')[1])
-                    member = await server.get_member(message.content.split(' ')[2])
+                    server = bot.get_server(message.content.split(' ')[1])
+                    member = server.get_member(message.content.split(' ')[2])
                 else:
                     server = message.server
-                    member = await server.get_member(message.content.split(' ')[1])
+                    member = server.get_member(message.content.split(' ')[1])
                 await bot.ban(member)
 
         #tChIfunny.join()
