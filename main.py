@@ -156,15 +156,6 @@ def get_simple_cmd_output(cmd, stderr=STDOUT):
     args = shlex.split(cmd)
     return Popen(args, stdout=PIPE, stderr=stderr).communicate()[0]
 
-def get_ping_time(host):
-    host = host.split(':')[0]
-    cmd = "fping {host} -C 1 -q".format(host=host)
-    res = [float(x) for x in process.get_simple_cmd_output(cmd).strip().split(':')[-1].split() if x != '-']
-    if len(res) > 0:
-        return sum(res) / len(res)
-    else:
-        return 999999
-
 def processImage(infile):
     try:
         im = Image.open(infile)
@@ -249,9 +240,9 @@ async def on_message(message):
             await bot.send_typing(message.channel)
             t2 = time.perf_counter()
             typingPing = str(round((t2-t1)*1000, 1)) + ' ms'
-            dnsPing = get_ping_time('8.8.8.8')
-            googlePing = get_ping_time('google.com')
-            lanPing = get_ping_time('192.168.1.1')
+            dnsPing = get_simple_cmd_output('fping -C 1 -q 8.8.8.8').split(' ')[2]
+            googlePing = get_simple_cmd_output('fping -C 1 -q google.com').split(' ')[2]
+            lanPing = get_simple_cmd_output('fping -C 1 -q 192.168.1.1').split(' ')[2]
             emPing = discord.Embed(title=':ping_pong: Pong! :ping_pong:')
             emPing.add_field(name='Typing ping', value=typingPing, inline=True)
             emPing.add_field(name='DNS ping', value=dnsPing, inline=True)
