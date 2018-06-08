@@ -15,6 +15,8 @@ import ast
 import threading
 import time
 from io import StringIO
+import shlex
+from subprocess import Popen, PIPE, STDOUT
 
 #modules
 import images
@@ -103,17 +105,21 @@ emHeck = discord.Embed(title='No Swearing!', colour=0x121296)
 emThink = discord.Embed(title=':thinking::thinking::thinking::thinking::thinking:', colour=0x121296)
 emThink.set_image(url="https://i.imgur.com/wHMWq1B.gif")
 
-emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my owner, `Yamcha#4224`, or by ~~using my suggestion command.~~\n\nThis bot\'s command prefix is: `?/`\n\u200b', colour=0x121296)
+emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\u200b', colour=0x121296)
 emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
 emHelp0.set_author(name='Cancer Bot Help', icon_url='https://i.imgur.com/4fehjDz.png')
 emHelp0.add_field(name='?/help', value='Displays this help text', inline=True)
 emHelp0.add_field(name='?/jpeg', value='Adds jpeg compression to images', inline=True)
 emHelp0.add_field(name='?/ping', value='Tests the bot\'s ping time', inline=True)
 emHelp0.add_field(name='?/rape', value='Utterly fucks an image', inline=True)
-emHelp0.add_field(name='?/deepfry', value=':b:eep fried :b:emes anyone? :joy:')
+#emHelp0.add_field(name='?/deepfry', value=':b:eep fried :b:emes anyone? :joy:')
+emHelp0.add_field(name='?/whois <ID>', value='Looks up user info by ID', inline=True)
+emHelp0.add_field(name='?/suggest <suggestion>', value='DMs my senpai any suggestions you have', inline=True)
+
+#emHelp0.add_field(name='?/help advanced', value='Helpage for more advanced bot commands', inline=True)
 
 emJpeg = discord.Embed(title='✅ JPEG Complete! ✅')
-emRape = discord.Embed(title='✅ Image Fucked!  ✅')
+emRape = discord.Embed(title='✅ Image Fucked! ✅')
 
 
 def loglog(message):
@@ -144,6 +150,20 @@ def image_check(suspect,template):
 
 def findWholeWord(w):
     return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search
+
+def get_simple_cmd_output(cmd, stderr=STDOUT):
+    #Execute a simple external command and get its output.
+    args = shlex.split(cmd)
+    return Popen(args, stdout=PIPE, stderr=stderr).communicate()[0]
+
+def get_ping_time(host):
+    host = host.split(':')[0]
+    cmd = "fping {host} -C 1 -q".format(host=host)
+    res = [float(x) for x in process.get_simple_cmd_output(cmd).strip().split(':')[-1].split() if x != '-']
+    if len(res) > 0:
+        return sum(res) / len(res)
+    else:
+        return 999999
 
 def processImage(infile):
     try:
@@ -228,8 +248,15 @@ async def on_message(message):
             t1 = time.perf_counter()
             await bot.send_typing(message.channel)
             t2 = time.perf_counter()
+            typingPing = str(round((t2-t1)*1000, 1)) + ' ms'
+            dnsPing = get_ping_time('8.8.8.8')
+            googlePing = get_ping_time('google.com')
+            lanPing = get_ping_time('192.168.1.1')
             emPing = discord.Embed(title=':ping_pong: Pong! :ping_pong:')
-            emPing.add_field(name='Typing ping', value=str(round((t2-t1)*1000, 1)) + ' ms', inline=True)
+            emPing.add_field(name='Typing ping', value=typingPing, inline=True)
+            emPing.add_field(name='DNS ping', value=dnsPing, inline=True)
+            emPing.add_field(name='Google ping', value=googlePing, inline=True)
+            emPing.add_field(name='LAN ping', value=lanPing, inline=True)
             await bot.send_message(message.channel, embed=emPing)
 
         if 'no u' in message.content.lower():
@@ -279,6 +306,12 @@ async def on_message(message):
         if message.content.lower().startswith('?/deepfry'):
             await bot.send_typing(message.channel)
             await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FEATURE_NOT_IMPLEMENTED`\n*Request by: `' + str(message.author) + '`*')
+
+        if message.content.lower().startswith('?/whois'):
+            pass
+
+        if message.content.lower().startswith('?/suggest'):
+            pass
 
         #bot owner commands
         if message.content.lower().startswith('?/;jpegas'):
