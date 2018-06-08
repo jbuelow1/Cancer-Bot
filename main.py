@@ -282,7 +282,9 @@ async def on_message(message):
 
         #bot owner commands
         if message.content.lower().startswith('?/;jpegas'):
+            debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
+                loglog('Bot owner has issued a owner command.')
                 fail, exit, url = images.jpeg(message)
                 await bot.delete_message(message)
                 if not fail:
@@ -292,7 +294,9 @@ async def on_message(message):
                     await bot.send_message(message.channel, embed=emJpeg)
 
         if message.content.lower().startswith('?/;rapeas'):
+            debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
+                loglog('Bot owner has issued a owner command.')
                 fail, exit, url = images.rape(message)
                 await bot.delete_message(message)
                 if not fail:
@@ -302,7 +306,9 @@ async def on_message(message):
                     await bot.send_message(message.channel, embed=emRape)
 
         '''if message.content.lower().startswith('?/;deepfryas'):
+            debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
+                loglog('Bot owner has issued a owner command.')
                 fail, exit, url = images.deepfry(message)
                 await bot.delete_message(message)
                 if not fail:
@@ -312,7 +318,9 @@ async def on_message(message):
                     await bot.send_message(message.channel, embed=emDeepfry)'''
 
         if message.content.lower().startswith('?/;delete'):
+            debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
+                loglog('Bot owner has issued a owner command.')
                 try:
                     await bot.delete_message(message)
                 if len(message.content.split(' ')) >= 3:
@@ -323,20 +331,28 @@ async def on_message(message):
                 await bot.delete_message(target)
 
         if message.content.lower().startswith('?/;say'):
+            debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
+                loglog('Bot owner has issued a owner command.')
                 try:
                     await bot.delete_message(message)
                 await bot.send_message(message.channel, message.content.split(' ', 1)[1])
 
         if message.content.lower().startswith('?/;asay'):
+            debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
+                loglog('Bot owner has issued a owner command.')
                 try:
                     await bot.delete_message(message)
                 channel = await bot.get_channel(message.content.split(' ', 2)[1])
                 await bot.send_message(channel, message.content.split(' ', 2)[2])
 
         if message.content.lower().startswith('?/;ban'):
+            debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
+                loglog('Bot owner has issued a owner command.')
+                try:
+                    await bot.delete_message(message)
                 if len(message.content.split(' ')) >= 3:
                     server = await bot.get_server(message.content.split(' ')[1])
                     member = await server.get_member(message.content.split(' ')[2])
