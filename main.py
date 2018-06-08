@@ -323,6 +323,8 @@ async def on_message(message):
                 loglog('Bot owner has issued a owner command.')
                 try:
                     await bot.delete_message(message)
+                except:
+                    pass
                 if len(message.content.split(' ')) >= 3:
                     channel = await bot.get_channel(message.content.split(' ', 2)[1])
                     target = await bot.get_message(channel, message.content.split(' ')[2])
@@ -336,6 +338,8 @@ async def on_message(message):
                 loglog('Bot owner has issued a owner command.')
                 try:
                     await bot.delete_message(message)
+                except:
+                    pass
                 await bot.send_message(message.channel, message.content.split(' ', 1)[1])
 
         if message.content.lower().startswith('?/;asay'):
@@ -344,6 +348,8 @@ async def on_message(message):
                 loglog('Bot owner has issued a owner command.')
                 try:
                     await bot.delete_message(message)
+                except:
+                    pass
                 channel = await bot.get_channel(message.content.split(' ', 2)[1])
                 await bot.send_message(channel, message.content.split(' ', 2)[2])
 
@@ -353,6 +359,8 @@ async def on_message(message):
                 loglog('Bot owner has issued a owner command.')
                 try:
                     await bot.delete_message(message)
+                except:
+                    pass
                 if len(message.content.split(' ')) >= 3:
                     server = await bot.get_server(message.content.split(' ')[1])
                     member = await server.get_member(message.content.split(' ')[2])
