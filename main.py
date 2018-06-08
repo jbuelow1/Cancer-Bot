@@ -152,9 +152,25 @@ def findWholeWord(w):
     return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search
 
 def get_simple_cmd_output(cmd, stderr=STDOUT):
-    #Execute a simple external command and get its output.
+    """
+    Execute a simple external command and get its output.
+    """
     args = shlex.split(cmd)
     return Popen(args, stdout=PIPE, stderr=stderr).communicate()[0]
+
+
+def get_ping_time(host):
+    host = host.split(':')[0]
+    cmd = "fping {host} -C 3 -q".format(host=host)
+    # result = str(get_simple_cmd_output(cmd)).replace('\\','').split(':')[-1].split() if x != '-']
+    result = str(get_simple_cmd_output(cmd)).replace('\\', '').split(':')[-1].replace("n'", '').replace("-",
+                                                                                                        '').replace(
+        "b''", '').split()
+    res = [float(x) for x in result]
+    if len(res) > 0:
+        return sum(res) / len(res)
+    else:
+        return 999999
 
 def processImage(infile):
     try:
@@ -241,11 +257,11 @@ async def on_message(message):
             t2 = time.perf_counter()
             typingPing = str(round((t2-t1)*1000, 1)) + ' ms'
             try:
-                dnsPing = get_simple_cmd_output('fping -C 1 -q 8.8.8.8').split(' ')[2]
-                googlePing = get_simple_cmd_output('fping -C 1 -q google.com').split(' ')[2]
-                lanPing = get_simple_cmd_output('fping -C 1 -q 192.168.1.1').split(' ')[2]
+                dnsPing = get_ping_time('8.8.8.8')
+                googlePing = get_ping_time('google.com')
+                lanPing = get_ping_time('192.168.1.1')
             except:
-                print(get_simple_cmd_output('fping -C 1 -q 192.168.1.1').split(' ')[2])
+                pass
             emPing = discord.Embed(title=':ping_pong: Pong! :ping_pong:')
             emPing.add_field(name='Typing ping', value=typingPing, inline=True)
             emPing.add_field(name='DNS ping', value=dnsPing, inline=True)
