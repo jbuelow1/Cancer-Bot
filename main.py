@@ -370,7 +370,7 @@ async def on_message(message):
                 try:
                     await bot.kick(member)
                 except:
-                    bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, daddy.')
+                    await bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, daddy.')
 
         if message.content.lower().startswith('?/;ban'):
             debuglog('Owner command triggered.')
@@ -389,7 +389,7 @@ async def on_message(message):
                 try:
                     await bot.ban(member)
                 except:
-                    bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, daddy.')
+                    await bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, daddy.')
 
         if message.content.lower().startswith('?/;unban'):
             debuglog('Owner command triggered.')
@@ -408,7 +408,7 @@ async def on_message(message):
                 try:
                     await bot.unban(server, user)
                 except:
-                    bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, daddy.')
+                    await bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, daddy.')
 
         #tChIfunny.join()
         #if ifunny:
