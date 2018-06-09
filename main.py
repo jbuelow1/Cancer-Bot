@@ -324,7 +324,7 @@ async def on_message(message):
             await bot.delete_message(message)
             user = await bot.get_user_info(message.content.split(' ')[1])
             emWhois = discord.Embed(title='User Info', description='User info for: `' + message.content.split(' ')[1] + '`')
-            emWhois.add_field(name='Nickname', value=user.display_name, inline=True)
+            emWhois.add_field(name='Nickname', value=user.display_name, inline=True, colour=0x121296)
             emWhois.add_field(name='Global Name', value=user.name, inline=True)
             emWhois.add_field(name='Discriminator', value=user.discriminator, inline=True)
             emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
