@@ -18,6 +18,7 @@ from io import StringIO
 import shlex
 from subprocess import Popen, PIPE, STDOUT
 import math
+import asyncio
 
 #modules
 import images
