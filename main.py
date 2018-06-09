@@ -94,19 +94,57 @@ dancefont = {
 '9': '9'
 }
 
+stati = [
+'with little children',
+'with ur mum XD',
+'( ͡° ͜ʖ ͡°)',
+'with big, big balls',
+'FORTNITE XD XD',
+'yeeting babies',
+'deepfrying the memes',
+'bepis simulator',
+'with myself',
+'with my peepee'
+'with mommy\'s peepee',
+'midget basketball',
+'with my rocket',
+'with the anthros',
+'peek a boo ( ͡° ͜ʖ ͡°)',
+'on e621',
+'lewding lolis',
+'dead',
+'alone',
+'Discord',
+'with high voltage',
+'on a shitty server',
+'in the street',
+'with lives of the innocent',
+'rm -rf /',
+'with 14 werewolves',
+'in a back alley'
+]
+
+helpStati = [
+'type ?/help',
+'try ?/help',
+'use ?/help',
+'say ?/help',
+'?/help'
+]
+
 debug = True
 
 bot = discord.Client()
 
-emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), colour=0x121296)
+emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), color=0x00ff00)
 emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
 
-emHeck = discord.Embed(title='No Swearing!', colour=0x121296)
+emHeck = discord.Embed(title='No Swearing!', color=0x00ff00)
 
-emThink = discord.Embed(title=':thinking::thinking::thinking::thinking::thinking:', colour=0x121296)
+emThink = discord.Embed(title=':thinking::thinking::thinking::thinking::thinking:', color=0x00ff00)
 emThink.set_image(url="https://i.imgur.com/wHMWq1B.gif")
 
-emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\u200b', colour=0x121296)
+emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\u200b', color=0x00ff00)
 emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
 emHelp0.set_author(name='Cancer Bot Help', icon_url='https://i.imgur.com/4fehjDz.png')
 emHelp0.add_field(name='?/help', value='Displays this help text', inline=True)
@@ -119,8 +157,8 @@ emHelp0.add_field(name='?/suggest <suggestion>', value='DMs my senpai any sugges
 
 #emHelp0.add_field(name='?/help advanced', value='Helpage for more advanced bot commands', inline=True)
 
-emJpeg = discord.Embed(title='✅ JPEG Complete! ✅', colour=0x121296)
-emRape = discord.Embed(title='✅ Image Fucked! ✅', colour=0x121296)
+emJpeg = discord.Embed(title='✅ JPEG Complete! ✅', color=0x00ff00)
+emRape = discord.Embed(title='✅ Image Fucked! ✅', color=0x00ff00)
 
 
 def loglog(message):
@@ -203,7 +241,12 @@ async def on_ready():
     loglog('Connected to Discord!')
     await bot.edit_profile(username="Cancer Bot")
     loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
-    await bot.change_presence(game=discord.Game(name='with kids | ?/help'))
+
+    while True:
+        await bot.change_presence(game=discord.Game(name=random.choice(stati)))
+        time.sleep(5)
+        await bot.change_presence(game=discord.Game(name=random.choice(helpStati) + ' in ' + str(len(bot.servers)) + ' servers'))
+        time.sleep(3)
 
 @bot.event
 async def on_message(message):
@@ -261,7 +304,7 @@ async def on_message(message):
             dnsPing = str(math.floor(get_ping_time('8.8.8.8'))) + ' ms'
             googlePing = str(math.floor(get_ping_time('google.com'))) + ' ms'
             lanPing = str(math.floor(get_ping_time('192.168.1.1'))) + ' ms'
-            emPing = discord.Embed(title=':ping_pong: Pong! :ping_pong:', description='Ping statistics for this bot', colour=0x121296)
+            emPing = discord.Embed(title=':ping_pong: Pong! :ping_pong:', description='Ping statistics for this bot', color=0x00ff00)
             emPing.add_field(name='Typing ping', value=typingPing, inline=False)
             emPing.add_field(name='DNS (8.8.8.8) ping', value=dnsPing, inline=False)
             emPing.add_field(name='Google (google.com) ping', value=googlePing, inline=False)
@@ -324,7 +367,7 @@ async def on_message(message):
             await bot.delete_message(message)
             user = await bot.get_user_info(message.content.split(' ')[1])
             emWhois = discord.Embed(title='User Info', description='User info for: `' + message.content.split(' ')[1] + '`')
-            emWhois.add_field(name='Nickname', value=user.display_name, inline=True, colour=0x121296)
+            emWhois.add_field(name='Nickname', value=user.display_name, inline=True, color=0x00ff00)
             emWhois.add_field(name='Global Name', value=user.name, inline=True)
             emWhois.add_field(name='Discriminator', value=user.discriminator, inline=True)
             emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
@@ -334,8 +377,8 @@ async def on_message(message):
         if message.content.lower().startswith('?/suggest'):
             await bot.send_typing(message.channel)
             owner = await bot.get_user_info('273940917596061698')
-            await bot.send_message(owner, 'Feedback from ' + str(message.author) + ':```' + message.content.split(' ', 1)[1] + '```')
-            await bot.send_message(message.channel, 'Thanks for your feedback!')
+            await bot.send_message(owner, 'HEWWO SENPAI I HAS FEEDBACK FROM ' + str(message.author) + ':```' + message.content.split(' ', 1)[1].replace('```', '<REMOVED>') + '```')
+            await bot.send_message(message.channel, 'Thanks for your feedback! Senpai has been notified!')
 
         #bot owner commands
         if message.content.lower().startswith('?/;jpegas'):
@@ -427,7 +470,7 @@ async def on_message(message):
                 try:
                     await bot.kick(member)
                 except:
-                    await bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, daddy.')
+                    await bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, senpai.')
 
         if message.content.lower().startswith('?/;ban'):
             debuglog('Owner command triggered.')
@@ -446,7 +489,7 @@ async def on_message(message):
                 try:
                     await bot.ban(member)
                 except:
-                    await bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, daddy.')
+                    await bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, senpai.')
 
         if message.content.lower().startswith('?/;unban'):
             debuglog('Owner command triggered.')
@@ -465,7 +508,7 @@ async def on_message(message):
                 try:
                     await bot.unban(server, user)
                 except:
-                    await bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, daddy.')
+                    await bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, senpai.')
 
         #tChIfunny.join()
         #if ifunny:
