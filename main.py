@@ -322,7 +322,7 @@ async def on_message(message):
         if message.content.lower().startswith('?/whois'):
             await bot.send_typing(message.channel)
             await bot.delete_message(message)
-            user = bot.get_user_info(message.content.split(' ')[1])
+            user = await bot.get_user_info(message.content.split(' ')[1])
             emWhois = discord.Embed(title='User Info', description='User info for: `' + message.content.split(' ')[1] + '`')
             emWhois.add_field(name='Nickname', value=user.display_name, inline=True)
             emWhois.add_field(name='Global Name', value=user.name, inline=True)
