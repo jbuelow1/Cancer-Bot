@@ -407,7 +407,7 @@ async def on_message(message):
                     await bot.delete_message(message)
                 except:
                     pass
-                channel = await bot.get_channel(message.content.split(' ', 2)[1])
+                channel = bot.get_channel(message.content.split(' ', 2)[1])
                 await bot.send_message(channel, message.content.split(' ', 2)[2])
 
         if message.content.lower().startswith('?/;kick'):
