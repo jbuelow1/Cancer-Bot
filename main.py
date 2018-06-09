@@ -316,13 +316,26 @@ async def on_message(message):
 
         if message.content.lower().startswith('?/deepfry'):
             await bot.send_typing(message.channel)
+            await bot.send_typing(message.channel)
             await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FEATURE_NOT_IMPLEMENTED`\n*Request by: `' + str(message.author) + '`*')
 
         if message.content.lower().startswith('?/whois'):
-            pass
+            await bot.send_typing(message.channel)
+            await bot.delete_message(message)
+            user = bot.get_user(message.content.split(' ')[1])
+            emWhois = discord.Embed(title='User Info', description='User info for: `' + message.content.split(' ')[1] + '`')
+            emWhois.add_field(name='Nickname', value=user.display_name, inline=True)
+            emWhois.add_field(name='Global Name', value=user.name, inline=True)
+            emWhois.add_field(name='Discriminator', value=user.discriminator, inline=True)
+            emWhois.set_footer(icon_url=target.avatar_url, text=str(target.display_name) + ' requested this command')
+            emWhois.set_image(url=user.avatar_url)
+            await bot.send_message(message.channel, embed=emWhois)
 
         if message.content.lower().startswith('?/suggest'):
-            pass
+            await bot.send_typing(message.channel)
+            owner = bot.get_user('273940917596061698')
+            await bot.send_message(owner, message.content.split(' ', 1)[1])
+            await bot.send_message(message.channel, 'Thanks for your feedback!')
 
         #bot owner commands
         if message.content.lower().startswith('?/;jpegas'):
@@ -333,7 +346,7 @@ async def on_message(message):
                 await bot.delete_message(message)
                 if not fail:
                     target = await bot.get_user_info(message.content.split(' ')[1])
-                    emJpeg.set_footer(icon_url=target.avatar_url, text=str(target) + ' requested this command')
+                    emJpeg.set_footer(icon_url=target.avatar_url, text=str(target.display_name) + ' requested this command')
                     emJpeg.set_image(url=url)
                     await bot.send_message(message.channel, embed=emJpeg)
 
@@ -345,7 +358,7 @@ async def on_message(message):
                 await bot.delete_message(message)
                 if not fail:
                     target = await bot.get_user_info(message.content.split(' ')[1])
-                    emRape.set_footer(icon_url=target.avatar_url, text=str(target) + ' requested this command')
+                    emRape.set_footer(icon_url=target.avatar_url, text=str(target.display_name) + ' requested this command')
                     emRape.set_image(url=url)
                     await bot.send_message(message.channel, embed=emRape)
 
@@ -445,10 +458,10 @@ async def on_message(message):
                     pass
                 if len(message.content.split(' ')) >= 3:
                     server = bot.get_server(message.content.split(' ')[1])
-                    user = server.get_user(message.content.split(' ')[2])
+                    user = bot.get_user(message.content.split(' ')[2])
                 else:
                     server = message.server
-                    user = server.get_user(message.content.split(' ')[1])
+                    user = bot.get_user(message.content.split(' ')[1])
                 try:
                     await bot.unban(server, user)
                 except:
