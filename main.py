@@ -230,6 +230,13 @@ def processImage(infile):
     except EOFError:
         pass # end of sequence
 
+def status_change():
+    while True:
+        await bot.change_presence(game=discord.Game(name=random.choice(stati)))
+        time.sleep(5)
+        await bot.change_presence(game=discord.Game(name=random.choice(helpStati) + ' in ' + str(len(bot.servers)) + ' servers'))
+        time.sleep(3)
+
 #END OF FUNCTIONS
 #DEFINES:
 loglog(blankvar.join(('Starting Cancer Bot v', version, '...')))
@@ -242,11 +249,7 @@ async def on_ready():
     await bot.edit_profile(username="Cancer Bot")
     loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
 
-    while True:
-        await bot.change_presence(game=discord.Game(name=random.choice(stati)))
-        time.sleep(5)
-        await bot.change_presence(game=discord.Game(name=random.choice(helpStati) + ' in ' + str(len(bot.servers)) + ' servers'))
-        time.sleep(3)
+    bot.loop.create_task(status_change())
 
 @bot.event
 async def on_message(message):
@@ -518,17 +521,6 @@ async def on_message(message):
 
         debuglog(blankvar.join(('Message #', message.id, ' has finished processing.')))
 
-@bot.event
-async def on_ready():
-    loglog('Connected to Discord!')
-    await bot.edit_profile(username="Cancer Bot")
-    loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
-
-    while True:
-        await bot.change_presence(game=discord.Game(name=random.choice(stati)))
-        time.sleep(5)
-        await bot.change_presence(game=discord.Game(name=random.choice(helpStati) + ' in ' + str(len(bot.servers)) + ' servers'))
-        time.sleep(3)
 
 
 loglog('Attempting to login to Discord...')
