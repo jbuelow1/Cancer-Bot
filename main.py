@@ -236,7 +236,7 @@ async def status_change():
         await bot.change_presence(game=discord.Game(name=random.choice(stati)))
         await asyncio.sleep(10)
         await bot.change_presence(game=discord.Game(name=random.choice(helpStati) + ' in ' + str(len(bot.servers) - 2) + ' servers'))
-        await asyncio.sleep(5)
+        await asyncio.sleep(10)
 
 #END OF FUNCTIONS
 #DEFINES:
