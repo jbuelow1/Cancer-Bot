@@ -230,12 +230,12 @@ def processImage(infile):
     except EOFError:
         pass # end of sequence
 
-def status_change():
+def status_change(bot):
     while True:
         await bot.change_presence(game=discord.Game(name=random.choice(stati)))
-        time.sleep(5)
+        asyncio.sleep(5)
         await bot.change_presence(game=discord.Game(name=random.choice(helpStati) + ' in ' + str(len(bot.servers)) + ' servers'))
-        time.sleep(3)
+        asyncio.sleep(3)
 
 #END OF FUNCTIONS
 #DEFINES:
@@ -249,7 +249,7 @@ async def on_ready():
     await bot.edit_profile(username="Cancer Bot")
     loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
 
-    bot.loop.create_task(status_change())
+    bot.loop.create_task(status_change(bot))
 
 @bot.event
 async def on_message(message):
