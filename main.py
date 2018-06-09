@@ -327,7 +327,7 @@ async def on_message(message):
             emWhois.add_field(name='Nickname', value=user.display_name, inline=True)
             emWhois.add_field(name='Global Name', value=user.name, inline=True)
             emWhois.add_field(name='Discriminator', value=user.discriminator, inline=True)
-            emWhois.set_footer(icon_url=target.avatar_url, text=str(target.display_name) + ' requested this command')
+            emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
             emWhois.set_image(url=user.avatar_url)
             await bot.send_message(message.channel, embed=emWhois)
 
