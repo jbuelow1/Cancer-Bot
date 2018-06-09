@@ -334,7 +334,7 @@ async def on_message(message):
         if message.content.lower().startswith('?/suggest'):
             await bot.send_typing(message.channel)
             owner = bot.get_user_info('273940917596061698')
-            await bot.send_message(owner, 'Feedback from ' + message.author + ':```' + message.content.split(' ', 1)[1] + '```')
+            await bot.send_message(owner, 'Feedback from ' + str(message.author) + ':```' + message.content.split(' ', 1)[1] + '```')
             await bot.send_message(message.channel, 'Thanks for your feedback!')
 
         #bot owner commands
