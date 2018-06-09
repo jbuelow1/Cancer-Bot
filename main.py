@@ -234,9 +234,9 @@ def processImage(infile):
 async def status_change():
     while True:
         await bot.change_presence(game=discord.Game(name=random.choice(stati)))
-        await asyncio.sleep(10)
+        await asyncio.sleep(20)
         await bot.change_presence(game=discord.Game(name=random.choice(helpStati) + ' in ' + str(len(bot.servers) - 2) + ' servers'))
-        await asyncio.sleep(10)
+        await asyncio.sleep(20)
 
 #END OF FUNCTIONS
 #DEFINES:
