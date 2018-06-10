@@ -398,7 +398,7 @@ async def on_message(message):
                         users.append(user.id)
 
             diff = datetime.datetime.now() - startdate
-            uptime = 'online for: ' + diff.days + ' days, ' + diff.hours + ' hours, ' + diff.minutes + ' minutes and ' + diff.seconds + ' seconds'
+            uptime = 'online for: ' + str(diff.days) + ' days, ' + str(diff.hours) + ' hours, ' + str(diff.minutes) + ' minutes and ' + str(diff.seconds) + ' seconds'
 
             emStats = discord.Embed(color=0x00ff00)
             emHelp0.set_author(name='Cancer Bot Stats', icon_url='https://i.imgur.com/4fehjDz.png')
