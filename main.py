@@ -155,7 +155,8 @@ emHelp0.add_field(name='?/ping', value='Tests the bot\'s ping time', inline=True
 emHelp0.add_field(name='?/rape', value='Utterly fucks an image', inline=True)
 #emHelp0.add_field(name='?/deepfry', value=':b:eep fried :b:emes anyone? :joy:')
 emHelp0.add_field(name='?/whois <ID>', value='Looks up user info by ID', inline=True)
-emHelp0.add_field(name='?/suggest <suggestion>', value='DMs my senpai any suggestions you have', inline=True)
+emHelp0.add_field(name='?/suggest <suggestion>', value='DMs my senpai any suggestions you have', inline=True)?/
+emHelp0.add_field(name='?/stats', value='Shows bot stats', inline=True)
 
 #emHelp0.add_field(name='?/help advanced', value='Helpage for more advanced bot commands', inline=True)
 
@@ -299,6 +300,7 @@ async def on_message(message):
 
         if message.content.lower().startswith('?/help'):
             await bot.send_typing(message.channel)
+            emHelp0.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
             await bot.send_message(message.channel, embed=emHelp0)
 
         if message.content.lower().startswith('?/ping'):
@@ -372,8 +374,8 @@ async def on_message(message):
             await bot.send_typing(message.channel)
             await bot.delete_message(message)
             user = await bot.get_user_info(message.content.split(' ')[1])
-            emWhois = discord.Embed(title='User Info', description='User info for: `' + message.content.split(' ')[1] + '`')
-            emWhois.add_field(name='Nickname', value=user.display_name, inline=True, color=0x00ff00)
+            emWhois = discord.Embed(title='User Info', description='User info for: `' + message.content.split(' ')[1] + '`', color=0x00ff00)
+            emWhois.add_field(name='Nickname', value=user.display_name, inline=True)
             emWhois.add_field(name='Global Name', value=user.name, inline=True)
             emWhois.add_field(name='Discriminator', value=user.discriminator, inline=True)
             emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
@@ -395,9 +397,11 @@ async def on_message(message):
                     if (not (user.id in users) and (not user.bot)):
                         users.append(user.id)
 
-            uptime = str(datetime.datetime.now() - startdate).split('.', 2)[0]
-
-            emStats = discord.Embed(title='Cancer Bot Stats', color=0x00ff00)
+            diff = datetime.datetime.now() - startdate
+            uptime = 'online for: ' + diff.days + ' days, ' + diff.hours + ' hours, ' + diff.minutes + ' minutes and ' + diff.seconds + ' seconds'
+            
+            emStats = discord.Embed(color=0x00ff00)
+            emHelp0.set_author(name='Cancer Bot Stats', icon_url='https://i.imgur.com/4fehjDz.png')
             emStats.add_field(name='Servers', value=str(len(bot.servers) - 2), inline=True)
             emStats.add_field(name='Users', value=str(len(users)), inline=True)
             emStats.add_field(name='Uptime', value=uptime, inline=True)
