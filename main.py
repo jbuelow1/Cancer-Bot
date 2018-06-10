@@ -384,6 +384,17 @@ async def on_message(message):
             await bot.send_message(owner, 'HEWWO SENPAI I HAS FEEDBACK FROM ' + str(message.author) + ':```' + message.content.split(' ', 1)[1].replace('```', '<REMOVED>') + '```')
             await bot.send_message(message.channel, 'Thanks for your feedback! Senpai has been notified!')
 
+        if message.content.lower().startswith('?/stats'):
+            users = []
+            for server in bot.servers:
+                for member in server.members:
+                    if user not in [int(y) for x in users for y in x.split()]:
+                        users.append(user)
+            emStats = discord.Embed(title='Cancer Bot Stats', color=0x00ff00)
+            emStats.add_field(name='Servers', value=str(len(bot.servers) - 2), inline=True)
+            emStats.add_field(name='Users', value=str(len(users)), inline=True)
+            await bot.send_message(message.channel, embed=emStats)
+
         #bot owner commands
         if message.content.lower().startswith('?/;jpegas'):
             debuglog('Owner command triggered.')
