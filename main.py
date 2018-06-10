@@ -280,12 +280,12 @@ async def on_message(message):
 
         if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())): #CBP
             await bot.send_typing(message.channel)
-            if (blankvar.join(('<@', bot.user.id, '>')) in message.content) or (blankvar.join(('<!@', bot.user.id, '>')) in message.content):
+            if bot.user.mentioned_in(message):
                 await bot.send_message(message.channel, 'no u')
                 await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
             else:
                 await bot.send_message(message.channel, embed=emBleach)
-        elif (blankvar.join(('<@', bot.user.id, '>')) in message.content) or (blankvar.join(('<!@', bot.user.id, '>')) in message.content):
+        elif bot.user.mentioned_in(message):
             await bot.send_typing(message.channel)
             if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
                 await bot.send_message(message.channel, 'no u')

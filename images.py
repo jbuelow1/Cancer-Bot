@@ -65,7 +65,7 @@ def rape(message):
                         os.makedirs('/discordcdn/rape/' + message.channel.id + '/' + message.author.id)
                     try:
                         picture = picture.convert('RGB')
-                        #picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
+                        picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
                         picture.save(localfile,"JPEG",optimize=False,quality=1)
                         remotefile = 'http://cdn.jplp.tk/rape/' + message.channel.id + '/' + message.author.id + '/' + message.author.avatar_url.split('/')[-1].split('?')[0] + str(rand_discriminator) + '.jpg'
                     except:
@@ -94,7 +94,7 @@ def rape(message):
                         os.makedirs('/discordcdn/rape/' + message.channel.id + '/' + message.author.id)
                     try:
                         picture = picture.convert('RGB')
-                        #picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
+                        picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
                         picture.save(localfile,"JPEG",optimize=False,quality=1)
                         remotefile = 'http://cdn.jplp.tk/rape/' + message.channel.id + '/' + message.author.id + '/' + message.mentions[0].avatar_url.split('/')[-1].split('?')[0] + str(rand_discriminator) + '.jpg'
                     except:
@@ -124,7 +124,7 @@ def rape(message):
                     os.makedirs('/discordcdn/rape/' + message.channel.id + '/' + message.author.id)
                 try:
                     picture = picture.convert('RGB')
-                    #picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
+                    picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
                     picture.save(localfile,"JPEG",optimize=False,quality=1)
                     remotefile = 'http://cdn.jplp.tk/rape/' + message.channel.id + '/' + message.author.id + '/' + message.author.avatar_url.split('/')[-1].split('?')[0] + str(rand_discriminator) + '.jpg'
                 except:
@@ -153,7 +153,7 @@ def rape(message):
                     os.makedirs('/discordcdn/rape/' + message.channel.id + '/' + message.author.id)
                 try:
                     picture = picture.convert('RGB')
-                    #picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
+                    picture = picture.filter(ImageFilter.UnsharpMask(80000,80000,0))
                     picture.save(localfile,"JPEG",optimize=False,quality=1)
                     remotefile = 'http://cdn.jplp.tk/rape/' + message.channel.id + '/' + message.author.id + '/' + message.mentions[0].avatar_url.split('/')[-1].split('?')[0] + str(rand_discriminator) + '.jpg'
                 except:
