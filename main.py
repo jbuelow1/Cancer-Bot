@@ -443,7 +443,7 @@ async def on_message(message):
 
 
             diff = relativedelta(datetime.datetime.now(), startdate)
-            uptime = 'online for: ' + str(diff.days) + ' days, ' + str(diff.hours) + ' hours, ' + str(diff.minutes) + ' minutes and ' + str(diff.seconds) + ' seconds'
+            uptime = str(diff.days) + ' days, ' + str(diff.hours) + ' hours, ' + str(diff.minutes) + ' minutes and ' + str(diff.seconds) + ' seconds'
 
             emStats = discord.Embed(description='Statistics on Cancer Bot version ' + version, color=0x00ff00)
             emStats.set_author(name='Cancer Bot Stats', icon_url='https://i.imgur.com/4fehjDz.png')
