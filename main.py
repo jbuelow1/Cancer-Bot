@@ -157,8 +157,8 @@ emHelp0.add_field(name='?/suggest <suggestion>', value='DMs my senpai any sugges
 
 emHelp0.add_field(name='?/whois [user]', value='Looks up user info', inline=True)
 
-emHelp0.add_field(name='?/jpeg <{image}>', value='Adds jpeg compression to images', inline=True)
-emHelp0.add_field(name='?/destroy <{image}>', value='Destroys an image', inline=True)
+emHelp0.add_field(name='?/jpeg {image}', value='Adds jpeg compression to images', inline=True)
+emHelp0.add_field(name='?/destroy {image}', value='Destroys an image', inline=True)
 #emHelp0.add_field(name='?/deepfry <{image}>', value=':b:eep fried :b:emes anyone? :joy:')
 
 #emHelp0.add_field(name='?/help advanced', value='Helpage for more advanced bot commands', inline=True)
