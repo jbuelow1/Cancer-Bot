@@ -450,9 +450,9 @@ async def on_message(message):
             emStats.add_field(name='Servers', value=str(len(bot.servers) - 2), inline=True)
             emStats.add_field(name='Users', value=str(len(users)), inline=True)
             emStats.add_field(name='Uptime', value=uptime, inline=False)
-            emStats.add_field(name='Actions since restart', value=commands + triggers, inline=False)
-            emStats.add_field(name='Commands', value=commands, inline=True)
-            emStats.add_field(name='Triggers', value=triggers, inline=True)
+            emStats.add_field(name='Actions since restart', value=bot.commands + bot.triggers, inline=False)
+            emStats.add_field(name='Commands', value=bot.commands, inline=True)
+            emStats.add_field(name='Triggers', value=bot.triggers, inline=True)
             emStats.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
             await bot.send_message(message.channel, embed=emStats)
 
