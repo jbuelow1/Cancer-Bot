@@ -22,13 +22,14 @@ import asyncio
 import datetime
 from dateutil.relativedelta import relativedelta
 from pathlib import Path
+import pickle
 
 #modules
 import images
 
 version = '9'
 if str(Path(".").resolve()).split('/')[-1] == 'testing':
-    version = version + ' [BETA]' 
+    version = version + ' [BETA]'
 blankvar = ''
 headers={
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
@@ -239,6 +240,10 @@ def processImage(infile):
     except EOFError:
         pass # end of sequence
 
+def save_stats():
+    with open('actions.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
+        pickle.dump([bot.commands, bot.triggers], f)
+
 async def status_change():
     while True:
         await bot.change_presence(game=discord.Game(name=random.choice(stati)))
@@ -250,9 +255,16 @@ async def status_change():
 #DEFINES:
 loglog(blankvar.join(('Starting Cancer Bot v', version, '...')))
 startdate = datetime.datetime.now()
-bot.commands = 0
-bot.triggers = 0
+bot.restart.commands = 0
+bot.restart.triggers = 0
 
+try:
+    with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
+        bot.commands, bot.triggers = pickle.load(f)
+except:
+    bot.commands = 0
+    bot.triggers = 0
+    save_stats()
 
 #ASYNCROUS EVENTS:
 @bot.event
@@ -279,11 +291,13 @@ async def on_message(message):
             bot.triggers += 1
             emHeck.set_image(url=random.choice(hecks))
             await bot.send_message(message.channel, embed=emHeck)
+            save_stats()
 
         if message.mention_everyone:
             await bot.send_typing(message.channel)
             bot.triggers += 1
             await bot.send_message(message.channel, random.choice(pingemojis))
+            save_stats()
 
         if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())): #CBP
             await bot.send_typing(message.channel)
@@ -293,6 +307,7 @@ async def on_message(message):
                 await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
             else:
                 await bot.send_message(message.channel, embed=emBleach)
+            save_stats()
         elif bot.user.mentioned_in(message):
             await bot.send_typing(message.channel)
             bot.triggers += 1
@@ -301,16 +316,19 @@ async def on_message(message):
                 await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
             else:
                 await bot.send_message(message.channel, 'H- Hewwo?!')
+            save_stats()
 
         if findWholeWord('xd')(message.content.lower()):
             await bot.send_typing(message.channel)
             bot.triggers += 1
             await bot.send_message(message.channel, '<a:xd:442034831690301461>')
+            save_stats()
 
         if '🤔' in message.content:
             await bot.send_typing(message.channel)
             bot.triggers += 1
             await bot.send_message(message.channel, embed=emThink)
+            save_stats()
 
         if message.content.lower().startswith('?/help'):
             bot.commands += 1
@@ -318,6 +336,7 @@ async def on_message(message):
             await bot.delete_message(message)
             emHelp0.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
             await bot.send_message(message.channel, embed=emHelp0)
+            save_stats()
 
         if message.content.lower().startswith('?/ping'):
             bot.commands += 1
@@ -337,11 +356,13 @@ async def on_message(message):
             emPing.set_thumbnail(url='https://i.imgur.com/q60RAcT.jpg')
             emPing.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
             await bot.send_message(message.channel, embed=emPing)
+            save_stats()
 
         if 'no u' in message.content.lower():
             await bot.send_typing(message.channel)
             bot.triggers += 1
             await bot.send_message(message.channel, 'Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.') #CBP
+            save_stats()
 
         if message.content.lower().startswith('?/jpeg'):
             bot.commands += 1
@@ -363,6 +384,7 @@ async def on_message(message):
                 emJpeg.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
                 emJpeg.set_image(url=url)
                 await bot.send_message(message.channel, embed=emJpeg)
+            save_stats()
 
         if message.content.lower().startswith('?/destroy') or message.content.lower().startswith('?/rape'):
             bot.commands += 1
@@ -384,12 +406,14 @@ async def on_message(message):
                 emRape.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
                 emRape.set_image(url=url)
                 await bot.send_message(message.channel, embed=emRape)
+            save_stats()
 
         if message.content.lower().startswith('?/deepfry'):
             bot.commands += 1
             await bot.send_typing(message.channel)
             await bot.send_typing(message.channel)
             await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FEATURE_NOT_IMPLEMENTED`\n*Request by: `' + str(message.author) + '`*') #CBP
+            save_stats()
 
         if message.content.lower().startswith('?/whois'):
             bot.commands += 1
@@ -426,6 +450,7 @@ async def on_message(message):
                 emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
                 emWhois.set_image(url=message.author.avatar_url)
                 await bot.send_message(message.channel, embed=emWhois)
+            save_stats()
 
         if message.content.lower().startswith('?/suggest'):
             bot.commands += 1
@@ -433,6 +458,7 @@ async def on_message(message):
             owner = await bot.get_user_info('273940917596061698')
             await bot.send_message(owner, 'HEWWO SENPAI I HAS FEEDBACK FROM `' + str(message.author) + '`:```' + message.content.split(' ', 1)[1].replace('```', '<REMOVED>') + '```')
             await bot.send_message(message.channel, 'Thanks for your feedback! Senpai has been notified!')
+            save_stats()
 
         if message.content.lower().startswith('?/stats'):
             bot.commands += 1
@@ -453,11 +479,15 @@ async def on_message(message):
             emStats.add_field(name='Servers', value=str(len(bot.servers) - 2), inline=True)
             emStats.add_field(name='Users', value=str(len(users)), inline=True)
             emStats.add_field(name='Uptime', value=uptime, inline=False)
-            emStats.add_field(name='Actions since restart', value=bot.commands + bot.triggers, inline=False)
+            emStats.add_field(name='Actions since restart', value=bot.restart.commands + bot.restart.triggers, inline=False)
+            emStats.add_field(name='Commands', value=bot.restart.commands, inline=True)
+            emStats.add_field(name='Triggers', value=bot.restart.triggers, inline=True)
+            emStats.add_field(name='Actions since v9', value=bot.commands + bot.triggers, inline=False)
             emStats.add_field(name='Commands', value=bot.commands, inline=True)
             emStats.add_field(name='Triggers', value=bot.triggers, inline=True)
             emStats.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
             await bot.send_message(message.channel, embed=emStats)
+            save_stats()
 
         #bot owner commands
         if message.content.lower().startswith('?/;jpegas'):
@@ -472,6 +502,7 @@ async def on_message(message):
                     emJpeg.set_footer(icon_url=target.avatar_url, text=str(target.display_name) + ' requested this command')
                     emJpeg.set_image(url=url)
                     await bot.send_message(message.channel, embed=emJpeg)
+                save_stats()
 
         if message.content.lower().startswith('?/;rapeas'): #CBP
             bot.commands += 1
@@ -485,6 +516,7 @@ async def on_message(message):
                     emRape.set_footer(icon_url=target.avatar_url, text=str(target.display_name) + ' requested this command')
                     emRape.set_image(url=url)
                     await bot.send_message(message.channel, embed=emRape)
+                save_stats()
 
         '''if message.content.lower().startswith('?/;deepfryas'):
             debuglog('Owner command triggered.')
@@ -496,7 +528,8 @@ async def on_message(message):
                     target = await bot.get_user_info(message.content.split(' ')[1])
                     emDeepfry.set_footer(icon_url=target.avatar_url, text=str(target) + ' requested this command')
                     emDeepfry.set_image(url=url)
-                    await bot.send_message(message.channel, embed=emDeepfry)'''
+                    await bot.send_message(message.channel, embed=emDeepfry)
+                save_stats()'''
 
         if message.content.lower().startswith('?/;delete'):
             bot.commands += 1
@@ -513,6 +546,7 @@ async def on_message(message):
                 else:
                     target = await bot.get_message(message.channel, message.content.split(' ')[1])
                 await bot.delete_message(target)
+                save_stats()
 
         if message.content.lower().startswith('?/;say'):
             bot.commands += 1
@@ -524,6 +558,7 @@ async def on_message(message):
                 except:
                     pass
                 await bot.send_message(message.channel, message.content.split(' ', 1)[1])
+                save_stats()
 
         if message.content.lower().startswith('?/;asay'):
             bot.commands += 1
@@ -536,6 +571,7 @@ async def on_message(message):
                     pass
                 channel = bot.get_channel(message.content.split(' ', 2)[1])
                 await bot.send_message(channel, message.content.split(' ', 2)[2])
+                save_stats()
 
         if message.content.lower().startswith('?/;kick'):
             bot.commands += 1
@@ -556,6 +592,7 @@ async def on_message(message):
                     await bot.kick(member)
                 except:
                     await bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, senpai.')
+                save_stats()
 
         if message.content.lower().startswith('?/;ban'):
             bot.commands += 1
@@ -576,6 +613,7 @@ async def on_message(message):
                     await bot.ban(member)
                 except:
                     await bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, senpai.')
+                save_stats()
 
         if message.content.lower().startswith('?/;unban'):
             bot.commands += 1
@@ -596,6 +634,7 @@ async def on_message(message):
                     await bot.unban(server, user)
                 except:
                     await bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, senpai.')
+                save_stats()
 
         #tChIfunny.join()
         #if ifunny:
