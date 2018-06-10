@@ -245,7 +245,7 @@ def save_stats():
         bot.commands, bot.triggers = pickle.load(f)
 
     with open('actions.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
-        pickle.dump([bot.rcommands + bot.commands, bot.rtriggers + bot.commands], f)
+        pickle.dump([1 + bot.commands, 1 + bot.commands], f)
 
 async def status_change():
     while True:
