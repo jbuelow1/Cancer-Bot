@@ -249,6 +249,7 @@ async def on_ready():
     loglog('Connected to Discord!')
     await bot.edit_profile(username="Cancer Bot")
     loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
+    starttime = floor(time.clock())
 
     bot.loop.create_task(status_change())
 
@@ -390,10 +391,15 @@ async def on_message(message):
                 for user in server.members:
                     if (not (user.id in users) and (not user.bot)):
                         users.append(user.id)
+
+            sec = timedelta(seconds=starttime - floor(time.clock()))
+            d = datetime(1,1,1) + sec
+            uptime = "%d days, %d hours, %d minutes and %d seconds" % (d.day-1, d.hour, d.minute, d.second))
+
             emStats = discord.Embed(title='Cancer Bot Stats', color=0x00ff00)
             emStats.add_field(name='Servers', value=str(len(bot.servers) - 2), inline=True)
             emStats.add_field(name='Users', value=str(len(users)), inline=True)
-            emStats.add_field(name='Uptime', value='<PLACEHOLD>', inline=True)
+            emStats.add_field(name='Uptime', value=uptime, inline=True)
             emStats.add_field(name='Version', value=version, inline=True)
             await bot.send_message(message.channel, embed=emStats)
 
