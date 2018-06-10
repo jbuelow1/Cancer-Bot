@@ -27,7 +27,7 @@ from pathlib import Path
 import images
 
 version = '9'
-if str(Path().resolve().parent).split('/')[-1] == 'testing':
+if str(Path(".").resolve()).split('/')[-1] == 'testing':
     version = version + ' [BETA]' 
 blankvar = ''
 headers={
