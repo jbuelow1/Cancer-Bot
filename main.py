@@ -393,7 +393,7 @@ async def on_message(message):
                     if (not (user.id in users) and (not user.bot)):
                         users.append(user.id)
 
-            uptime = str(datetime.datetime.now() - startdate)
+            uptime = str(datetime.datetime.now() - startdate).split('.', 2)[0]
 
             emStats = discord.Embed(title='Cancer Bot Stats', color=0x00ff00)
             emStats.add_field(name='Servers', value=str(len(bot.servers) - 2), inline=True)
