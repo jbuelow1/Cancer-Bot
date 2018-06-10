@@ -273,18 +273,18 @@ async def on_message(message):
 
         if (findWholeWord('heck')(message.content.lower()) or findWholeWord('hek')(message.content.lower()) or findWholeWord('hecking')(message.content.lower()) or findWholeWord('heckin')(message.content.lower())):
             await bot.send_typing(message.channel)
-            triggers += 1
+            bot.triggers += 1
             emHeck.set_image(url=random.choice(hecks))
             await bot.send_message(message.channel, embed=emHeck)
 
         if message.mention_everyone:
             await bot.send_typing(message.channel)
-            triggers += 1
+            bot.triggers += 1
             await bot.send_message(message.channel, random.choice(pingemojis))
 
         if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())): #CBP
             await bot.send_typing(message.channel)
-            triggers += 1
+            bot.triggers += 1
             if bot.user.mentioned_in(message):
                 await bot.send_message(message.channel, 'no u')
                 await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
@@ -292,7 +292,7 @@ async def on_message(message):
                 await bot.send_message(message.channel, embed=emBleach)
         elif bot.user.mentioned_in(message):
             await bot.send_typing(message.channel)
-            triggers += 1
+            bot.triggers += 1
             if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
                 await bot.send_message(message.channel, 'no u')
                 await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
@@ -301,23 +301,23 @@ async def on_message(message):
 
         if findWholeWord('xd')(message.content.lower()):
             await bot.send_typing(message.channel)
-            triggers += 1
+            bot.triggers += 1
             await bot.send_message(message.channel, '<a:xd:442034831690301461>')
 
         if '🤔' in message.content:
             await bot.send_typing(message.channel)
-            triggers += 1
+            bot.triggers += 1
             await bot.send_message(message.channel, embed=emThink)
 
         if message.content.lower().startswith('?/help'):
-            commands += 1
+            bot.commands += 1
             await bot.send_typing(message.channel)
             await bot.delete_message(message)
             emHelp0.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
             await bot.send_message(message.channel, embed=emHelp0)
 
         if message.content.lower().startswith('?/ping'):
-            commands += 1
+            bot.commands += 1
             t1 = time.perf_counter()
             await bot.send_typing(message.channel)
             t2 = time.perf_counter()
@@ -337,11 +337,11 @@ async def on_message(message):
 
         if 'no u' in message.content.lower():
             await bot.send_typing(message.channel)
-            triggers += 1
+            bot.triggers += 1
             await bot.send_message(message.channel, 'Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.') #CBP
 
         if message.content.lower().startswith('?/jpeg'):
-            commands += 1
+            bot.commands += 1
             await bot.send_typing(message.channel)
             fail, exit, url = images.jpeg(message)
             await bot.delete_message(message)
@@ -362,7 +362,7 @@ async def on_message(message):
                 await bot.send_message(message.channel, embed=emJpeg)
 
         if message.content.lower().startswith('?/destroy') or message.content.lower().startswith('?/rape'):
-            commands += 1
+            bot.commands += 1
             await bot.send_typing(message.channel)
             fail, exit, url = images.rape(message)
             await bot.delete_message(message)
@@ -383,13 +383,13 @@ async def on_message(message):
                 await bot.send_message(message.channel, embed=emRape)
 
         if message.content.lower().startswith('?/deepfry'):
-            commands += 1
+            bot.commands += 1
             await bot.send_typing(message.channel)
             await bot.send_typing(message.channel)
             await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FEATURE_NOT_IMPLEMENTED`\n*Request by: `' + str(message.author) + '`*') #CBP
 
         if message.content.lower().startswith('?/whois'):
-            commands += 1
+            bot.commands += 1
             await bot.send_typing(message.channel)
             await bot.delete_message(message)
             if len(message.mentions) > 0:
@@ -425,14 +425,14 @@ async def on_message(message):
                 await bot.send_message(message.channel, embed=emWhois)
 
         if message.content.lower().startswith('?/suggest'):
-            commands += 1
+            bot.commands += 1
             await bot.send_typing(message.channel)
             owner = await bot.get_user_info('273940917596061698')
             await bot.send_message(owner, 'HEWWO SENPAI I HAS FEEDBACK FROM `' + str(message.author) + '`:```' + message.content.split(' ', 1)[1].replace('```', '<REMOVED>') + '```')
             await bot.send_message(message.channel, 'Thanks for your feedback! Senpai has been notified!')
 
         if message.content.lower().startswith('?/stats'):
-            commands += 1
+            bot.commands += 1
             await bot.send_typing(message.channel)
             await bot.delete_message(message)
             users = []
@@ -458,7 +458,7 @@ async def on_message(message):
 
         #bot owner commands
         if message.content.lower().startswith('?/;jpegas'):
-            commands += 1
+            bot.commands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
@@ -471,7 +471,7 @@ async def on_message(message):
                     await bot.send_message(message.channel, embed=emJpeg)
 
         if message.content.lower().startswith('?/;rapeas'): #CBP
-            commands += 1
+            bot.commands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
@@ -496,7 +496,7 @@ async def on_message(message):
                     await bot.send_message(message.channel, embed=emDeepfry)'''
 
         if message.content.lower().startswith('?/;delete'):
-            commands += 1
+            bot.commands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
@@ -512,7 +512,7 @@ async def on_message(message):
                 await bot.delete_message(target)
 
         if message.content.lower().startswith('?/;say'):
-            commands += 1
+            bot.commands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
@@ -523,7 +523,7 @@ async def on_message(message):
                 await bot.send_message(message.channel, message.content.split(' ', 1)[1])
 
         if message.content.lower().startswith('?/;asay'):
-            commands += 1
+            bot.commands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
@@ -535,7 +535,7 @@ async def on_message(message):
                 await bot.send_message(channel, message.content.split(' ', 2)[2])
 
         if message.content.lower().startswith('?/;kick'):
-            commands += 1
+            bot.commands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
@@ -555,7 +555,7 @@ async def on_message(message):
                     await bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, senpai.')
 
         if message.content.lower().startswith('?/;ban'):
-            commands += 1
+            bot.commands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
@@ -575,7 +575,7 @@ async def on_message(message):
                     await bot.send_message(message.author, ':warning: I have insufficient permissions to do that action in that server, senpai.')
 
         if message.content.lower().startswith('?/;unban'):
-            commands += 1
+            bot.commands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
