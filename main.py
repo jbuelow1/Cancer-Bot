@@ -347,6 +347,7 @@ async def on_message(message):
             else:
                 emJpeg.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
                 emJpeg.set_image(url=url)
+                print(url)
                 await bot.send_message(message.channel, embed=emJpeg)
 
         if message.content.lower().startswith('?/destroy') or message.content.lower().startswith('?/rape'):
