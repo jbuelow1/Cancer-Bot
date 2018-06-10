@@ -21,11 +21,14 @@ import math
 import asyncio
 import datetime
 from dateutil.relativedelta import relativedelta
+from pathlib import Path
 
 #modules
 import images
 
-version = '8'
+version = '9'
+if str(Path().resolve().parent).split('/')[-1] == 'testing':
+    version = version + ' [BETA]' 
 blankvar = ''
 headers={
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
