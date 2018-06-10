@@ -19,6 +19,7 @@ import shlex
 from subprocess import Popen, PIPE, STDOUT
 import math
 import asyncio
+from datetime import datetime, timedelta
 
 #modules
 import images
@@ -392,8 +393,8 @@ async def on_message(message):
                     if (not (user.id in users) and (not user.bot)):
                         users.append(user.id)
 
-            sec = time.timedelta(seconds=starttime - math.floor(time.clock()))
-            d = time.datetime(1,1,1) + sec
+            sec = timedelta(seconds=starttime - math.floor(time.clock()))
+            d = datetime(1,1,1) + sec
             uptime = "%d days, %d hours, %d minutes and %d seconds" % (d.day-1, d.hour, d.minute, d.second)
 
             emStats = discord.Embed(title='Cancer Bot Stats', color=0x00ff00)
