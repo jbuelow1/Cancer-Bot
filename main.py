@@ -251,7 +251,7 @@ async def on_ready():
     await bot.edit_profile(username="Cancer Bot")
     loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
     global starttime
-    starttime = math.floor(time.clock())
+    starttime = time.clock()
 
     bot.loop.create_task(status_change())
 
@@ -394,7 +394,7 @@ async def on_message(message):
                     if (not (user.id in users) and (not user.bot)):
                         users.append(user.id)
 
-            sec = timedelta(seconds=starttime - math.floor(time.clock()))
+            sec = timedelta(seconds=starttime - time.clock())
             d = datetime(1,1,1) + sec
             uptime = "%d days, %d hours, %d minutes and %d seconds" % (d.day-1, d.hour, d.minute, d.second)
 
