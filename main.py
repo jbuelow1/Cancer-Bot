@@ -388,9 +388,8 @@ async def on_message(message):
             users = []
             for server in bot.servers:
                 for user in server.members:
-                    if (not (user.id in users) and (not user.bot) and (not user == bot.user)):
+                    if (not (user.id in users) and (not user.bot)):
                         users.append(user.id)
-            print(users)
             emStats = discord.Embed(title='Cancer Bot Stats', color=0x00ff00)
             emStats.add_field(name='Servers', value=str(len(bot.servers) - 2), inline=True)
             emStats.add_field(name='Users', value=str(len(users)), inline=True)
