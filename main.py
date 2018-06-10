@@ -250,6 +250,7 @@ async def on_ready():
     loglog('Connected to Discord!')
     await bot.edit_profile(username="Cancer Bot")
     loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
+    global starttime
     starttime = math.floor(time.clock())
 
     bot.loop.create_task(status_change())
