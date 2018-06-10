@@ -240,7 +240,7 @@ def jpeg(message):
                         traceback.print_exc()
                         return True, 3, ''
                     rand_discriminator = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(5))
-                    localfile = '/discordcdn/jpeg/' + message.channel.id + '/' + message.author.id + '/' + message.mentions[0].avatar_url.split('/')[-1].split('?')[0].split('? + str(rand_discriminator) + '.jpg'
+                    localfile = '/discordcdn/jpeg/' + message.channel.id + '/' + message.author.id + '/' + message.mentions[0].avatar_url.split('/')[-1].split('?')[0] + str(rand_discriminator) + '.jpg'
                     if not os.path.exists('/discordcdn/jpeg/' + message.channel.id):
                         os.makedirs('/discordcdn/jpeg/' + message.channel.id)
                     if not os.path.exists('/discordcdn/jpeg/' + message.channel.id + '/' + message.author.id):
