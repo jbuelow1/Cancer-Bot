@@ -19,7 +19,7 @@ import shlex
 from subprocess import Popen, PIPE, STDOUT
 import math
 import asyncio
-from datetime import datetime, timedelta
+from datetime
 
 #modules
 import images
@@ -250,8 +250,7 @@ async def on_ready():
     loglog('Connected to Discord!')
     await bot.edit_profile(username="Cancer Bot")
     loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
-    global starttime
-    starttime = time.clock()
+    startdate = datetime.datetime.now()
 
     bot.loop.create_task(status_change())
 
@@ -394,7 +393,7 @@ async def on_message(message):
                     if (not (user.id in users) and (not user.bot)):
                         users.append(user.id)
 
-            uptime = deltatime(time.clock() - starttime).strftime('%Y-%m-%d %H:%M:%S')
+            uptime = str(datetime.datetime.now() - startdate)
 
             emStats = discord.Embed(title='Cancer Bot Stats', color=0x00ff00)
             emStats.add_field(name='Servers', value=str(len(bot.servers) - 2), inline=True)
