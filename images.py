@@ -51,7 +51,7 @@ def rape(message):
                         for chunk in r:
                             f.write(chunk)
 
-                    filepath = ''.join(('tmp/', message.author.avatar_url.split('/')[-1])))
+                    filepath = ''.join(('tmp/', message.author.avatar_url.split('/')[-1]))
                     try:
                         picture = Image.open(filepath)
                     except:
@@ -80,7 +80,7 @@ def rape(message):
                         for chunk in r:
                             f.write(chunk)
 
-                    filepath = ''.join(('tmp/', message.mentions[0].avatar_url.split('/')[-1])))
+                    filepath = ''.join(('tmp/', message.mentions[0].avatar_url.split('/')[-1]))
                     try:
                         picture = Image.open(filepath)
                     except:
@@ -110,7 +110,7 @@ def rape(message):
                     for chunk in r:
                         f.write(chunk)
 
-                filepath = ''.join(('tmp/', message.author.avatar_url.split('/')[-1])))
+                filepath = ''.join(('tmp/', message.author.avatar_url.split('/')[-1]))
                 try:
                     picture = Image.open(filepath)
                 except:
@@ -139,7 +139,7 @@ def rape(message):
                     for chunk in r:
                         f.write(chunk)
 
-                filepath = ''.join(('tmp/', message.mentions[0].avatar_url.split('/')[-1])))
+                filepath = ''.join(('tmp/', message.mentions[0].avatar_url.split('/')[-1]))
                 try:
                     picture = Image.open(filepath)
                 except:
@@ -204,7 +204,7 @@ def jpeg(message):
                         for chunk in r:
                             f.write(chunk)
 
-                    filepath = ''.join(('tmp/', message.author.avatar_url.split('/')[-1])))
+                    filepath = ''.join(('tmp/', message.author.avatar_url.split('/')[-1]))
                     try:
                         picture = Image.open(filepath)
                     except:
@@ -233,7 +233,7 @@ def jpeg(message):
                         for chunk in r:
                             f.write(chunk)
 
-                    filepath = ''.join(('tmp/', message.mentions[0].avatar_url.split('/')[-1])))
+                    filepath = ''.join(('tmp/', message.mentions[0].avatar_url.split('/')[-1]))
                     try:
                         picture = Image.open(filepath)
                     except:
@@ -263,7 +263,7 @@ def jpeg(message):
                     for chunk in r:
                         f.write(chunk)
 
-                filepath = ''.join(('tmp/', message.author.avatar_url.split('/')[-1])))
+                filepath = ''.join(('tmp/', message.author.avatar_url.split('/')[-1]))
                 try:
                     picture = Image.open(filepath)
                 except:
@@ -292,7 +292,7 @@ def jpeg(message):
                     for chunk in r:
                         f.write(chunk)
 
-                filepath = ''.join(('tmp/', message.mentions[0].avatar_url.split('/')[-1])))
+                filepath = ''.join(('tmp/', message.mentions[0].avatar_url.split('/')[-1]))
                 try:
                     picture = Image.open(filepath)
                 except:
