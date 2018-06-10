@@ -23,7 +23,7 @@ import asyncio
 #modules
 import images
 
-version = '3'
+version = 'v8'
 blankvar = ''
 headers={
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
@@ -388,11 +388,13 @@ async def on_message(message):
             users = []
             for server in bot.servers:
                 for user in server.members:
-                    if user not in users:
-                        users.append(user)
+                    if user.id not in users:
+                        users.append(user.id)
             emStats = discord.Embed(title='Cancer Bot Stats', color=0x00ff00)
             emStats.add_field(name='Servers', value=str(len(bot.servers) - 2), inline=True)
             emStats.add_field(name='Users', value=str(len(users)), inline=True)
+            emStats.add_field(name='Uptime', value='<PLACEHOLD>', inline=True)
+            emStats.add_field(name='Version', value=version, inline=True)
             await bot.send_message(message.channel, embed=emStats)
 
         #bot owner commands
