@@ -20,6 +20,7 @@ from subprocess import Popen, PIPE, STDOUT
 import math
 import asyncio
 import datetime
+from dateutil.relativedelta import relativedelta
 
 #modules
 import images
@@ -397,7 +398,8 @@ async def on_message(message):
                     if (not (user.id in users) and (not user.bot)):
                         users.append(user.id)
 
-            diff = datetime.datetime.now() - startdate
+
+            diff = relativedelta(datetime.datetime.now(), startdate)
             uptime = 'online for: ' + str(diff.days) + ' days, ' + str(diff.hours) + ' hours, ' + str(diff.minutes) + ' minutes and ' + str(diff.seconds) + ' seconds'
 
             emStats = discord.Embed(color=0x00ff00)
