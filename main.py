@@ -155,7 +155,7 @@ emHelp0.add_field(name='?/ping', value='Tests the bot\'s ping time', inline=True
 emHelp0.add_field(name='?/rape', value='Utterly fucks an image', inline=True)
 #emHelp0.add_field(name='?/deepfry', value=':b:eep fried :b:emes anyone? :joy:')
 emHelp0.add_field(name='?/whois <ID>', value='Looks up user info by ID', inline=True)
-emHelp0.add_field(name='?/suggest <suggestion>', value='DMs my senpai any suggestions you have', inline=True)?/
+emHelp0.add_field(name='?/suggest <suggestion>', value='DMs my senpai any suggestions you have', inline=True)
 emHelp0.add_field(name='?/stats', value='Shows bot stats', inline=True)
 
 #emHelp0.add_field(name='?/help advanced', value='Helpage for more advanced bot commands', inline=True)
@@ -399,7 +399,7 @@ async def on_message(message):
 
             diff = datetime.datetime.now() - startdate
             uptime = 'online for: ' + diff.days + ' days, ' + diff.hours + ' hours, ' + diff.minutes + ' minutes and ' + diff.seconds + ' seconds'
-            
+
             emStats = discord.Embed(color=0x00ff00)
             emHelp0.set_author(name='Cancer Bot Stats', icon_url='https://i.imgur.com/4fehjDz.png')
             emStats.add_field(name='Servers', value=str(len(bot.servers) - 2), inline=True)
