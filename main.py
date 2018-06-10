@@ -147,7 +147,7 @@ emHeck = discord.Embed(title='No Swearing!', color=0x00ff00)
 emThink = discord.Embed(title=':thinking::thinking::thinking::thinking::thinking:', color=0x00ff00)
 emThink.set_image(url="https://i.imgur.com/wHMWq1B.gif")
 
-emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\n`<argument>` is a required argument\n`[argument]` is an optional argument\n`{file}` is a file ~~or user~~ argument\n\u200b', color=0x00ff00)
+emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\n`<argument>` is a required argument\n`[argument]` is an optional argument\n`{file}` is a file (usually image) ~~(or user)~~ argument that must be attached\n\u200b', color=0x00ff00)
 emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
 emHelp0.set_author(name='Cancer Bot Help', icon_url='https://i.imgur.com/4fehjDz.png')
 emHelp0.add_field(name='?/help', value='Displays this help text', inline=True)
