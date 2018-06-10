@@ -242,7 +242,7 @@ def processImage(infile):
 
 def save_stats():
     with open('actions.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
-        pickle.dump([bot.rcommands, bot.triggers], f)
+        pickle.dump([bot.rcommands, bot.rtriggers], f)
 
 async def status_change():
     while True:
@@ -260,10 +260,10 @@ bot.rtriggers = 0
 
 try:
     with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
-        bot.rcommands, bot.triggers = pickle.load(f)
+        bot.commands, bot.triggers = pickle.load(f)
 except:
     bot.rcommands = 0
-    bot.triggers = 0
+    bot.rtriggers = 0
     save_stats()
 
 #ASYNCROUS EVENTS:
@@ -465,16 +465,16 @@ async def on_message(message):
             bot.rcommands += 1
             await bot.send_typing(message.channel)
             await bot.delete_message(message)
+            save_stats()
             users = []
             for server in bot.servers:
                 for user in server.members:
                     if (not (user.id in users) and (not user.bot)):
                         users.append(user.id)
-
-
+            with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
+                bot.commands, bot.triggers = pickle.load(f)
             diff = relativedelta(datetime.datetime.now(), startdate)
             uptime = str(diff.days) + ' days, ' + str(diff.hours) + ' hours, ' + str(diff.minutes) + ' minutes and ' + str(diff.seconds) + ' seconds'
-
             emStats = discord.Embed(description='Statistics on Cancer Bot version ' + version, color=0x00ff00)
             emStats.set_author(name='Cancer Bot Stats', icon_url='https://i.imgur.com/4fehjDz.png')
             emStats.add_field(name='Servers', value=str(len(bot.servers) - 2), inline=True)
@@ -483,13 +483,11 @@ async def on_message(message):
             emStats.add_field(name='Actions since restart', value=bot.rcommands + bot.rtriggers, inline=False)
             emStats.add_field(name='Commands', value=bot.rcommands, inline=True)
             emStats.add_field(name='Triggers', value=bot.rtriggers, inline=True)
-            emStats.add_field(name='Actions since v9', value=bot.rcommands + bot.triggers, inline=False)
-            emStats.add_field(name='Commands', value=bot.rcommands, inline=True)
+            emStats.add_field(name='Actions since v9', value=bot.commands + bot.triggers, inline=False)
+            emStats.add_field(name='Commands', value=bot.commands, inline=True)
             emStats.add_field(name='Triggers', value=bot.triggers, inline=True)
             emStats.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
             await bot.send_message(message.channel, embed=emStats)
-            save_stats()
-
         #bot owner commands
         if message.content.lower().startswith('?/;jpegas'):
             bot.rcommands += 1
