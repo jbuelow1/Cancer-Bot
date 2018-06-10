@@ -387,7 +387,7 @@ async def on_message(message):
         if message.content.lower().startswith('?/stats'):
             users = []
             for server in bot.servers:
-                for member in server.members:
+                for user in server.members:
                     if user not in [int(y) for x in users for y in x.split()]:
                         users.append(user)
             emStats = discord.Embed(title='Cancer Bot Stats', color=0x00ff00)
