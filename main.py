@@ -383,10 +383,12 @@ async def on_message(message):
         if message.content.lower().startswith('?/suggest'):
             await bot.send_typing(message.channel)
             owner = await bot.get_user_info('273940917596061698')
-            await bot.send_message(owner, 'HEWWO SENPAI I HAS FEEDBACK FROM ' + str(message.author) + ':```' + message.content.split(' ', 1)[1].replace('```', '<REMOVED>') + '```')
+            await bot.send_message(owner, 'HEWWO SENPAI I HAS FEEDBACK FROM `' + str(message.author) + '`:```' + message.content.split(' ', 1)[1].replace('```', '<REMOVED>') + '```')
             await bot.send_message(message.channel, 'Thanks for your feedback! Senpai has been notified!')
 
         if message.content.lower().startswith('?/stats'):
+            await bot.send_typing(message.channel)
+            await bot.delete_message(message)
             users = []
             for server in bot.servers:
                 for user in server.members:
@@ -400,6 +402,7 @@ async def on_message(message):
             emStats.add_field(name='Users', value=str(len(users)), inline=True)
             emStats.add_field(name='Uptime', value=uptime, inline=True)
             emStats.add_field(name='Version', value=version, inline=True)
+            emStats.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
             await bot.send_message(message.channel, embed=emStats)
 
         #bot owner commands
