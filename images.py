@@ -254,6 +254,10 @@ def jpeg(message):
                         traceback.print_exc()
                         return True, 4, ''
 
+                    print(message.mentions[0].avatar_url)
+                    print(localfile)
+                    print(remotefile)
+
                     return False, 0, remotefile
     else:
         if message.mentions == []:
