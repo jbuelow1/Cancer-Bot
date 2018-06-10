@@ -147,7 +147,7 @@ emHeck = discord.Embed(title='No Swearing!', color=0x00ff00)
 emThink = discord.Embed(title=':thinking::thinking::thinking::thinking::thinking:', color=0x00ff00)
 emThink.set_image(url="https://i.imgur.com/wHMWq1B.gif")
 
-emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\n`<argument>` is a required argument\n`[argument]` is an optional argument\n`{image}` is an optional image ~~(or user)~~ argument that must be attached\n`<{image}>` is an required image argument\n\u200b', color=0x00ff00)
+emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\n`<argument>` is a required argument\n`[argument]` is an optional argument\n`{image}` is an optional image ~~(or user)~~ argument that is attached\n`<{image}>` is an required image argument\n\u200b', color=0x00ff00)
 emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
 emHelp0.set_author(name='Cancer Bot Help', icon_url='https://i.imgur.com/4fehjDz.png')
 emHelp0.add_field(name='?/help', value='Displays this help text', inline=True)
@@ -155,7 +155,7 @@ emHelp0.add_field(name='?/ping', value='Tests the bot\'s ping time', inline=True
 emHelp0.add_field(name='?/stats', value='Shows bot stats', inline=True)
 emHelp0.add_field(name='?/suggest <suggestion>', value='DMs my senpai any suggestions you have', inline=True)
 
-emHelp0.add_field(name='?/whois <ID>', value='Looks up user info by ID', inline=True)
+emHelp0.add_field(name='?/whois [user]', value='Looks up user info', inline=True)
 
 emHelp0.add_field(name='?/jpeg <{image}>', value='Adds jpeg compression to images', inline=True)
 emHelp0.add_field(name='?/destroy <{image}>', value='Destroys an image', inline=True)
@@ -261,8 +261,8 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     debuglog(blankvar.join(('New Message by ', str(message.author), ' (', str(message.author.id), ') with message ID ', str(message.id), ' in channel ', str(message.channel.id), '.')))
-    if message.author == bot.user:
-        debuglog('Message is by me, exiting...')
+    if message.author.bot:
+        debuglog('Message is by me or another bot, exiting...')
         return
     else:
         #tChIfunny = threading.Thread(target=chIfunny, args=(message,))
@@ -274,7 +274,7 @@ async def on_message(message):
             emHeck.set_image(url=random.choice(hecks))
             await bot.send_message(message.channel, embed=emHeck)
 
-        if '@everyone' in message.content:
+        if message.mention_everyone:
             await bot.send_typing(message.channel)
             await bot.send_message(message.channel, random.choice(pingemojis))
 
@@ -303,6 +303,7 @@ async def on_message(message):
 
         if message.content.lower().startswith('?/help'):
             await bot.send_typing(message.channel)
+            await bot.delete_message(message)
             emHelp0.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
             await bot.send_message(message.channel, embed=emHelp0)
 
@@ -376,14 +377,37 @@ async def on_message(message):
         if message.content.lower().startswith('?/whois'):
             await bot.send_typing(message.channel)
             await bot.delete_message(message)
-            user = await bot.get_user_info(message.content.split(' ')[1])
-            emWhois = discord.Embed(title='User Info', description='User info for: `' + message.content.split(' ')[1] + '`', color=0x00ff00)
-            emWhois.add_field(name='Nickname', value=user.display_name, inline=True)
-            emWhois.add_field(name='Global Name', value=user.name, inline=True)
-            emWhois.add_field(name='Discriminator', value=user.discriminator, inline=True)
-            emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
-            emWhois.set_image(url=user.avatar_url)
-            await bot.send_message(message.channel, embed=emWhois)
+            if len(message.mentions) > 0:
+                if len(message.mentions) > 3:
+                    await bot.send_message(message.channel, message.author.mention + ', you supplied more than 3 users to lookup. Because of this, the userinfo is being sent to your DMs.')
+                    for user in message.mentions:
+                        emWhois = discord.Embed(title='User Info', color=0x00ff00)
+                        emWhois.add_field(name='Nickname', value=user.display_name, inline=True)
+                        emWhois.add_field(name='Global Name', value=user.name, inline=True)
+                        emWhois.add_field(name='Discriminator', value=user.discriminator, inline=True)
+                        emWhois.add_field(name='ID', value=user.id, inline=True)
+                        emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
+                        emWhois.set_image(url=user.avatar_url)
+                        await bot.send_message(message.author, embed=emWhois)
+                else:
+                    for user in message.mentions:
+                        emWhois = discord.Embed(title='User Info', color=0x00ff00)
+                        emWhois.add_field(name='Nickname', value=user.display_name, inline=True)
+                        emWhois.add_field(name='Global Name', value=user.name, inline=True)
+                        emWhois.add_field(name='Discriminator', value=user.discriminator, inline=True)
+                        emWhois.add_field(name='ID', value=user.id, inline=True)
+                        emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
+                        emWhois.set_image(url=user.avatar_url)
+                        await bot.send_message(message.channel, embed=emWhois)
+            else:
+                emWhois = discord.Embed(title='User Info', color=0x00ff00)
+                emWhois.add_field(name='Nickname', value=message.author.display_name, inline=True)
+                emWhois.add_field(name='Global Name', value=message.author.name, inline=True)
+                emWhois.add_field(name='Discriminator', value=message.author.discriminator, inline=True)
+                emWhois.add_field(name='ID', value=message.author.id, inline=True)
+                emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
+                emWhois.set_image(url=message.author.avatar_url)
+                await bot.send_message(message.channel, embed=emWhois)
 
         if message.content.lower().startswith('?/suggest'):
             await bot.send_typing(message.channel)
