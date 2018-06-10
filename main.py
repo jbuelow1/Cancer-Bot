@@ -23,7 +23,7 @@ import asyncio
 #modules
 import images
 
-version = 'v8'
+version = '8'
 blankvar = ''
 headers={
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
@@ -392,8 +392,8 @@ async def on_message(message):
                     if (not (user.id in users) and (not user.bot)):
                         users.append(user.id)
 
-            sec = timedelta(seconds=starttime - math.floor(time.clock()))
-            d = datetime(1,1,1) + sec
+            sec = time.timedelta(seconds=starttime - math.floor(time.clock()))
+            d = time.datetime(1,1,1) + sec
             uptime = "%d days, %d hours, %d minutes and %d seconds" % (d.day-1, d.hour, d.minute, d.second)
 
             emStats = discord.Embed(title='Cancer Bot Stats', color=0x00ff00)
