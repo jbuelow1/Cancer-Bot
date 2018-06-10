@@ -402,7 +402,7 @@ async def on_message(message):
             diff = relativedelta(datetime.datetime.now(), startdate)
             uptime = 'online for: ' + str(diff.days) + ' days, ' + str(diff.hours) + ' hours, ' + str(diff.minutes) + ' minutes and ' + str(diff.seconds) + ' seconds'
 
-            emStats = discord.Embed(color=0x00ff00)
+            emStats = discord.Embed(description='Statistics on Cancer Bot', color=0x00ff00)
             emHelp0.set_author(name='Cancer Bot Stats', icon_url='https://i.imgur.com/4fehjDz.png')
             emStats.add_field(name='Servers', value=str(len(bot.servers) - 2), inline=True)
             emStats.add_field(name='Users', value=str(len(users)), inline=True)
