@@ -247,10 +247,8 @@ async def status_change():
 #DEFINES:
 loglog(blankvar.join(('Starting Cancer Bot v', version, '...')))
 startdate = datetime.datetime.now()
-global commands
-global triggers
-commands = 0
-triggers = 0
+bot.commands = 0
+bot.triggers = 0
 
 
 #ASYNCROUS EVENTS:
