@@ -242,6 +242,7 @@ async def status_change():
 #END OF FUNCTIONS
 #DEFINES:
 loglog(blankvar.join(('Starting Cancer Bot v', version, '...')))
+startdate = datetime.datetime.now()
 
 
 #ASYNCROUS EVENTS:
@@ -250,7 +251,6 @@ async def on_ready():
     loglog('Connected to Discord!')
     await bot.edit_profile(username="Cancer Bot")
     loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
-    startdate = datetime.datetime.now()
 
     bot.loop.create_task(status_change())
 
