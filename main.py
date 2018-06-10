@@ -255,8 +255,8 @@ async def status_change():
 #DEFINES:
 loglog(blankvar.join(('Starting Cancer Bot v', version, '...')))
 startdate = datetime.datetime.now()
-bot.restart.commands = 0
-bot.restart.triggers = 0
+bot.rcommands = 0
+bot.rtriggers = 0
 
 try:
     with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
@@ -479,9 +479,9 @@ async def on_message(message):
             emStats.add_field(name='Servers', value=str(len(bot.servers) - 2), inline=True)
             emStats.add_field(name='Users', value=str(len(users)), inline=True)
             emStats.add_field(name='Uptime', value=uptime, inline=False)
-            emStats.add_field(name='Actions since restart', value=bot.restart.commands + bot.restart.triggers, inline=False)
-            emStats.add_field(name='Commands', value=bot.restart.commands, inline=True)
-            emStats.add_field(name='Triggers', value=bot.restart.triggers, inline=True)
+            emStats.add_field(name='Actions since restart', value=bot.rcommands + bot.rtriggers, inline=False)
+            emStats.add_field(name='Commands', value=bot.rcommands, inline=True)
+            emStats.add_field(name='Triggers', value=bot.rtriggers, inline=True)
             emStats.add_field(name='Actions since v9', value=bot.commands + bot.triggers, inline=False)
             emStats.add_field(name='Commands', value=bot.commands, inline=True)
             emStats.add_field(name='Triggers', value=bot.triggers, inline=True)
