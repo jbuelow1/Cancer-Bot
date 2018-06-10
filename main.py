@@ -98,33 +98,33 @@ dancefont = {
 }
 
 stati = [
-'with little children',
-'with ur mum XD',
+'with little children', #CBP
+'with ur mum XD', #CBP
 '( ͡° ͜ʖ ͡°)',
-'with big, big balls',
+'with big, big balls', #CBP
 'FORTNITE XD XD',
-'yeeting babies',
+'yeeting babies', #CBP
 'deepfrying the memes',
 'bepis simulator',
-'with myself',
-'with my peepee',
-'with mommy\'s peepee',
-'midget basketball',
-'with my rocket',
-'with the anthros',
-'peek a boo ( ͡° ͜ʖ ͡°)',
-'on e621',
-'lewding lolis',
+'with myself', #CBP
+'with my peepee', #CBP
+'with mommy\'s peepee', #CBP
+'midget basketball', #CBP
+'with my rocket', #CBP
+'with the anthros', #CBP
+'peek a boo ( ͡° ͜ʖ ͡°)', #CBP
+'on e621', #CBP
+'lewding lolis', #CBP
 'dead',
 'alone',
 'Discord',
 'with high voltage',
-'on a shitty server',
-'in the street',
-'with lives of the innocent',
+'on a shitty server', #CBP
+'in the street', #CBP
+'with lives of the innocent', #CBP
 'rm -rf /',
-'with 14 werewolves',
-'in a back alley'
+'with 14 werewolves', #CBP
+'in a back alley' #CBP
 ]
 
 helpStati = [
@@ -139,7 +139,7 @@ debug = True
 
 bot = discord.Client()
 
-emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), color=0x00ff00)
+emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), color=0x00ff00) #CBP
 emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
 
 emHeck = discord.Embed(title='No Swearing!', color=0x00ff00)
@@ -147,13 +147,13 @@ emHeck = discord.Embed(title='No Swearing!', color=0x00ff00)
 emThink = discord.Embed(title=':thinking::thinking::thinking::thinking::thinking:', color=0x00ff00)
 emThink.set_image(url="https://i.imgur.com/wHMWq1B.gif")
 
-emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\u200b', color=0x00ff00)
+emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\n`<argument>` is a required argument\n`[argument]` is an optional argument\n`\{file\}` is a file ~~or user~~ argument\n\u200b', color=0x00ff00)
 emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
 emHelp0.set_author(name='Cancer Bot Help', icon_url='https://i.imgur.com/4fehjDz.png')
 emHelp0.add_field(name='?/help', value='Displays this help text', inline=True)
 emHelp0.add_field(name='?/jpeg', value='Adds jpeg compression to images', inline=True)
 emHelp0.add_field(name='?/ping', value='Tests the bot\'s ping time', inline=True)
-emHelp0.add_field(name='?/rape', value='Utterly fucks an image', inline=True)
+emHelp0.add_field(name='?/destroy', value='Destroys an image', inline=True)
 #emHelp0.add_field(name='?/deepfry', value=':b:eep fried :b:emes anyone? :joy:')
 emHelp0.add_field(name='?/whois <ID>', value='Looks up user info by ID', inline=True)
 emHelp0.add_field(name='?/suggest <suggestion>', value='DMs my senpai any suggestions you have', inline=True)
@@ -162,7 +162,7 @@ emHelp0.add_field(name='?/stats', value='Shows bot stats', inline=True)
 #emHelp0.add_field(name='?/help advanced', value='Helpage for more advanced bot commands', inline=True)
 
 emJpeg = discord.Embed(title='✅ JPEG Complete! ✅', color=0x00ff00)
-emRape = discord.Embed(title='✅ Image Fucked! ✅', color=0x00ff00)
+emRape = discord.Embed(title='✅ Image Destroyed! ✅', color=0x00ff00)
 
 
 def loglog(message):
@@ -276,18 +276,18 @@ async def on_message(message):
             await bot.send_typing(message.channel)
             await bot.send_message(message.channel, random.choice(pingemojis))
 
-        if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
+        if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())): #CBP
             await bot.send_typing(message.channel)
             if (blankvar.join(('<@', bot.user.id, '>')) in message.content) or (blankvar.join(('<!@', bot.user.id, '>')) in message.content):
                 await bot.send_message(message.channel, 'no u')
-                await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.')
+                await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
             else:
                 await bot.send_message(message.channel, embed=emBleach)
         elif (blankvar.join(('<@', bot.user.id, '>')) in message.content) or (blankvar.join(('<!@', bot.user.id, '>')) in message.content):
             await bot.send_typing(message.channel)
             if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
                 await bot.send_message(message.channel, 'no u')
-                await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.')
+                await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
             else:
                 await bot.send_message(message.channel, 'H- Hewwo?!')
 
@@ -324,7 +324,7 @@ async def on_message(message):
 
         if 'no u' in message.content.lower():
             await bot.send_typing(message.channel)
-            await bot.send_message(message.channel, 'Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.')
+            await bot.send_message(message.channel, 'Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.') #CBP
 
         if message.content.lower().startswith('?/jpeg'):
             await bot.send_typing(message.channel)
@@ -332,35 +332,35 @@ async def on_message(message):
             await bot.delete_message(message)
             if fail:
                 if exit == 1:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu You made a fucky wucky!! A wittle fucko boingo! You better be working **VEWY HAWD** to fix this! Please supply a `.png`, `.jpg`, `.jpeg` or `.bmp` file!\nError code: `YOURE_AUTISTIC`\n*Request by: `' + str(message.author) + '`*')
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu You made a fucky wucky!! A wittle fucko boingo! You better be working **VEWY HAWD** to fix this! Please supply a `.png`, `.jpg`, `.jpeg` or `.bmp` file!\nError code: `NO_FILE`\n*Request by: `' + str(message.author) + '`*') #CBP
                 elif exit == 2:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `DOWNLOAD_FAILED`\n*Request by: `' + str(message.author) + '`*')
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `DOWNLOAD_FAILED`\n*Request by: `' + str(message.author) + '`*') #CBP
                 elif exit == 3:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FILE_OPEN_FAILURE`\n*Request by: `' + str(message.author) + '`*')
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FILE_OPEN_FAILURE`\n*Request by: `' + str(message.author) + '`*') #CBP
                 elif exit == 4:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `PROCESSING_FAILED`\n*Request by: `' + str(message.author) + '`*')
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `PROCESSING_FAILED`\n*Request by: `' + str(message.author) + '`*') #CBP
                 else:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `OOPSIE_WOOPSIE`\n*Request by: `' + str(message.author) + '`*')
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `OOPSIE_WOOPSIE`\n*Request by: `' + str(message.author) + '`*') #CBP
             else:
                 emJpeg.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
                 emJpeg.set_image(url=url)
                 await bot.send_message(message.channel, embed=emJpeg)
 
-        if message.content.lower().startswith('?/rape'):
+        if message.content.lower().startswith('?/destroy') or message.content.lower().startswith('?/rape'):
             await bot.send_typing(message.channel)
             fail, exit, url = images.rape(message)
             await bot.delete_message(message)
             if fail:
                 if exit == 1:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu You made a fucky wucky!! A wittle fucko boingo! You better be working **VEWY HAWD** to fix this! Please supply a `.png`, `.jpg`, `.jpeg` or `.bmp` file!\nError code: `YOURE_AUTISTIC`\n*Request by: `' + str(message.author) + '`*')
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu You made a fucky wucky!! A wittle fucko boingo! You better be working **VEWY HAWD** to fix this! Please supply a `.png`, `.jpg`, `.jpeg` or `.bmp` file!\nError code: `NO_FILE`\n*Request by: `' + str(message.author) + '`*') #CBP
                 elif exit == 2:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `DOWNLOAD_FAILED`\n*Request by: `' + str(message.author) + '`*')
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `DOWNLOAD_FAILED`\n*Request by: `' + str(message.author) + '`*') #CBP
                 elif exit == 3:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FILE_OPEN_FAILURE`\n*Request by: `' + str(message.author) + '`*')
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FILE_OPEN_FAILURE`\n*Request by: `' + str(message.author) + '`*') #CBP
                 elif exit == 4:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `PROCESSING_FAILED`\n*Request by: `' + str(message.author) + '`*')
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `PROCESSING_FAILED`\n*Request by: `' + str(message.author) + '`*') #CBP
                 else:
-                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `OOPSIE_WOOPSIE`\n*Request by: `' + str(message.author) + '`*')
+                    await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `OOPSIE_WOOPSIE`\n*Request by: `' + str(message.author) + '`*') #CBP
             else:
                 emRape.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
                 emRape.set_image(url=url)
@@ -369,7 +369,7 @@ async def on_message(message):
         if message.content.lower().startswith('?/deepfry'):
             await bot.send_typing(message.channel)
             await bot.send_typing(message.channel)
-            await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FEATURE_NOT_IMPLEMENTED`\n*Request by: `' + str(message.author) + '`*')
+            await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FEATURE_NOT_IMPLEMENTED`\n*Request by: `' + str(message.author) + '`*') #CBP
 
         if message.content.lower().startswith('?/whois'):
             await bot.send_typing(message.channel)
@@ -424,7 +424,7 @@ async def on_message(message):
                     emJpeg.set_image(url=url)
                     await bot.send_message(message.channel, embed=emJpeg)
 
-        if message.content.lower().startswith('?/;rapeas'):
+        if message.content.lower().startswith('?/;rapeas'): #CBP
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
