@@ -241,8 +241,11 @@ def processImage(infile):
         pass # end of sequence
 
 def save_stats():
+    with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
+        bot.commands, bot.triggers = pickle.load(f)
+
     with open('actions.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
-        pickle.dump([bot.rcommands, bot.rtriggers], f)
+        pickle.dump([bot.rcommands + bot.commands, bot.rtriggers + bot.commands], f)
 
 async def status_change():
     while True:
