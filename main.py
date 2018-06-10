@@ -272,9 +272,8 @@ try:
     with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
         bot.commands, bot.triggers = pickle.load(f)
 except:
-    bot.rcommands = 0
-    bot.rtriggers = 0
-    save_stats()
+    with open('actions.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
+        pickle.dump([0, 0], f)
 
 #ASYNCROUS EVENTS:
 @bot.event
