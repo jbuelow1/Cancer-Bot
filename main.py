@@ -244,11 +244,13 @@ def save_stats():
     with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
         bot.commands, bot.triggers = pickle.load(f)
 
-    unsavedcmd = bot.rcommands - unsavedcmd
-    unsavedtrg = bot.rtriggers - unsavedtrg
+    bot.ucommands = bot.rcommands - bot.scommands
+    bot.utriggers = bot.rtriggers - bot.striggers
+    bot.scommands = bot.rcommands
+    bot.striggers = bot.rtriggers
 
     with open('actions.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
-        pickle.dump([unsavedcmd + bot.commands, unsavedtrg + bot.triggers], f)
+        pickle.dump([bot.ucommands + bot.commands, bot.utriggers + bot.triggers], f)
 
 async def status_change():
     while True:
@@ -263,8 +265,8 @@ loglog(blankvar.join(('Starting Cancer Bot v', version, '...')))
 startdate = datetime.datetime.now()
 bot.rcommands = 0
 bot.rtriggers = 0
-unsavedcmd = 0
-unsavedtrg = 0
+bot.scommands = 0
+bot.striggers = 0
 
 try:
     with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
