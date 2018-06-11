@@ -272,8 +272,9 @@ try:
     with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
         bot.commands, bot.triggers = pickle.load(f)
 except:
-    with open('actions.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
-        pickle.dump([0, 0], f)
+    bot.rcommands = 0
+    bot.rtriggers = 0
+    save_stats()
 
 #ASYNCROUS EVENTS:
 @bot.event
@@ -346,6 +347,8 @@ async def on_message(message):
             await bot.delete_message(message)
             emHelp0.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
             await bot.send_message(message.channel, embed=emHelp0)
+            if len(bot.servers) > 7:
+                await bot.send_message(message.channel, '**MESSAGE TO DISCORD BOT LIST TESTER(S):**\nThis bot has several trigger words. These can be anywhere in a message, and are listed below:```heck\n@everyone (must actually ping, not just text)\n@Cancer Bot (again, must actually ping)\nXD\nno u\n🤔```')
             save_stats()
 
         if message.content.lower().startswith('?/ping'):
