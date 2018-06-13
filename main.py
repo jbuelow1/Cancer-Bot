@@ -32,7 +32,7 @@ if str(Path(".").resolve()).split('/')[-1] == 'testing':
     version = version + ' [BETA]'
 blankvar = ''
 headers={
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0'
 }
 
 hecks = [
@@ -284,6 +284,11 @@ async def on_ready():
     loglog(blankvar.join(('(User: "', str(bot.user), '", User ID: "', str(bot.user.id), '")')))
 
     bot.loop.create_task(status_change())
+
+@bot.event
+async def on_server_join(server):
+    owner = await bot.get_user_info('273940917596061698')
+    await bot.send_message(owner, '**HEWWO SENPAI I HAS JOINED A NEW SERVER CALLED** ' + server.name + ' **WITH** ' + str(len(server.members)) + ' **MEMBERS!**)
 
 @bot.event
 async def on_message(message):
