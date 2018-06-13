@@ -286,6 +286,11 @@ async def on_ready():
     bot.loop.create_task(status_change())
 
 @bot.event
+async def on_server_join(server):
+    owner = await bot.get_user_info('273940917596061698')
+    await bot.send_message(owner, '**HEWWO SENPAI I HAS JOINED A NEW SERVER CALLED** ' + server.name + ' **WITH** ' + str(len(server.members)) + ' **MEMBERS!**)
+
+@bot.event
 async def on_message(message):
     debuglog(blankvar.join(('New Message by ', str(message.author), ' (', str(message.author.id), ') with message ID ', str(message.id), ' in channel ', str(message.channel.id), '.')))
     if message.author.bot:
