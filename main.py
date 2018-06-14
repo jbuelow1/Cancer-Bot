@@ -330,7 +330,7 @@ async def on_message(message):
                 await bot.send_message(message.channel, embed=emBleach)
             save_stats()
 
-        elif bot.user.mentioned_in(message) and (not message.mentions_everyone):
+        elif bot.user.mentioned_in(message) and (not message.mention_everyone):
             if message.server.id == '264445053596991498':
                 return
             await bot.send_typing(message.channel)
