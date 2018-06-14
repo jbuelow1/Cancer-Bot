@@ -302,6 +302,8 @@ async def on_message(message):
 
 
         if (findWholeWord('heck')(message.content.lower()) or findWholeWord('hek')(message.content.lower()) or findWholeWord('hecking')(message.content.lower()) or findWholeWord('heckin')(message.content.lower())):
+            if message.server.id == '264445053596991498':
+                return
             await bot.send_typing(message.channel)
             bot.rtriggers += 1
             emHeck.set_image(url=random.choice(hecks))
@@ -309,12 +311,16 @@ async def on_message(message):
             save_stats()
 
         if message.mention_everyone:
+            if message.server.id == '264445053596991498':
+                return
             await bot.send_typing(message.channel)
             bot.rtriggers += 1
             await bot.send_message(message.channel, random.choice(pingemojis))
             save_stats()
 
         if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())): #CBP
+            if message.server.id == '264445053596991498':
+                return
             await bot.send_typing(message.channel)
             bot.rtriggers += 1
             if bot.user.mentioned_in(message):
@@ -324,7 +330,9 @@ async def on_message(message):
                 await bot.send_message(message.channel, embed=emBleach)
             save_stats()
 
-        elif bot.user.mentioned_in(message):
+        elif bot.user.mentioned_in(message) and (not message.mentions_everyone):
+            if message.server.id == '264445053596991498':
+                return
             await bot.send_typing(message.channel)
             bot.rtriggers += 1
             if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
@@ -335,12 +343,16 @@ async def on_message(message):
             save_stats()
 
         if findWholeWord('xd')(message.content.lower()):
+            if message.server.id == '264445053596991498':
+                return
             await bot.send_typing(message.channel)
             bot.rtriggers += 1
             await bot.send_message(message.channel, '<a:xd:442034831690301461>')
             save_stats()
 
         if '🤔' in message.content:
+            if message.server.id == '264445053596991498':
+                return
             await bot.send_typing(message.channel)
             bot.rtriggers += 1
             await bot.send_message(message.channel, embed=emThink)
@@ -375,6 +387,8 @@ async def on_message(message):
             save_stats()
 
         if 'no u' in message.content.lower():
+            if message.server.id == '264445053596991498':
+                return
             await bot.send_typing(message.channel)
             bot.rtriggers += 1
             await bot.send_message(message.channel, 'Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.') #CBP
