@@ -1,4 +1,3 @@
-
 import discord
 from six.moves import configparser
 import os
@@ -26,8 +25,7 @@ import pickle
 import importlib
 
 #modules
-import modParser as parser
-import modImages as images
+import modules
 
 version = '9'
 if str(Path(".").resolve()).split('/')[-1] == 'testing':
@@ -300,11 +298,11 @@ async def on_message(message):
         return
     else:
         if message.content.startswith('?/;reload'):
-            importlib.reload(message.content.lower().split(' ')[1])
+            importlib.reload(modules)
         elif message.content.startswith('?/'):
-            parser.commands(bot, message)
+            modules.parser.commands(bot, message)
         else:
-            parser.triggers(bot, message)
+            modules.parser.triggers(bot, message)
 
         if (findWholeWord('heck')(message.content.lower()) or findWholeWord('hek')(message.content.lower()) or findWholeWord('hecking')(message.content.lower()) or findWholeWord('heckin')(message.content.lower())):
             await bot.send_typing(message.channel)
