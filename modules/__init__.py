@@ -1,2 +1,2 @@
 from parser import *
-from images import *
+#from images import *
