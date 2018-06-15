@@ -1,3 +1,5 @@
+import asyncio
+
 def commands(bot, message):
     pass
 
