@@ -289,7 +289,7 @@ async def on_ready():
 @bot.event
 async def on_server_join(server):
     owner = await bot.get_user_info('273940917596061698')
-    await bot.send_message(owner, '**HEWWO SENPAI I HAS JOINED A NEW SERVER CALLED** ' + server.name + ' **WITH** ' + str(len(server.members)) + ' **MEMBERS!**)
+    await bot.send_message(owner, '**HEWWO SENPAI I HAS JOINED A NEW SERVER CALLED** ' + server.name + ' **WITH** ' + str(len(server.members)) + ' **MEMBERS!**')
 
 @bot.event
 async def on_message(message):
