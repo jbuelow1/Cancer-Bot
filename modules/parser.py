@@ -1,5 +1,5 @@
 def commands(bot, message):
-
+    pass
 
 def triggers(bot, message):
     if message.server.id == '264445053596991498':
