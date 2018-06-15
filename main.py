@@ -23,10 +23,11 @@ import datetime
 from dateutil.relativedelta import relativedelta
 from pathlib import Path
 import pickle
+import importlib
 
 #modules
-from modules import parser
-from modules import images
+import modParser as parser
+import modImages as images
 
 version = '9'
 if str(Path(".").resolve()).split('/')[-1] == 'testing':
@@ -298,7 +299,11 @@ async def on_message(message):
         debuglog('Message is by me or another bot, exiting...')
         return
     else:
-        if message.content.startswith('?/'):
+        if message.content.startswith('?/;load'):
+
+        if message.content.startswith('?/;reload'):
+            importlib.reload(message.content.lower().split(' ')[1])
+        elif message.content.startswith('?/'):
             parser.commands(bot, message)
         else:
             parser.triggers(bot, message)
