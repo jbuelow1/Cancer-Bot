@@ -25,7 +25,8 @@ import pickle
 import importlib
 
 #modules
-import modules
+import modules.parser
+import modules.images
 
 version = '9'
 if str(Path(".").resolve()).split('/')[-1] == 'testing':
@@ -298,7 +299,8 @@ async def on_message(message):
         return
     else:
         if message.content.startswith('?/;reload'):
-            importlib.reload(modules)
+            importlib.reload(modules.parser)
+            importlib.reload(modules.images)
         elif message.content.startswith('?/'):
             modules.parser.commands(bot, message)
         else:
