@@ -25,7 +25,8 @@ from pathlib import Path
 import pickle
 
 #modules
-import images
+from modules import parser
+from modules import images
 
 version = '9'
 if str(Path(".").resolve()).split('/')[-1] == 'testing':
@@ -297,9 +298,10 @@ async def on_message(message):
         debuglog('Message is by me or another bot, exiting...')
         return
     else:
-        #tChIfunny = threading.Thread(target=chIfunny, args=(message,))
-        tJpeg = threading.Thread(target=images.jpeg, args=(message,))
-
+        if message.content.startswith('?/'):
+            parser.commands(bot, message)
+        else:
+            parser.triggers(bot, message)
 
         if (findWholeWord('heck')(message.content.lower()) or findWholeWord('hek')(message.content.lower()) or findWholeWord('hecking')(message.content.lower()) or findWholeWord('heckin')(message.content.lower())):
             await bot.send_typing(message.channel)
