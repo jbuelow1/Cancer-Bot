@@ -1,2 +1,2 @@
-import parser
-import images
+from parser import *
+from images import *
