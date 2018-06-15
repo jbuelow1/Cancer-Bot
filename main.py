@@ -142,7 +142,8 @@ helpStati = [
 
 debug = True
 
-global bot = discord.Client()
+global bot
+bot = discord.Client()
 
 emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), color=0x00ff00) #CBP
 emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
