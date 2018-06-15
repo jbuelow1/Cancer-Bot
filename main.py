@@ -241,17 +241,17 @@ def processImage(infile):
     except EOFError:
         pass # end of sequence
 
-def save_stats():
-    with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
-        bot.commands, bot.triggers = pickle.load(f)
+async def save_stats():
+    while True:
+        with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
+            bot.commands, bot.triggers = pickle.load(f)
 
-    bot.ucommands = bot.rcommands - bot.scommands
-    bot.utriggers = bot.rtriggers - bot.striggers
-    bot.scommands = bot.rcommands
-    bot.striggers = bot.rtriggers
+        with open('actions.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
+            pickle.dump([bot.ucommands + bot.commands, bot.utriggers + bot.triggers], f)
 
-    with open('actions.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
-        pickle.dump([bot.ucommands + bot.commands, bot.utriggers + bot.triggers], f)
+        bot.ucommands = 0
+        bot.utriggers = 0
+        await asyncio.sleep(60)
 
 async def status_change():
     while True:
@@ -264,18 +264,13 @@ async def status_change():
 #DEFINES:
 loglog(blankvar.join(('Starting Cancer Bot v', version, '...')))
 startdate = datetime.datetime.now()
-bot.rcommands = 0
-bot.rtriggers = 0
+bot.ucommands = 0
+bot.utriggers = 0
 bot.scommands = 0
 bot.striggers = 0
 
-try:
-    with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
-        bot.commands, bot.triggers = pickle.load(f)
-except:
-    bot.rcommands = 0
-    bot.rtriggers = 0
-    save_stats()
+with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
+    bot.acommands, bot.atriggers = pickle.load(f)
 
 #ASYNCROUS EVENTS:
 @bot.event
@@ -306,50 +301,7 @@ async def on_message(message):
         else:
             modules.parser.triggers(bot, message)
 
-        if (findWholeWord('heck')(message.content.lower()) or findWholeWord('hek')(message.content.lower()) or findWholeWord('hecking')(message.content.lower()) or findWholeWord('heckin')(message.content.lower())):
-            await bot.send_typing(message.channel)
-            bot.rtriggers += 1
-            emHeck.set_image(url=random.choice(hecks))
-            await bot.send_message(message.channel, embed=emHeck)
-            save_stats()
 
-        if message.mention_everyone:
-            await bot.send_typing(message.channel)
-            bot.rtriggers += 1
-            await bot.send_message(message.channel, random.choice(pingemojis))
-            save_stats()
-
-        if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())): #CBP
-            await bot.send_typing(message.channel)
-            bot.rtriggers += 1
-            if bot.user.mentioned_in(message):
-                await bot.send_message(message.channel, 'no u')
-                await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
-            else:
-                await bot.send_message(message.channel, embed=emBleach)
-            save_stats()
-
-        elif bot.user.mentioned_in(message):
-            await bot.send_typing(message.channel)
-            bot.rtriggers += 1
-            if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
-                await bot.send_message(message.channel, 'no u')
-                await bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
-            else:
-                await bot.send_message(message.channel, 'H- Hewwo?!')
-            save_stats()
-
-        if findWholeWord('xd')(message.content.lower()):
-            await bot.send_typing(message.channel)
-            bot.rtriggers += 1
-            await bot.send_message(message.channel, '<a:xd:442034831690301461>')
-            save_stats()
-
-        if '🤔' in message.content:
-            await bot.send_typing(message.channel)
-            bot.rtriggers += 1
-            await bot.send_message(message.channel, embed=emThink)
-            save_stats()
 
         if message.content.lower().startswith('?/help'):
             bot.rcommands += 1
@@ -379,11 +331,7 @@ async def on_message(message):
             await bot.send_message(message.channel, embed=emPing)
             save_stats()
 
-        if 'no u' in message.content.lower():
-            await bot.send_typing(message.channel)
-            bot.rtriggers += 1
-            await bot.send_message(message.channel, 'Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.') #CBP
-            save_stats()
+
 
         if message.content.lower().startswith('?/jpeg'):
             bot.rcommands += 1
