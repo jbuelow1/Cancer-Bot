@@ -299,8 +299,6 @@ async def on_message(message):
         debuglog('Message is by me or another bot, exiting...')
         return
     else:
-        if message.content.startswith('?/;load'):
-
         if message.content.startswith('?/;reload'):
             importlib.reload(message.content.lower().split(' ')[1])
         elif message.content.startswith('?/'):
