@@ -4,7 +4,7 @@ class Mparser:
     def __init__(self, bot):
         self.bot = bot
 
-        def findWholeWord(w):
+        def self.self.findWholeWorld(w):
             return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search
 
     def commands(self, message):
@@ -14,7 +14,7 @@ class Mparser:
         if message.server.id == '264445053596991498':
             return
 
-        if (findWholeWord('heck')(message.content.lower()) or findWholeWord('hek')(message.content.lower()) or findWholeWord('hecking')(message.content.lower()) or findWholeWord('heckin')(message.content.lower())):
+        if (self.findWholeWorld('heck')(message.content.lower()) or self.findWholeWorld('hek')(message.content.lower()) or self.findWholeWorld('hecking')(message.content.lower()) or self.findWholeWorld('heckin')(message.content.lower())):
             self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
@@ -27,7 +27,7 @@ class Mparser:
             self.bot.utriggers += 1
             self.bot.send_message(message.channel, random.choice(pingemojis))
 
-        if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())): #CBP
+        if (self.findWholeWorld('die')(message.content.lower()) or self.findWholeWorld('kys')(message.content.lower()) or self.findWholeWorld('kms')(message.content.lower())): #CBP
             self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
@@ -41,13 +41,13 @@ class Mparser:
             self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
-            if (findWholeWord('die')(message.content.lower()) or findWholeWord('kys')(message.content.lower()) or findWholeWord('kms')(message.content.lower())):
+            if (self.findWholeWorld('die')(message.content.lower()) or self.findWholeWorld('kys')(message.content.lower()) or self.findWholeWorld('kms')(message.content.lower())):
                 self.bot.send_message(message.channel, 'no u')
                 self.bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
             else:
                 self.bot.send_message(message.channel, 'H- Hewwo?!')
 
-        if findWholeWord('xd')(message.content.lower()):
+        if self.findWholeWorld('xd')(message.content.lower()):
             self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
