@@ -4,10 +4,10 @@ class Mparser:
     def __init__(self, bot):
         self.bot = bot
 
-    def commands(bot, message):
+    def commands(self, message):
         pass
 
-    def triggers(message):
+    def triggers(self, message):
         if message.server.id == '264445053596991498':
             return
 
