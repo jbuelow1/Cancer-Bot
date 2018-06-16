@@ -1,4 +1,4 @@
-import asyncio
+import re
 
 class Mparser:
     def __init__(self, bot):
