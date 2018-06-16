@@ -25,7 +25,7 @@ import pickle
 import importlib
 
 #modules
-import modules.parser
+from modules.parser import Mparser
 import modules.images
 
 version = '9'
@@ -142,8 +142,8 @@ helpStati = [
 
 debug = True
 
-global bot
 bot = discord.Client()
+parser = Mparser(bot)
 
 emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), color=0x00ff00) #CBP
 emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
@@ -295,12 +295,12 @@ async def on_message(message):
         return
     else:
         if message.content.startswith('?/;reload'):
-            importlib.reload(modules.parser)
+            importlib.reload(Mparser)
             importlib.reload(modules.images)
         elif message.content.startswith('?/'):
-            modules.parser.commands(bot, message)
+            parser.commands(message)
         else:
-            modules.parser.triggers(bot, message)
+            parser.triggers(message)
 
 
 
