@@ -4,7 +4,7 @@ class Mparser:
     def __init__(self, bot):
         self.bot = bot
 
-        def self.findWholeWorld(w):
+        def findWholeWorld(w):
             return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search
 
     def commands(self, message):
