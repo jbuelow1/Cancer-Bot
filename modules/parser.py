@@ -1,6 +1,9 @@
 import asyncio
 
 class Mparser:
+    def findWholeWord(w):
+        return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search
+
     def __init__(self, bot):
         self.bot = bot
 
