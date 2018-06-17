@@ -98,7 +98,7 @@ class Mparser:
             self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
-            emHeck.set_image(url=random.choice(hecks))
+            emHeck.set_image(url=random.choice(self.hecks))
             self.bot.send_message(message.channel, embed=emHeck)
             print("done prosessing trigger.")
 
