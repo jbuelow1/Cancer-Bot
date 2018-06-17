@@ -144,6 +144,7 @@ debug = True
 
 bot = discord.Client()
 def initializer():
+    global parser
     parser = Mparser(bot)
 
 initializer()
