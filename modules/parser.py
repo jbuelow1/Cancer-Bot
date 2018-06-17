@@ -73,6 +73,9 @@ class Mparser:
     def findWholeWorld(self, w):
         return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search
 
+    def wordInString(word, string_value):
+        return True if re.search(r'\b' + word + r'\b', string_value) else False
+
     def commands(self, message):
         pass
 
@@ -89,7 +92,7 @@ class Mparser:
         if message.server.id == '264445053596991498':
             return
 
-        if (self.findWholeWorld('heck')(message.content.lower()) or self.findWholeWorld('hek')(message.content.lower()) or self.findWholeWorld('hecking')(message.content.lower()) or self.findWholeWorld('heckin')(message.content.lower())):
+        if (self.wordInString('heck', message.content.lower()) or self.wordInString('hek', message.content.lower()) or self.wordInString('hecking', message.content.lower()) or self.wordInString('heckin', message.content.lower())):
             print("heck found.")
             self.bot.send_typing(message.channel)
             self.bot.striggers += 1
@@ -104,7 +107,7 @@ class Mparser:
             self.bot.utriggers += 1
             self.bot.send_message(message.channel, random.choice(pingemojis))
 
-        if (self.findWholeWorld('die')(message.content.lower()) or self.findWholeWorld('kys')(message.content.lower()) or self.findWholeWorld('kms')(message.content.lower())): #CBP
+        if (self.wordInString('die', message.content.lower()) or self.wordInString('kys', message.content.lower()) or self.wordInString('kms', message.content.lower())): #CBP
             self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
@@ -118,13 +121,13 @@ class Mparser:
             self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
-            if (self.findWholeWorld('die')(message.content.lower()) or self.findWholeWorld('kys')(message.content.lower()) or self.findWholeWorld('kms')(message.content.lower())):
+            if (self.wordInString('die', message.content.lower()) or self.wordInString('kys', message.content.lower()) or self.wordInString('kms', message.content.lower())):
                 self.bot.send_message(message.channel, 'no u')
                 self.bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
             else:
                 self.bot.send_message(message.channel, 'H- Hewwo?!')
 
-        if self.findWholeWorld('xd')(message.content.lower()):
+        if self.wordInString('xd', message.content.lower()):
             self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
