@@ -100,7 +100,7 @@ class Mparser:
             self.bot.striggers += 1
             self.bot.utriggers += 1
             emHeck.set_image(url=random.choice(self.hecks))
-            messageid = self.bot.send_message(message.channel, embed=emHeck)
+            await self.bot.send_message(message.channel, embed=emHeck)
             print("done prosessing trigger. (maybe?)")
             print(messageid)
 
