@@ -101,6 +101,7 @@ class Mparser:
             self.bot.utriggers += 1
             emHeck.set_image(url=random.choice(self.hecks))
             self.bot.send_message(message.channel, embed=emHeck)
+            print(emHeck)
             print("done prosessing trigger.")
 
         if message.mention_everyone:
