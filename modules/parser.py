@@ -77,6 +77,7 @@ class Mparser:
         pass
 
     def triggers(self, message):
+        print("starting trigger parser...")
         emBleach = discord.Embed(title=''.join((self.dancefont['k'],self.dancefont['y'],self.dancefont['s'])), color=0x00ff00) #CBP
         emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
 
@@ -89,11 +90,13 @@ class Mparser:
             return
 
         if (self.findWholeWorld('heck')(message.content.lower()) or self.findWholeWorld('hek')(message.content.lower()) or self.findWholeWorld('hecking')(message.content.lower()) or self.findWholeWorld('heckin')(message.content.lower())):
+            print("heck found.")
             self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
             emHeck.set_image(url=random.choice(hecks))
             self.bot.send_message(message.channel, embed=emHeck)
+            print("done prosessing trigger.")
 
         if message.mention_everyone:
             self.bot.send_typing(message.channel)
