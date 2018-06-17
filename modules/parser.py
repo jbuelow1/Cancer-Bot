@@ -81,17 +81,6 @@ class Mparser:
         pass
 
     def triggers(self, message):
-        hecks = [
-        'https://i.imgur.com/ynS00JL.jpg',
-        'https://i.imgur.com/YaFUVwE.jpg',
-        'https://i.imgur.com/S6sqpoq.png',
-        'https://i.imgur.com/zTxzouf.jpg',
-        'https://i.imgur.com/z4u0Juo.png',
-        'https://i.imgur.com/z4u0Juo.png',
-        'https://i.imgur.com/vcTg4tO.jpg',
-        ]
-
-        
         print("starting trigger parser...")
         emBleach = discord.Embed(title=''.join((self.dancefont['k'],self.dancefont['y'],self.dancefont['s'])), color=0x00ff00) #CBP
         emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
@@ -110,7 +99,7 @@ class Mparser:
             self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
-            emHeck.set_image(url=random.choice(hecks))
+            emHeck.set_image(url=random.choice(self.hecks))
             self.bot.send_message(message.channel, embed=emHeck)
             print("done prosessing trigger.")
 
@@ -118,7 +107,7 @@ class Mparser:
             self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
-            self.bot.send_message(message.channel, random.choice(pingemojis))
+            self.bot.send_message(message.channel, random.choice(self.pingemojis))
 
         if (self.wordInString('die', message.content.lower()) or self.wordInString('kys', message.content.lower()) or self.wordInString('kms', message.content.lower())): #CBP
             self.bot.send_typing(message.channel)
