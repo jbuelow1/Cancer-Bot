@@ -338,7 +338,8 @@ async def on_message(message):
             emPing.add_field(name='LAN (192.168.1.1) ping', value=lanPing, inline=False)
             emPing.set_thumbnail(url='https://i.imgur.com/q60RAcT.jpg')
             emPing.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
-            await bot.send_message(message.channel, embed=emPing)
+            await testvar = bot.send_message(message.channel, embed=emPing)
+            print(testvar)
             save_stats()
 
 
