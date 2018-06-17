@@ -31,7 +31,7 @@ class Mparser:
         '<a:angeryping:441962932662829096>'
         ]
 
-        self.dancefont = {
+        self.self.dancefont = {
         'a': '<a:danceA:440893333150105601>',
         'b': '<a:danceB:440893333443706890>',
         'c': '<a:danceC:440893333301100564>',
@@ -77,7 +77,7 @@ class Mparser:
         pass
 
     def triggers(self, message):
-        emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), color=0x00ff00) #CBP
+        emBleach = discord.Embed(title=''.join((self.dancefont['k'],self.dancefont['y'],self.dancefont['s'])), color=0x00ff00) #CBP
         emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
 
         emHeck = discord.Embed(title='No Swearing!', color=0x00ff00)
