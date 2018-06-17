@@ -1,5 +1,6 @@
 import re
 import discord
+import random
 
 class Mparser:
     def __init__(self, bot):
