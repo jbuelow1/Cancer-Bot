@@ -301,6 +301,7 @@ async def on_message(message):
         if message.content.startswith('?/;reload'):
             importlib.reload(modules.parser)
             importlib.reload(modules.images)
+            parser = Mparser(bot)
         elif message.content.startswith('?/'):
             parser.commands(message)
         else:
