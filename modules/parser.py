@@ -31,7 +31,7 @@ class Mparser:
         '<a:angeryping:441962932662829096>'
         ]
 
-        self.self.dancefont = {
+        self.dancefont = {
         'a': '<a:danceA:440893333150105601>',
         'b': '<a:danceB:440893333443706890>',
         'c': '<a:danceC:440893333301100564>',
