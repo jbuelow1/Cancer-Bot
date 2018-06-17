@@ -270,8 +270,12 @@ bot.utriggers = 0
 bot.scommands = 0
 bot.striggers = 0
 
-with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
-    bot.acommands, bot.atriggers = pickle.load(f)
+try:
+    with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
+        bot.acommands, bot.atriggers = pickle.load(f)
+except:
+    with open('actions.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
+        pickle.dump([0, 0], f)
 
 #ASYNCROUS EVENTS:
 @bot.event
