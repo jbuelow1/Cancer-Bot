@@ -1,4 +1,5 @@
 import re
+import discord
 
 class Mparser:
     def __init__(self, bot):
@@ -83,7 +84,7 @@ class Mparser:
 
         emThink = discord.Embed(title=':thinking::thinking::thinking::thinking::thinking:', color=0x00ff00)
         emThink.set_image(url="https://i.imgur.com/wHMWq1B.gif")
-        
+
         if message.server.id == '264445053596991498':
             return
 
