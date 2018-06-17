@@ -73,7 +73,7 @@ class Mparser:
     def findWholeWorld(self, w):
         return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search
 
-    def wordInString(word, string_value):
+    def wordInString(self, word, string_value):
         return True if re.search(r'\b' + word + r'\b', string_value) else False
 
     def commands(self, message):
