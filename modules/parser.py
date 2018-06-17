@@ -95,10 +95,19 @@ class Mparser:
 
         if (self.wordInString('heck', message.content.lower()) or self.wordInString('hek', message.content.lower()) or self.wordInString('hecking', message.content.lower()) or self.wordInString('heckin', message.content.lower())):
             print("heck found.")
+            hecks = [
+            'https://i.imgur.com/ynS00JL.jpg',
+            'https://i.imgur.com/YaFUVwE.jpg',
+            'https://i.imgur.com/S6sqpoq.png',
+            'https://i.imgur.com/zTxzouf.jpg',
+            'https://i.imgur.com/z4u0Juo.png',
+            'https://i.imgur.com/z4u0Juo.png',
+            'https://i.imgur.com/vcTg4tO.jpg',
+            ]
             self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
-            emHeck.set_image(url=random.choice(self.hecks))
+            emHeck.set_image(url=random.choice(hecks))
             self.bot.send_message(message.channel, embed=emHeck)
             print("done prosessing trigger.")
 
