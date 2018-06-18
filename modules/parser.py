@@ -75,7 +75,7 @@ class Mparser:
         return True if re.search(r'\b' + word + r'\b', string_value) else False
 
     async def commands(self, message):
-        pass
+        print("reloading works now!")
 
     async def triggers(self, message):
         print("starting trigger parser...")
