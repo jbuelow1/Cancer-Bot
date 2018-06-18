@@ -75,7 +75,7 @@ class Mparser:
         return True if re.search(r'\b' + word + r'\b', string_value) else False
 
     async def commands(self, message):
-        pass
+        await self.bot.send_typing(message.channel)
 
     async def triggers(self, message):
         print("starting trigger parser...")
