@@ -25,7 +25,7 @@ import pickle
 import importlib
 
 #modules
-from modules.parser import Mparser
+import modules.parser as parser
 import modules.images
 
 version = '9'
@@ -145,7 +145,7 @@ debug = True
 bot = discord.Client()
 def initializer():
     global parser
-    parser = Mparser(bot)
+    parser = parser.parser(bot)
 
 initializer()
 
@@ -303,7 +303,7 @@ async def on_message(message):
         return
     else:
         if message.content.startswith('?/;reload'):
-            importlib.reload(modules.parser)
+            importlib.reload(parser)
             importlib.reload(modules.images)
             initializer()
         elif message.content.startswith('?/'):
