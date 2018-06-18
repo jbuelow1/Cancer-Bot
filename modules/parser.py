@@ -71,16 +71,13 @@ class Mparser:
         '9': '9'
         }
 
-    def findWholeWorld(self, w):
-        return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search
-
     def wordInString(self, word, string_value):
         return True if re.search(r'\b' + word + r'\b', string_value) else False
 
-    def commands(self, message):
+    async def commands(self, message):
         pass
 
-    def triggers(self, message):
+    async def triggers(self, message):
         print("starting trigger parser...")
         emBleach = discord.Embed(title=''.join((self.dancefont['k'],self.dancefont['y'],self.dancefont['s'])), color=0x00ff00) #CBP
         emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
@@ -96,7 +93,7 @@ class Mparser:
         if (self.wordInString('heck', message.content.lower()) or self.wordInString('hek', message.content.lower()) or self.wordInString('hecking', message.content.lower()) or self.wordInString('heckin', message.content.lower())):
             print("heck found.")
 
-            self.bot.send_typing(message.channel)
+            await self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
             emHeck.set_image(url=random.choice(self.hecks))
@@ -105,45 +102,45 @@ class Mparser:
             print(messageid)
 
         if message.mention_everyone:
-            self.bot.send_typing(message.channel)
+            await self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
-            self.bot.send_message(message.channel, random.choice(self.pingemojis))
+            await self.bot.send_message(message.channel, random.choice(self.pingemojis))
 
         if (self.wordInString('die', message.content.lower()) or self.wordInString('kys', message.content.lower()) or self.wordInString('kms', message.content.lower())): #CBP
-            self.bot.send_typing(message.channel)
+            await self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
             if self.bot.user.mentioned_in(message):
-                self.bot.send_message(message.channel, 'no u')
-                self.bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
+                await self.bot.send_message(message.channel, 'no u')
+                await self.bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
             else:
-                self.bot.send_message(message.channel, embed=emBleach)
+                await self.bot.send_message(message.channel, embed=emBleach)
 
         elif self.bot.user.mentioned_in(message):
-            self.bot.send_typing(message.channel)
+            await self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
             if (self.wordInString('die', message.content.lower()) or self.wordInString('kys', message.content.lower()) or self.wordInString('kms', message.content.lower())):
-                self.bot.send_message(message.channel, 'no u')
-                self.bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
+                await self.bot.send_message(message.channel, 'no u')
+                await self.bot.send_message(message.channel, 'Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
             else:
-                self.bot.send_message(message.channel, 'H- Hewwo?!')
+                await self.bot.send_message(message.channel, 'H- Hewwo?!')
 
         if self.wordInString('xd', message.content.lower()):
-            self.bot.send_typing(message.channel)
+            await self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
-            self.bot.send_message(message.channel, '<a:xd:442034831690301461>')
+            await self.bot.send_message(message.channel, '<a:xd:442034831690301461>')
 
         if '🤔' in message.content:
-            self.bot.send_typing(message.channel)
+            await self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
-            self.bot.send_message(message.channel, embed=emThink)
+            await self.bot.send_message(message.channel, embed=emThink)
 
         if 'no u' in message.content.lower():
-            self.bot.send_typing(message.channel)
+            await self.bot.send_typing(message.channel)
             self.bot.striggers += 1
             self.bot.utriggers += 1
-            self.bot.send_message(message.channel, 'Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.') #CBP
+            await self.bot.send_message(message.channel, 'Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.') #CBP
