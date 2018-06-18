@@ -25,7 +25,7 @@ import pickle
 import importlib
 
 #modules
-import modules.parser as parser
+import Mparser
 import modules.images
 
 version = '9'
