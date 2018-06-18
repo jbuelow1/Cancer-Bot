@@ -307,9 +307,9 @@ async def on_message(message):
             importlib.reload(modules.images)
             initializer()
         elif message.content.startswith('?/'):
-            parser.commands(message)
+            await parser.commands(message)
         else:
-            parser.triggers(message)
+            await parser.triggers(message)
 
 
 
