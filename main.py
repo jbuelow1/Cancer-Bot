@@ -314,7 +314,8 @@ async def on_message(message):
 
 
         if message.content.lower().startswith('?/help'):
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             await bot.send_typing(message.channel)
             await bot.delete_message(message)
             emHelp0.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
@@ -322,7 +323,8 @@ async def on_message(message):
             save_stats()
 
         if message.content.lower().startswith('?/ping'):
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             t1 = time.perf_counter()
             await bot.send_typing(message.channel)
             t2 = time.perf_counter()
@@ -344,7 +346,8 @@ async def on_message(message):
 
 
         if message.content.lower().startswith('?/jpeg'):
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             await bot.send_typing(message.channel)
             fail, exit, url = images.jpeg(message)
             await bot.delete_message(message)
@@ -366,7 +369,8 @@ async def on_message(message):
             save_stats()
 
         if message.content.lower().startswith('?/destroy') or message.content.lower().startswith('?/rape'):
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             await bot.send_typing(message.channel)
             fail, exit, url = images.rape(message)
             await bot.delete_message(message)
@@ -388,14 +392,16 @@ async def on_message(message):
             save_stats()
 
         if message.content.lower().startswith('?/deepfry'):
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             await bot.send_typing(message.channel)
             await bot.send_typing(message.channel)
             await bot.send_message(message.channel, ':warning: **OOPSIE WOOPSIE!!** Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working **VEWY HAWD** to fix this!\nError code: `FEATURE_NOT_IMPLEMENTED`\n*Request by: `' + str(message.author) + '`*') #CBP
             save_stats()
 
         if message.content.lower().startswith('?/whois'):
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             await bot.send_typing(message.channel)
             await bot.delete_message(message)
             if len(message.mentions) > 0:
@@ -432,7 +438,8 @@ async def on_message(message):
             save_stats()
 
         if message.content.lower().startswith('?/suggest'):
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             await bot.send_typing(message.channel)
             owner = await bot.get_user_info('273940917596061698')
             await bot.send_message(owner, 'HEWWO SENPAI I HAS FEEDBACK FROM `' + str(message.author) + '`:```' + message.content.split(' ', 1)[1].replace('```', '<REMOVED>') + '```')
@@ -440,7 +447,8 @@ async def on_message(message):
             save_stats()
 
         if message.content.lower().startswith('?/stats'):
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             await bot.send_typing(message.channel)
             await bot.delete_message(message)
             save_stats()
@@ -468,7 +476,8 @@ async def on_message(message):
             await bot.send_message(message.channel, embed=emStats)
         #bot owner commands
         if message.content.lower().startswith('?/;jpegas'):
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
@@ -482,7 +491,8 @@ async def on_message(message):
                 save_stats()
 
         if message.content.lower().startswith('?/;rapeas'): #CBP
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
@@ -509,7 +519,8 @@ async def on_message(message):
                 save_stats()'''
 
         if message.content.lower().startswith('?/;delete'):
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
@@ -526,7 +537,8 @@ async def on_message(message):
                 save_stats()
 
         if message.content.lower().startswith('?/;say'):
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
@@ -538,7 +550,8 @@ async def on_message(message):
                 save_stats()
 
         if message.content.lower().startswith('?/;asay'):
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
@@ -551,7 +564,8 @@ async def on_message(message):
                 save_stats()
 
         if message.content.lower().startswith('?/;kick'):
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
@@ -572,7 +586,8 @@ async def on_message(message):
                 save_stats()
 
         if message.content.lower().startswith('?/;ban'):
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
@@ -593,7 +608,8 @@ async def on_message(message):
                 save_stats()
 
         if message.content.lower().startswith('?/;unban'):
-            bot.rcommands += 1
+            bot.scommands += 1
+            bot.ucommands += 1
             debuglog('Owner command triggered.')
             if str(message.author.id) == '273940917596061698':
                 loglog('Bot owner has issued a owner command.')
