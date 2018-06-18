@@ -2,7 +2,7 @@ import re
 import discord
 import random
 
-class Mparser:
+class parser:
     def __init__(self, bot):
         self.bot = bot
         self.hecks = [
