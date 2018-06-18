@@ -143,11 +143,7 @@ helpStati = [
 debug = True
 
 bot = discord.Client()
-def initializer():
-    global parser
-    parser = parser.parser(bot)
-
-initializer()
+parser = Mparser.parser(bot)
 
 emBleach = discord.Embed(title=''.join((dancefont['k'],dancefont['y'],dancefont['s'])), color=0x00ff00) #CBP
 emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
@@ -303,9 +299,8 @@ async def on_message(message):
         return
     else:
         if message.content.startswith('?/;reload'):
-            importlib.reload(parser)
+            importlib.reload(Mparser)
             importlib.reload(modules.images)
-            initializer()
         elif message.content.startswith('?/'):
             await parser.commands(message)
         else:
