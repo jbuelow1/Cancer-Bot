@@ -70,4 +70,4 @@ else:
     print('ERR_EXIT_CODE = "1"')
     exit(1)
 
-bot.run('TOKEN', bot=True, reconnect=True)
+bot.run(token, bot=True, reconnect=True)
