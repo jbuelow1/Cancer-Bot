@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 
 import sys, traceback
+from six.moves import configparser
 
 """This is a multi file example showcasing many features of the command extension and the use of cogs.
 These are examples only and are not intended to be used as a fully functioning bot. Rather they should give you a basic
@@ -60,5 +61,13 @@ async def on_ready():
     await bot.change_presence(game=discord.Game(name='Cogs Example', type=1, url='https://twitch.tv/kraken'))
     print(f'Successfully logged in and booted...!')
 
+filename = "ifr.cfg"
+if os.path.isfile(filename):
+    config = configparser.ConfigParser()
+    config.read(filename)
+    token = config.get("config", "token")
+else:
+    print('ERR_EXIT_CODE = "1"')
+    exit(1)
 
 bot.run('TOKEN', bot=True, reconnect=True)
