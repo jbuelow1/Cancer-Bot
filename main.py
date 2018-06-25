@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-import sys, traceback
+import os, sys, traceback
 from six.moves import configparser
 
 """This is a multi file example showcasing many features of the command extension and the use of cogs.
