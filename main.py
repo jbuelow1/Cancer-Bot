@@ -59,7 +59,7 @@ async def on_ready():
 
     # Changes our bots Playing Status. type=1(streaming) for a standard game you could remove type and url.
     await bot.change_presence(game=discord.Game(name='Cogs Example', type=1, url='https://twitch.tv/kraken'))
-    print(f'Successfully logged in and booted...!')
+    print('Successfully logged in and booted...!')
 
 filename = "ifr.cfg"
 if os.path.isfile(filename):
