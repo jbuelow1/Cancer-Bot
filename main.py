@@ -58,7 +58,7 @@ async def on_ready():
     print('logged in')
 
     # Changes our bots Playing Status. type=1(streaming) for a standard game you could remove type and url.
-    await bot.change_presence(game=discord.Game(name='Cogs Example', type=1, url='https://google.com'))
+    await bot.change_presence(game=discord.Game(name='Rewrite Test'))
     print('Successfully logged in and booted...!')
 
 filename = "ifr.cfg"
