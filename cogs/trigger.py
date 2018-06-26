@@ -70,8 +70,8 @@ class tiggerCog:
         '9': '9'
         }
 
-    @self.bot.event
-    async def on_message(message):
+    @self.bot.listen('on_message')
+    async def parseTriggers(message):
         print("starting trigger parser...")
         emBleach = discord.Embed(title=''.join((self.dancefont['k'],self.dancefont['y'],self.dancefont['s'])), color=0x00ff00) #CBP
         emBleach.set_image(url="https://i.imgur.com/Mto46BE.png")
