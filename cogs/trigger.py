@@ -138,5 +138,5 @@ class tiggerCog:
             self.bot.utriggers += 1
             await self.bot.send_message(message.channel, 'Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.') #CBP
 
-    def setup(bot):
-        bot.add_cog(triggerCog(bot))
+def setup(bot):
+    bot.add_cog(triggerCog(bot))
