@@ -1,6 +1,7 @@
 from discord.ext import commands
 import discord
 import re
+import random
 
 class triggerCog:
     def __init__(self, bot):
