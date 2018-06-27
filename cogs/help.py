@@ -14,7 +14,7 @@ class helpCog:
         self.emHelp0.add_field(name='?/stats', value='Shows bot stats', inline=True)
         self.emHelp0.add_field(name='?/suggest <suggestion>', value='DMs my senpai any suggestions you have', inline=True)
 
-    @commmands.command(name='help')
+    @commands.command(name='help')
     async def helpMsg(self, ctx):
         await ctx.trigger_typing()
         await ctx.message.delete()
