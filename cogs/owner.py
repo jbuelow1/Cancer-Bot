@@ -18,7 +18,7 @@ class OwnerCog:
         except Exception as e:
             await ctx.send('**ERROR:** `' + str(e) + '`')
         else:
-            await ctx.send('**`SUCCESS`**')
+            await ctx.send('**SUCCESS:** `Loaded module named \'' + cog + '\'`')
 
     @commands.command(name='unload', hidden=True)
     @commands.is_owner()
@@ -31,7 +31,7 @@ class OwnerCog:
         except Exception as e:
             await ctx.send('**ERROR:** `' + str(e) + '`')
         else:
-            await ctx.send('**`SUCCESS`**')
+            await ctx.send('**SUCCESS:** `Unloaded module named \'' + cog + '\'`')
 
     @commands.command(name='reload', hidden=True)
     @commands.is_owner()
@@ -45,7 +45,8 @@ class OwnerCog:
         except Exception as e:
             await ctx.send('**ERROR:** `' + str(e) + '`')
         else:
-            await ctx.send('**`SUCCESS`**')
+            await ctx.send('**SUCCESS:** `Unloaded module named \'' + cog + '\'`')
+            await ctx.send('**SUCCESS:** `Loaded module named \'' + cog + '\'`')
 
 
 def setup(bot):
