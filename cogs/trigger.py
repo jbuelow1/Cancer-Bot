@@ -1,6 +1,6 @@
 from discord.ext import commands
 
-class tiggerCog:
+class triggerCog:
     def __init__(self, bot):
         self.bot = bot
 
