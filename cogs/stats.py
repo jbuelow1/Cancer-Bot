@@ -23,7 +23,7 @@ class statsCog:
         raise TypeError("target must be a callable, "
                         "not {!r}".format(type(target)))
 
-    async def save_stats(self):
+    def save_stats(self):
         while True:
             try:
                 with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
