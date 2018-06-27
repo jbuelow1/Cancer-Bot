@@ -27,7 +27,7 @@ class statsCog:
     def __init__(self, bot):
         self.bot = bot
         loop = asyncio.get_event_loop()
-        loop.run_in_executor(None, self.save_stats())
+        loop.run_until_complete(self.save_stats())
 
     async def on_command(self, ctx):
         self.bot.scommands += 1
