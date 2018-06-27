@@ -16,7 +16,7 @@ class OwnerCog:
         try:
             self.bot.load_extension(cog)
         except Exception as e:
-            await ctx.send(f'**`ERROR:`** {type(e).__name__} - {e}')
+            await ctx.send('**ERROR:** `' + str(e) + '`')
         else:
             await ctx.send('**`SUCCESS`**')
 
@@ -29,7 +29,7 @@ class OwnerCog:
         try:
             self.bot.unload_extension(cog)
         except Exception as e:
-            await ctx.send(f'**`ERROR:`** {type(e).__name__} - {e}')
+            await ctx.send('**ERROR:** `' + str(e) + '`')
         else:
             await ctx.send('**`SUCCESS`**')
 
@@ -43,7 +43,7 @@ class OwnerCog:
             self.bot.unload_extension(cog)
             self.bot.load_extension(cog)
         except Exception as e:
-            await ctx.send(f'**`ERROR:`** {type(e).__name__} - {e}')
+            await ctx.send('**ERROR:** `' + str(e) + '`')
         else:
             await ctx.send('**`SUCCESS`**')
 
