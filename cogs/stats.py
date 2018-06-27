@@ -13,7 +13,7 @@ class statsCog:
     async def save_stats():
         while True:
             with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
-                bot.commands, bot.triggers = pickle.load(f)
+                self.bot.commands, self.bot.triggers = pickle.load(f)
 
             with open('actions.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
                 pickle.dump([self.bot.ucommands + self.bot.commands, self.bot.utriggers + self.bot.triggers], f)
@@ -25,7 +25,6 @@ class statsCog:
     async def on_command(self, ctx):
         self.bot.scommands += 1
         self.bot.ucommands += 1
-        return True
 
     @commands.command(name='stats')
     async def stats(self, ctx):
@@ -36,6 +35,7 @@ class statsCog:
             for user in server.members:
                 if (not (user.id in users) and (not user.bot)):
                     users.append(user.id)
+
         diff = relativedelta(datetime.datetime.now(), self.bot.startdate)
         uptime = str(diff.days) + ' days, ' + str(diff.hours) + ' hours, ' + str(diff.minutes) + ' minutes and ' + str(diff.seconds) + ' seconds'
         emStats = discord.Embed(description='Statistics on Cancer Bot', color=0x00ff00)
@@ -43,12 +43,12 @@ class statsCog:
         emStats.add_field(name='Servers', value=str(len(self.bot.guilds) - 2), inline=True)
         emStats.add_field(name='Users', value=str(len(users)), inline=True)
         emStats.add_field(name='Uptime', value=uptime, inline=False)
-        emStats.add_field(name='Actions since restart', value=self.bot.rcommands + self.bot.rtriggers, inline=False)
-        emStats.add_field(name='Commands', value=self.bot.rcommands, inline=True)
-        emStats.add_field(name='Triggers', value=self.bot.rtriggers, inline=True)
-        emStats.add_field(name='Actions since v9', value=self.bot.commands + self.bot.triggers, inline=False)
-        emStats.add_field(name='Commands', value=self.bot.commands, inline=True)
-        emStats.add_field(name='Triggers', value=self.bot.triggers, inline=True)
+        emStats.add_field(name='Actions since restart', value=self.bot.scommands + self.bot.striggers, inline=False)
+        emStats.add_field(name='Commands', value=self.bot.scommands, inline=True)
+        emStats.add_field(name='Triggers', value=self.bot.striggers, inline=True)
+        emStats.add_field(name='Actions since v9', value=self.bot.commands + self.bot.triggers + self.bot.ucommands + self.bot.utriggers, inline=False)
+        emStats.add_field(name='Commands', value=self.bot.commands + self.bot.ucommands, inline=True)
+        emStats.add_field(name='Triggers', value=self.bot.triggers + self.bot.utriggers, inline=True)
         emStats.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
         await ctx.send(embed=emStats)
 
