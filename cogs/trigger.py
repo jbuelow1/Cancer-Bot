@@ -92,17 +92,21 @@ class triggerCog:
             return
 
         if (self.wordInString('heck', message.content.lower()) or self.wordInString('hek', message.content.lower()) or self.wordInString('hecking', message.content.lower()) or self.wordInString('heckin', message.content.lower())):
-            print("heck found.")
-
+            self.bot.striggers += 1
+            self.bot.utriggers += 1
             await message.channel.trigger_typing()
             emHeck.set_image(url=random.choice(self.hecks))
             await message.channel.send(embed=emHeck)
 
         if message.mention_everyone:
+            self.bot.striggers += 1
+            self.bot.utriggers += 1
             await message.channel.trigger_typing()
             await message.channel.send(random.choice(self.pingemojis))
 
         if (self.wordInString('die', message.content.lower()) or self.wordInString('kys', message.content.lower()) or self.wordInString('kms', message.content.lower())): #CBP
+            self.bot.striggers += 1
+            self.bot.utriggers += 1
             await message.channel.trigger_typing()
             if self.bot.user.mentioned_in(message):
                 await message.channel.send('no u')
@@ -111,6 +115,8 @@ class triggerCog:
                 await message.channel.send(embed=emBleach)
 
         elif self.bot.user.mentioned_in(message):
+            self.bot.striggers += 1
+            self.bot.utriggers += 1
             await message.channel.trigger_typing()
             if (self.wordInString('die', message.content.lower()) or self.wordInString('kys', message.content.lower()) or self.wordInString('kms', message.content.lower())):
                 await message.channel.send('no u')
@@ -119,14 +125,20 @@ class triggerCog:
                 await message.channel.send('H- Hewwo?!')
 
         if self.wordInString('xd', message.content.lower()):
+            self.bot.striggers += 1
+            self.bot.utriggers += 1
             await message.channel.trigger_typing()
             await message.channel.send('<a:xd:442034831690301461>')
 
         if '🤔' in message.content:
+            self.bot.striggers += 1
+            self.bot.utriggers += 1
             await message.channel.trigger_typing()
             await message.channel.send(embed=emThink)
 
         if 'no u' in message.content.lower():
+            self.bot.striggers += 1
+            self.bot.utriggers += 1
             await message.channel.trigger_typing()
             await message.channel.send('Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.') #CBP
 
