@@ -50,17 +50,16 @@ if __name__ == '__main__':
             print('Failed to load extension {extension}.', file=sys.stderr)
             traceback.print_exc()
 
+bot.scommands = 0
+bot.ucommands = 0
+bot.striggers = 0
+bot.utriggers = 0
+
+bot.startdate = datetime.datetime.now()
 
 @bot.event
 async def on_ready():
     """http://discordpy.readthedocs.io/en/rewrite/api.html#discord.on_ready"""
-
-    bot.scommands = 0
-    bot.ucommands = 0
-    bot.striggers = 0
-    bot.utriggers = 0
-
-    bot.startdate = datetime.datetime.now()
 
     print('logged in')
 
