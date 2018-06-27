@@ -46,8 +46,8 @@ class basicCog:
         emPing.add_field(name='Google (google.com) ping', value=googlePing, inline=False)
         emPing.add_field(name='LAN (192.168.1.1) ping', value=lanPing, inline=False)
         emPing.set_thumbnail(url='https://i.imgur.com/q60RAcT.jpg')
-        emPing.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
-        await bot.send_message(message.channel, embed=emPing)
+        emPing.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
+        await ctx.send(embed=emPing)
 
     @commands.command(name='whois')
     async def whois(self, ctx):
