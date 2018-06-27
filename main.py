@@ -33,7 +33,8 @@ def get_prefix(bot, message):
 initial_extensions = [
 'cogs.help',
 'cogs.owner',
-'cogs.trigger'
+'cogs.trigger',
+'cogs.basic'
 ]
 
 bot = commands.Bot(command_prefix=get_prefix, description='A Rewrite Cog Example')
