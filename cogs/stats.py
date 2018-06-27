@@ -12,13 +12,13 @@ class statsCog:
         while True:
             try:
                 with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
-                    self.bot.commands, self.bot.triggers = pickle.load(f)
+                    self.bot.vcommands, self.bot.vtriggers = pickle.load(f)
             except:
-                self.bot.commands = 0
-                self.bot.triggers = 0
+                self.bot.vcommands = 0
+                self.bot.vtriggers = 0
 
             with open('actions.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
-                pickle.dump([self.bot.ucommands + self.bot.commands, self.bot.utriggers + self.bot.triggers], f)
+                pickle.dump([self.bot.ucommands + self.bot.vcommands, self.bot.utriggers + self.bot.vtriggers], f)
 
             self.bot.ucommands = 0
             self.bot.utriggers = 0
@@ -52,9 +52,9 @@ class statsCog:
         emStats.add_field(name='Actions since restart', value=self.bot.scommands + self.bot.striggers, inline=False)
         emStats.add_field(name='Commands', value=self.bot.scommands, inline=True)
         emStats.add_field(name='Triggers', value=self.bot.striggers, inline=True)
-        emStats.add_field(name='Actions since v9', value=self.bot.commands + self.bot.triggers + self.bot.ucommands + self.bot.utriggers, inline=False)
-        emStats.add_field(name='Commands', value=self.bot.commands + self.bot.ucommands, inline=True)
-        emStats.add_field(name='Triggers', value=self.bot.triggers + self.bot.utriggers, inline=True)
+        emStats.add_field(name='Actions since v9', value=self.bot.vcommands + self.bot.vtriggers + self.bot.ucommands + self.bot.utriggers, inline=False)
+        emStats.add_field(name='Commands', value=self.bot.vcommands + self.bot.ucommands, inline=True)
+        emStats.add_field(name='Triggers', value=self.bot.vtriggers + self.bot.utriggers, inline=True)
         emStats.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
         await ctx.send(embed=emStats)
 
