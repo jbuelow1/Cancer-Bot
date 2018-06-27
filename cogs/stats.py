@@ -5,13 +5,10 @@ import asyncio
 import pickle
 import datetime
 from dateutil.relativedelta import relativedelta
+import time
 
 class statsCog:
-    def __init__(self, bot):
-        self.bot = bot
-        await self.save_stats()
-
-    async def save_stats():
+    def save_stats(self):
         while True:
             with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
                 self.bot.commands, self.bot.triggers = pickle.load(f)
@@ -21,7 +18,11 @@ class statsCog:
 
             self.bot.ucommands = 0
             self.bot.utriggers = 0
-            await asyncio.sleep(60)
+            time.sleep(60)
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.save_stats()
 
     async def on_command(self, ctx):
         self.bot.scommands += 1
