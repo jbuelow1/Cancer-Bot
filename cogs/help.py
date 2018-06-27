@@ -16,6 +16,7 @@ class helpCog:
 
     @commands.command(name='help')
     async def helpMsg(self, ctx):
+        """displays this help text"""
         await ctx.trigger_typing()
         await ctx.message.delete()
         self.emHelp0.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
