@@ -10,14 +10,14 @@ class basicCog:
     def __init__(self, bot):
         self.bot = bot
 
-    def get_simple_cmd_output(cmd, stderr=STDOUT):
+    def get_simple_cmd_output(self, cmd, stderr=STDOUT):
         """
         Execute a simple external command and get its output.
         """
         args = shlex.split(cmd)
         return Popen(args, stdout=PIPE, stderr=stderr).communicate()[0]
 
-    def get_ping_time(host):
+    def get_ping_time(self, host):
         host = host.split(':')[0]
         cmd = "fping {host} -C 1 -q".format(host=host)
         # result = str(get_simple_cmd_output(cmd)).replace('\\','').split(':')[-1].split() if x != '-']
