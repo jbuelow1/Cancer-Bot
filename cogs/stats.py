@@ -8,7 +8,7 @@ from dateutil.relativedelta import relativedelta
 import time
 
 class statsCog:
-    def save_stats(self):
+    async def save_stats(self):
         while True:
             try:
                 with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
@@ -26,7 +26,8 @@ class statsCog:
 
     def __init__(self, bot):
         self.bot = bot
-        self.save_stats()
+        loop = asyncio.get_event_loop()
+        loop.run_in_executor(None, self.save_stats())
 
     async def on_command(self, ctx):
         self.bot.scommands += 1
