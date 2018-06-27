@@ -3,6 +3,7 @@ import discord
 
 import math
 import shlex
+from subprocess import Popen, PIPE, STDOUT
 
 class basicCog:
     def __init__(self, bot):
@@ -82,5 +83,3 @@ class basicCog:
             emWhois.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
             emWhois.set_image(url=ctx.message.author.avatar_url)
             await ctx.send(embed=emWhois)
-
-    
