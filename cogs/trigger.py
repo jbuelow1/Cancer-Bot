@@ -97,39 +97,39 @@ class triggerCog:
 
             await message.channel.trigger_typing()
             emHeck.set_image(url=random.choice(self.hecks))
-            await message.channnel.send(embed=emHeck)
+            await message.channel.send(embed=emHeck)
 
         if message.mention_everyone:
             await message.channel.trigger_typing()
-            await message.channnel.send(random.choice(self.pingemojis))
+            await message.channel.send(random.choice(self.pingemojis))
 
         if (self.wordInString('die', message.content.lower()) or self.wordInString('kys', message.content.lower()) or self.wordInString('kms', message.content.lower())): #CBP
             await message.channel.trigger_typing()
             if self.bot.user.mentioned_in(message):
-                await message.channnel.send('no u')
-                await message.channnel.send('Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
+                await message.channel.send('no u')
+                await message.channel.send('Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
             else:
-                await message.channnel.send(embed=emBleach)
+                await message.channel.send(embed=emBleach)
 
         elif self.bot.user.mentioned_in(message):
             await message.channel.trigger_typing()
             if (self.wordInString('die', message.content.lower()) or self.wordInString('kys', message.content.lower()) or self.wordInString('kms', message.content.lower())):
-                await message.channnel.send('no u')
-                await message.channnel.send('Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
+                await message.channel.send('no u')
+                await message.channel.send('Ladies and gentlmen, I appear to have won this argument. You can stop fighting like little cucklets now.') #CBP
             else:
-                await message.channnel.send('H- Hewwo?!')
+                await message.channel.send('H- Hewwo?!')
 
         if self.wordInString('xd', message.content.lower()):
             await message.channel.trigger_typing()
-            await message.channnel.send('<a:xd:442034831690301461>')
+            await message.channel.send('<a:xd:442034831690301461>')
 
         if '🤔' in message.content:
             await message.channel.trigger_typing()
-            await message.channnel.send(embed=emThink)
+            await message.channel.send(embed=emThink)
 
         if 'no u' in message.content.lower():
             await message.channel.trigger_typing()
-            await message.channnel.send('Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.') #CBP
+            await message.channel.send('Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.') #CBP
 
 def setup(bot):
     bot.add_cog(triggerCog(bot))
