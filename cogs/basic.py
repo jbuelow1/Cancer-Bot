@@ -82,3 +82,5 @@ class basicCog:
             emWhois.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
             emWhois.set_image(url=ctx.message.author.avatar_url)
             await ctx.send(embed=emWhois)
+
+    
