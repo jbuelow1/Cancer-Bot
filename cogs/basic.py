@@ -31,7 +31,7 @@ class basicCog:
             return 999999
 
     @commands.command(name='ping')
-    async def ping(self, ctx, *, host: str):
+    async def ping(self, ctx):
         t1 = time.perf_counter()
         await ctx.trigger_typing()
         t2 = time.perf_counter()
