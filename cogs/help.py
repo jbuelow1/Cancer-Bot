@@ -13,6 +13,8 @@ class helpCog:
         self.emHelp0.add_field(name='?/ping', value='Tests the bot\'s ping time', inline=True)
         self.emHelp0.add_field(name='?/stats', value='Shows bot stats', inline=True)
         self.emHelp0.add_field(name='?/suggest <suggestion>', value='DMs my senpai any suggestions you have', inline=True)
+        self.emHelp0.add_field(name='?/jpeg {image}', value='Compresses the life out of an image', inline=True)
+        self.emHelp0.add_field(name='?/destroy {image}', value='utterly destroys an image', inline=True)
 
     @commands.command(name='help')
     async def helpMsg(self, ctx):
