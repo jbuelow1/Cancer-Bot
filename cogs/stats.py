@@ -8,7 +8,7 @@ from dateutil.relativedelta import relativedelta
 import time
 
 class statsCog:
-    def call_in_background(target, *, loop=None, executor=None):
+    def call_in_background(self, target, *, loop=None, executor=None):
         """Schedules and starts target callable as a background task
 
         If not given, *loop* defaults to the current thread's event loop
