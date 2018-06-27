@@ -10,8 +10,12 @@ import time
 class statsCog:
     def save_stats(self):
         while True:
-            with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
-                self.bot.commands, self.bot.triggers = pickle.load(f)
+            try:
+                with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
+                    self.bot.commands, self.bot.triggers = pickle.load(f)
+            except:
+                self.bot.commands = 0
+                self.bot.triggers = 0
 
             with open('actions.pkl', 'wb') as f:  # Python 3: open(..., 'wb')
                 pickle.dump([self.bot.ucommands + self.bot.commands, self.bot.utriggers + self.bot.triggers], f)
