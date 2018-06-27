@@ -4,6 +4,7 @@ import discord
 import asyncio
 import pickle
 import datetime
+from dateutil.relativedelta import relativedelta
 
 class statsCog:
     def __init__(self, bot):
