@@ -81,7 +81,10 @@ class triggerCog:
         emThink = discord.Embed(title=':thinking::thinking::thinking::thinking::thinking:', color=0x00ff00)
         emThink.set_image(url="https://i.imgur.com/wHMWq1B.gif")
 
-        if message.server.id == '264445053596991498':
+        if message.guild.id == '264445053596991498':
+            return
+
+        if message.author.bot:
             return
 
         if (self.wordInString('heck', message.content.lower()) or self.wordInString('hek', message.content.lower()) or self.wordInString('hecking', message.content.lower()) or self.wordInString('heckin', message.content.lower())):
