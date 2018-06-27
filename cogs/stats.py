@@ -31,7 +31,7 @@ class statsCog:
         await ctx.trigger_typing()
         await ctx.message.delete()
         users = []
-        for server in self.bot.servers:
+        for server in self.bot.guilds:
             for user in server.members:
                 if (not (user.id in users) and (not user.bot)):
                     users.append(user.id)
