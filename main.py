@@ -35,7 +35,8 @@ initial_extensions = [
 'cogs.help',
 'cogs.owner',
 'cogs.trigger',
-'cogs.basic'
+'cogs.basic',
+'cogs.stats'
 ]
 
 bot = commands.Bot(command_prefix=get_prefix, description='A Rewrite Cog Example')
