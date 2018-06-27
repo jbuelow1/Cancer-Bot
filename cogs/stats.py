@@ -9,6 +9,7 @@ from dateutil.relativedelta import relativedelta
 class statsCog:
     def __init__(self, bot):
         self.bot = bot
+        await self.save_stats()
 
     async def save_stats():
         while True:

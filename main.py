@@ -41,6 +41,13 @@ initial_extensions = [
 
 bot = commands.Bot(command_prefix=get_prefix, description='A Rewrite Cog Example')
 
+bot.scommands = 0
+bot.ucommands = 0
+bot.striggers = 0
+bot.utriggers = 0
+
+bot.startdate = datetime.datetime.now()
+
 # Here we load our extensions(cogs) listed above in [initial_extensions].
 if __name__ == '__main__':
     for extension in initial_extensions:
@@ -49,13 +56,6 @@ if __name__ == '__main__':
         except Exception as e:
             print('Failed to load extension {extension}.', file=sys.stderr)
             traceback.print_exc()
-
-bot.scommands = 0
-bot.ucommands = 0
-bot.striggers = 0
-bot.utriggers = 0
-
-bot.startdate = datetime.datetime.now()
 
 @bot.event
 async def on_ready():
