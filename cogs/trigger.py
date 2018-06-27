@@ -70,7 +70,7 @@ class tiggerCog:
         '9': '9'
         }
 
-    @commands.bot.listen('on_message')
+    @self.bot.listen('on_message')
     async def parseTriggers(message):
         print("starting trigger parser...")
         emBleach = discord.Embed(title=''.join((self.dancefont['k'],self.dancefont['y'],self.dancefont['s'])), color=0x00ff00) #CBP
