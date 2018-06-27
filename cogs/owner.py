@@ -45,8 +45,7 @@ class OwnerCog:
         except Exception as e:
             await ctx.send('**ERROR:** `' + str(e) + '`')
         else:
-            await ctx.send('**SUCCESS:** `Unloaded module named \'' + cog + '\'`')
-            await ctx.send('**SUCCESS:** `Loaded module named \'' + cog + '\'`')
+            await ctx.send('**SUCCESS:** `Unloaded module named \'' + cog + '\'`\n**SUCCESS:** `Loaded module named \'' + cog + '\'`')
 
 
 def setup(bot):
