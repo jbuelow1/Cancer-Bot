@@ -4,6 +4,7 @@ import discord
 import math
 import shlex
 from subprocess import Popen, PIPE, STDOUT
+import time
 
 class basicCog:
     def __init__(self, bot):
