@@ -8,6 +8,21 @@ from dateutil.relativedelta import relativedelta
 import time
 
 class statsCog:
+    def call_in_background(target, *, loop=None, executor=None):
+        """Schedules and starts target callable as a background task
+
+        If not given, *loop* defaults to the current thread's event loop
+        If not given, *executor* defaults to the loop's default executor
+
+        Returns the scheduled task.
+        """
+        if loop is None:
+            loop = asyncio.get_event_loop()
+        if callable(target):
+            return loop.run_in_executor(executor, target)
+        raise TypeError("target must be a callable, "
+                        "not {!r}".format(type(target)))
+
     async def save_stats(self):
         while True:
             try:
@@ -26,8 +41,7 @@ class statsCog:
 
     def __init__(self, bot):
         self.bot = bot
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(self.save_stats())
+        self.call_in_background(self.save_stats())
 
     async def on_command(self, ctx):
         self.bot.scommands += 1
