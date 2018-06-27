@@ -3,6 +3,7 @@ from discord.ext import commands
 
 import os, sys, traceback
 from six.moves import configparser
+import datetime
 
 """This is a multi file example showcasing many features of the command extension and the use of cogs.
 These are examples only and are not intended to be used as a fully functioning bot. Rather they should give you a basic
@@ -53,10 +54,17 @@ if __name__ == '__main__':
 async def on_ready():
     """http://discordpy.readthedocs.io/en/rewrite/api.html#discord.on_ready"""
 
+    bot.scommands = 0
+    bot.ucommands = 0
+    bot.striggers = 0
+    bot.utriggers = 0
+
+    bot.startdate = datetime.datetime.now()
+
     print('logged in')
 
     # Changes our bots Playing Status. type=1(streaming) for a standard game you could remove type and url.
-    await bot.change_presence(game=discord.Game(name='Rewrite Test'))
+    await bot.change_presence(game=discord.Game(name='Status Service 404'))
     print('Successfully logged in and booted...!')
 
 filename = "ifr.cfg"
