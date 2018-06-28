@@ -5,7 +5,7 @@ import random
 import asyncio
 
 class statusCog:
-    async def status_change():
+    async def status_change(self):
         stati = [
         'with little children', #CBP
         'with ur mum XD', #CBP
@@ -50,7 +50,7 @@ class statusCog:
             await self.bot.change_presence(game=discord.Game(name=random.choice(helpStati) + ' in ' + str(len(bot.servers) - 2) + ' servers'))
             await asyncio.sleep(10)
 
-    def __init__(bot):
+    def __init__(self, bot):
         self.bot = bot
         self.bot.loop.create_task(status_change())
 
