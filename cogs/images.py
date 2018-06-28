@@ -21,21 +21,26 @@ class imagesCog:
                 attachment.filename.lower().endswith('jpeg'),
                 attachment.filename.lower().endswith('bmp')
                 ]):
+                    print('found image ' + message.attachment.filename)
                     image_request_result = requests.get(attachment.url)
                     image = Image.open(BytesIO(image_request_result.content))
                     images.append(image)
+                    print(message.attachment.filename + ' saved to list.')
             return images
 
     def addjpeg(self, image, quality=1):
+        print('jpegging...')
         image = image.convert('RGB')
         output = BytesIO()
         image.save(output, format="JPEG", quality=quality)
         done = output.getvalue()
         output.close()
+        print('jpeg complete')
         return done
 
     @commands.command(name='jpeg')
     async def jpeg(self, ctx):
+        print('getting images...')
         images = self.getImages(ctx.message)
         if len(images) > 0:
             if len(images) < 10:
