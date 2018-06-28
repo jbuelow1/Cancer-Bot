@@ -26,7 +26,7 @@ class imagesCog:
                         images.append(image)
                 return images
 
-        def jpeg(image, quality=1):
+        def addjpeg(image, quality=1):
             image = image.convert('RGB')
             output = StringIO()
             image.save(output, format="JPEG", quality=quality)
@@ -41,7 +41,7 @@ class imagesCog:
                 if len(images) < 10:
                     outputImages = []
                     for image in images:
-                        image = self.jpeg(image)
+                        image = self.addjpeg(image)
                         outputImages.append(discord.File(BytesIO(image)))
                     ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
                 else:
