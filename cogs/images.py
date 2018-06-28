@@ -50,7 +50,10 @@ class imagesCog:
                     outputImages.append(discord.File(BytesIO(image)))
                     print('created discord file object')
                 print('sending file(s)...')
-                ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
+                messageout = ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
+                print('files sent!')
+                print(outputImages)
+                print(messageout)
             else:
                 ctx.send(':warning: Too many files! Please supply 1-10 per message. :warning:')
         else:
