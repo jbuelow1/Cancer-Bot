@@ -48,16 +48,11 @@ class imagesCog:
                 for image in images:
                     image = self.addjpeg(image)
                     outputImages.append(discord.File(BytesIO(image)))
-                    print('created discord file object')
-                print('sending file(s)...')
-                messageout = ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
-                print('files sent!')
-                print(outputImages)
-                print(messageout)
+                await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
             else:
-                ctx.send(':warning: Too many files! Please supply 1-10 per message. :warning:')
+                await ctx.send(':warning: Too many files! Please supply 1-10 per message. :warning:')
         else:
-            ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
+            await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
     @commands.command(name='destroy')
     async def destroy(self, ctx):
