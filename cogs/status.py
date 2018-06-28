@@ -50,9 +50,11 @@ class statusCog:
         while True:
             await self.bot.change_presence(game=discord.Game(name=random.choice(stati)))
             await asyncio.sleep(20)
-            await self.bot.change_presence(game=discord.Game(name=random.choice(helpStati) + ' in ' + str(len(self.bot.servers) - 2) + ' servers'))
+            #await self.bot.change_presence(game=discord.Game(name=random.choice(helpStati) + ' in ' + str(len(bot.servers) - 2) + ' servers'))
             await asyncio.sleep(10)
+
+    self.bot.loop.create_task(self.status_change())
+
 
 def setup(bot):
     bot.add_cog(statusCog(bot))
-    bot.loop.create_task(statusCog.status_change())
