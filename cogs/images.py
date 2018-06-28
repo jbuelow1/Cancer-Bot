@@ -21,7 +21,7 @@ class imagesCog:
                 attachment.filename.lower().endswith('jpeg'),
                 attachment.filename.lower().endswith('bmp')
                 ]):
-                    print('found image ' + message.attachment.filename)
+                    print('found image ' + attachment.filename)
                     image_request_result = requests.get(attachment.url)
                     image = Image.open(BytesIO(image_request_result.content))
                     images.append(image)
