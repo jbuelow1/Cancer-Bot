@@ -2,6 +2,7 @@ from discord.ext import commands
 import discord
 
 from PIL import Image
+from PIL import ImageFilter
 from io import StringIO, BytesIO
 import requests
 import asyncio
@@ -37,6 +38,14 @@ class imagesCog:
         output.close()
         return done
 
+    def recolorimg(self, image):
+        image = image.filter(ImageFilter.UnsharpMask(80000,80000,0))
+        output = BytesIO()
+        image.save(output, format="PNG")
+        done = output.getvalue()
+        output.close()
+        return done
+
     @commands.command(name='jpeg')
     async def jpeg(self, ctx):
         async with ctx.typing():
@@ -58,7 +67,24 @@ class imagesCog:
 
     @commands.command(name='destroy')
     async def destroy(self, ctx):
-        pass
+        async with ctx.typing():
+            images = self.getImages(ctx.message)
+            if len(images) > 0:
+                if len(images) < 10:
+                    outputImages = []
+                    filenum = 0
+                    for image in images:
+                        image = self.recolorimg(image)
+                        image = Image.open(BytesIO(image))
+                        image = self.addjpeg(image)
+                        outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.jpeg'))
+                        filenum += 1
+                        print(outputImages)
+                    await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
+                else:
+                    await ctx.send(':warning: Too many files! Please supply 1-10 per message. :warning:')
+            else:
+                await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
 def setup(bot):
     bot.add_cog(imagesCog(bot))
