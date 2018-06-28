@@ -39,7 +39,7 @@ class imagesCog:
         done = Image.open(BytesIO(done))
         return done
 
-    def recolorimg(self, image, ammount=80000):
+    def unsharpenimg(self, image, ammount=80000):
         image = image.filter(ImageFilter.UnsharpMask(ammount,ammount,0))
         output = BytesIO()
         image.save(output, format="PNG")
@@ -73,8 +73,8 @@ class imagesCog:
             else:
                 await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
-    @commands.command(name='recolor')
-    async def recolor(self, ctx):
+    @commands.command(name='unsharpen')
+    async def unsharpen(self, ctx):
         async with ctx.typing():
             images = self.getImages(ctx.message)
             if len(images) > 0:
@@ -82,7 +82,7 @@ class imagesCog:
                     outputImages = []
                     filenum = 0
                     for image in images:
-                        image = self.recolorimg(image, 20000)
+                        image = self.unsharpenimg(image, 20000)
 
                         output = BytesIO()
                         image.save(output, format="PNG")
@@ -108,7 +108,7 @@ class imagesCog:
                     outputImages = []
                     filenum = 0
                     for image in images:
-                        image = self.recolorimg(image)
+                        image = self.unsharpenimg(image)
                         image = self.addjpeg(image)
 
                         output = BytesIO()
