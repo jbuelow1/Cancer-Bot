@@ -22,13 +22,13 @@ class imagesCog:
                 attachment.filename.lower().endswith('bmp')
                 ]):
                     image_request_result = requests.get(attachment.url)
-                    image = Image.open(StringIO(image_request_result.content))
+                    image = Image.open(BytesIO(image_request_result.content))
                     images.append(image)
             return images
 
     def addjpeg(self, image, quality=1):
         image = image.convert('RGB')
-        output = StringIO()
+        output = BytesIO()
         image.save(output, format="JPEG", quality=quality)
         done = output.getvalue()
         output.close()
