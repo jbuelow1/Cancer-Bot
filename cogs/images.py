@@ -9,7 +9,7 @@ class imagesCog:
     def __init__(self, bot):
         self.bot = bot
 
-    def getImages(message):
+    def getImages(self, message):
         if message.attachments == []:
             return []
         else:
@@ -26,7 +26,7 @@ class imagesCog:
                     images.append(image)
             return images
 
-    def addjpeg(image, quality=1):
+    def addjpeg(self, image, quality=1):
         image = image.convert('RGB')
         output = StringIO()
         image.save(output, format="JPEG", quality=quality)
