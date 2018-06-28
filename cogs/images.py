@@ -47,11 +47,11 @@ class imagesCog:
         done = Image.open(BytesIO(done))
         return done
 
-    def unfortunateProcess(self, image):
-        image = image.resize((350, 300))
-        unfortunate = Image.open('imgsrc/unfortunate.png')
-        unfortunate.paste(image, (625, 400), mask=image)
-        return unfortunate
+    def picInPic(self, image, background, size, location):
+        image = image.resize(size)
+        background = Image.open('imgsrc/' + background)
+        background.paste(image, location, mask=image)
+        return background
 
 
     @commands.command(name='jpeg')
@@ -140,7 +140,7 @@ class imagesCog:
                     outputImages = []
                     filenum = 0
                     for image in images:
-                        image = self.unfortunateProcess(image)
+                        image = self.picInPic(image, 'unfortunate.png', (350, 300), (625, 400))
 
                         output = BytesIO()
                         image.save(output, format="PNG")
