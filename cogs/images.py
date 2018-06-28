@@ -39,7 +39,7 @@ class imagesCog:
 
     @commands.command(name='jpeg')
     async def jpeg(self, ctx):
-        await with ctx.typing():
+        async with ctx.typing():
             images = self.getImages(ctx.message)
             if len(images) > 0:
                 if len(images) < 10:
