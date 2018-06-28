@@ -29,33 +29,31 @@ class imagesCog:
             return images
 
     def addjpeg(self, image, quality=1):
-        print('jpegging...')
         image = image.convert('RGB')
         output = BytesIO()
         image.save(output, format="JPEG", quality=quality)
         done = output.getvalue()
         output.close()
-        print('jpeg complete')
         return done
 
     @commands.command(name='jpeg')
     async def jpeg(self, ctx):
-        print('getting images...')
-        images = self.getImages(ctx.message)
-        if len(images) > 0:
-            if len(images) < 10:
-                outputImages = []
-                filenum = 0
-                for image in images:
-                    image = self.addjpeg(image)
-                    outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.jpeg'))
-                    filenum += 1
-                    print(outputImages)
-                await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
+        await with ctx.typing():
+            images = self.getImages(ctx.message)
+            if len(images) > 0:
+                if len(images) < 10:
+                    outputImages = []
+                    filenum = 0
+                    for image in images:
+                        image = self.addjpeg(image)
+                        outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.jpeg'))
+                        filenum += 1
+                        print(outputImages)
+                    await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
+                else:
+                    await ctx.send(':warning: Too many files! Please supply 1-10 per message. :warning:')
             else:
-                await ctx.send(':warning: Too many files! Please supply 1-10 per message. :warning:')
-        else:
-            await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
+                await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
     @commands.command(name='destroy')
     async def destroy(self, ctx):
