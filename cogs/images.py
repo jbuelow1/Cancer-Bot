@@ -12,25 +12,22 @@ class imagesCog:
         self.bot = bot
 
     def getImages(self, message):
-        if message.attachments == []:
-            return []
-        else:
-            images = []
-            for attachment in message.attachments:
-                if any([
-                attachment.filename.lower().endswith('png'),
-                attachment.filename.lower().endswith('jpg'),
-                attachment.filename.lower().endswith('jpeg'),
-                attachment.filename.lower().endswith('bmp')
-                ]):
-                    image_request_result = requests.get(attachment.url)
-                    image = Image.open(BytesIO(image_request_result.content))
-                    images.append(image)
-            for user in message.mentions:
-                image_request_result = requests.get(user.avatar_url)
+        images = []
+        for attachment in message.attachments:
+            if any([
+            attachment.filename.lower().endswith('png'),
+            attachment.filename.lower().endswith('jpg'),
+            attachment.filename.lower().endswith('jpeg'),
+            attachment.filename.lower().endswith('bmp')
+            ]):
+                image_request_result = requests.get(attachment.url)
                 image = Image.open(BytesIO(image_request_result.content))
                 images.append(image)
-            return images
+        for user in message.mentions:
+            image_request_result = requests.get(user.avatar_url)
+            image = Image.open(BytesIO(image_request_result.content))
+            images.append(image)
+        return images
 
     def addjpeg(self, image, quality=1):
         image = image.convert('RGB')
