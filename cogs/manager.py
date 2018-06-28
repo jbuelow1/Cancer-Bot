@@ -1,7 +1,7 @@
 from discord.ext import commands
 
 
-class OwnerCog:
+class managerCog:
 
     def __init__(self, bot):
         self.bot = bot
@@ -49,4 +49,4 @@ class OwnerCog:
 
 
 def setup(bot):
-    bot.add_cog(OwnerCog(bot))
+    bot.add_cog(managerCog(bot))
