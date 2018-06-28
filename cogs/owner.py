@@ -2,7 +2,7 @@ from discord.ext import commands
 import discord
 
 class ownerCog:
-    def __init__(bot):
+    def __init__(self, bot):
         self.bot = bot
 
     async def on_server_join(self, server):
