@@ -4,6 +4,7 @@ import discord
 from PIL import Image
 from io import StringIO, BytesIO
 import requests
+import asyncio
 
 class imagesCog:
     def __init__(self, bot):
@@ -38,7 +39,7 @@ class imagesCog:
 
     @commands.command(name='jpeg')
     async def jpeg(self, ctx):
-        await with ctx.trigger_typing():
+        await with ctx.typing():
             images = self.getImages(ctx.message)
             if len(images) > 0:
                 if len(images) < 10:
