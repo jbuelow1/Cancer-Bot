@@ -48,6 +48,7 @@ class imagesCog:
         return done
 
     def unfortunateProcess(self, image):
+        image = image.convert('RGB')
         image = image.resize((350, 300))
         unfortunate = Image.open('imgsrc/unfortunate.png')
         unfortunate.paste(image, (625, 400))
