@@ -25,7 +25,7 @@ class imagesCog:
                     image_request_result = requests.get(attachment.url)
                     image = Image.open(BytesIO(image_request_result.content))
                     images.append(image)
-                    print(message.attachment.filename + ' saved to list.')
+                    print(attachment.filename + ' saved to list.')
             return images
 
     def addjpeg(self, image, quality=1):
@@ -48,6 +48,8 @@ class imagesCog:
                 for image in images:
                     image = self.addjpeg(image)
                     outputImages.append(discord.File(BytesIO(image)))
+                    print('created discord file object')
+                print('sending file(s)...')
                 ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
             else:
                 ctx.send(':warning: Too many files! Please supply 1-10 per message. :warning:')
