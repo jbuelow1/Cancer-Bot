@@ -14,3 +14,6 @@ class ownerCog:
         owner = await bot.get_user_info('273940917596061698')
         await owner.send('HEWWO SENPAI I HAS FEEDBACK FROM `' + str(ctx.message.author) + '`:```' + arg.replace('```', '<REMOVED>') + '```')
         await ctx.send('Thanks for your feedback! Senpai has been notified!')
+
+def setup(bot):
+    bot.add_cog(ownerCog(bot))
