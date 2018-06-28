@@ -39,8 +39,8 @@ class imagesCog:
         done = Image.open(BytesIO(done))
         return done
 
-    def recolorimg(self, image):
-        image = image.filter(ImageFilter.UnsharpMask(80000,80000,0))
+    def recolorimg(self, image, ammount=80000):
+        image = image.filter(ImageFilter.UnsharpMask(ammount,ammount,0))
         output = BytesIO()
         image.save(output, format="PNG")
         done = output.getvalue()
@@ -82,7 +82,7 @@ class imagesCog:
                     outputImages = []
                     filenum = 0
                     for image in images:
-                        image = self.recolorimg(image)
+                        image = self.recolorimg(image, 20000)
 
                         output = BytesIO()
                         image.save(output, format="PNG")
