@@ -45,9 +45,11 @@ class imagesCog:
         if len(images) > 0:
             if len(images) < 10:
                 outputImages = []
+                filenum = 0
                 for image in images:
                     image = self.addjpeg(image)
-                    outputImages.append(discord.File(BytesIO(image), filename='jpeg.jpeg'))
+                    outputImages.append(discord.File(BytesIO(image), filename='jpeg' + filenum + '.jpeg'))
+                    filenum += 1
                     print(outputImages)
                 await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
             else:
