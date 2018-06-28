@@ -2,8 +2,7 @@ from discord.ext import commands
 import discord
 
 from PIL import Image
-from StringIO import StringIO
-from BytesIO import BytesIO
+from io import StringIO, BytesIO
 import requests
 
 class imagesCog:
