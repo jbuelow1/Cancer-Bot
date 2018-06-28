@@ -38,7 +38,7 @@ class imagesCog:
 
     @commands.command(name='jpeg')
     async def jpeg(self, ctx):
-        await with ctx.message.channel.typing():
+        await with ctx.trigger_typing():
             images = self.getImages(ctx.message)
             if len(images) > 0:
                 if len(images) < 10:
