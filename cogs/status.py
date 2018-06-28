@@ -8,7 +8,7 @@ class statusCog:
     def __init__(self, bot):
         self.bot = bot
 
-    async def status_change(self):
+    async def status_change():
         stati = [
         'with little children', #CBP
         'with ur mum XD', #CBP
