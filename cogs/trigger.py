@@ -140,7 +140,7 @@ class triggerCog:
             self.bot.striggers += 1
             self.bot.utriggers += 1
             await message.channel.trigger_typing()
-            await message.channel.send('Ladies and gentlmen, <@' + message.author.id + '> appears to have won this argument. You can stop fighting like little cucklets now.') #CBP
+            await message.channel.send('Ladies and gentlmen, ' + message.author.mention + ' appears to have won this argument. You can stop fighting like little cucklets now.') #CBP
 
 def setup(bot):
     bot.add_cog(triggerCog(bot))
