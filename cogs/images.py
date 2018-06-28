@@ -47,7 +47,7 @@ class imagesCog:
                 outputImages = []
                 for image in images:
                     image = self.addjpeg(image)
-                    outputImages.append(discord.File(BytesIO(image)))
+                    outputImages.append(discord.File(BytesIO(image), filename='jpeg.jpeg'))
                 await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
             else:
                 await ctx.send(':warning: Too many files! Please supply 1-10 per message. :warning:')
