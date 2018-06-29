@@ -224,10 +224,10 @@ class imagesCog:
     async def facts(self, ctx, *, arg):
         async with ctx.typing():
             textarea = Image.new('RGBA', (300, 200), (255,255,255,0))
-            font = ImageFont.truetype('fonts/facts.ttf', 40)
+            font = ImageFont.truetype('fonts/facts.ttf', 20)
             d = ImageDraw.Draw(textarea)
 
-            d.multiline_text((0,0), arg, fill=(255,255,255,255), font=font, spacing=10, align='center')
+            d.multiline_text((0,0), arg, fill=(0,0,0,255), font=font, spacing=10, align='center')
 
             output = BytesIO()
             textarea.save(output, format="PNG")
