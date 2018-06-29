@@ -240,7 +240,7 @@ class imagesCog:
                 y_text += height
             textarea = textarea.rotate(-15)
             image = self.picInPic(textarea, background, (344, 276), (10, 490))
-            image = textarea
+            #image = textarea
             output = BytesIO()
             image.save(output, format="PNG")
             image = output.getvalue()
