@@ -230,14 +230,14 @@ class imagesCog:
             d = ImageDraw.Draw(textarea)
             lines = textwrap.wrap(text, width=40)
             y_text = 38
-            w = 52
+            w = 300
             for line in lines:
                 width, height = font.getsize(line)
                 d.text(((w - width) / 2, y_text), line, font=font, fill=(0,0,0,255))
                 y_text += height
             #d.multiline_text((52,38), arg, fill=(0,0,0,255), font=font, spacing=2, align='left')
             textarea = textarea.rotate(-18)
-            image = self.picInPic(textarea, background, (344, 276), (-10, 490))
+            image = self.picInPic(textarea, background, (344, 276), (10, 490))
             output = BytesIO()
             image.save(output, format="PNG")
             image = output.getvalue()
