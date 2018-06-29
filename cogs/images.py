@@ -225,12 +225,12 @@ class imagesCog:
     async def facts(self, ctx, *, text):
         async with ctx.typing():
             background = Image.open('imgsrc/facts.png')
-            textarea = Image.new('RGBA', (344, 276), (0,0,0,100))
+            textarea = Image.new('RGBA', (344, 276), (0,0,0,20))
             font = ImageFont.truetype('fonts/facts.ttf', 25)
             d = ImageDraw.Draw(textarea)
             lines = textwrap.wrap(text, width=40)
-            y_text = 38
-            w = 300
+            y_text = 0
+            w = 0
             for line in lines:
                 width, height = font.getsize(line)
                 d.text(((w - width) / 2, y_text), line, font=font, fill=(0,0,0,255))
