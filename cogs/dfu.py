@@ -2,7 +2,7 @@ from discord.ext import commands
 
 import py_compile
 
-class managerCog:
+class dfuCog:
 
     def __init__(self, bot):
         self.bot = bot
@@ -53,4 +53,4 @@ class managerCog:
 
 
 def setup(bot):
-    bot.add_cog(managerCog(bot))
+    bot.add_cog(dfuCog(bot))
