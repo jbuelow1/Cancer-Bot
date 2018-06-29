@@ -223,14 +223,15 @@ class imagesCog:
     @commands.cooldown(1, 10, commands.BucketType.channel)
     async def facts(self, ctx, *, arg):
         async with ctx.typing():
+            background = Image.open('imgsrc/fact.png')
             textarea = Image.new('RGBA', (300, 200), (0,0,0,0))
             font = ImageFont.truetype('fonts/facts.ttf', 25)
             d = ImageDraw.Draw(textarea)
-
             d.multiline_text((0,0), arg, fill=(0,0,0,255), font=font, spacing=10, align='center')
-
+            textarea.rotate(16)
+            image = self.picInPic(textarea, background, (50, 500), (300, 200))
             output = BytesIO()
-            textarea.save(output, format="PNG")
+            image.save(output, format="PNG")
             image = output.getvalue()
             output.close()
             await ctx.send(':white_check_mark: Done! :white_check_mark:', file=discord.File(BytesIO(image), filename='facts.png'))
