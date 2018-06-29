@@ -229,7 +229,7 @@ class imagesCog:
             d = ImageDraw.Draw(textarea)
             d.multiline_text((0,0), arg, fill=(0,0,0,255), font=font, spacing=10, align='center')
             textarea.rotate(16)
-            image = self.picInPic(textarea, background, (50, 500), (300, 200))
+            image = self.picInPic(textarea, background, (0, 0), (344, 276))
             output = BytesIO()
             image.save(output, format="PNG")
             image = output.getvalue()
