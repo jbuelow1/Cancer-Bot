@@ -48,6 +48,7 @@ class imagesCog:
         return done
 
     def picInPic(self, image, background, size, location):
+        image = image.convert('RGBA')
         image = image.resize(size)
         background = Image.open('imgsrc/' + background)
         background.paste(image, location, mask=image)
