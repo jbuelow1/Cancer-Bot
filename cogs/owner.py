@@ -5,9 +5,9 @@ class ownerCog:
     def __init__(self, bot):
         self.bot = bot
 
-    async def on_server_join(self, server):
+    async def on_guild_join(self, guild):
         owner = await self.bot.get_user_info('273940917596061698')
-        await owner.send('**HEWWO SENPAI I HAS JOINED A NEW SERVER CALLED** ' + server.name + ' **WITH** ' + str(len(server.members)) + ' **MEMBERS!**')
+        await owner.send('**HEWWO SENPAI I HAS JOINED A NEW GUILD CALLED** ' + guild.name + ' **WITH** ' + str(len(guild.members)) + ' **MEMBERS!**')
 
     @commands.command(name='suggest')
     async def suggest(self, ctx, *, arg):
