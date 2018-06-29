@@ -75,7 +75,7 @@ class imagesCog:
 
     def picInPic(self, image, background, size, location):
         image = image.convert('RGBA')
-        image = self.rescale(image, size[0], size[1], False)
+        image = self.rescale(image, size[0], size[1], True)
         background = Image.open('imgsrc/' + background)
         background.paste(image, location, mask=image)
         return background
