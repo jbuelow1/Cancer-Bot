@@ -7,8 +7,10 @@ class managerCog:
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.Group(name='dfu')
+
     # Hidden means it won't show up on the default help.
-    @commands.command(name='load', hidden=True)
+    @dfu.command(name='load', hidden=True)
     @commands.is_owner()
     async def cog_load(self, ctx, *, cog: str):
         """Command which Loads a Module.
@@ -21,7 +23,7 @@ class managerCog:
         else:
             await ctx.send('**SUCCESS:** `Loaded module named \'' + cog + '\'`')
 
-    @commands.command(name='unload', hidden=True)
+    @dfu.command(name='unload', hidden=True)
     @commands.is_owner()
     async def cog_unload(self, ctx, *, cog: str):
         """Command which Unloads a Module.
@@ -34,7 +36,7 @@ class managerCog:
         else:
             await ctx.send('**SUCCESS:** `Unloaded module named \'' + cog + '\'`')
 
-    @commands.command(name='reload', hidden=True)
+    @dfu.command(name='reload', hidden=True)
     @commands.is_owner()
     async def cog_reload(self, ctx, *, cog: str):
         """Command which Reloads a Module.
