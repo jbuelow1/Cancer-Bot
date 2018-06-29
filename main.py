@@ -32,16 +32,18 @@ def get_prefix(bot, message):
 # Below cogs represents our folder our cogs are in. Following is the file name. So 'meme.py' in cogs, would be cogs.meme
 # Think of it like a dot path import
 initial_extensions = [
+'cogs.dfu',
 'cogs.manager',
 'cogs.owner',
 'cogs.status',
 'cogs.help',
 'cogs.trigger',
 'cogs.basic',
-'cogs.stats'
+'cogs.stats',
+'cogs.images'
 ]
 
-bot = commands.Bot(command_prefix=get_prefix, description='A Rewrite Cog Example')
+bot = commands.Bot(command_prefix=get_prefix, description='A Very Cancerous Discord Bot')
 
 bot.scommands = 0
 bot.ucommands = 0
@@ -52,11 +54,16 @@ bot.startdate = datetime.datetime.now()
 
 # Here we load our extensions(cogs) listed above in [initial_extensions].
 if __name__ == '__main__':
+    print('Loading extensions...')
+    print('Searching for extensions...')
+    for extension in initial_extensions:
+        print('Found extension: ' + extension)
     for extension in initial_extensions:
         try:
+            print('Loading extension \'' + extension + '\'...')
             bot.load_extension(extension)
         except Exception as e:
-            print('Failed to load extension {extension}.', file=sys.stderr)
+            print('Failed to load extension \'' + extension + '\'\nError: ' + e)
             traceback.print_exc()
 
 @bot.event
