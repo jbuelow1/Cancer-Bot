@@ -224,7 +224,7 @@ class imagesCog:
     async def facts(self, ctx, *, arg):
         async with ctx.typing():
             textarea = Image.new('RGBA', (300, 200), (255,255,255,0))
-            font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 40)
+            font = ImageFont.truetype('fonts/facts.ttf', 40)
             d = ImageDraw.Draw(textarea)
 
             d.multiline_text((0,0), arg, fill=(255,255,255,255), font=font, spacing=10, align='center')
