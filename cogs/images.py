@@ -222,7 +222,7 @@ class imagesCog:
 
     @commands.command(name='facts')
     @commands.cooldown(1, 10, commands.BucketType.channel)
-    async def facts(self, ctx, *, arg):
+    async def facts(self, ctx, *, text):
         async with ctx.typing():
             background = Image.open('imgsrc/facts.png')
             textarea = Image.new('RGBA', (344, 276), (0,0,0,0))
