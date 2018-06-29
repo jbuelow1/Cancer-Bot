@@ -47,7 +47,7 @@ class imagesCog:
         done = Image.open(BytesIO(done))
         return done
 
-    def rescale(self, img, width, height, force=True):
+    def rescale(self, img, max_width, max_height, force=True):
     	"""Rescale the given image, optionally cropping it to make sure the result image has the specified width and height."""
     	if not force:
     		img.thumbnail((max_width, max_height), Image.ANTIALIAS)
