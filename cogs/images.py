@@ -3,6 +3,7 @@ import discord
 
 from PIL import Image
 from PIL import ImageFilter
+from PIL import ImageDraw, ImageFont
 from io import StringIO, BytesIO
 import requests
 import asyncio
@@ -217,6 +218,22 @@ class imagesCog:
                     await ctx.send(':warning: Too many files! Please supply 1-10 per message. :warning:')
             else:
                 await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
+
+    @commands.command(name='facts')
+    @commands.cooldown(1, 10, commands.BucketType.channel)
+    async def facts(self, ctx, *, arg):
+        async with ctx.typing():
+            textarea = Image.new('RGBA', (300, 200), (255,255,255,0))
+            font = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 40)
+            d = ImageDraw.Draw(textarea)
+
+            d.multiline_text((0,0), arg, fill=(255,255,255,255), font=font, spacing=10, align='center')
+
+            output = BytesIO()
+            textarea.save(output, format="PNG")
+            image = output.getvalue()
+            output.close()
+            await ctx.send(':white_check_mark: Done! :white_check_mark:', file=image)
 
 def setup(bot):
     bot.add_cog(imagesCog(bot))
