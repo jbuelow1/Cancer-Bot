@@ -13,6 +13,7 @@ class helpCog:
         self.emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
         self.emHelp0.set_author(name='Cancer Bot Help', icon_url='https://i.imgur.com/4fehjDz.png')
         for command in commands:
+            print(command.name)
             if not command.hidden:
                 self.emHelp0.add_field(name='?/' + command.name, value=command.brief, inline=True)
 
