@@ -224,10 +224,10 @@ class imagesCog:
     async def facts(self, ctx, *, arg):
         async with ctx.typing():
             background = Image.open('imgsrc/facts.png')
-            textarea = Image.new('RGBA', (300, 200), (0,0,0,0))
+            textarea = Image.new('RGBA', (344, 276), (0,0,0,0))
             font = ImageFont.truetype('fonts/facts.ttf', 25)
             d = ImageDraw.Draw(textarea)
-            d.multiline_text((30,0), arg, fill=(0,0,0,255), font=font, spacing=2, align='left')
+            d.multiline_text((52,38), arg, fill=(0,0,0,255), font=font, spacing=2, align='left')
             textarea = textarea.rotate(-16)
             image = self.picInPic(textarea, background, (344, 276), (50, 500))
             output = BytesIO()
