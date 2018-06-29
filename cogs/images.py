@@ -133,33 +133,6 @@ class imagesCog:
             else:
                 await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
-    @commands.command(name='unfortunate')
-    @commands.cooldown(1, 10, commands.BucketType.channel)
-    async def unfortunate(self, ctx):
-        async with ctx.typing():
-            images = self.getImages(ctx.message)
-            if len(images) > 0:
-                if len(images) < 10:
-                    outputImages = []
-                    filenum = 0
-                    for image in images:
-                        image = self.picInPic(image, 'unfortunate.png', (350, 300), (625, 400))
-
-                        output = BytesIO()
-                        image.save(output, format="PNG")
-                        image = output.getvalue()
-                        output.close()
-
-                        outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.jpeg'))
-                        filenum += 1
-                        print(outputImages)
-                    await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
-                else:
-                    await ctx.send(':warning: Too many files! Please supply 1-10 per message. :warning:')
-            else:
-                await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
-
-
     @commands.command(name='destroy')
     @commands.cooldown(1, 10, commands.BucketType.channel)
     async def destroy(self, ctx):
@@ -197,7 +170,7 @@ class imagesCog:
                     outputImages = []
                     filenum = 0
                     for image in images:
-                        image = self.picInPic(image, '14rw.png', (744, 484), (625, 400))
+                        image = self.picInPic(image, '14rw.png', (744, 484), (0, 255))
 
                         output = BytesIO()
                         image.save(output, format="PNG")
@@ -223,7 +196,7 @@ class imagesCog:
                     outputImages = []
                     filenum = 0
                     for image in images:
-                        image = self.picInPic(image, 'unfortunate.png', (350, 300), (0, 255))
+                        image = self.picInPic(image, 'unfortunate.png', (350, 300), (625, 400))
 
                         output = BytesIO()
                         image.save(output, format="PNG")
