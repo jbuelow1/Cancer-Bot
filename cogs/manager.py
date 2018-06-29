@@ -40,6 +40,7 @@ class managerCog:
         Remember to use dot path. e.g: cogs.owner"""
 
         try:
+            self.bot.load_extention(cog)
             self.bot.unload_extension(cog)
             self.bot.load_extension(cog)
         except Exception as e:
