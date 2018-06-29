@@ -36,11 +36,11 @@ initial_extensions = [
 'cogs.manager',
 'cogs.owner',
 'cogs.status',
-'cogs.help',
 'cogs.trigger',
 'cogs.basic',
 'cogs.stats',
-'cogs.images'
+'cogs.images',
+'cogs.help'
 ]
 
 bot = commands.Bot(command_prefix=get_prefix, description='A Very Cancerous Discord Bot')
