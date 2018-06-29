@@ -149,10 +149,9 @@ class imagesCog:
             else:
                 await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
-
-    @commands.command(name='destroy')
+    @commands.command(name='unfortunate')
     @commands.cooldown(1, 10, commands.BucketType.channel)
-    async def destroy(self, ctx):
+    async def unfortunate(self, ctx):
         async with ctx.typing():
             images = self.getImages(ctx.message)
             if len(images) > 0:
@@ -160,8 +159,7 @@ class imagesCog:
                     outputImages = []
                     filenum = 0
                     for image in images:
-                        image = self.unsharpenimg(image)
-                        image = self.addjpeg(image)
+                        image = self.picInPic(image, 'unfortunate.png', (350, 300), (625, 400))
 
                         output = BytesIO()
                         image.save(output, format="PNG")
@@ -177,9 +175,10 @@ class imagesCog:
             else:
                 await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
-    @commands.command(name='unfortunate')
+
+    @commands.command(name='destroy')
     @commands.cooldown(1, 10, commands.BucketType.channel)
-    async def unfortunate(self, ctx):
+    async def destroy(self, ctx):
         async with ctx.typing():
             images = self.getImages(ctx.message)
             if len(images) > 0:
@@ -187,7 +186,8 @@ class imagesCog:
                     outputImages = []
                     filenum = 0
                     for image in images:
-                        image = self.picInPic(image, 'unfortunate.png', (350, 300), (625, 400))
+                        image = self.unsharpenimg(image)
+                        image = self.addjpeg(image)
 
                         output = BytesIO()
                         image.save(output, format="PNG")
