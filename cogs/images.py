@@ -238,7 +238,7 @@ class imagesCog:
                 width, height = font.getsize(line)
                 d.text(((w - width) / 2, y_text), line, font=font, fill=(0,0,0,255))
                 y_text += height
-            textarea = textarea.rotate(-15)
+            textarea = textarea.rotate(-16)
             image = self.picInPic(textarea, background, (344, 276), (10, 490))
             output = BytesIO()
             image.save(output, format="PNG")
