@@ -225,7 +225,7 @@ class imagesCog:
     async def facts(self, ctx, *, text):
         async with ctx.typing():
             background = Image.open('imgsrc/facts.png')
-            textarea = Image.new('RGBA', (344, 276), (0,0,0,20))
+            textarea = Image.new('RGBA', (344, 276), (0,0,0,0))
             font = ImageFont.truetype('fonts/facts.ttf', 25)
             d = ImageDraw.Draw(textarea)
             lines = textwrap.wrap(text, width=25)
@@ -240,7 +240,6 @@ class imagesCog:
                 y_text += height
             textarea = textarea.rotate(-15)
             image = self.picInPic(textarea, background, (344, 276), (10, 490))
-            #image = textarea
             output = BytesIO()
             image.save(output, format="PNG")
             image = output.getvalue()
