@@ -229,8 +229,8 @@ class imagesCog:
             font = ImageFont.truetype('fonts/facts.ttf', 25)
             d = ImageDraw.Draw(textarea)
             lines = textwrap.wrap(text, width=40)
-            y_text = 0
-            w = 0
+            y_text = 38
+            w = 322
             for line in lines:
                 width, height = font.getsize(line)
                 d.text(((w - width) / 2, y_text), line, font=font, fill=(0,0,0,255))
