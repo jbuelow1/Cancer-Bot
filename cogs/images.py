@@ -14,12 +14,7 @@ class imagesCog:
     def getImages(self, message):
         images = []
         for attachment in message.attachments:
-            if any([
-            attachment.filename.lower().endswith('png'),
-            attachment.filename.lower().endswith('jpg'),
-            attachment.filename.lower().endswith('jpeg'),
-            attachment.filename.lower().endswith('bmp')
-            ]):
+            if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp'):
                 image_request_result = requests.get(attachment.url)
                 image = Image.open(BytesIO(image_request_result.content))
                 images.append(image)
@@ -30,12 +25,7 @@ class imagesCog:
         messages = await message.channel.history(limit=25).flatten()
         for testMessage in messages:
             for attachment in testMessage.attachments:
-                if any([
-                attachment.filename.lower().endswith('png'),
-                attachment.filename.lower().endswith('jpg'),
-                attachment.filename.lower().endswith('jpeg'),
-                attachment.filename.lower().endswith('bmp')
-                ]):
+                if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp'):
                     image_request_result = requests.get(attachment.url)
                     image = Image.open(BytesIO(image_request_result.content))
                     images.append(image)
