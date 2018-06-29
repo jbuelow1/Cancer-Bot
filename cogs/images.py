@@ -233,7 +233,7 @@ class imagesCog:
             textarea.save(output, format="PNG")
             image = output.getvalue()
             output.close()
-            await ctx.send(':white_check_mark: Done! :white_check_mark:', file=image)
+            await ctx.send(':white_check_mark: Done! :white_check_mark:', file=discord.File(BytesIO(image)))
 
 def setup(bot):
     bot.add_cog(imagesCog(bot))
