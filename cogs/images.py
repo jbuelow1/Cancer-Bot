@@ -202,7 +202,7 @@ class imagesCog:
                     filenum = 0
                     for image in images:
                         background = Image.open('imgsrc/14rw.png')
-                        image = self.picInPic(image, background, (744, 484), (0, 255))
+                        image = self.picInPic(image, background, (744, 484), (0, 225))
 
                         output = BytesIO()
                         image.save(output, format="PNG")
