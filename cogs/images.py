@@ -228,7 +228,7 @@ class imagesCog:
             textarea = Image.new('RGBA', (344, 276), (0,0,0,20))
             font = ImageFont.truetype('fonts/facts.ttf', 25)
             d = ImageDraw.Draw(textarea)
-            lines = textwrap.wrap(text, width=20)
+            lines = textwrap.wrap(text, width=25)
             y_text = 38
             w = 322
             for line in lines:
