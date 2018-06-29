@@ -82,6 +82,7 @@ class imagesCog:
 
 
     @commands.command(name='jpeg')
+    @commands.cooldown(10, 3, BucketType.channel)
     async def jpeg(self, ctx):
         async with ctx.typing():
             images = self.getImages(ctx.message)
@@ -107,6 +108,7 @@ class imagesCog:
                 await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
     @commands.command(name='unsharpen')
+    @commands.cooldown(10, 3, BucketType.channel)
     async def unsharpen(self, ctx):
         async with ctx.typing():
             images = self.getImages(ctx.message)
@@ -133,6 +135,7 @@ class imagesCog:
 
 
     @commands.command(name='destroy')
+    @commands.cooldown(10, 3, BucketType.channel)
     async def destroy(self, ctx):
         async with ctx.typing():
             images = self.getImages(ctx.message)
@@ -159,6 +162,7 @@ class imagesCog:
                 await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
     @commands.command(name='unfortunate')
+    @commands.cooldown(10, 3, BucketType.channel)
     async def unfortunate(self, ctx):
         async with ctx.typing():
             images = self.getImages(ctx.message)
