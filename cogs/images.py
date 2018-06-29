@@ -28,7 +28,8 @@ class imagesCog:
             image = Image.open(BytesIO(image_request_result.content))
             images.append(image)
         if images == []:
-            for tmessage in message.channel.history(limit=20).flatten():
+            messages = await message.channel.history(limit=25).flatten()
+            for tmessage in messages:
                 if not tmessage.attachments == []:
                     for attachment in tmessage.attachments:
                         if any([
