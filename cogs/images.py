@@ -27,7 +27,7 @@ class imagesCog:
             image_request_result = requests.get(user.avatar_url)
             image = Image.open(BytesIO(image_request_result.content))
             images.append(image)
-        if images == []:
+        """if images == []:
             messages = await message.channel.history(limit=25).flatten()
             for tmessage in messages:
                 if not tmessage.attachments == []:
@@ -42,7 +42,7 @@ class imagesCog:
                             image = Image.open(BytesIO(image_request_result.content))
                             images.append(image)
                 if not images == []:
-                    break
+                    break"""
         return images
 
     def addjpeg(self, image, quality=1):
