@@ -236,7 +236,7 @@ class imagesCog:
                 d.text(((w - width) / 2, y_text), line, font=font, fill=(0,0,0,255))
                 y_text += height
             #d.multiline_text((52,38), arg, fill=(0,0,0,255), font=font, spacing=2, align='left')
-            textarea = textarea.rotate(-18)
+            textarea = textarea.rotate(-16)
             #image = self.picInPic(textarea, background, (344, 276), (10, 490))
             image = textarea
             output = BytesIO()
