@@ -81,7 +81,6 @@ class imagesCog:
     def picInPic(self, image, background, size, location):
         image = image.convert('RGBA')
         image = self.rescale(image, size[0], size[1], True)
-        background = Image.open('imgsrc/' + background)
         background.paste(image, location, mask=image)
         return background
 
@@ -175,7 +174,8 @@ class imagesCog:
                     outputImages = []
                     filenum = 0
                     for image in images:
-                        image = self.picInPic(image, 'unfortunate.png', (350, 300), (625, 400))
+                        background = Image.open('imgsrc/unfortunate.png')
+                        image = self.picInPic(image, background, (350, 300), (625, 400))
 
                         output = BytesIO()
                         image.save(output, format="PNG")
@@ -201,7 +201,8 @@ class imagesCog:
                     outputImages = []
                     filenum = 0
                     for image in images:
-                        image = self.picInPic(image, '14rw.png', (744, 484), (0, 255))
+                        background = Image.open('imgsrc/14rw.png')
+                        image = self.picInPic(image, background, (744, 484), (0, 255))
 
                         output = BytesIO()
                         image.save(output, format="PNG")
