@@ -6,6 +6,7 @@ from PIL import ImageFilter
 from io import StringIO, BytesIO
 import requests
 import asyncio
+import os
 
 class imagesCog:
     def __init__(self, bot):
