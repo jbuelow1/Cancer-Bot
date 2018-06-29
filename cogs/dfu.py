@@ -4,7 +4,7 @@ import py_compile
 
 class dfuCog:
 
-    def __init__(self, bot, callback):
+    def __init__(self, bot):
         self.bot = bot
 
     @commands.group(name='dfu')
