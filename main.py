@@ -63,7 +63,7 @@ if __name__ == '__main__':
             print('Loading extension \'' + extension + '\'...')
             bot.load_extension(extension)
         except Exception as e:
-            print('Failed to load extension \'' + extension + '\'\nError: ' + e)
+            print('Failed to load extension \'' + extension + '\'\nError: ' + str(e))
             traceback.print_exc()
 
 @bot.event
