@@ -228,7 +228,7 @@ class imagesCog:
             font = ImageFont.truetype('fonts/facts.ttf', 25)
             d = ImageDraw.Draw(textarea)
             d.multiline_text((30,0), arg, fill=(0,0,0,255), font=font, spacing=2, align='left')
-            textarea.rotate(16)
+            textarea = textarea.rotate(16)
             image = self.picInPic(textarea, background, (344, 276), (50, 500))
             output = BytesIO()
             image.save(output, format="PNG")
