@@ -7,6 +7,7 @@ class helpCog:
         bot.remove_command('help')
 
         commands = list(self.bot.walk_commands())
+        print(commands)
 
         self.emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\n`<argument>` is a required argument\n`[argument]` is an optional argument\n`{image}` is an optional image argument that is attached\n\u200b', color=0x00ff00)
         self.emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
@@ -14,6 +15,7 @@ class helpCog:
         for command in commands:
             if not command.hidden:
                 self.emHelp0.add_field(name='?/' + command.name, value=command.brief, inline=True)
+
         """self.emHelp0.add_field(name='?/help', value='Displays this help text', inline=True)
         self.emHelp0.add_field(name='?/ping', value='Tests the bot\'s ping time', inline=True)
         self.emHelp0.add_field(name='?/stats', value='Shows bot stats', inline=True)
