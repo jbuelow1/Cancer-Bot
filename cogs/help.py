@@ -12,12 +12,12 @@ class helpCog:
         self.emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\n`<argument>` is a required argument\n`[argument]` is an optional argument\n`{image}` is an optional image argument that is attached\n\u200b', color=0x00ff00)
         self.emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
         self.emHelp0.set_author(name='Cancer Bot Help', icon_url='https://i.imgur.com/4fehjDz.png')
-        for command in commands:
+        """for command in commands:
             print(command.name)
             if not command.hidden:
-                self.emHelp0.add_field(name='?/' + command.name, value=command.brief, inline=True)
+                self.emHelp0.add_field(name='?/' + command.name, value=command.brief, inline=True)"""
 
-        """self.emHelp0.add_field(name='?/help', value='Displays this help text', inline=True)
+        self.emHelp0.add_field(name='?/help', value='Displays this help text', inline=True)
         self.emHelp0.add_field(name='?/ping', value='Tests the bot\'s ping time', inline=True)
         self.emHelp0.add_field(name='?/stats', value='Shows bot stats', inline=True)
         self.emHelp0.add_field(name='?/suggest <suggestion>', value='DMs my senpai any suggestions you have', inline=True)
@@ -25,7 +25,7 @@ class helpCog:
         self.emHelp0.add_field(name='?/unsharpen {image}', value='unsharpens an image', inline=True)
         self.emHelp0.add_field(name='?/destroy {image}', value='utterly destroys an image', inline=True)
         self.emHelp0.add_field(name='?/unfortunate {image}', value='Well, this is unfortunate', inline=True)
-        self.emHelp0.add_field(name='?/14rw {image}', value='Just another reason', inline=True)"""
+        self.emHelp0.add_field(name='?/14rw {image}', value='Just another reason', inline=True)
 
     @commands.command(name='help')
     async def helpMsg(self, ctx):
