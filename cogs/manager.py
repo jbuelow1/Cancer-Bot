@@ -1,5 +1,6 @@
 from discord.ext import commands
 
+import py_compile
 
 class managerCog:
 
@@ -40,7 +41,7 @@ class managerCog:
         Remember to use dot path. e.g: cogs.owner"""
 
         try:
-            self.bot.load_extension(cog)
+            py_compile.compile(cog.replace('.', '/') + '.py')
             self.bot.unload_extension(cog)
             self.bot.load_extension(cog)
         except Exception as e:
