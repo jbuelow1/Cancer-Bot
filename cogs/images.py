@@ -233,7 +233,7 @@ class imagesCog:
                 await ctx.send(':warning: Too much text! :warning:')
                 return
             y_text = 38
-            w = 322
+            w = 300
             for line in lines:
                 width, height = font.getsize(line)
                 d.text(((w - width) / 2, y_text), line, font=font, fill=(0,0,0,255))
