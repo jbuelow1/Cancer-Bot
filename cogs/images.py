@@ -226,9 +226,9 @@ class imagesCog:
         async with ctx.typing():
             background = Image.open('imgsrc/facts.png')
             textarea = Image.new('RGBA', (344, 276), (0,0,0,0))
-            font = ImageFont.truetype('fonts/facts.ttf', 25)
+            font = ImageFont.truetype('fonts/facts.ttf', 32)
             d = ImageDraw.Draw(textarea)
-            lines = textwrap.wrap(text, width=25)
+            lines = textwrap.wrap(text, width=20)
             if len(lines) > 7:
                 await ctx.send(':warning: Too much text! :warning:')
                 return
