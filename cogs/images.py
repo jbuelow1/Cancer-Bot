@@ -226,7 +226,7 @@ class imagesCog:
         async with ctx.typing():
             background = Image.open('imgsrc/facts.png')
             textarea = Image.new('RGBA', (344, 276), (0,0,0,0))
-            font = ImageFont.truetype('fonts/facts.ttf', 32)
+            font = ImageFont.truetype('fonts/facts.ttf', 30)
             d = ImageDraw.Draw(textarea)
             lines = textwrap.wrap(text, width=12)
             if len(lines) > 7:
