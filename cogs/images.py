@@ -229,7 +229,7 @@ class imagesCog:
             font = ImageFont.truetype('fonts/facts.ttf', 30)
             d = ImageDraw.Draw(textarea)
             lines = textwrap.wrap(text, width=24)
-            if len(lines) > 7:
+            if len(lines) > 5:
                 await ctx.send(':warning: Too much text! :warning:')
                 return
             y_text = 38
