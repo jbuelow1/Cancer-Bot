@@ -228,7 +228,7 @@ class imagesCog:
             textarea = Image.new('RGBA', (344, 276), (0,0,0,0))
             font = ImageFont.truetype('fonts/facts.ttf', 30)
             d = ImageDraw.Draw(textarea)
-            lines = textwrap.wrap(text, width=20)
+            lines = textwrap.wrap(text, width=26)
             if len(lines) > 7:
                 await ctx.send(':warning: Too much text! :warning:')
                 return
