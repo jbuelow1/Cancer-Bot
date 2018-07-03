@@ -257,7 +257,7 @@ class imagesCog:
                     filenum = 0
                     for image in images:
                         background = Image.open('imgsrc/condomfail.png')
-                        image = self.picInPic(image, background, (302, 219), (7, 370))
+                        image = self.picInPic(image, background, (322, 322), (0, 392))
 
                         output = BytesIO()
                         image.save(output, format="PNG")
