@@ -7,6 +7,7 @@ class helpCog:
         bot.remove_command('help')
 
     @commands.command(name='help', usage='', brief='Displays this helptext')
+    @commands.cooldown(1, 60, commands.BucketType.channel)
     async def helpMsg(self, ctx):
         await ctx.trigger_typing()
         await ctx.message.delete()
@@ -19,9 +20,9 @@ class helpCog:
         for command in commands:
             if command.enabled and not command.hidden:
                 try:
-                    self.emHelp0.add_field(name='?/' + command.name + ' ' + command.usage, value=command.brief, inline=True)
+                    self.emHelp0.add_field(name='?/' + command.name + ' ' + command.usage, value=command.brief, inline=False)
                 except:
-                    self.emHelp0.add_field(name='?/' + command.name, value='ERROR: Could not retrieve command info.', inline=True)
+                    self.emHelp0.add_field(name='?/' + command.name, value='ERROR: Could not retrieve command info.', inline=False)
 
         self.emHelp0.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
         await ctx.send(embed=self.emHelp0)
