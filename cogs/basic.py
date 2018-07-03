@@ -49,7 +49,7 @@ class basicCog:
         emPing.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
         await ctx.send(embed=emPing)
 
-    @commands.command(name='whois', usage='<User>', brief='Who tf is this?')
+    @commands.command(name='whois', usage='<User>', brief='Who tf is this?', disabled=True)
     async def whois(self, ctx):
         await ctx.trigger_typing()
         await ctx.message.delete()
