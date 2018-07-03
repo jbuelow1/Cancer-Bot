@@ -21,7 +21,7 @@ class helpCog:
                 try:
                     self.emHelp0.add_field(name='?/' + command.name + ' ' + command.usage, value=command.brief, inline=True)
                 except:
-                    self.emHelp0.add_field(name='[ERROR]', value='[ERROR]', inline=True)
+                    self.emHelp0.add_field(name='[ERROR]', value='a command was found, but could not be added due to senpai fucking up... AGAIN!', inline=True)
 
         self.emHelp0.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
         await ctx.send(embed=self.emHelp0)
