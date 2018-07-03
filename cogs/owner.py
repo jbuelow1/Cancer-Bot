@@ -9,7 +9,7 @@ class ownerCog:
         owner = await self.bot.get_user_info('273940917596061698')
         await owner.send('**HEWWO SENPAI I HAS JOINED A NEW GUILD CALLED** ' + guild.name + ' **WITH** ' + str(len(guild.members)) + ' **MEMBERS!**')
 
-    @commands.command(name='suggest')
+    @commands.command(name='suggest', usage='<Text>', brief='Sends senpai your "wonderful" ideas')
     async def suggest(self, ctx, *, arg):
         owner = await self.bot.get_user_info('273940917596061698')
         await owner.send('HEWWO SENPAI I HAS FEEDBACK FROM `' + str(ctx.message.author) + '`:```' + arg.replace('```', '<REMOVED>') + '```')
