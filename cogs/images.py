@@ -246,5 +246,32 @@ class imagesCog:
             output.close()
             await ctx.send(':white_check_mark: Done! :white_check_mark:', file=discord.File(BytesIO(image), filename='facts.png'))
 
+    @commands.command(name='condomfail')
+    @commands.cooldown(1, 10, commands.BucketType.channel)
+    async def condomfail(self, ctx):
+        async with ctx.typing():
+            images = self.getImages(ctx.message)
+            if len(images) > 0:
+                if len(images) < 10:
+                    outputImages = []
+                    filenum = 0
+                    for image in images:
+                        background = Image.open('imgsrc/condomfail.png')
+                        image = self.picInPic(image, background, (302, 219), (7, 370))
+
+                        output = BytesIO()
+                        image.save(output, format="PNG")
+                        image = output.getvalue()
+                        output.close()
+
+                        outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.jpeg'))
+                        filenum += 1
+                        print(outputImages)
+                    await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
+                else:
+                    await ctx.send(':warning: Too many files! Please supply 1-10 per message. :warning:')
+            else:
+                await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
+
 def setup(bot):
     bot.add_cog(imagesCog(bot))
