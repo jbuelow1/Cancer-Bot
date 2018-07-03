@@ -25,6 +25,7 @@ class imagestestCog:
                     images.append(image)
             if not images == []:
                 break
+        ctx.send(str(images))
         return images
 
     def filler():
