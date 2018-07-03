@@ -104,7 +104,7 @@ class imagesCog:
                         image = output.getvalue()
                         output.close()
 
-                        outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.jpeg'))
+                        outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.png'))
                         filenum += 1
                         print(outputImages)
                     await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
@@ -130,7 +130,7 @@ class imagesCog:
                         image = output.getvalue()
                         output.close()
 
-                        outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.jpeg'))
+                        outputImages.append(discord.File(BytesIO(image), filename='unsharpened' + str(filenum) + '.png'))
                         filenum += 1
                         print(outputImages)
                     await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
@@ -157,7 +157,7 @@ class imagesCog:
                         image = output.getvalue()
                         output.close()
 
-                        outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.jpeg'))
+                        outputImages.append(discord.File(BytesIO(image), filename='destroyed' + str(filenum) + '.png'))
                         filenum += 1
                         print(outputImages)
                     await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
@@ -184,7 +184,7 @@ class imagesCog:
                         image = output.getvalue()
                         output.close()
 
-                        outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.jpeg'))
+                        outputImages.append(discord.File(BytesIO(image), filename='unfortunate' + str(filenum) + '.png'))
                         filenum += 1
                         print(outputImages)
                     await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
@@ -211,7 +211,7 @@ class imagesCog:
                         image = output.getvalue()
                         output.close()
 
-                        outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.jpeg'))
+                        outputImages.append(discord.File(BytesIO(image), filename='14rw' + str(filenum) + '.png'))
                         filenum += 1
                         print(outputImages)
                     await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
@@ -264,7 +264,7 @@ class imagesCog:
                         image = output.getvalue()
                         output.close()
 
-                        outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.jpeg'))
+                        outputImages.append(discord.File(BytesIO(image), filename='condomfail' + str(filenum) + '.png'))
                         filenum += 1
                         print(outputImages)
                     await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
@@ -291,7 +291,7 @@ class imagesCog:
                         image = output.getvalue()
                         output.close()
 
-                        outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.jpeg'))
+                        outputImages.append(discord.File(BytesIO(image), filename='autismtoday' + str(filenum) + '.png'))
                         filenum += 1
                         print(outputImages)
                     await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
