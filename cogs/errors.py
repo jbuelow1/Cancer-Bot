@@ -26,3 +26,6 @@ class errorCog:
             for perm in error.missing_perms:
                 perms = perms + '\n' + str(perm)
             await ctx.send(':no_entry_sign: Sorry, ' + ctx.author.mention + ', but I do not have sufficient permissions to do that here. Contact an admin of this server for help. :no_entry_sign:\n```Missing Permissions for ' + self.bot.user.nick + ':' + perms + '```')
+
+def setup(bot):
+    bot.add_cog(errorCog(bot))
