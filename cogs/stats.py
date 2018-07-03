@@ -34,7 +34,7 @@ class statsCog:
         self.bot.scommands += 1
         self.bot.ucommands += 1
 
-    @commands.command(name='stats')
+    @commands.command(name='stats', usage='', brief='Shows bot statistics')
     async def stats(self, ctx):
         await ctx.trigger_typing()
         await ctx.message.delete()

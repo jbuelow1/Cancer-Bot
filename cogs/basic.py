@@ -30,7 +30,7 @@ class basicCog:
         else:
             return 999999
 
-    @commands.command(name='ping')
+    @commands.command(name='ping', usage='', brief='Tests the bot\'s shitty internet')
     async def ping(self, ctx):
         t1 = time.perf_counter()
         await ctx.trigger_typing()
@@ -49,7 +49,7 @@ class basicCog:
         emPing.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
         await ctx.send(embed=emPing)
 
-    @commands.command(name='whois')
+    @commands.command(name='whois', usage='<User>', brief='Who tf is this?')
     async def whois(self, ctx):
         await ctx.trigger_typing()
         await ctx.message.delete()

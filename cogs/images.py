@@ -87,7 +87,7 @@ class imagesCog:
         return background
 
 
-    @commands.command(name='jpeg')
+    @commands.command(name='jpeg', usage='<Image | User>', brief='Compresses an image')
     @commands.cooldown(1, 10, commands.BucketType.channel)
     async def jpeg(self, ctx):
         async with ctx.typing():
@@ -113,7 +113,7 @@ class imagesCog:
             else:
                 await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
-    @commands.command(name='unsharpen')
+    @commands.command(name='unsharpen', usage='<Image | User>', brief='Unsharpens an image')
     @commands.cooldown(1, 10, commands.BucketType.channel)
     async def unsharpen(self, ctx):
         async with ctx.typing():
@@ -139,7 +139,7 @@ class imagesCog:
             else:
                 await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
-    @commands.command(name='destroy')
+    @commands.command(name='destroy', usage='<Image | User>', brief='Utterly wrecks an image')
     @commands.cooldown(1, 10, commands.BucketType.channel)
     async def destroy(self, ctx):
         async with ctx.typing():
@@ -166,7 +166,7 @@ class imagesCog:
             else:
                 await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
-    @commands.command(name='unfortunate')
+    @commands.command(name='unfortunate', usage='<Image | User>', brief='This is unfortunate')
     @commands.cooldown(1, 10, commands.BucketType.channel)
     async def unfortunate(self, ctx):
         async with ctx.typing():
@@ -193,7 +193,7 @@ class imagesCog:
             else:
                 await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
-    @commands.command(name='14rw')
+    @commands.command(name='14rw', usage='<Image | User>', brief='Just another reason')
     @commands.cooldown(1, 10, commands.BucketType.channel)
     async def reasonswhy(self, ctx):
         async with ctx.typing():
@@ -220,7 +220,7 @@ class imagesCog:
             else:
                 await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
-    @commands.command(name='facts')
+    @commands.command(name='facts', usage='<Image | User>', brief='Present your factual evidence')
     @commands.cooldown(1, 10, commands.BucketType.channel)
     async def facts(self, ctx, *, text):
         async with ctx.typing():
@@ -246,7 +246,7 @@ class imagesCog:
             output.close()
             await ctx.send(':white_check_mark: Done! :white_check_mark:', file=discord.File(BytesIO(image), filename='facts.png'))
 
-    @commands.command(name='condomfail')
+    @commands.command(name='condomfail', usage='<Image | User>', brief='Dammit! it broke again!')
     @commands.cooldown(1, 10, commands.BucketType.channel)
     async def condomfail(self, ctx):
         async with ctx.typing():
@@ -273,7 +273,7 @@ class imagesCog:
             else:
                 await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
-    @commands.command(name='autismtoday')
+    @commands.command(name='autismtoday', usage='<Image | User>', brief='It\'s getting out of hand.')
     @commands.cooldown(1, 10, commands.BucketType.channel)
     async def autismtoday(self, ctx):
         async with ctx.typing():
@@ -300,7 +300,7 @@ class imagesCog:
             else:
                 await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
-    @commands.command(name='autismlevel')
+    @commands.command(name='autismlevel', usage='<Image | User>', brief='LEVEL UP!')
     @commands.cooldown(1, 10, commands.BucketType.channel)
     async def autismlevel(self, ctx):
         async with ctx.typing():
