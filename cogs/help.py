@@ -6,33 +6,21 @@ class helpCog:
         self.bot = bot
         bot.remove_command('help')
 
-        commands = list(self.bot.walk_commands())
-        print(commands)
-
-        self.emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\n`<argument>` is a required argument\n`[argument]` is an optional argument\n`{image}` is an optional image argument that is attached\n\u200b', color=0x00ff00)
-        self.emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
-        self.emHelp0.set_author(name='Cancer Bot Help', icon_url='https://i.imgur.com/4fehjDz.png')
-        """for command in commands:
-            print(command.name)
-            if not command.hidden:
-                self.emHelp0.add_field(name='?/' + command.name, value=command.brief, inline=True)"""
-
-        self.emHelp0.add_field(name='?/help', value='Displays this help text', inline=True)
-        self.emHelp0.add_field(name='?/ping', value='Tests the bot\'s ping time', inline=True)
-        self.emHelp0.add_field(name='?/stats', value='Shows bot stats', inline=True)
-        self.emHelp0.add_field(name='?/suggest <suggestion>', value='DMs my senpai any suggestions you have', inline=True)
-        self.emHelp0.add_field(name='?/jpeg {image}', value='Compresses the life out of an image', inline=True)
-        self.emHelp0.add_field(name='?/unsharpen {image}', value='unsharpens an image', inline=True)
-        self.emHelp0.add_field(name='?/destroy {image}', value='utterly destroys an image', inline=True)
-        self.emHelp0.add_field(name='?/unfortunate {image}', value='Well, this is unfortunate', inline=True)
-        self.emHelp0.add_field(name='?/14rw {image}', value='Just another reason', inline=True)
-        self.emHelp0.add_field(name='?/facts <fact>', value='Present your factual evidence', inline=True)
-
-    @commands.command(name='help')
+    @commands.command(name='help', usage='', brief='Displays this helptext')
     async def helpMsg(self, ctx):
         """Displays this help text"""
         await ctx.trigger_typing()
         await ctx.message.delete()
+
+        self.emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\n`<argument>` is a required argument\n`[argument]` is an optional argument\n`{image}` is an optional image argument that is attached\n\u200b', color=0x00ff00)
+        self.emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
+        self.emHelp0.set_author(name='Cancer Bot Help', icon_url='https://i.imgur.com/4fehjDz.png')
+
+        commands = list(self.bot.walk_commands())
+        for command in commands:
+            if command.enabled and not command.hidden:
+                self.emHelp0.add_field(name='?/' + command.name + ' ' + command.usage, value=command.brief, inline=True)
+
         self.emHelp0.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
         await ctx.send(embed=self.emHelp0)
 
