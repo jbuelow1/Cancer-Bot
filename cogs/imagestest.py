@@ -27,6 +27,9 @@ class imagestestCog:
                 break
         return images
 
+    def filler():
+        print('this most certainly should not have been run!')
+
     @commands.command(name='test_images', hidden=True):
     async def test_images(self, ctx):
         async with ctx.typing():
