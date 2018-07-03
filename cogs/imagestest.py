@@ -16,7 +16,7 @@ class imagestestCog:
             image_request_result = requests.get(user.avatar_url)
             image = Image.open(BytesIO(image_request_result.content))
             images.append(image)
-        """messages = await message.channel.history(limit=25).flatten()
+        messages = await message.channel.history(limit=25).flatten()
         for testMessage in messages:
             for attachment in testMessage.attachments:
                 if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp'):
@@ -24,7 +24,7 @@ class imagestestCog:
                     image = Image.open(BytesIO(image_request_result.content))
                     images.append(image)
             if not images == []:
-                break"""
+                break
         return images
 
     @commands.command(name='test_images', hidden=True):
@@ -39,3 +39,6 @@ class imagestestCog:
                 outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.png'))
                 filenum += 1
             await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
+
+def setup(bot):
+    bot.add_cog(imagestestCog(bot))
