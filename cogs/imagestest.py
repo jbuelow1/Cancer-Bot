@@ -21,20 +21,27 @@ class imagestestCog:
     @commands.command(name='findimages', hidden=True)
     async def test_images(self, ctx):
         async with ctx.typing():
+            print('Collecting images from invoke message...')
             images = self.getImages(ctx.message)
             if images == []:
+                print('No images found in invoke message. Searching history...')
                 channel = ctx.message.channel
                 async for message in channel.history(limit=25):
+                    print('Searching message #' + message.id + ' by ' + str(message.author))
                     images = self.getImages(message)
                     if not images == []:
+                        print('Images found in message #' + message.id + ' by ' + str(message.author))
                         break
+            filenum = 0
             for image in images:
+                print('Converting image #' + filenum + '...')
                 output = BytesIO()
                 image.save(output, format="PNG")
                 image = output.getvalue()
                 output.close()
                 outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.png'))
                 filenum += 1
+            print('Sending images...')
             await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
 
 def setup(bot):
