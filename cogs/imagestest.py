@@ -16,7 +16,7 @@ class imagestestCog:
             image_request_result = requests.get(user.avatar_url)
             image = Image.open(BytesIO(image_request_result.content))
             images.append(image)
-        await for testMessage in message.channel.history(limit=25):
+        async for testMessage in message.channel.history(limit=25):
             for attachment in testMessage.attachments:
                 if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp'):
                     image_request_result = requests.get(attachment.url)
@@ -32,7 +32,12 @@ class imagestestCog:
 
     @commands.command(name='findimages', hidden=True)
     async def test_images(self, ctx):
-        async with ctx.typing():
+        counter = 0
+        async for message in channel.history(limit=200):
+            if message.author == client.user:
+                counter += 1
+        await ctx.send(str(counter))
+        """async with ctx.typing():
             images = self.getImages(ctx.message)
             for image in images:
                 output = BytesIO()
@@ -41,7 +46,7 @@ class imagestestCog:
                 output.close()
                 outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.png'))
                 filenum += 1
-            await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
+            await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)"""
 
 def setup(bot):
     bot.add_cog(imagestestCog(bot))
