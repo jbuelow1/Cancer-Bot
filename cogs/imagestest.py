@@ -30,6 +30,7 @@ class imagestestCog:
                 messages = await channel.history(limit=25).flatten()
                 print(str(messages[0].attachments))
                 for message in messages:
+                    print('Searching a message from history...')
                     print('Searching message #' + message.id + ' by ' + str(message.author))
                     images = self.getImages(message)
                     if not images == []:
