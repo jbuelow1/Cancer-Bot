@@ -16,7 +16,7 @@ class imagestestCog:
             image_request_result = requests.get(user.avatar_url)
             image = Image.open(BytesIO(image_request_result.content))
             images.append(image)
-        async for testMessage in message.channel.history(limit=25):
+        """async for testMessage in message.channel.history(limit=25):
             for attachment in testMessage.attachments:
                 if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp'):
                     image_request_result = requests.get(attachment.url)
@@ -24,7 +24,7 @@ class imagestestCog:
                     images.append(image)
             if not images == []:
                 break
-        ctx.send(str(images))
+        ctx.send(str(images))"""
         return images
 
     def filler():
@@ -32,6 +32,7 @@ class imagestestCog:
 
     @commands.command(name='findimages', hidden=True)
     async def test_images(self, ctx):
+        channel = message.channel
         counter = 0
         async for message in channel.history(limit=200):
             if message.author == client.user:
