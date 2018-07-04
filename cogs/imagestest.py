@@ -27,6 +27,7 @@ class imagestestCog:
                 print('No images found in invoke message. Searching history...')
                 channel = ctx.message.channel
                 messages = await channel.history(limit=25).flatten()
+                print(str(messages))
                 for message in messages:
                     print('Searching message #' + message.id + ' by ' + str(message.author))
                     images = self.getImages(message)
