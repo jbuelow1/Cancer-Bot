@@ -5,17 +5,26 @@ class imagestestCog:
     def __init__(self, bot):
         self.bot = bot
 
-    def getImages(self, inMessage):
+    def getImages(self, message):
         images = []
-        for attachment in inMessage.attachments:
+        for attachment in message.attachments:
             if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp'):
                 image_request_result = requests.get(attachment.url)
                 image = Image.open(BytesIO(image_request_result.content))
                 images.append(image)
-        for user in inMessage.mentions:
+        for user in message.mentions:
             image_request_result = requests.get(user.avatar_url)
             image = Image.open(BytesIO(image_request_result.content))
             images.append(image)
+        """messages = await message.channel.history(limit=25).flatten()
+        for testMessage in messages:
+            for attachment in testMessage.attachments:
+                if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp'):
+                    image_request_result = requests.get(attachment.url)
+                    image = Image.open(BytesIO(image_request_result.content))
+                    images.append(image)
+            if not images == []:
+                break"""
         return images
 
     @commands.command(name='findimages', hidden=True)
@@ -38,6 +47,7 @@ class imagestestCog:
                         print('breaking')
                         break
             filenum = 0
+            print('Converting images...')
             for image in images:
                 print('Converting image #' + str(filenum) + '...')
                 output = BytesIO()
