@@ -31,10 +31,10 @@ class imagestestCog:
                 print(str(messages[0].attachments))
                 for message in messages:
                     print('Searching a message from history...')
-                    print('Searching message #' + message.id + ' by ' + str(message.author))
+                    print('Searching message #' + str(message.id) + ' by ' + str(message.author))
                     images = self.getImages(message)
                     if not images == []:
-                        print('Images found in message #' + message.id + ' by ' + str(message.author))
+                        print('Images found in message #' + str(message.id) + ' by ' + str(message.author))
                         break
             filenum = 0
             for image in images:
