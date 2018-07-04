@@ -16,8 +16,7 @@ class imagestestCog:
             image_request_result = requests.get(user.avatar_url)
             image = Image.open(BytesIO(image_request_result.content))
             images.append(image)
-        await message.channel.history(limit=25).flatten()
-        for testMessage in messages:
+        await for testMessage in message.channel.history(limit=25):
             for attachment in testMessage.attachments:
                 if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp'):
                     image_request_result = requests.get(attachment.url)
