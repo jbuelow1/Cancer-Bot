@@ -35,10 +35,11 @@ class imagestestCog:
                     images = self.getImages(message)
                     if not images == []:
                         #print('Images found in message #' + str(message.id) + ' by ' + str(message.author))
+                        print('breaking')
                         break
             filenum = 0
             for image in images:
-                print('Converting image #' + filenum + '...')
+                print('Converting image #' + str(filenum) + '...')
                 output = BytesIO()
                 image.save(output, format="PNG")
                 image = output.getvalue()
