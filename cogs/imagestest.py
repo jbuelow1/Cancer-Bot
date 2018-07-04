@@ -16,17 +16,6 @@ class imagestestCog:
             image_request_result = requests.get(user.avatar_url)
             image = Image.open(BytesIO(image_request_result.content))
             images.append(image)
-
-        channel = inMessage.channel
-        async for message in channel.history(limit=25):
-            for attachment in message.attachments:
-                if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp'):
-                    image_request_result = requests.get(attachment.url)
-                    image = Image.open(BytesIO(image_request_result.content))
-                    images.append(image)
-            if not images == []:
-                break
-        ctx.send(str(images))
         return images
 
     def filler():
@@ -36,6 +25,12 @@ class imagestestCog:
     async def test_images(self, ctx):
         async with ctx.typing():
             images = self.getImages(ctx.message)
+            if images == []:
+                channel = ctx.message.channel
+                async for message in channel.history(limit=25):
+                    images = self.getImages(message)
+                    if not images == []:
+                        break
             for image in images:
                 output = BytesIO()
                 image.save(output, format="PNG")
