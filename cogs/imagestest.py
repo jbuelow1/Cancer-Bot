@@ -22,7 +22,8 @@ class imagestestCog:
     async def test_images(self, ctx):
         async with ctx.typing():
             print('Collecting images from invoke message...')
-            images = self.getImages(ctx.message)
+            #images = self.getImages(ctx.message)
+            images = []
             if images == []:
                 print('No images found in invoke message. Searching history...')
                 channel = ctx.message.channel
