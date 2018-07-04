@@ -18,9 +18,6 @@ class imagestestCog:
             images.append(image)
         return images
 
-    def filler():
-        print('this most certainly should not have been run!')
-
     @commands.command(name='findimages', hidden=True)
     async def test_images(self, ctx):
         async with ctx.typing():
