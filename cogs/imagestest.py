@@ -1,6 +1,8 @@
 from discord.ext import commands
 import discord
 
+import requests
+
 class imagestestCog:
     def __init__(self, bot):
         self.bot = bot
