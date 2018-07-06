@@ -19,11 +19,6 @@ class thelpCog:
             self.emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
             self.emHelp0.set_author(name='Cancer Bot Help', icon_url='https://i.imgur.com/4fehjDz.png')
 
-            for category in self.bot.categories:
-                self.emHelp0.add_field(name='?/help ' + category, value='Display commands in this command category', inline=False)
-
-            self.emHelp0.add_field(name='===== Uncategorized Commands: =====', inline=False)
-
             commands = list(self.bot.walk_commands())
             for command in commands:
                 if command.enabled and (not command.hidden) and (not (command.category in self.bot.categories)):
