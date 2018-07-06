@@ -15,11 +15,11 @@ class copypastaCog:
     @commands.command(name='bee', usage='', brief='Buzz buzz, motherfucker', hidden=True)
     @commands.cooldown(1, 60, commands.BucketType.channel)
     async def beePasta(self, ctx):
-        request_result = requests.get('https://gist.githubusercontent.com/The5heepDev/a15539b297a7862af4f12ce07fee6bb7/raw/7164813a9b8d0a3b2dcffd5b80005f1967887475/entire_bee_movie_script')
-        pasta = request_result.content
-        lines = textwrap.wrap(pasta, width=2000)
+        f = open('copypastas/bee.txt', mode='r')
+        pasta = f.read()
+        lines = textwrap.wrap(pasta, width=1990)
         for line in lines:
-            await ctx.send(line)
+            await ctx.send('**' + line + '**')
 
 def setup(bot):
     bot.add_cog(copypastaCog(bot))
