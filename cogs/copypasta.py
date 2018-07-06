@@ -20,6 +20,8 @@ class copypastaCog:
         lines = textwrap.wrap(pasta, width=1990)
         for line in lines:
             await ctx.send('**' + line + '**')
+            await ctx.trigger_typing()
+        await ctx.send('That is all.')
 
 def setup(bot):
     bot.add_cog(copypastaCog(bot))
