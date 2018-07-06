@@ -18,7 +18,7 @@ class helpCog:
 
         commands = list(self.bot.walk_commands())
         for command in commands:
-            if command.enabled and not command.hidden:
+            if command.enabled and (not command.hidden):
                 try:
                     self.emHelp0.add_field(name='?/' + command.name + ' ' + command.usage, value=command.brief, inline=False)
                 except:
