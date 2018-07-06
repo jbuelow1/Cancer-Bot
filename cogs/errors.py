@@ -7,7 +7,7 @@ class errorCog:
 
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
-            await ctx.send(':no_entry_sign: ' + ctx.author.mention + ', that command is on cooldown. Please try again in ' + error.retry_after + ' seconds. :no_entry_sign:')
+            await ctx.send(':no_entry_sign: ' + ctx.author.mention + ', that command is on cooldown. Please try again in ' + str(error.retry_after) + ' seconds. :no_entry_sign:')
 
         if isinstance(error, commands.DisabledCommand):
             await ctx.send(':no_entry_sign: ' + ctx.author.mention + ', that command is currently disabled. Please try again later. :no_entry_sign:')
