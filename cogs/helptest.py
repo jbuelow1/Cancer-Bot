@@ -12,6 +12,8 @@ class thelpCog:
         await ctx.trigger_typing()
         await ctx.message.delete()
 
+        print(str(page))
+
         if page == None:
             self.emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\n`<argument>` is a required argument\n`[argument]` is an optional argument\n`{image}` is an optional image argument that is attached\n\u200b', color=0x00ff00)
             self.emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
