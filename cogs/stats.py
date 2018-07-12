@@ -11,7 +11,7 @@ class statsCog:
     def __init__(self, bot):
         self.bot = bot
 
-    async def save_stats(self):
+    async def save_stats():
         while True:
             try:
                 with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
