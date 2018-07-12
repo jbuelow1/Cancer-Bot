@@ -8,7 +8,7 @@ from dateutil.relativedelta import relativedelta
 import time
 
 class statsCog:
-    """async def save_stats(self):
+    async def save_stats(self):
         while True:
             try:
                 with open('actions.pkl', 'rb') as f:  # Python 3: open(..., 'rb')
@@ -22,7 +22,7 @@ class statsCog:
 
             self.bot.ucommands = 0
             self.bot.utriggers = 0
-            time.sleep(60)"""
+            await asyncio.sleep(60)
 
     def __init__(self, bot):
         self.bot = bot
@@ -54,11 +54,13 @@ class statsCog:
         emStats.add_field(name='Actions since restart', value=self.bot.scommands + self.bot.striggers, inline=False)
         emStats.add_field(name='Commands', value=self.bot.scommands, inline=True)
         emStats.add_field(name='Triggers', value=self.bot.striggers, inline=True)
-        #emStats.add_field(name='Actions since v9', value=self.bot.vcommands + self.bot.vtriggers + self.bot.ucommands + self.bot.utriggers, inline=False)
-        #emStats.add_field(name='Commands', value=self.bot.vcommands + self.bot.ucommands, inline=True)
-        #emStats.add_field(name='Triggers', value=self.bot.vtriggers + self.bot.utriggers, inline=True)
+        emStats.add_field(name='Actions since the dawn of time', value=self.bot.vcommands + self.bot.vtriggers + self.bot.ucommands + self.bot.utriggers, inline=False)
+        emStats.add_field(name='Commands', value=self.bot.vcommands + self.bot.ucommands, inline=True)
+        emStats.add_field(name='Triggers', value=self.bot.vtriggers + self.bot.utriggers, inline=True)
         emStats.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
         await ctx.send(embed=emStats)
+
+    self.bot.loop.create_task(save_stats())
 
 def setup(bot):
     bot.add_cog(statsCog(bot))
