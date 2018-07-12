@@ -37,18 +37,13 @@ class statsCog:
     async def stats(self, ctx):
         await ctx.trigger_typing()
         await ctx.message.delete()
-        users = []
-        for server in self.bot.guilds:
-            for user in server.members:
-                if (not (user.id in users) and (not user.bot)):
-                    users.append(user.id)
 
         diff = relativedelta(datetime.datetime.now(), self.bot.startdate)
         uptime = str(diff.days) + ' days, ' + str(diff.hours) + ' hours, ' + str(diff.minutes) + ' minutes and ' + str(diff.seconds) + ' seconds'
         emStats = discord.Embed(description='Statistics on Cancer Bot', color=0x00ff00)
         emStats.set_author(name='Cancer Bot Stats', icon_url='https://i.imgur.com/4fehjDz.png')
         emStats.add_field(name='Servers', value=str(len(self.bot.guilds) - 2), inline=True)
-        emStats.add_field(name='Users', value=str(len(users)), inline=True)
+        emStats.add_field(name='Users', value=str(len(self.bot.users)), inline=True)
         emStats.add_field(name='Uptime', value=uptime, inline=False)
         emStats.add_field(name='Actions since restart', value=self.bot.scommands + self.bot.striggers, inline=False)
         emStats.add_field(name='Commands', value=self.bot.scommands, inline=True)
