@@ -9,7 +9,7 @@ class ownerCog:
         owner = await self.bot.get_user_info('273940917596061698')
         await owner.send('**HEWWO SENPAI I HAS JOINED A NEW GUILD CALLED** ' + guild.name + ' **WITH** ' + str(len(guild.members)) + ' **MEMBERS!**')
 
-    @commands.command(name='lsguilds')
+    @commands.command(name='lsguilds', hidden=True)
     @commands.is_owner()
     async def lsguilds(self, ctx):
         guildList = ''
