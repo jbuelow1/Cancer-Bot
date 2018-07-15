@@ -7,7 +7,6 @@ import textwrap
 class copypastaCog:
     def __init__(self, bot):
         self.bot = bot
-        print('Loaded copypasta cog.')
 
     @commands.command(category='copypasta', name='fit', usage='', brief='Gotta stay fit, kids')
     async def fitPasta(self, ctx):
