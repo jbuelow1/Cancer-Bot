@@ -8,10 +8,10 @@ class ownerCog:
     async def on_guild_join(self, guild):
         owner = await self.bot.get_user_info('273940917596061698')
         guildDesc = '**Guild Joined**\n\nName: `' + guild.name +
-            '`\nMember count: `' + guild.member_count +
+            '`\nMember count: `' + str(guild.member_count) +
             '`\nID: `' + str(guild.id) +
             '`\nChannels: `' + str(len(guild.channels)) +
-            '`\nCreated at: `' + guild.created_at +
+            '`\nCreated at: `' + str(guild.created_at) +
             '`\nisLarge: `' + str(guild.large) +
             '`\nOwner: `' + str(guild.owner) +
             '`\nOwner ID: `' + str(guild.owner.id) +
