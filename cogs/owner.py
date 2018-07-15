@@ -7,7 +7,18 @@ class ownerCog:
 
     async def on_guild_join(self, guild):
         owner = await self.bot.get_user_info('273940917596061698')
-        await owner.send('**HEWWO SENPAI I HAS JOINED A NEW GUILD CALLED** ' + guild.name + ' **WITH** ' + str(len(guild.members)) + ' **MEMBERS!**')
+        guildDesc = '**Guild Joined**\n\nName: `' + guild.name +
+            '`\nMember count: `' + guild.member_count +
+            '`\nID: `' + str(guild.id) +
+            '`\nChannels: `' + str(len(guild.channels)) +
+            '`\nCreated at: `' + guild.created_at +
+            '`\nisLarge: `' + str(guild.large) +
+            '`\nOwner: `' + str(guild.owner) +
+            '`\nOwner ID: `' + str(guild.owner.id) +
+            '`'
+        if (len(guild.features) > 0):
+            guildDesc += '\n\n𝓢𝓹𝓮𝓬𝓲𝓪𝓵 𝓕𝓮𝓪𝓽𝓾𝓻𝓮𝓼: `' + str(guild.features) + '`'
+        await owner.send(guildDesc)
 
     @commands.command(name='lsguilds', hidden=True)
     @commands.is_owner()
