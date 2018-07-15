@@ -53,37 +53,57 @@ class basicCog:
     async def whois(self, ctx):
         await ctx.trigger_typing()
         await ctx.message.delete()
-        if len(ctx.message.mentions) > 0:
-            if len(ctx.message.mentions) > 3:
-                await ctx.send(ctx.message.author.mention + ', you supplied more than 3 users to lookup. Because of this, the userinfo is being sent to your DMs.')
-                for user in ctx.message.mentions:
-                    emWhois = discord.Embed(title='User Info', color=0x00ff00)
-                    emWhois.add_field(name='Nickname', value=user.display_name, inline=True)
-                    emWhois.add_field(name='Global Name', value=user.name, inline=True)
-                    emWhois.add_field(name='Discriminator', value=user.discriminator, inline=True)
-                    emWhois.add_field(name='ID', value=user.id, inline=True)
-                    emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
-                    emWhois.set_image(url=user.avatar_url)
-                    await user.send(embed=emWhois)
-            else:
-                for user in message.mentions:
-                    emWhois = discord.Embed(title='User Info', color=0x00ff00)
-                    emWhois.add_field(name='Nickname', value=user.display_name, inline=True)
-                    emWhois.add_field(name='Global Name', value=user.name, inline=True)
-                    emWhois.add_field(name='Discriminator', value=user.discriminator, inline=True)
-                    emWhois.add_field(name='ID', value=user.id, inline=True)
-                    emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
-                    emWhois.set_image(url=user.avatar_url)
-                    await ctx.send(embed=emWhois)
+        if (message.mention_everyone):
+            await ctx.send('Wow, okay. You\'re a fucking asshole! Enjoy your spam, asshole!')
+            for user in ctx.guild.users:
+                emWhois = discord.Embed(title='User Info', color=0x00ff00)
+                emWhois.add_field(name='Nickname', value=user.display_name, inline=True)
+                emWhois.add_field(name='Global Name', value=user.name, inline=True)
+                emWhois.add_field(name='Discriminator', value=user.discriminator, inline=True)
+                emWhois.add_field(name='ID', value=user.id, inline=True)
+                if ctx.author.bot:
+                    emWhois.add_field(name='===== BOT =====', inline=False)
+                emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
+                emWhois.set_image(url=user.avatar_url)
+                await ctx.author.send(embed=emWhois)
         else:
-            emWhois = discord.Embed(title='User Info', color=0x00ff00)
-            emWhois.add_field(name='Nickname', value=ctx.message.author.display_name, inline=True)
-            emWhois.add_field(name='Global Name', value=ctx.message.author.name, inline=True)
-            emWhois.add_field(name='Discriminator', value=ctx.message.author.discriminator, inline=True)
-            emWhois.add_field(name='ID', value=ctx.message.author.id, inline=True)
-            emWhois.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
-            emWhois.set_image(url=ctx.message.author.avatar_url)
-            await ctx.send(embed=emWhois)
+            if len(ctx.message.mentions) > 0:
+                if len(ctx.message.mentions) > 3:
+                    await ctx.send(ctx.message.author.mention + ', you supplied more than 3 users to lookup. Because of this, the userinfo is being sent to your DMs.')
+                    for user in ctx.message.mentions:
+                        emWhois = discord.Embed(title='User Info', color=0x00ff00)
+                        emWhois.add_field(name='Nickname', value=user.display_name, inline=True)
+                        emWhois.add_field(name='Global Name', value=user.name, inline=True)
+                        emWhois.add_field(name='Discriminator', value=user.discriminator, inline=True)
+                        emWhois.add_field(name='ID', value=user.id, inline=True)
+                        if ctx.author.bot:
+                            emWhois.add_field(name='===== BOT =====', inline=False)
+                        emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
+                        emWhois.set_image(url=user.avatar_url)
+                        await ctx.author.send(embed=emWhois)
+                else:
+                    for user in message.mentions:
+                        emWhois = discord.Embed(title='User Info', color=0x00ff00)
+                        emWhois.add_field(name='Nickname', value=user.display_name, inline=True)
+                        emWhois.add_field(name='Global Name', value=user.name, inline=True)
+                        emWhois.add_field(name='Discriminator', value=user.discriminator, inline=True)
+                        emWhois.add_field(name='ID', value=user.id, inline=True)
+                        if ctx.author.bot:
+                            emWhois.add_field(name='===== BOT =====', inline=False)
+                        emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
+                        emWhois.set_image(url=user.avatar_url)
+                        await ctx.send(embed=emWhois)
+            else:
+                emWhois = discord.Embed(title='User Info', color=0x00ff00)
+                emWhois.add_field(name='Nickname', value=ctx.message.author.display_name, inline=True)
+                emWhois.add_field(name='Global Name', value=ctx.message.author.name, inline=True)
+                emWhois.add_field(name='Discriminator', value=ctx.message.author.discriminator, inline=True)
+                emWhois.add_field(name='ID', value=ctx.message.author.id, inline=True)
+                if ctx.author.bot:
+                    emWhois.add_field(name='===== BOT =====', inline=False)
+                emWhois.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
+                emWhois.set_image(url=ctx.message.author.avatar_url)
+                await ctx.send(embed=emWhois)
 
 def setup(bot):
     bot.add_cog(basicCog(bot))
