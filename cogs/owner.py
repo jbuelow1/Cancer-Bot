@@ -29,14 +29,15 @@ class ownerCog:
     @commands.command(name='lsreport', hidden=True)
     @commands.is_owner()
     async def lsreport(self, ctx):
-        try:
-            d = json.dump(self.bot.__dict__)
-        except:
-            await ctx.send(':warning: The JSON dump failed! :warning:')
-        else:
-            f = io.StringIO(d)
-            file = discord.File(d, filename='dump.json')
-            await ctx.send(':white_check_mark: Done! :white_check_mark:', file=file)
+        async with ctx.typing():
+            try:
+                d = json.dump(self.bot.__dict__)
+            except:
+                await ctx.send(':warning: The JSON dump failed! :warning:')
+            else:
+                f = io.StringIO(d)
+                file = discord.File(d, filename='dump.json')
+                await ctx.send(':white_check_mark: Done! :white_check_mark:', file=file)
 
 
     @commands.command(name='suggest', usage='<Text>', brief='Sends senpai your "wonderful" ideas')
