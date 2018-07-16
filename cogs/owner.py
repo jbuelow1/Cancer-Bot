@@ -32,7 +32,7 @@ class ownerCog:
     async def lsreport(self, ctx):
         async with ctx.typing():
             try:
-                d = json.dump(self.bot.__dict__)
+                d = json.dumps(self.bot.__dict__)
             except:
                 traceback.print_exc()
                 await ctx.send(':warning: The JSON dump failed! :warning:')
