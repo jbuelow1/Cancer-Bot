@@ -3,7 +3,7 @@ import discord
 
 import json
 import io
-import sys
+import traceback
 
 class ownerCog:
     def __init__(self, bot):
@@ -34,8 +34,8 @@ class ownerCog:
             try:
                 d = json.dump(self.bot.__dict__)
             except:
-                print(sys.exc_info()[0])
-                await ctx.send(':warning: The JSON dump failed! :warning:```' + str(sys.exc_info[0]) + '```')
+                traceback.print_exc()
+                await ctx.send(':warning: The JSON dump failed! :warning:')
             else:
                 f = io.StringIO(d)
                 file = discord.File(d, filename='dump.json')
