@@ -34,6 +34,7 @@ class ownerCog:
             try:
                 d = json.dump(self.bot.__dict__)
             except:
+                print(sys.exc_info()[0])
                 await ctx.send(':warning: The JSON dump failed! :warning:```' + sys.exc_info[0] + '```')
             else:
                 f = io.StringIO(d)
