@@ -183,11 +183,11 @@ class imagesCog:
                         image = self.picInPic(image, background, (350, 300), (625, 400))
 
                         output = BytesIO()
-                        image.save(output, format="GIF")
+                        image.save(output, format="PNG")
                         image = output.getvalue()
                         output.close()
 
-                        outputImages.append(discord.File(BytesIO(image), filename='unfortunate' + str(filenum) + '.gif'))
+                        outputImages.append(discord.File(BytesIO(image), filename='unfortunate' + str(filenum) + '.png'))
                         filenum += 1
                         print(outputImages)
                     await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
