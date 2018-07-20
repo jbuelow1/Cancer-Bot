@@ -26,6 +26,7 @@ class copypastaCog:
     @commands.command(category='copypasta', name='bee', usage='', brief='why? (spam warning)')
     @commands.cooldown(1, 300, commands.BucketType.channel)
     async def beePasta(self, ctx):
+        print(getting upvotes...)
         upvotes = await dblpy.get_upvote_info()
         print(str(upvotes))
         f = open('copypastas/bee.txt', mode='r')
