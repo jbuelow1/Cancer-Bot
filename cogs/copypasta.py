@@ -27,6 +27,7 @@ class copypastaCog:
         print('checking for users upvote status...')
         headers = {'Content-Type': 'application/json', 'Authorization': self.dbltoken}
         r = requests.get('https://discordbots.org/api/bots/439851454203691019/check?userId=' + ctx.author.id, headers=headers)
+        print("done")
         if r.status_code == 200:
             print(r.json())
         print(str(voted))
