@@ -5,6 +5,7 @@ import dbl
 import os
 import requests
 import textwrap
+import configparser
 
 class copypastaCog:
     def __init__(self, bot):
