@@ -19,6 +19,7 @@ class copypastaCog:
             print('Could not find a config file for dbl. HOW THE FUCK AM I RUNNING????')
 
     async def has_voted(ctx):
+        filename = "ifr.cfg"
         if os.path.isfile(filename):
             config = configparser.ConfigParser()
             config.read(filename)
