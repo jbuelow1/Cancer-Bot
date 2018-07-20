@@ -5,7 +5,6 @@ import os
 import requests
 import textwrap
 import configparser
-import ast
 
 class copypastaCog:
     def __init__(self, bot):
@@ -30,7 +29,7 @@ class copypastaCog:
         headers['Authorization'] = dbltoken
         r = requests.get('https://discordbots.org/api/bots/439851454203691019/check?userId=' + str(ctx.author.id), headers=headers)
         if r.status_code == 200:
-            rdict = ast.literal_eval(r.json())
+            rdict = r.json()
             if rdict['voted'] == 1:
                 return True
             if rdict['voted'] == 0:
