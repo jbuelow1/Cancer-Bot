@@ -25,8 +25,8 @@ class copypastaCog:
     @commands.cooldown(1, 300, commands.BucketType.channel)
     async def beePasta(self, ctx):
         print('checking for users upvote status...')
-        print('i am a nigger')
-        print('user id: ' + str(ctx.author.id))
+        print('i am a true nigger')
+        print(str(ctx.author.id))
         print(self.dbltoken)
         headers = {'Content-Type': 'application/json', 'Authorization': self.dbltoken}
         r = requests.get('https://discordbots.org/api/bots/439851454203691019/check?userId=' + ctx.author.id, headers=headers)
