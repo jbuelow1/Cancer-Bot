@@ -1,6 +1,5 @@
 from discord.ext import commands
 import discord
-import dbl
 
 import os
 import requests
@@ -14,10 +13,9 @@ class copypastaCog:
         if os.path.isfile(filename):
             config = configparser.ConfigParser()
             config.read(filename)
-            token = config.get("config", "dbltoken")
+            self.dbltoken = config.get("config", "dbltoken")
         else:
             print('Could not find a config file for dbl. HOW THE FUCK AM I RUNNING????')
-        self.dblpy = dbl.Client(self.bot, token)
 
     @commands.command(category='copypasta', name='fit', usage='', brief='Gotta stay fit, kids')
     async def fitPasta(self, ctx):
@@ -26,9 +24,12 @@ class copypastaCog:
     @commands.command(category='copypasta', name='bee', usage='', brief='why? (spam warning)')
     @commands.cooldown(1, 300, commands.BucketType.channel)
     async def beePasta(self, ctx):
-        print('getting upvotes...')
-        upvotes = await dblpy.get_upvote_info()
-        print(str(upvotes))
+        print('checking for users upvote status...')
+        headers = {'Content-Type': 'application/json', 'Authorization': self.dbltoken}
+        r = requests.get('https://discordbots.org/api/bots/439851454203691019/check?userId=' + ctx.author.id, headers=headers)
+        if r.status_code == 200:
+            print(r.json())
+        print(str(voted))
         f = open('copypastas/bee.txt', mode='r')
         pasta = f.read()
         lines = textwrap.wrap(pasta, width=1990)
