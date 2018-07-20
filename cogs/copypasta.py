@@ -1,5 +1,6 @@
 from discord.ext import commands
 import discord
+import dbl
 
 import requests
 import textwrap
@@ -7,6 +8,14 @@ import textwrap
 class copypastaCog:
     def __init__(self, bot):
         self.bot = bot
+        filename = "ifr.cfg"
+        if os.path.isfile(filename):
+            config = configparser.ConfigParser()
+            config.read(filename)
+            token = config.get("config", "dbltoken")
+        else:
+            print('Could not find a config file for dbl. HOW THE FUCK AM I RUNNING????')
+        self.dblpy = dbl.Client(self.bot, token)
 
     @commands.command(category='copypasta', name='fit', usage='', brief='Gotta stay fit, kids')
     async def fitPasta(self, ctx):
@@ -15,6 +24,8 @@ class copypastaCog:
     @commands.command(category='copypasta', name='bee', usage='', brief='why? (spam warning)')
     @commands.cooldown(1, 300, commands.BucketType.channel)
     async def beePasta(self, ctx):
+        upvotes = await dblpy.get_upvote_info()
+        print(str(upvotes))
         f = open('copypastas/bee.txt', mode='r')
         pasta = f.read()
         lines = textwrap.wrap(pasta, width=1990)
