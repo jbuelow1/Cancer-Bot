@@ -19,8 +19,14 @@ class copypastaCog:
             print('Could not find a config file for dbl. HOW THE FUCK AM I RUNNING????')
 
     async def has_voted(ctx):
+        if os.path.isfile(filename):
+            config = configparser.ConfigParser()
+            config.read(filename)
+            dbltoken = config.get("config", "dbltoken")
+        else:
+            print('Could not find a config file for dbl. HOW THE FUCK AM I RUNNING????')
         headers = {'Content-Type': 'application/json'}
-        headers['Authorization'] = self.dbltoken
+        headers['Authorization'] = dbltoken
         r = requests.get('https://discordbots.org/api/bots/439851454203691019/check?userId=' + str(ctx.author.id), headers=headers)
         if r.status_code == 200:
             rdict = ast.literal_eval(r.json())
