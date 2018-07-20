@@ -2,6 +2,7 @@ from discord.ext import commands
 import discord
 import dbl
 
+import os
 import requests
 import textwrap
 
