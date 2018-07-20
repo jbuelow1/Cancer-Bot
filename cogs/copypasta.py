@@ -28,7 +28,8 @@ class copypastaCog:
         print('i am a true nigger')
         print(ctx.author.id)
         print(self.dbltoken)
-        headers = {'Content-Type': 'application/json', 'Authorization': self.dbltoken}
+        headers = {'Content-Type': 'application/json'}
+        headers['Authorization'] = self.dbltoken
         print(headers)
         r = requests.get('https://discordbots.org/api/bots/439851454203691019/check?userId=' + ctx.author.id, headers=headers)
         print("done")
