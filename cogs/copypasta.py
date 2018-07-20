@@ -25,11 +25,11 @@ class copypastaCog:
     @commands.cooldown(1, 300, commands.BucketType.channel)
     async def beePasta(self, ctx):
         print('checking for users upvote status...')
-        print(ctx.author.id)
+        print(str(ctx.author.id))
         print(self.dbltoken)
         headers = {'Content-Type': 'application/json'}
         headers['Authorization'] = self.dbltoken
-        r = requests.get('https://discordbots.org/api/bots/439851454203691019/check?userId=' + ctx.author.id, headers=headers)
+        r = requests.get('https://discordbots.org/api/bots/439851454203691019/check?userId=' + str(ctx.author.id), headers=headers)
         print("done")
         if r.status_code == 200:
             print(r.json())
