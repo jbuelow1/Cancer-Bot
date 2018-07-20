@@ -30,7 +30,6 @@ class copypastaCog:
         print(self.dbltoken)
         headers = {'Content-Type': 'application/json'}
         headers['Authorization'] = self.dbltoken
-        print(headers)
         r = requests.get('https://discordbots.org/api/bots/439851454203691019/check?userId=' + ctx.author.id, headers=headers)
         print("done")
         if r.status_code == 200:
