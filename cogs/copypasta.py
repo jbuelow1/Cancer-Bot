@@ -26,9 +26,10 @@ class copypastaCog:
     async def beePasta(self, ctx):
         print('checking for users upvote status...')
         print('i am a true nigger')
-        print(str(ctx.author.id))
+        print(ctx.author.id)
         print(self.dbltoken)
         headers = {'Content-Type': 'application/json', 'Authorization': self.dbltoken}
+        print(headers)
         r = requests.get('https://discordbots.org/api/bots/439851454203691019/check?userId=' + ctx.author.id, headers=headers)
         print("done")
         if r.status_code == 200:
