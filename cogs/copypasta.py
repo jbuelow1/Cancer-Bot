@@ -18,7 +18,7 @@ class copypastaCog:
         else:
             print('Could not find a config file for dbl. HOW THE FUCK AM I RUNNING????')
 
-    async def has_voted(self, ctx):
+    async def has_voted(ctx):
         headers = {'Content-Type': 'application/json'}
         headers['Authorization'] = self.dbltoken
         r = requests.get('https://discordbots.org/api/bots/439851454203691019/check?userId=' + str(ctx.author.id), headers=headers)
@@ -36,7 +36,7 @@ class copypastaCog:
 
     @commands.command(category='copypasta', name='bee', usage='', brief='why? (spam warning)')
     @commands.cooldown(1, 300, commands.BucketType.channel)
-    @commands.check(self.has_voted)
+    @commands.check(has_voted)
     async def beePasta(self, ctx):
         f = open('copypastas/bee.txt', mode='r')
         pasta = f.read()
