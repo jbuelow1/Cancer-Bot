@@ -17,10 +17,13 @@ class imagesCog:
     def getImages(self, message):
         images = []
         for attachment in message.attachments:
-            if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp'):
+            if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp', '.gif'):
                 image_request_result = requests.get(attachment.url)
                 image = Image.open(BytesIO(image_request_result.content))
                 images.append(image)
+            '''else if os.path.splitext(attachment.filename)[1].lower() in ('.gif'):
+                #add check for voted user here'''
+
         for user in message.mentions:
             image_request_result = requests.get(user.avatar_url)
             image = Image.open(BytesIO(image_request_result.content))
