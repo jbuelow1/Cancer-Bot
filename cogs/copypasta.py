@@ -36,7 +36,7 @@ class copypastaCog:
 
     @commands.command(category='copypasta', name='bee', usage='', brief='why? (spam warning)')
     @commands.cooldown(1, 300, commands.BucketType.channel)
-    @commands.check(has_voted)
+    @commands.check(self.has_voted)
     async def beePasta(self, ctx):
         f = open('copypastas/bee.txt', mode='r')
         pasta = f.read()
