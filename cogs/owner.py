@@ -11,11 +11,12 @@ class ownerCog:
 
     async def on_guild_join(self, guild):
         owner = await self.bot.get_user_info('273940917596061698')
-        guildDesc = 'Name: `' + guild.name + '`\nMember count: `' + str(guild.member_count) + '`\nID: `' + str(guild.id) + '`\nChannels: `' + str(len(guild.channels)) + '`\nCreated at: `' + str(guild.created_at) + '`\nisLarge: `' + str(guild.large) + '`\nOwner: `' + str(guild.owner) + '`\nOwner ID: `' + str(guild.owner.id) + '`'
+        guildDesc = 'Name:          `' + guild.name + '`\nMembers:   `' + str(guild.member_count) + '`\nID:                 `' + str(guild.id) + '`\nChannels:   `' + str(len(guild.channels)) + '`\nCreated at: `' + str(guild.created_at) + '`\nisLarge:       `' + str(guild.large) + '`\nOwner:         `' + str(guild.owner) + '`\nOwner ID:    `' + str(guild.owner.id) + '`'
         if (len(guild.features) > 0):
             guildDesc += '\n\n𝓢𝓹𝓮𝓬𝓲𝓪𝓵 𝓕𝓮𝓪𝓽𝓾𝓻𝓮𝓼: `' + str(guild.features) + '`'
         em = discord.Embed(title='Guild Join', description=guildDesc)
         em.set_image(url=guild.icon_url)
+        em.set_thumbnail(url=guild.owner.avatar_url)
         await owner.send(embed=em)
 
     @commands.command(name='lsguilds', hidden=True)
