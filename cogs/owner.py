@@ -35,7 +35,7 @@ class ownerCog:
         guildList = ''
         for guild in self.bot.guilds:
             guildList = guildList + guild.name + '\n'
-        emLsGuilds = discord.Embed(title='Cancer Bot\'s Guild List', description=guildList)
+        emLsGuilds = discord.Embed(title='Cancer Bot\'s Guild List', description=guildList, color=0xffff00)
         await ctx.send(embed=emLsGuilds)
 
     #why in the actual fucking fuck did i decide to make this command? Like when the fuck will i even use this shit???? ITS SO FUCKING LONG!!!! WHY!!!! WHY THE FUCK DID I WASTE SOOO MUCH FUCKING TIME DOING THIS SHIT?!?!??!?! REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
