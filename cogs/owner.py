@@ -35,11 +35,11 @@ class ownerCog:
         guildList = ''
         for guild in self.bot.guilds:
             if len(guildList) < 2040:
-                guildList = guildList + str(guild.id) + ' | ' + guild.name + '\n'
+                guildList = guildList + '`' + str(guild.id) + '` | ' + guild.name + '\n'
             else:
                 emLsGuilds = discord.Embed(title='Cancer Bot\'s Guild List', description=guildList, color=0xffff00)
                 await ctx.send(embed=emLsGuilds)
-                guildList = str(guild.id) + ' | ' + guild.name + '\n'
+                guildList = '`' + str(guild.id) + '` | ' + guild.name + '\n'
         emLsGuilds = discord.Embed(title='Cancer Bot\'s Guild List', description=guildList, color=0xffff00)
         await ctx.send(embed=emLsGuilds)
 
