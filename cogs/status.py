@@ -52,7 +52,7 @@ class statusCog:
                 try:
                     await self.bot.change_presence(game=discord.Game(name=random.choice(stati)))
                     await asyncio.sleep(20)
-                    await self.bot.change_presence(game=discord.Game(name=random.choice(helpStati) + ' in ' + str(len(self.bot.guilds) - 2) + ' servers'))
+                    await self.bot.change_presence(game=discord.Game(name=random.choice(helpStati) + ' in ' + str(len(self.bot.guilds)) + ' servers'))
                     await asyncio.sleep(10)
                 except:
                     print('[WARN] Setting status message failed! Either this server is offline, or the API is down.')
