@@ -24,7 +24,27 @@ class statusCog:
 
         self.bot.loop.create_task(status_change())
 
-    @commands.group(name='addstatus', hidden=True)
+    async def has_voted(ctx):
+        filename = "ifr.cfg"
+        if os.path.isfile(filename):
+            config = configparser.ConfigParser()
+            config.read(filename)
+            dbltoken = config.get("config", "dbltoken")
+        else:
+            print('Could not find a config file for dbl. HOW THE FUCK AM I RUNNING????')
+        headers = {'Content-Type': 'application/json'}
+        headers['Authorization'] = dbltoken
+        r = requests.get('https://discordbots.org/api/bots/439851454203691019/check?userId=' + str(ctx.author.id), headers=headers)
+        if r.status_code == 200:
+            rdict = r.json()
+            if rdict['voted'] == 1:
+                return True
+            if rdict['voted'] == 0:
+                await ctx.send(':no_entry_sign: Woah there! Seems like you havent voted today! Try using this command again once you have voted. :no_entry_sign:\nVote for Cancer Bot at: https://discordbots.org/bot/439851454203691019/vote')
+                return False
+
+    @commands.group(name='addstatus', hidden=True, invoke_without_command=True)
+    @commands.check(has_voted)
     async def addstatus(self, ctx):
         await ctx.send(':warning: Use `?/addstatus status <status>` or `?/addstatus help <status>`. :warning:')
 
