@@ -4,52 +4,17 @@ import discord
 import random
 import asyncio
 import time
+import pickle
 
 class statusCog:
     def __init__(self, bot):
         self.bot = bot
 
         async def status_change():
-            stati = [
-            'with little children', #CBP
-            'with ur mum XD', #CBP
-            '( ͡° ͜ʖ ͡°)',
-            'with big, big balls', #CBP
-            'FORTNITE XD XD',
-            'yeeting babies', #CBP
-            'deepfrying the memes',
-            'bepis simulator',
-            'with myself', #CBP
-            'with my peepee', #CBP
-            'with mommy\'s peepee', #CBP
-            'midget basketball', #CBP
-            'with my rocket', #CBP
-            'with the anthros', #CBP
-            'peek a boo ( ͡° ͜ʖ ͡°)', #CBP
-            'on e621', #CBP
-            'lewding lolis', #CBP
-            'dead',
-            'alone',
-            'Discord',
-            'with high voltage',
-            'on a shitty server', #CBP
-            'in the street', #CBP
-            'with lives of the innocent', #CBP
-            'rm -rf /',
-            'with 14 werewolves', #CBP
-            'in a back alley' #CBP
-            ]
-
-            helpStati = [
-            'type ?/help',
-            'try ?/help',
-            'use ?/help',
-            'say ?/help',
-            '?/help'
-            ]
-
             while True:
                 try:
+                    with open('status.pkl', 'rb') as f:
+                        stati, helpStati = pickle.load(f)
                     await self.bot.change_presence(game=discord.Game(name=random.choice(stati)))
                     await asyncio.sleep(20)
                     await self.bot.change_presence(game=discord.Game(name=random.choice(helpStati) + ' in ' + str(len(self.bot.guilds)) + ' servers'))
@@ -58,6 +23,26 @@ class statusCog:
                     print('[WARN] Setting status message failed! Either this server is offline, or the API is down.')
 
         self.bot.loop.create_task(status_change())
+
+    @commands.group(name='addstatus', hidden=True)
+    async def addstatus(self, ctx, *, arg):
+        await ctx.send(':warning: Use `?/addstatus status <status>` or `?/addstatus help <status>`. :warning:')
+
+    @addstatus.command(name='status', hidden=True)
+    async def addstatusstatus(self, ctx, *, arg):
+        with open('status.pkl', 'rb') as f:
+            stati, helpStati = pickle.load(f)
+        stati.append(arg)
+        with open('status.pkl', 'wb') as f:
+            pickle.dump([stati, helpStati], f)
+
+    @addstatus.command(name='help', hidden=True)
+    async def addhelpstatus(self, ctx, *, arg):
+        with open('status.pkl', 'rb') as f:
+            stati, helpStati = pickle.load(f)
+        helpStati.append(arg)
+        with open('status.pkl', 'wb') as f:
+            pickle.dump([stati, helpStati], f)
 
 def setup(bot):
     bot.add_cog(statusCog(bot))
