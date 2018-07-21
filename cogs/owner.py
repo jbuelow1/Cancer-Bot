@@ -14,7 +14,17 @@ class ownerCog:
         guildDesc = 'Name:          `' + guild.name + '`\nMembers:   `' + str(guild.member_count) + '`\nID:                 `' + str(guild.id) + '`\nChannels:   `' + str(len(guild.channels)) + '`\nCreated at: `' + str(guild.created_at) + '`\nisLarge:       `' + str(guild.large) + '`\nOwner:         `' + str(guild.owner) + '`\nOwner ID:    `' + str(guild.owner.id) + '`'
         if (len(guild.features) > 0):
             guildDesc += '\n\n𝓢𝓹𝓮𝓬𝓲𝓪𝓵 𝓕𝓮𝓪𝓽𝓾𝓻𝓮𝓼: `' + str(guild.features) + '`'
-        em = discord.Embed(title='Guild Join', description=guildDesc)
+        em = discord.Embed(title='Guild Join', description=guildDesc, color=0x00ff00)
+        em.set_image(url=guild.icon_url)
+        em.set_thumbnail(url=guild.owner.avatar_url)
+        await owner.send(embed=em)
+
+    async def on_guild_remove(self, guild):
+        owner = await self.bot.get_user_info('273940917596061698')
+        guildDesc = 'Name:          `' + guild.name + '`\nMembers:   `' + str(guild.member_count) + '`\nID:                 `' + str(guild.id) + '`\nChannels:   `' + str(len(guild.channels)) + '`\nCreated at: `' + str(guild.created_at) + '`\nisLarge:       `' + str(guild.large) + '`\nOwner:         `' + str(guild.owner) + '`\nOwner ID:    `' + str(guild.owner.id) + '`'
+        if (len(guild.features) > 0):
+            guildDesc += '\n\n𝓢𝓹𝓮𝓬𝓲𝓪𝓵 𝓕𝓮𝓪𝓽𝓾𝓻𝓮𝓼: `' + str(guild.features) + '`'
+        em = discord.Embed(title='Guild Leave', description=guildDesc, color=0xff0000)
         em.set_image(url=guild.icon_url)
         em.set_thumbnail(url=guild.owner.avatar_url)
         await owner.send(embed=em)
