@@ -34,7 +34,13 @@ class ownerCog:
     async def lsguilds(self, ctx):
         guildList = ''
         for guild in self.bot.guilds:
-            guildList = guildList + str(guild.id) + ' | ' + guild.name + '\n'
+            if len(guildList) < 2000:
+                guildList = guildList + str(guild.id) + ' | ' + guild.name + '\n'
+            else:
+                guildList = guildList + str(guild.id) + ' | ' + guild.name + '\n'
+                emLsGuilds = discord.Embed(title='Cancer Bot\'s Guild List', description=guildList, color=0xffff00)
+                await ctx.send(embed=emLsGuilds)
+                guildList = ''
         emLsGuilds = discord.Embed(title='Cancer Bot\'s Guild List', description=guildList, color=0xffff00)
         await ctx.send(embed=emLsGuilds)
 
