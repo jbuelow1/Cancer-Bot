@@ -114,7 +114,7 @@ class triggerCog:
             else:
                 await message.channel.send(embed=emBleach)
 
-        elif self.bot.user.mentioned_in(message):
+        elif self.bot.user.mentioned_in(message) and not message.mention_everyone:
             self.bot.striggers += 1
             self.bot.utriggers += 1
             await message.channel.trigger_typing()
