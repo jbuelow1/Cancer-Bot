@@ -44,11 +44,12 @@ class statusCog:
                 return False
 
     @commands.group(name='addstatus', hidden=True, invoke_without_command=True)
-    @commands.check(has_voted)
     async def addstatus(self, ctx):
         await ctx.send(':warning: Use `?/addstatus status <status>` or `?/addstatus help <status>`. :warning:')
 
     @addstatus.command(name='status', hidden=True)
+    @commands.cooldown(1, 86400, commands.BucketType.user)
+    @commands.check(has_voted)
     async def addstatusstatus(self, ctx, *, arg):
         with open('status.pkl', 'rb') as f:
             stati, helpStati = pickle.load(f)
@@ -57,6 +58,8 @@ class statusCog:
             pickle.dump([stati, helpStati], f)
 
     @addstatus.command(name='help', hidden=True)
+    @commands.cooldown(1, 86400, commands.BucketType.user)
+    @commands.check(has_voted)
     async def addhelpstatus(self, ctx, *, arg):
         with open('status.pkl', 'rb') as f:
             stati, helpStati = pickle.load(f)
