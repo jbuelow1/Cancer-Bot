@@ -15,7 +15,7 @@ class ownerCog:
         if (len(guild.features) > 0):
             guildDesc += '\n\n𝓢𝓹𝓮𝓬𝓲𝓪𝓵 𝓕𝓮𝓪𝓽𝓾𝓻𝓮𝓼: `' + str(guild.features) + '`'
         em = discord.Embed(title='Guild Join', description=guildDesc)
-        em.set_image(url=guild.icon)
+        em.set_image(url=guild.icon_url)
         await owner.send(embed=em)
 
     @commands.command(name='lsguilds', hidden=True)
