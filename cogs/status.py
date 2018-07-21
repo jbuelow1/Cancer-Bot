@@ -25,7 +25,7 @@ class statusCog:
         self.bot.loop.create_task(status_change())
 
     @commands.group(name='addstatus', hidden=True)
-    async def addstatus(self, ctx, *, arg):
+    async def addstatus(self, ctx):
         await ctx.send(':warning: Use `?/addstatus status <status>` or `?/addstatus help <status>`. :warning:')
 
     @addstatus.command(name='status', hidden=True)
