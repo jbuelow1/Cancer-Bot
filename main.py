@@ -35,7 +35,7 @@ def get_prefix(bot, message):
 initial_extensions = [
 'cogs.manager',
 'cogs.owner',
-#'cogs.status',
+'cogs.status',
 'cogs.trigger',
 'cogs.basic',
 'cogs.stats',

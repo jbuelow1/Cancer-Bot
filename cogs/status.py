@@ -12,15 +12,18 @@ class statusCog:
 
         async def status_change():
             while True:
+                with open('status.pkl', 'rb') as f:
+                    stati, helpStati = pickle.load(f)
                 try:
-                    with open('status.pkl', 'rb') as f:
-                        stati, helpStati = pickle.load(f)
                     await self.bot.change_presence(game=discord.Game(name=random.choice(stati)))
-                    await asyncio.sleep(20)
-                    await self.bot.change_presence(game=discord.Game(name=random.choice(helpStati) + ' in ' + str(len(self.bot.guilds)) + ' servers'))
-                    await asyncio.sleep(10)
                 except:
                     print('[WARN] Setting status message failed! Either this server is offline, or the API is down.')
+                await asyncio.sleep(20)
+                try:
+                    await self.bot.change_presence(game=discord.Game(name=random.choice(helpStati) + ' in ' + str(len(self.bot.guilds)) + ' servers'))
+                except:
+                    print('[WARN] Setting status message failed! Either this server is offline, or the API is down.')
+                await asyncio.sleep(10)
 
         self.bot.loop.create_task(status_change())
 
