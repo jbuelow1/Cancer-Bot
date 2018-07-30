@@ -21,7 +21,7 @@ class imagesCog:
                 image_request_result = requests.get(attachment.url)
                 image = Image.open(BytesIO(image_request_result.content))
                 images.append(image)
-            else if os.path.splitext(attachment.filename)[1].lower() in ('.gif'):
+            elif os.path.splitext(attachment.filename)[1].lower() in ('.gif'):
                 image_request_result = requests.get(attachment.url)
                 image = Image.open(BytesIO(image_request_result.content))
                 if not True: #if not has_voted
