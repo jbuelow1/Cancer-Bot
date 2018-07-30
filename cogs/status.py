@@ -5,6 +5,7 @@ import random
 import asyncio
 import time
 import pickle
+import os
 
 class statusCog:
     def __init__(self, bot):
