@@ -7,6 +7,7 @@ import time
 import pickle
 import os
 import configparser
+import requests
 
 class statusCog:
     def __init__(self, bot):
