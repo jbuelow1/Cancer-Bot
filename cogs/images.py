@@ -17,12 +17,20 @@ class imagesCog:
     def getImages(self, message):
         images = []
         for attachment in message.attachments:
-            if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp', '.gif'):
+            if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp'):
                 image_request_result = requests.get(attachment.url)
                 image = Image.open(BytesIO(image_request_result.content))
                 images.append(image)
-            '''else if os.path.splitext(attachment.filename)[1].lower() in ('.gif'):
-                #add check for voted user here'''
+            else if os.path.splitext(attachment.filename)[1].lower() in ('.gif'):
+                image_request_result = requests.get(attachment.url)
+                image = Image.open(BytesIO(image_request_result.content))
+                if not True: #if not has_voted
+                    output = BytesIO()
+                    image.save(output, save_all=False, format='GIF')
+                    frame = output.getvalue()
+                    output.close()
+                    image = Image.open(BytesIO(frame))
+                    images.append(image)
 
         for user in message.mentions:
             image_request_result = requests.get(user.avatar_url)
@@ -39,7 +47,7 @@ class imagesCog:
                 break"""
         return images
 
-    def addjpeg(self, image, quality=1):
+    def addjpeg(self, image, quality=1, voted=False):
         image = image.convert('RGB')
         output = BytesIO()
         image.save(output, format="JPEG", quality=quality)
@@ -48,14 +56,9 @@ class imagesCog:
         done = Image.open(BytesIO(done))
         return done
 
-    def unsharpenimg(self, image, ammount=80000):
+    def unsharpenimg(self, image, ammount=80000, voted=False):
         image = image.filter(ImageFilter.UnsharpMask(ammount,ammount,0))
-        output = BytesIO()
-        image.save(output, format="PNG")
-        done = output.getvalue()
-        output.close()
-        done = Image.open(BytesIO(done))
-        return done
+        return image
 
     def rescale(self, img, max_width, max_height, force=True):
     	"""Rescale the given image, optionally cropping it to make sure the result image has the specified width and height."""
@@ -83,7 +86,7 @@ class imagesCog:
     	return img
 
 
-    def picInPic(self, image, background, size, location):
+    def picInPic(self, image, background, size, location, voted=False):
         image = image.convert('RGBA')
         image = self.rescale(image, size[0], size[1], True)
         background.paste(image, location, mask=image)
