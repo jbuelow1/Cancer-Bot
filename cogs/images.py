@@ -17,11 +17,11 @@ class imagesCog:
     def getImages(self, message):
         images = []
         for attachment in message.attachments:
-            if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp'):
+            if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp','.gif'):
                 image_request_result = requests.get(attachment.url)
                 image = Image.open(BytesIO(image_request_result.content))
                 images.append(image)
-            else if os.path.splitext(attachment.filename)[1].lower() in ('.gif'):
+            '''else if os.path.splitext(attachment.filename)[1].lower() in ('.gif'):
                 image_request_result = requests.get(attachment.url)
                 image = Image.open(BytesIO(image_request_result.content))
                 if not True: #if not has_voted
@@ -30,7 +30,7 @@ class imagesCog:
                     frame = output.getvalue()
                     output.close()
                     image = Image.open(BytesIO(frame))
-                    images.append(image)
+                    images.append(image)'''
 
         for user in message.mentions:
             image_request_result = requests.get(user.avatar_url)
