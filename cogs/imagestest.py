@@ -58,7 +58,7 @@ class imagesCog:
             image = image.convert('RGBA')
             image = image.filter(ImageFilter.UnsharpMask(ammount,ammount,0))
         output = BytesIO()
-        image.save(output, format=image.format, save_all=voted)
+        image.save(output, format='GIF', save_all=voted)
         done = output.getvalue()
         output.close()
         return BytesIO(done)
