@@ -17,24 +17,14 @@ class imagesCog:
     def getImages(self, message):
         images = []
         for attachment in message.attachments:
-            if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp'):
+            if os.path.splitext(attachment.filename)[1].lower() in ('.png', '.jpg', '.jpeg', '.bmp','.gif'):
                 image_request_result = requests.get(attachment.url)
-                image = Image.open(BytesIO(image_request_result.content))
+                image = BytesIO(image_request_result.content)
                 images.append(image)
-            elif os.path.splitext(attachment.filename)[1].lower() in ('.gif'):
-                image_request_result = requests.get(attachment.url)
-                image = Image.open(BytesIO(image_request_result.content))
-                if not True: #if not has_voted
-                    output = BytesIO()
-                    image.save(output, save_all=False, format='GIF')
-                    frame = output.getvalue()
-                    output.close()
-                    image = Image.open(BytesIO(frame))
-                    images.append(image)
 
         for user in message.mentions:
             image_request_result = requests.get(user.avatar_url)
-            image = Image.open(BytesIO(image_request_result.content))
+            image = BytesIO(image_request_result.content)
             images.append(image)
         """messages = await message.channel.history(limit=25).flatten()
         for testMessage in messages:
@@ -48,13 +38,13 @@ class imagesCog:
         return images
 
     def addjpeg(self, image, quality=1, voted=False):
+        image = Image.open(image)
         image = image.convert('RGB')
         output = BytesIO()
         image.save(output, format="JPEG", quality=quality)
         done = output.getvalue()
         output.close()
-        done = Image.open(BytesIO(done))
-        return done
+        return BytesIO(done)
 
     def unsharpenimg(self, image, ammount=80000, voted=False):
         image = image.filter(ImageFilter.UnsharpMask(ammount,ammount,0))
@@ -102,15 +92,10 @@ class imagesCog:
                 if len(images) < 10:
                     outputImages = []
                     filenum = 0
-                    for image in images:
-                        image = self.addjpeg(image)
+                    for imagef in images:
+                        image = self.addjpeg(imagef)
 
-                        output = BytesIO()
-                        image.save(output, format="PNG")
-                        image = output.getvalue()
-                        output.close()
-
-                        outputImages.append(discord.File(BytesIO(image), filename='jpeg' + str(filenum) + '.png'))
+                        outputImages.append(discord.File(image, filename='jpeg' + str(filenum) + '.png'))
                         filenum += 1
                         print(outputImages)
                     await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
