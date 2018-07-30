@@ -47,7 +47,21 @@ class imagesCog:
         return BytesIO(done)
 
     def unsharpenimg(self, image, ammount=80000, voted=False):
-        image = image.filter(ImageFilter.UnsharpMask(ammount,ammount,0))
+        image = Image.open(image)
+        if voted and image.format == 'GIF':
+            for _ in range(image.n_frames):
+                image = image.convert('RGBA')
+                image = image.filter(ImageFilter.UnsharpMask(ammount,ammount,0))
+                image.seek(image.tell() + 1)
+            image.seek(0)
+        else:
+            image = image.convert('RGBA')
+            image = image.filter(ImageFilter.UnsharpMask(ammount,ammount,0))
+        output = BytesIO()
+        image.save(output, format=image.format, save_all=voted)
+        done = output.getvalue()
+        output.close()
+        return BytesIO(done)
         return image
 
     def rescale(self, img, max_width, max_height, force=True):
@@ -114,7 +128,7 @@ class imagesCog:
                     outputImages = []
                     filenum = 0
                     for image in images:
-                        image = self.unsharpenimg(image, 20000)
+                        image = self.unsharpenimg(image, 20000, True)
 
                         output = BytesIO()
                         image.save(output, format="PNG")
