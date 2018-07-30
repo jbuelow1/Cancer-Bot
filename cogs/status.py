@@ -6,6 +6,7 @@ import asyncio
 import time
 import pickle
 import os
+import configparser
 
 class statusCog:
     def __init__(self, bot):
