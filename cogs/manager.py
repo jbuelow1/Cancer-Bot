@@ -2,6 +2,7 @@ from discord.ext import commands
 
 import py_compile
 import shutil
+import os
 
 class managerCog:
 
