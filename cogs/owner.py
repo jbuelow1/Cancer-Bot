@@ -60,9 +60,17 @@ class ownerCog:
 
 
     @commands.command(name='suggest', usage='<Text>', brief='Sends senpai your "wonderful" ideas')
+    @commands.cooldown(3, 86400, commands.BucketType.user)
     async def suggest(self, ctx, *, arg):
         owner = await self.bot.get_user_info('273940917596061698')
-        await owner.send('HEWWO SENPAI I HAS FEEDBACK FROM `' + str(ctx.message.author) + '`:```' + arg.replace('```', '<REMOVED>') + '```')
+        guildDesc = 'Name:          `' + ctx.guild.name + '`\nMembers:   `' + str(ctx.guild.member_count) + '`\nID:                 `' + str(ctx.guild.id) + '`\nChannels:   `' + str(len(ctx.guild.channels)) + '`\nCreated at: `' + str(ctx.guild.created_at) + '`\nisLarge:       `' + str(ctx.guild.large) + '`\nOwner:         `' + str(ctx.guild.owner) + '`\nOwner ID:    `' + str(ctx.guild.owner.id) + '`'
+        if (len(guild.features) > 0):
+            guildDesc += '\n\n𝓢𝓹𝓮𝓬𝓲𝓪𝓵 𝓕𝓮𝓪𝓽𝓾𝓻𝓮𝓼: `' + str(guild.features) + '`'
+        guildDesc += '\n\nFeedback:\n```' + arg.replace('```', '<REMOVED>') + '```'
+        em = discord.Embed(title='Feedback', description=guildDesc, color=0x00ff00)
+        em.set_image(url=ctx.author.avatar_url)
+        em.set_thumbnail(url=ctx.guild.icon_url)
+        await owner.send(embed=em)
         await ctx.send('Thanks for your feedback! Senpai has been notified!')
 
 def setup(bot):
