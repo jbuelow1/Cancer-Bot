@@ -11,6 +11,7 @@ class managerCog:
         self.bot = bot
         self.loadedmods = [
         'cogs.manager',
+        'cogs.errors',
         'cogs.owner',
         'cogs.status',
         'cogs.trigger',
