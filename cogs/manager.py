@@ -72,7 +72,7 @@ class managerCog:
     @commands.group(name='modman', hidden=True, invoke_without_command=True)
     @commands.check(is_dev)
     async def modman(self, ctx):
-        e = discord.Embed(title='No action specified', description='You can use:\n`load`\n`unload`\n`reload`\n`clear`\n~~`list`~~', color=0xff0000)
+        e = discord.Embed(title='No action specified', description='You can use:\n`load`\n`unload`\n`reload`\n`clear`\n`list`', color=0xff0000)
         e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
         await ctx.send(embed=e)
 
@@ -86,6 +86,8 @@ class managerCog:
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             await ctx.send(embed=e)
         else:
+            if not cog in self.loadedmods:
+                self.loadedmods.append(cog)
             e = discord.Embed(title='Module Loaded', color=0x00ff00)
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             e.add_field(name='Module', value=cog)
@@ -101,6 +103,8 @@ class managerCog:
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             await ctx.send(embed=e)
         else:
+            if cog in self.loadedmods:
+                self.loadedmods.remove(cog)
             e = discord.Embed(title='Module Unloaded', color=0x00ff00)
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             e.add_field(name='Module', value=cog)
@@ -117,6 +121,8 @@ class managerCog:
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             await ctx.send(embed=e)
         else:
+            if not cog in self.loadedmods:
+                self.loadedmods.append(cog)
             e = discord.Embed(title='Module Reloaded', color=0x00ff00)
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             e.add_field(name='Module', value=cog)
@@ -136,10 +142,12 @@ class managerCog:
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             await ctx.send(embed=e)
 
-    '''@modman.group(name='list', hidden=True, invoke_without_command=True)
+    @modman.group(name='list', hidden=True, invoke_without_command=True)
     @commands.check(is_dev)
     async def modmanList(self, ctx):
-        await ctx.send('You must specify ~~`all`~~, `avaliable` or ~~`loaded`~~.')
+        e = discord.Embed(title='No action specified', description='You can use:\n`avaliable`\n`loaded`', color=0xff0000)
+        e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
+        await ctx.send(embed=e)
 
     @modmanList.command(name='avaliable', hidden=True)
     @commands.check(is_dev)
@@ -147,8 +155,20 @@ class managerCog:
         mods = ''
         for file in os.listdir('./cogs'):
             if file.endswith('.py'):
-                mods += file.replace(file.split('.')[-1], '').replace('/','.') + '\n'
-        await ctx.send('Module listing complete:\n```' + mods + '```')'''
+                mods += '`cogs.' + file.split('.py')[0].replace('/','.') + '`\n'
+        e = discord.Embed(title='Avaliable Modules', description=mods, color=0x00ff00)
+        e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
+        await ctx.send(embed=e)
+
+    @modmanList.command(name='loaded', hidden=True)
+    @commands.check(is_dev)
+    async def modmanListLoaded(self, ctx):
+        mods = ''
+        for mod in self.loadedmods:
+            mods += '`' + mod + '`\n'
+        e = discord.Embed(title='Loaded Modules', description=mods, color=0x00ff00)
+        e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
+        await ctx.send(embed=e)
 
 def setup(bot):
     bot.add_cog(managerCog(bot))
