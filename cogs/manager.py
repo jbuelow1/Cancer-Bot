@@ -189,7 +189,7 @@ class managerCog:
             del lines[-1]
             del lines[-1]
             for file in lines:
-                files += file.split('|')[0].split(' ')[1] + ' - ' + file.split('|')[1].split(' ')[1] + ' edit(s)'
+                files += file.split('|')[0].split(' ')[1] + ' - ' + file.split('|')[1].split(' ')[1] + ' edit(s)\n'
             final = 'Repository: ' + output.decode().split('\n')[0].split(' ')[1] + '\nBranch: ' + output.decode().split('\n')[1].split(' ')[5] + '\n\n' + files
             e = discord.Embed(title='Files pulled from GitHub', description=final, color=0x00ff00)
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
