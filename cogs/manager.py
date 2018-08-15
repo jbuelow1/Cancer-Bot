@@ -186,10 +186,13 @@ class managerCog:
             await ctx.send('```' + output.decode() + '```')
             files = ''
             lines = output.decode().split('\n')
+            await ctx.send(str(len(lines)))
             del lines[:4]
             del lines[-1]
+            await ctx.send(str(len(lines)))
             for file in lines:
                 files += file.split('|')[0].split(' ')[0] + ' - ' + file.split('|')[1].split(' ')[1] + ' edits'
+            await ctx.send(files)
             final = 'Repository: ' + output.decode().split(' ')[1] + '\nBranch: ' + output.decode().split(' ')[3] + '\n----------' + files
             e = discord.Embed(title='Files pulled from GitHub', description=output.decode().split('\n')[1], color=0x00ff00)
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
