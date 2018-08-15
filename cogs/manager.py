@@ -75,7 +75,7 @@ class managerCog:
     @commands.group(name='modman', hidden=True, invoke_without_command=True)
     @commands.check(is_dev)
     async def modman(self, ctx):
-        e = discord.Embed(title='No action specified', description='You can use:\n`load`\n`unload`\n`reload`\n`clear`\n`list`', color=0xff0000)
+        e = discord.Embed(title='No action specified', description='You can use:\n`load`\n`unload`\n`reload`\n`clear`\n`list`\n`pull`', color=0xff0000)
         e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
         await ctx.send(embed=e)
 
@@ -177,7 +177,15 @@ class managerCog:
     @commands.check(is_dev)
     async def modmanPull(self, ctx):
         args = shlex.split('git pull')
-        await ctx.send(Popen(args, stdout=PIPE, stderr=STDOUT).communicate()[0])
+        output = Popen(args, stdout=PIPE, stderr=STDOUT).communicate()[0]
+        if output == b'Already up-to-date.\n':
+            e = discord.Embed(title='Already up to date', color=0xffff00)
+            e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
+            await ctx.send(embed=e)
+        else:
+            e = discord.Embed(title='Files pulled from GitHub', description=output.decode(), color=0x00ff00)
+            e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
+            await ctx.send(embed=e)
 
 def setup(bot):
     bot.add_cog(managerCog(bot))
