@@ -32,6 +32,8 @@ class errorCog:
         if isinstance(error, commands.MissingPermissions):
             handled = True
             perms = ''
+            if await self.bot.is_owner(ctx.author):
+                await ctx.send(str(error.missing_perms))
             for perm in error.missing_perms:
                 perms = perms + '\n' + str(perm)
             await ctx.send(':no_entry_sign: Sorry, ' + ctx.author.mention + ', but you do not have sufficient permissions to do that here. Contact an admin of this server for help. :no_entry_sign:\n```Missing Permissions for ' + ctx.author.nick + ':' + perms + '```')
