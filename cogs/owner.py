@@ -92,8 +92,7 @@ class ownerCog:
         em.set_thumbnail(url=guild.owner.avatar_url)
         await ctx.send(embed=em)
         def check(reaction, user):
-            owner = await self.bot.is_owner(user)
-            return owner and str(reaction.emoji) == clock
+            return ctx.author.id == 273940917596061698 and str(reaction.emoji) == clock
         try:
             reaction, user = await client.wait_for('reaction_add', timeout=60.0, check=check)
         except asyncio.TimeoutError:
