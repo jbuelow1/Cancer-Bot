@@ -76,5 +76,25 @@ class ownerCog:
         await owner.send(embed=em)
         await ctx.send('Thanks for your feedback! Senpai has been notified!')
 
+    @commands.command(name='leave', hidden=True)
+    @commands.is_owner()
+    async def guildLeave(self, ctx, *, guildID: int):
+        guild = self.bot.get_guild(guildID)
+        guildDesc = 'Name:          `' + guild.name + '`\nMembers:   `' + str(guild.member_count) + '`\nID:                 `' + str(guild.id) + '`\nChannels:   `' + str(len(guild.channels)) + '`\nCreated at: `' + str(guild.created_at) + '`\nisLarge:       `' + str(guild.large) + '`\nOwner:         `' + str(guild.owner) + '`\nOwner ID:    `' + str(guild.owner.id) + '`'
+        if (len(guild.features) > 0):
+            guildDesc += '\n\n𝓢𝓹𝓮𝓬𝓲𝓪𝓵 𝓕𝓮𝓪𝓽𝓾𝓻𝓮𝓼: `' + str(guild.features) + '`'
+        guildDesc += '\n\n**__To confirm leaving of this guild, React with '
+        em = discord.Embed(title='Guild Leave Confirmation', description=guildDesc, color=0x00ff00)
+        em.set_image(url=guild.icon_url)
+        em.set_thumbnail(url=guild.owner.avatar_url)
+        await ctx.send(embed=em)
+
+    @commands.command(name='lsemoji', hidden=True)
+    @commands.is_owner()
+    async def lsEmoji(self, ctx):
+        emojiList = ''
+        for emoji in self.bot.emojis:
+            emojiList += ':' + emoji.name + ':\n'
+
 def setup(bot):
     bot.add_cog(ownerCog(bot))
