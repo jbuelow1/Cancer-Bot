@@ -183,6 +183,7 @@ class managerCog:
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             await ctx.send(embed=e)
         else:
+            await ctx.send('```' + output.decode() + '```')
             files = ''
             lines = output.decode().split('\n')
             del lines[:4]
