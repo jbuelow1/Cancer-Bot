@@ -45,7 +45,7 @@ class errorCog:
             await ctx.send(':no_entry_sign: Sorry, ' + ctx.author.mention + ', but I do not have sufficient permissions to do that here. Contact an admin of this server for help. :no_entry_sign:\n```Missing Permissions for ' + self.bot.user.nick + ':' + perms + '```')
 
         if await self.bot.is_owner(ctx.author):
-            await ctx.send(':warning: An error has occoured in that command! :warning:\nTraceback:```' + traceback.format_exc(5) + '```')
+            await ctx.send(':warning: An error has occoured in that command! :warning:\nTraceback:```' + ''.join(traceback.format_exception(error)) + '```')
 
         if not handled:
             await ctx.send('OOPSIE WOOPSIE!! Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working VEWY HAWD to fix this!\nˢᵉʳᶦᵒᵘˢˡʸ ⁿᵒᵗ ᵃ ᶠᵘᶜᵏᶦⁿᵍ ᶜˡᵘᵉ ʷʰᵃᵗ ʷᵉⁿᵗ ʷʳᵒⁿᵍ ʰᵉʳᵉ')
