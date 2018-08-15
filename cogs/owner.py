@@ -85,7 +85,7 @@ class ownerCog:
         if (len(guild.features) > 0):
             guildDesc += '\n\n𝓢𝓹𝓮𝓬𝓲𝓪𝓵 𝓕𝓮𝓪𝓽𝓾𝓻𝓮𝓼: `' + str(guild.features) + '`'
         clocks = ['🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚','🕛','🕜','🕝','🕞','🕟','🕠','🕡','🕢','🕣','🕤','🕥','🕦','🕧']
-        clock = random.choise(clocks)
+        clock = random.choice(clocks)
         guildDesc += '\n\n**__To confirm leaving of this guild, React with ' + clock + '.__**'
         em = discord.Embed(title='Guild Leave Confirmation', description=guildDesc, color=0x00ff00)
         em.set_image(url=guild.icon_url)
