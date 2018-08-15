@@ -26,6 +26,10 @@ class errorCog:
             handled = True
             await ctx.send(':raised_hand: HALT! That command is for senpai only!')
 
+        if isinstance(error, commands.MissingRequiredArgument):
+            handled = True
+            await ctx.send(':warning: You need to supply more arguments for that command, ' + ctx.author.mention)
+
         if isinstance(error, commands.MissingPermissions):
             handled = True
             perms = ''
