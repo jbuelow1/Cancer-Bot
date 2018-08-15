@@ -199,6 +199,7 @@ class managerCog:
             e = discord.Embed(title='Files pulled from GitHub', description=output.decode().split('\n')[1], color=0x00ff00)
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             await ctx.send(embed=e)
+            #comment
 
 def setup(bot):
     bot.add_cog(managerCog(bot))
