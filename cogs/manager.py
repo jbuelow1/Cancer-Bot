@@ -183,8 +183,8 @@ class managerCog:
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             await ctx.send(embed=e)
         else:
-            #output = b'From https://github.com/jbuelow1/Cancer-Bot\n   04f217e..0626e1a  stable     -> origin/stable\nUpdating 04f217e..0626e1a\nFast-forward\n cogs/manager.py | 1 -\n 1 file changed, 1 deletion(-)'
-            await ctx.send('```' + str(output) + '```')
+            output = b'From https://github.com/jbuelow1/Cancer-Bot\n   20408ae..685f437  stable     -> origin/stable\nUpdating 20408ae..685f437\nFast-forward\n cogs/manager.py | 1 -\n 1 file changed, 1 deletion(-)\n'
+            await ctx.send('```' + output.decode() + '```')
             files = ''
             lines = output.decode().split('\n')
             del lines[:4]
