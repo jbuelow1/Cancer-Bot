@@ -177,7 +177,7 @@ class managerCog:
     @commands.check(is_dev)
     async def modmanPull(self, ctx):
         args = shlex.split('git pull')
-        await ctx.send(Popen(args, stdout=PIPE, stderr=stderr).communicate()[0])
+        await ctx.send(Popen(args, stdout=PIPE, stderr=STDOUT).communicate()[0])
 
 def setup(bot):
     bot.add_cog(managerCog(bot))
