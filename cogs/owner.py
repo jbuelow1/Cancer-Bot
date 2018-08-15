@@ -4,6 +4,7 @@ import discord
 import json
 import io
 import traceback
+import textwrap
 
 class ownerCog:
     def __init__(self, bot):
@@ -95,7 +96,9 @@ class ownerCog:
         emojiList = ''
         for emoji in self.bot.emojis:
             emojiList += ':' + emoji.name + ':\n'
-        await ctx.send(emojiList)
+        lines = textwrap.wrap(emojiList, width=1990)
+        for line in lines:
+            await ctx.send(line)
 
 def setup(bot):
     bot.add_cog(ownerCog(bot))
