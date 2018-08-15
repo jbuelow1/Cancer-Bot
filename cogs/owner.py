@@ -4,7 +4,7 @@ import discord
 import json
 import io
 import traceback
-import textwrap
+import random
 
 class ownerCog:
     def __init__(self, bot):
@@ -84,21 +84,23 @@ class ownerCog:
         guildDesc = 'Name:          `' + guild.name + '`\nMembers:   `' + str(guild.member_count) + '`\nID:                 `' + str(guild.id) + '`\nChannels:   `' + str(len(guild.channels)) + '`\nCreated at: `' + str(guild.created_at) + '`\nisLarge:       `' + str(guild.large) + '`\nOwner:         `' + str(guild.owner) + '`\nOwner ID:    `' + str(guild.owner.id) + '`'
         if (len(guild.features) > 0):
             guildDesc += '\n\n𝓢𝓹𝓮𝓬𝓲𝓪𝓵 𝓕𝓮𝓪𝓽𝓾𝓻𝓮𝓼: `' + str(guild.features) + '`'
-        guildDesc += '\n\n**__To confirm leaving of this guild, React with '
+        clocks = ['🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚','🕛','🕜','🕝','🕞','🕟','🕠','🕡','🕢','🕣','🕤','🕥','🕦','🕧']
+        clock = random.choise(clocks)
+        guildDesc += '\n\n**__To confirm leaving of this guild, React with ' + clock + '.__**'
         em = discord.Embed(title='Guild Leave Confirmation', description=guildDesc, color=0x00ff00)
         em.set_image(url=guild.icon_url)
         em.set_thumbnail(url=guild.owner.avatar_url)
         await ctx.send(embed=em)
-
-    @commands.command(name='lsemoji', hidden=True)
-    @commands.is_owner()
-    async def lsEmoji(self, ctx):
-        emojiList = ''
-        for emoji in self.bot.emojis:
-            emojiList += ':' + emoji.name + ':\n'
-        lines = textwrap.wrap(emojiList, width=1990)
-        for line in lines:
-            await ctx.send(line)
+        def check(reaction, user):
+            owner = await self.bot.is_owner(user)
+            return owner and str(reaction.emoji) == clock
+        try:
+            reaction, user = await client.wait_for('reaction_add', timeout=60.0, check=check)
+        except asyncio.TimeoutError:
+            await ctx.send('Timeout.')
+        else:
+            await guild.channels[0].send('Senpai has requested that I leave this guild. Probably because you fuckers are too autistic. Bye, bitches!')
+            await guild.leave()
 
 def setup(bot):
     bot.add_cog(ownerCog(bot))
