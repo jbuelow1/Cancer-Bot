@@ -66,7 +66,7 @@ class ownerCog:
         if ctx.guild:
             guildDesc = 'Name:          `' + ctx.guild.name + '`\nMembers:   `' + str(ctx.guild.member_count) + '`\nID:                 `' + str(ctx.guild.id) + '`\nChannels:   `' + str(len(ctx.guild.channels)) + '`\nCreated at: `' + str(ctx.guild.created_at) + '`\nisLarge:       `' + str(ctx.guild.large) + '`\nOwner:         `' + str(ctx.guild.owner) + '`\nOwner ID:    `' + str(ctx.guild.owner.id) + '`'
             if (len(ctx.guild.features) > 0):
-            guildDesc += '\n\n𝓢𝓹𝓮𝓬𝓲𝓪𝓵 𝓕𝓮𝓪𝓽𝓾𝓻𝓮𝓼: `' + str(ctx.guild.features) + '`'
+                guildDesc += '\n\n𝓢𝓹𝓮𝓬𝓲𝓪𝓵 𝓕𝓮𝓪𝓽𝓾𝓻𝓮𝓼: `' + str(ctx.guild.features) + '`'
             guildDesc += '\n\nAuthor: ' + str(ctx.Author) + '\nFeedback:\n```' + arg.replace('```', '<REMOVED>') + '```'
         else:
             guildDesc = 'Author: ' + str(ctx.Author) + '\nFeedback:\n```' + arg.replace('```', '<REMOVED>') + '```'
