@@ -4,6 +4,8 @@ import discord
 import py_compile
 import shutil
 import os
+import shlex
+from subprocess import Popen, PIPE, STDOUT
 
 class managerCog:
 
@@ -170,6 +172,12 @@ class managerCog:
         e = discord.Embed(title='Loaded Modules', description=mods, color=0x00ff00)
         e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
         await ctx.send(embed=e)
+
+    @modman.command(name='pull', hidden=True):
+    @commands.check(is_dev):
+    async def modmanPull(self, ctx):
+        args = shlex.split('git pull')
+        await ctx.send(Popen(args, stdout=PIPE, stderr=stderr).communicate()[0])
 
 def setup(bot):
     bot.add_cog(managerCog(bot))
