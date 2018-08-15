@@ -173,8 +173,8 @@ class managerCog:
         e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
         await ctx.send(embed=e)
 
-    @modman.command(name='pull', hidden=True):
-    @commands.check(is_dev):
+    @modman.command(name='pull', hidden=True)
+    @commands.check(is_dev)
     async def modmanPull(self, ctx):
         args = shlex.split('git pull')
         await ctx.send(Popen(args, stdout=PIPE, stderr=stderr).communicate()[0])
