@@ -178,7 +178,7 @@ class managerCog:
     async def modmanPull(self, ctx):
         args = shlex.split('git pull')
         output = Popen(args, stdout=PIPE, stderr=STDOUT).communicate()[0]
-        if output == b'Already up-to-date.\n':
+        if output == b'Already up-to-date.\n ':
             e = discord.Embed(title='Already up to date', color=0xffff00)
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             await ctx.send(embed=e)
