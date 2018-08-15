@@ -189,8 +189,10 @@ class managerCog:
             await ctx.send(str(len(lines)))
             del lines[:4]
             del lines[-1]
+            del lines[-1]
             await ctx.send(str(len(lines)))
             for file in lines:
+                await ctx.send(file)
                 files += file.split('|')[0].split(' ')[0] + ' - ' + file.split('|')[1].split(' ')[1] + ' edits'
             await ctx.send(files)
             final = 'Repository: ' + output.decode().split(' ')[1] + '\nBranch: ' + output.decode().split(' ')[3] + '\n----------' + files
