@@ -5,6 +5,7 @@ import json
 import io
 import traceback
 import random
+import asyncio
 
 class ownerCog:
     def __init__(self, bot):
