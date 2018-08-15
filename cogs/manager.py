@@ -196,7 +196,7 @@ class managerCog:
                 files += file.split('|')[0].split(' ')[0] + ' - ' + file.split('|')[1].split(' ')[1] + ' edits'
             await ctx.send(files)
             final = 'Repository: ' + output.decode().split('\n')[1].split(' ')[1] + '\nBranch: ' + output.decode().split('\n')[1].split(' ')[3] + '\n----------' + files
-            e = discord.Embed(title='Files pulled from GitHub', description=output.decode().split('\n')[1], color=0x00ff00)
+            e = discord.Embed(title='Files pulled from GitHub', description=final, color=0x00ff00)
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             await ctx.send(embed=e)
             #comment
