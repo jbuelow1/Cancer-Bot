@@ -183,16 +183,14 @@ class managerCog:
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             await ctx.send(embed=e)
         else:
-            output = b'From https://github.com/jbuelow1/Cancer-Bot\n   20408ae..685f437  stable     -> origin/stable\nUpdating 20408ae..685f437\nFast-forward\n cogs/manager.py | 1 -\n 1 file changed, 1 deletion(-)\n'
-            await ctx.send('```' + output.decode() + '```')
             files = ''
             lines = output.decode().split('\n')
             del lines[:4]
             del lines[-1]
             del lines[-1]
             for file in lines:
-                files += file.split('|')[0].split(' ')[1] + ' - ' + file.split('|')[1].split(' ')[1] + ' edits'
-            final = 'Repository: ' + output.decode().split('\n')[0].split(' ')[1] + '\nBranch: ' + output.decode().split('\n')[1].split(' ')[5] + '\n----------\n' + files
+                files += file.split('|')[0].split(' ')[1] + ' - ' + file.split('|')[1].split(' ')[1] + ' edit(s)'
+            final = 'Repository: ' + output.decode().split('\n')[0].split(' ')[1] + '\nBranch: ' + output.decode().split('\n')[1].split(' ')[5] + '\n\n' + files
             e = discord.Embed(title='Files pulled from GitHub', description=final, color=0x00ff00)
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             await ctx.send(embed=e)
