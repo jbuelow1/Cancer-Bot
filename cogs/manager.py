@@ -184,7 +184,7 @@ class managerCog:
             await ctx.send(embed=e)
         else:
             #output = b'From https://github.com/jbuelow1/Cancer-Bot\n   04f217e..0626e1a  stable     -> origin/stable\nUpdating 04f217e..0626e1a\nFast-forward\n cogs/manager.py | 1 -\n 1 file changed, 1 deletion(-)'
-            await ctx.send('```' + output + '```')
+            await ctx.send('```' + str(output) + '```')
             files = ''
             lines = output.decode().split('\n')
             del lines[:4]
