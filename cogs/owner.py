@@ -63,10 +63,13 @@ class ownerCog:
     @commands.cooldown(3, 86400, commands.BucketType.user)
     async def suggest(self, ctx, *, arg):
         owner = await self.bot.get_user_info('273940917596061698')
-        guildDesc = 'Name:          `' + ctx.guild.name + '`\nMembers:   `' + str(ctx.guild.member_count) + '`\nID:                 `' + str(ctx.guild.id) + '`\nChannels:   `' + str(len(ctx.guild.channels)) + '`\nCreated at: `' + str(ctx.guild.created_at) + '`\nisLarge:       `' + str(ctx.guild.large) + '`\nOwner:         `' + str(ctx.guild.owner) + '`\nOwner ID:    `' + str(ctx.guild.owner.id) + '`'
-        if (len(guild.features) > 0):
-            guildDesc += '\n\n𝓢𝓹𝓮𝓬𝓲𝓪𝓵 𝓕𝓮𝓪𝓽𝓾𝓻𝓮𝓼: `' + str(guild.features) + '`'
-        guildDesc += '\n\nFeedback:\n```' + arg.replace('```', '<REMOVED>') + '```'
+        if ctx.guild:
+            guildDesc = 'Name:          `' + ctx.guild.name + '`\nMembers:   `' + str(ctx.guild.member_count) + '`\nID:                 `' + str(ctx.guild.id) + '`\nChannels:   `' + str(len(ctx.guild.channels)) + '`\nCreated at: `' + str(ctx.guild.created_at) + '`\nisLarge:       `' + str(ctx.guild.large) + '`\nOwner:         `' + str(ctx.guild.owner) + '`\nOwner ID:    `' + str(ctx.guild.owner.id) + '`'
+            if (len(ctx.guild.features) > 0):
+            guildDesc += '\n\n𝓢𝓹𝓮𝓬𝓲𝓪𝓵 𝓕𝓮𝓪𝓽𝓾𝓻𝓮𝓼: `' + str(ctx.guild.features) + '`'
+            guildDesc += '\n\nAuthor: ' + str(ctx.Author) + '\nFeedback:\n```' + arg.replace('```', '<REMOVED>') + '```'
+        else:
+            guildDesc = 'Author: ' + str(ctx.Author) + '\nFeedback:\n```' + arg.replace('```', '<REMOVED>') + '```'
         em = discord.Embed(title='Feedback', description=guildDesc, color=0x00ff00)
         em.set_image(url=ctx.author.avatar_url)
         em.set_thumbnail(url=ctx.guild.icon_url)
