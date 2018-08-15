@@ -95,6 +95,7 @@ class ownerCog:
         emojiList = ''
         for emoji in self.bot.emojis:
             emojiList += ':' + emoji.name + ':\n'
+        await ctx.send(emojiList)
 
 def setup(bot):
     bot.add_cog(ownerCog(bot))
