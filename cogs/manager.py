@@ -183,7 +183,7 @@ class managerCog:
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             await ctx.send(embed=e)
         else:
-            e = discord.Embed(title='Files pulled from GitHub', description=output.decode(), color=0x00ff00)
+            e = discord.Embed(title='Files pulled from GitHub', description=output.decode().split('\n')[1], color=0x00ff00)
             e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
             await ctx.send(embed=e)
 
