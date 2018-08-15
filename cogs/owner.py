@@ -95,7 +95,7 @@ class ownerCog:
         def check(reaction, user):
             return ctx.author.id == 273940917596061698 and str(reaction.emoji) == clock
         try:
-            reaction, user = await client.wait_for('reaction_add', timeout=60.0, check=check)
+            reaction, user = await self.bot.wait_for('reaction_add', timeout=60.0, check=check)
         except asyncio.TimeoutError:
             await ctx.send('Timeout.')
         else:
