@@ -27,7 +27,7 @@ class helpCog:
         self.emHelp0.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
         await ctx.send(embed=self.emHelp0)
 
-    @commands.command(name='help', usage='', brief='Displays this helptext')
+    @commands.command(name='help', usage='', brief='Displays this helptext', hidden=True)
     @commands.cooldown(1, 60, commands.BucketType.channel)
     async def helpMsg(self, ctx):
         await ctx.trigger_typing()
