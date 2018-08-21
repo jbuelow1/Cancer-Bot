@@ -52,7 +52,7 @@ class helpCog:
                     if command.enabled and (not command.hidden):
                         commandsInCog.append(command)
             if len(commandsInCog) > 0:
-                commandsInCog.sort()
+                commandsInCog.sort(key=lambda command: command.name)
                 text = ''
                 for command in commandsInCog:
                     try:
