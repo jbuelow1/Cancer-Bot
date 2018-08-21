@@ -333,5 +333,32 @@ class imagesCog:
             else:
                 await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
 
+    @commands.command(name='wanted', usage='<Image | User>', brief='Wanted for their crimes')
+    @commands.cooldown(1, 10, commands.BucketType.channel)
+    async def wanted(self, ctx):
+        async with ctx.typing():
+            images = self.getImages(ctx.message)
+            if len(images) > 0:
+                if len(images) < 10:
+                    outputImages = []
+                    filenum = 0
+                    for image in images:
+                        background = Image.open('imgsrc/wanted.png')
+                        image = self.picInPic(image, background, (1046, 1065), (198, 657))
+
+                        output = BytesIO()
+                        image.save(output, format="PNG")
+                        image = output.getvalue()
+                        output.close()
+
+                        outputImages.append(discord.File(BytesIO(image), filename='autismlevel' + str(filenum) + '.png'))
+                        filenum += 1
+                        print(outputImages)
+                    await ctx.send(':white_check_mark: Done! :white_check_mark:', files=outputImages)
+                else:
+                    await ctx.send(':warning: Too many files! Please supply 1-10 per message. :warning:')
+            else:
+                await ctx.send(':warning: Please supply a `.png`, `.jpg`/`.jpeg`, or `.bmp` image file! :warning:')
+
 def setup(bot):
     bot.add_cog(imagesCog(bot))
