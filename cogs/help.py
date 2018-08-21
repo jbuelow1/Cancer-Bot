@@ -59,7 +59,7 @@ class helpCog:
                         text += '**?/' + command.name + ' ' + command.usage + '** --- *' + command.brief + '*\n'
                     except:
                         text += '**?/' + command.name + '** --- *Command information unnavaliable*\n'
-                self.emHelp0.add_field(name=cog.split('Cog')[0].capitalize(), value=text)
+                self.emHelp0.add_field(name=cog.split('Cog')[0].capitalize(), value=text, inline=False)
 
         self.emHelp0.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
         await ctx.send(embed=self.emHelp0)
