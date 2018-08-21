@@ -51,7 +51,10 @@ class helpCog:
             if len(commandsInCog) > 0:
                 text = ''
                 for command in commandsInCog:
-                    text += '?/' + command.name + ' ' + command.usage + ' --- ' + command.brief
+                    try:
+                        text += '?/' + command.name + ' ' + command.usage + ' --- ' + command.brief
+                    except:
+                        text += '?/' + command.name + ' --- Command information unnavaliable'
                 self.emHelp0.add_field(name=cog, value=text)
 
         '''for command in commands:
