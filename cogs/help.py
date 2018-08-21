@@ -33,7 +33,7 @@ class helpCog:
         await ctx.trigger_typing()
         await ctx.message.delete()
 
-        self.emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\n`<argument>` is a required argument\n`[argument]` is an optional argument\n`{image}` is an optional image argument that is attached\n\u200b', color=0x00ff00)
+        self.emHelp0 = discord.Embed(description='I am under constant development, expect many changes! You can help by sumbitting any suggestions to my senpai by using my suggestion command. (`?/suggest <suggestion>`)\n\nThis bot\'s command prefix is: `?/`\n\n`<argument>` is a required argument\n`[argument]` is an optional argument\n\u200b', color=0x00ff00)
         self.emHelp0.set_thumbnail(url='https://i.imgur.com/fnt3A4l.png')
         self.emHelp0.set_author(name='Cancer Bot Help', icon_url='https://i.imgur.com/4fehjDz.png')
 
@@ -43,6 +43,8 @@ class helpCog:
             if not command.cog_name in cogs:
                 cogs.append(command.cog_name)
 
+        cogs.sort()
+
         for cog in cogs:
             commandsInCog = []
             for command in commands:
@@ -50,6 +52,7 @@ class helpCog:
                     if command.enabled and (not command.hidden):
                         commandsInCog.append(command)
             if len(commandsInCog) > 0:
+                commandsInCog.sort()
                 text = ''
                 for command in commandsInCog:
                     try:
