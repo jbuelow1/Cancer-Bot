@@ -176,7 +176,7 @@ class managerCog:
     @modman.command(name='pull', hidden=True)
     @commands.check(is_dev)
     async def modmanPull(self, ctx):
-        args = shlex.split('git pull')
+        args = shlex.split('git -C ~/bot-stable/ pull')
         output = Popen(args, stdout=PIPE, stderr=STDOUT).communicate()[0]
         if output == b'Already up-to-date.\n':
             e = discord.Embed(title='Already up to date', color=0xffff00)
