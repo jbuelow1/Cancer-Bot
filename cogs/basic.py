@@ -53,7 +53,7 @@ class basicCog:
     async def whois(self, ctx):
         await ctx.trigger_typing()
         await ctx.message.delete()
-        if (message.mention_everyone):
+        if (ctx.message.mention_everyone):
             await ctx.send('Wow, okay. You\'re a fucking asshole! Enjoy your spam, asshole!')
             for user in ctx.guild.users:
                 emWhois = discord.Embed(title='User Info', color=0x00ff00)
