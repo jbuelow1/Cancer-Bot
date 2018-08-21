@@ -47,15 +47,16 @@ class helpCog:
             commandsInCog = []
             for command in commands:
                 if command.cog_name == cog:
-                    commandsInCog.append(command)
+                    if command.enabled and (not command.hidden):
+                        commandsInCog.append(command)
             if len(commandsInCog) > 0:
                 text = ''
                 for command in commandsInCog:
                     try:
-                        text += '?/' + command.name + ' ' + command.usage + ' --- ' + command.brief
+                        text += '**__?/' + command.name + ' ' + command.usage + '**__ --- ' + command.brief + '\n'
                     except:
-                        text += '?/' + command.name + ' --- Command information unnavaliable'
-                self.emHelp0.add_field(name=cog, value=text)
+                        text += '**__?/' + command.name + '**__ --- Command information unnavaliable\n'
+                self.emHelp0.add_field(name=cog.split('Cog')[0], value=text)
 
         '''for command in commands:
             if command.enabled and (not command.hidden):
