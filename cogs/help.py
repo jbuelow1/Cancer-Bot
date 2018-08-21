@@ -53,9 +53,9 @@ class helpCog:
                 text = ''
                 for command in commandsInCog:
                     try:
-                        text += '**__?/' + command.name + ' ' + command.usage + '**__ --- ' + command.brief + '\n'
+                        text += '**?/' + command.name + ' ' + command.usage + '** --- *' + command.brief + '*\n'
                     except:
-                        text += '**__?/' + command.name + '**__ --- Command information unnavaliable\n'
+                        text += '**?/' + command.name + '** --- *Command information unnavaliable*\n'
                 self.emHelp0.add_field(name=cog.split('Cog')[0], value=text)
 
         '''for command in commands:
