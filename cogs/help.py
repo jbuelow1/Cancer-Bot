@@ -6,7 +6,7 @@ class helpCog:
         self.bot = bot
         bot.remove_command('help')
 
-    @commands.command(name='help', usage='', brief='Displays this helptext')
+    @commands.command(name='oldhelp', usage='', brief='Displays this helptext', enabled=False)
     @commands.cooldown(1, 60, commands.BucketType.channel)
     async def helpMsg(self, ctx):
         await ctx.trigger_typing()
@@ -27,7 +27,7 @@ class helpCog:
         self.emHelp0.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
         await ctx.send(embed=self.emHelp0)
 
-    @commands.command(name='helptest', usage='', brief='Displays this helptext', hidden=True)
+    @commands.command(name='help', usage='', brief='Displays this helptext')
     @commands.cooldown(1, 60, commands.BucketType.channel)
     async def helpMsg(self, ctx):
         await ctx.trigger_typing()
@@ -59,14 +59,7 @@ class helpCog:
                         text += '**?/' + command.name + ' ' + command.usage + '** --- *' + command.brief + '*\n'
                     except:
                         text += '**?/' + command.name + '** --- *Command information unnavaliable*\n'
-                self.emHelp0.add_field(name=cog.split('Cog')[0], value=text)
-
-        '''for command in commands:
-            if command.enabled and (not command.hidden):
-                try:
-                    self.emHelp0.add_field(name='?/' + command.name + ' ' + command.usage, value=command.brief, inline=False)
-                except:
-                    self.emHelp0.add_field(name='?/' + command.name, value='ERROR: Could not retrieve command info.', inline=False)'''
+                self.emHelp0.add_field(name=cog.split('Cog')[0].capitalize(), value=text)
 
         self.emHelp0.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
         await ctx.send(embed=self.emHelp0)
