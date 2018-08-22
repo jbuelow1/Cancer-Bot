@@ -143,7 +143,10 @@ class basicCog:
                         users.remove(member.id)
 
             counts = Counter(games)
-            plt.pie([counts['Online'], counts['Offline'], counts['Idle'], counts['Do Not Disturb'], counts['Other']], labels=['Online' + '\n(' + str(counts['Online']) + ')', 'Offline' + '\n(' + str(counts['Offline']) + ')', 'Idle' + '\n(' + str(counts['Idle']) + ')', 'Do Not Disturb' + '\n(' + str(counts['Do Not Disturb', 'Other' + '\n(' + str(counts['Other']) + ')']) + ')'], colors=['green', 'grey', 'orange', 'red', 'black'] autopct=None)
+            values = [counts['Online'], counts['Offline'], counts['Idle'], counts['Do Not Disturb'], counts['Other']]
+            labels = ['Online' + '\n(' + str(counts['Online']) + ')', 'Offline' + '\n(' + str(counts['Offline']) + ')', 'Idle' + '\n(' + str(counts['Idle']) + ')', 'Do Not Disturb' + '\n(' + str(counts['Do Not Disturb'], 'Other' + '\n(' + str(counts['Other']) + ')']) + ')']
+            colors = ['green', 'grey', 'orange', 'red', 'black']
+            plt.pie(values, labels=labels, colors=colors autopct=None)
             f = io.BytesIO()
             plt.savefig(f, format='png')
             plt.savefig('test.svg')
