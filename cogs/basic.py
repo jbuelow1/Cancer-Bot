@@ -144,15 +144,15 @@ class basicCog:
 
             counts = Counter(games)
             values = [counts['Online'], counts['Offline'], counts['Idle'], counts['Do Not Disturb']]
-            '''labels = [
+            labels = [
             'Online' + '\n(' + str(counts['Online']) + ')',
             'Offline' + '\n(' + str(counts['Offline']) + ')',
             'Idle' + '\n(' + str(counts['Idle']) + ')',
             'Do Not Disturb' + '\n(' + str(counts['Do Not Disturb']
-            ]'''
-            labels = ['Online', 'Offline', 'Idle', 'Do Not Disturb']
+            ]
+            #labels = ['Online', 'Offline', 'Idle', 'Do Not Disturb']
             colors = ['green', 'grey', 'orange', 'red', 'black']
-            plt.pie(values, labels=labels, colors=colors autopct=None)
+            plt.pie(values, labels=labels, colors=colors, autopct=None)
             f = io.BytesIO()
             plt.savefig(f, format='png')
             plt.savefig('test.svg')
