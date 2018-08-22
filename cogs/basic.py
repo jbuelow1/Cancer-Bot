@@ -114,7 +114,7 @@ class basicCog:
     @commands.command(name='games', usage='', brief='Shows statistics about what people are playing', hidden=True)
     @commands.cooldown(1, 30, commands.BucketType.channel)
     async def gameStats(self, ctx):
-        async with ctx.typing()
+        async with ctx.typing():
             users = []
             for guild in self.bot.guilds:
                 for member in guild.members:
