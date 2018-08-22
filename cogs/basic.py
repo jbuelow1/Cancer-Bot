@@ -139,7 +139,7 @@ class basicCog:
                         users.remove(member.id)
 
             counts = Counter(games)
-            plt.pie([float(v) for v in counts.values()], labels=[str(k) + ' (' + str(counts[k]) + ')' for k in counts], autopct=None)
+            plt.pie([float(v) for v in counts.values()], labels=[str(k) + '\n(' + str(counts[k]) + ')' for k in counts], autopct=None)
             f = io.BytesIO()
             plt.savefig(f, format='png')
             plt.savefig('test.svg')
