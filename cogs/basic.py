@@ -134,6 +134,10 @@ class basicCog:
                             games.append('Online')
                         elif member.status == discord.Status.offline:
                             games.append('Offline')
+                        elif member.status == discord.Status.idle:
+                            games.append('Idle')
+                        elif member.status == discord.Status.dnd:
+                            games.append('Do Not Disturb')
                         else:
                             games.append('Other')
                         users.remove(member.id)
