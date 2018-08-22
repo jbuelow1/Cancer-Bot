@@ -5,6 +5,10 @@ import math
 import shlex
 from subprocess import Popen, PIPE, STDOUT
 import time
+from collections import Counter
+import matplotlib.pyplot as plt
+import numpy as np
+import io
 
 class basicCog:
     def __init__(self, bot):
@@ -104,6 +108,30 @@ class basicCog:
                 emWhois.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
                 emWhois.set_image(url=ctx.message.author.avatar_url)
                 await ctx.send(embed=emWhois)
+
+    @commands.command(name='games', usage='', brief='Shows statistics about what people are playing', hidden=True)
+    @commands.cooldown(1, 30, commands.BucketType.channel)
+    async def gameStats(self, ctx):
+        users = []
+        for guild in self.bot.guilds:
+            for member in guild.members:
+                if not member.id in users:
+                    users.append(member.id)
+
+        games = []
+        for guild in self.bot.guilds:
+            for member in guild.members:
+                if member.id in users:
+                    if member.activity:
+                        if member.activity.type == discord.ActivityType.playing or member.activity.type == discord.ActivityType.listening:
+                            games.append(member.activity.name)
+
+        gd = Counter(games)
+        plt.pie([float(v) for v in counts.values()], labels=[float(k) for k in counts], autopct=None)
+        f = io.BytesIO()
+        plt.savefig(f)
+
+        await ctx.send('Collected game data for everyone I can see.', file=discord.File(f))
 
 def setup(bot):
     bot.add_cog(basicCog(bot))
