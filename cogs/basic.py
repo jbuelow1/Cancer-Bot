@@ -6,6 +6,8 @@ import shlex
 from subprocess import Popen, PIPE, STDOUT
 import time
 from collections import Counter
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import io
