@@ -131,9 +131,9 @@ class basicCog:
         counts = Counter(games)
         plt.pie([float(v) for v in counts.values()], labels=[float(k) for k in counts], autopct=None)
         f = io.BytesIO()
-        plt.savefig(f)
+        plt.savefig(f, format='svg')
 
-        await ctx.send('Collected game data for everyone I can see.', file=discord.File(f))
+        await ctx.send('Collected game data for everyone I can see.', file=discord.File(f, filename='games.svg'))
 
 def setup(bot):
     bot.add_cog(basicCog(bot))
