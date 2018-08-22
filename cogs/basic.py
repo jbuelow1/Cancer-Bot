@@ -114,26 +114,29 @@ class basicCog:
     @commands.command(name='games', usage='', brief='Shows statistics about what people are playing', hidden=True)
     @commands.cooldown(1, 30, commands.BucketType.channel)
     async def gameStats(self, ctx):
-        users = []
-        for guild in self.bot.guilds:
-            for member in guild.members:
-                if not member.id in users:
-                    users.append(member.id)
+        async with ctx.typing()
+            users = []
+            for guild in self.bot.guilds:
+                for member in guild.members:
+                    if not member.id in users:
+                        users.append(member.id)
 
-        games = []
-        for guild in self.bot.guilds:
-            for member in guild.members:
-                if member.id in users:
-                    if hasattr(member, 'activity'):
-                        if member.activity.type == discord.ActivityType.playing or member.activity.type == discord.ActivityType.listening:
-                            games.append(member.activity.name)
+            games = []
+            for guild in self.bot.guilds:
+                for member in guild.members:
+                    if member.id in users:
+                        if hasattr(member, 'activity'):
+                            if member.activity.type == discord.ActivityType.playing or member.activity.type == discord.ActivityType.listening:
+                                games.append(member.activity.name)
 
-        counts = Counter(games)
-        plt.pie([float(v) for v in counts.values()], labels=[float(k) for k in counts], autopct=None)
-        f = io.BytesIO()
-        plt.savefig(f, format='svg')
+            counts = Counter(games)
+            plt.pie([float(v) for v in counts.values()], labels=[str(k) for k in counts], autopct=None)
+            f = io.BytesIO()
+            plt.savefig(f, format='svg')
+            with open('testdata.json', 'w+') as f:
+                json.dump(f, [[float(v) for v in counts.values()], labels=[str(k) for k in counts]])
 
-        await ctx.send('Collected game data for everyone I can see.', file=discord.File(f, filename='games.svg'))
+            await ctx.send('Collected game data for everyone I can see.', file=discord.File(f, filename='games.svg'))
 
 def setup(bot):
     bot.add_cog(basicCog(bot))
