@@ -126,10 +126,16 @@ class basicCog:
             for guild in self.bot.guilds:
                 for member in guild.members:
                     if member.id in users:
-                        try:
+                        '''try:
                             games.append(member.activity.name)
                         except:
-                            pass
+                            pass'''
+                        if member.status == discord.Status.online:
+                            games.append('Online')
+                        elif member.status == discord.Status.offline:
+                            games.append('Offline')
+                        else:
+                            games.append('Other')
                         users.remove(member.id)
 
             counts = Counter(games)
