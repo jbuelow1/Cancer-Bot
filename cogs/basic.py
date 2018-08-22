@@ -122,7 +122,7 @@ class basicCog:
         for guild in self.bot.guilds:
             for member in guild.members:
                 if member.id in users:
-                    if member.activity:
+                    if hasattr(member, 'activity'):
                         if member.activity.type == discord.ActivityType.playing or member.activity.type == discord.ActivityType.listening:
                             games.append(member.activity.name)
 
