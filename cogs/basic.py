@@ -126,7 +126,7 @@ class basicCog:
                         if member.activity.type == discord.ActivityType.playing or member.activity.type == discord.ActivityType.listening:
                             games.append(member.activity.name)
 
-        gd = Counter(games)
+        counts = Counter(games)
         plt.pie([float(v) for v in counts.values()], labels=[float(k) for k in counts], autopct=None)
         f = io.BytesIO()
         plt.savefig(f)
