@@ -143,6 +143,7 @@ class basicCog:
             f = io.BytesIO()
             plt.savefig(f, format='png')
             plt.savefig('test.svg')
+            plt.clf()
             with open('testdata.json', 'w+') as jf:
                 json.dump([ games, counts, [ [float(v) for v in counts.values()], [str(k) for k in counts] ] ], jf)
 
