@@ -130,7 +130,7 @@ class basicCog:
                             games.append(member.activity.name)
                         except:
                             pass
-                        users.pop(member.id)
+                        users.remove(member.id)
 
             counts = Counter(games)
             plt.pie([float(v) for v in counts.values()], labels=[str(k) for k in counts], autopct=None)
