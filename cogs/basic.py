@@ -141,14 +141,14 @@ class basicCog:
             counts = Counter(games)
             plt.pie([float(v) for v in counts.values()], labels=[str(k) for k in counts], autopct=None)
             f = io.BytesIO()
-            plt.savefig(f, format='svg')
+            plt.savefig(f, format='png')
             plt.savefig('test.svg')
             with open('testdata.json', 'w+') as jf:
                 json.dump([ games, counts, [ [float(v) for v in counts.values()], [str(k) for k in counts] ] ], jf)
 
             data = f.getvalue()
             f.close()
-            await ctx.send('Collected game data for everyone I can see.', file=discord.File(io.BytesIO(data), filename='games.svg'))
+            await ctx.send('Collected game data for everyone I can see.', file=discord.File(io.BytesIO(data), filename='games.png'))
 
 def setup(bot):
     bot.add_cog(basicCog(bot))
