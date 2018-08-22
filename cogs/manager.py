@@ -26,7 +26,8 @@ class managerCog:
 
     async def is_dev(ctx):
         devs = [
-        273940917596061698
+        273940917596061698,
+        95274427171733504
         ]
         return ctx.author.id in devs
 
@@ -197,6 +198,19 @@ class managerCog:
                 await ctx.send(embed=e)
             except:
                 await ctx.send(output.decode())
+
+    @modman.command(name='devs', hidden=True)
+    @commands.is_owner()
+    async def modmanDevs(self, ctx):
+        e = discord.Embed(title='No action specified', description='You can use:\n`add`\n`remove`\n`list`', color=0xff0000)
+        e.set_author(name='Cancer Bot Module Manager', icon_url=self.bot.user.avatar_url)
+        await ctx.send(embed=e)
+
+    @modmanDevs.command(name='add', hidden=True)
+    @commands.is_owner()
+    async def modmanDevsAdd(self, ctx, *args):
+        for arg in args:
+            pass
 
 def setup(bot):
     bot.add_cog(managerCog(bot))
