@@ -11,6 +11,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import io
+import json
 
 class basicCog:
     def __init__(self, bot):
