@@ -135,7 +135,7 @@ class basicCog:
             f = io.BytesIO()
             plt.savefig(f, format='svg')
             with open('testdata.json', 'w+') as jf:
-                json.dump([ counts, [ [float(v) for v in counts.values()], [str(k) for k in counts] ] ], jf)
+                json.dump([ games, counts, [ [float(v) for v in counts.values()], [str(k) for k in counts] ] ], jf)
 
             await ctx.send('Collected game data for everyone I can see.', file=discord.File(f, filename='games.svg'))
 
