@@ -112,7 +112,7 @@ class basicCog:
                 emWhois.set_image(url=ctx.message.author.avatar_url)
                 await ctx.send(embed=emWhois)
 
-    @commands.command(name='games', usage='', brief='Shows statistics about what people are playing', hidden=True)
+    @commands.command(name='onlinestat', usage='', brief='Shows statistics about how many people are online')
     @commands.cooldown(1, 30, commands.BucketType.channel)
     async def gameStats(self, ctx):
         async with ctx.typing():
