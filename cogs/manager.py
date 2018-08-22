@@ -199,7 +199,7 @@ class managerCog:
             except:
                 await ctx.send(output.decode())
 
-    @modman.command(name='devs', hidden=True)
+    @modman.group(name='devs', hidden=True)
     @commands.is_owner()
     async def modmanDevs(self, ctx):
         e = discord.Embed(title='No action specified', description='You can use:\n`add`\n`remove`\n`list`', color=0xff0000)
