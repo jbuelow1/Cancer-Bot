@@ -126,9 +126,11 @@ class basicCog:
             for guild in self.bot.guilds:
                 for member in guild.members:
                     if member.id in users:
-                        if hasattr(member, 'activity'):
-                            if member.activity.type == discord.ActivityType.playing or member.activity.type == discord.ActivityType.listening:
-                                games.append(member.activity.name)
+                        try:
+                            games.append(member.activity.name)
+                        except:
+                            pass
+                        users.pop(member.id)
 
             counts = Counter(games)
             plt.pie([float(v) for v in counts.values()], labels=[str(k) for k in counts], autopct=None)
