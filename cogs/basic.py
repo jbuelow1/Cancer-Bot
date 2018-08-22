@@ -146,7 +146,9 @@ class basicCog:
             with open('testdata.json', 'w+') as jf:
                 json.dump([ games, counts, [ [float(v) for v in counts.values()], [str(k) for k in counts] ] ], jf)
 
-            await ctx.send('Collected game data for everyone I can see.', file=discord.File(f, filename='games.svg'))
+            data = f.getvalue()
+            f.close()
+            await ctx.send('Collected game data for everyone I can see.', file=discord.File(io.BytesIO(data), filename='games.svg'))
 
 def setup(bot):
     bot.add_cog(basicCog(bot))
