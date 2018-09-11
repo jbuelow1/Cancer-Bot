@@ -7,6 +7,7 @@ import traceback
 import random
 import asyncio
 
+
 class ownerCog:
     def __init__(self, bot):
         self.bot = bot
@@ -45,7 +46,6 @@ class ownerCog:
         emLsGuilds = discord.Embed(title='Cancer Bot\'s Guild List', description=guildList, color=0xffff00)
         await ctx.send(embed=emLsGuilds)
 
-    #why in the actual fucking fuck did i decide to make this command? Like when the fuck will i even use this shit???? ITS SO FUCKING LONG!!!! WHY!!!! WHY THE FUCK DID I WASTE SOOO MUCH FUCKING TIME DOING THIS SHIT?!?!??!?! REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
     @commands.command(name='lsreport', hidden=True)
     @commands.is_owner()
     async def lsreport(self, ctx):
@@ -59,7 +59,6 @@ class ownerCog:
                 f = io.StringIO(d)
                 file = discord.File(d, filename='dump.json')
                 await ctx.send(':white_check_mark: Done! :white_check_mark:', file=file)
-
 
     @commands.command(name='suggest', usage='<Text>', brief='Sends senpai your "wonderful" ideas')
     @commands.cooldown(3, 86400, commands.BucketType.user)
@@ -77,6 +76,23 @@ class ownerCog:
         em.set_thumbnail(url=ctx.guild.icon_url)
         await owner.send(embed=em)
         await ctx.send('Thanks for your feedback! Senpai has been notified!')
+        with open('suggestions.json', 'w+') as f:
+            data = json.load(f)
+            data.append(
+                {
+                    'guild': {
+                        'name': ctx.guild.name,
+                        'id': ctx.guild.id
+                    },
+                    'user': {
+                        'name': ctx.author.name,
+                        'id': ctx.author.id
+                    },
+                    'suggestion': arg
+                }
+            )
+            f.seek(0, 0)
+            json.dump(data, f)
 
     @commands.command(name='leave', hidden=True)
     @commands.is_owner()
