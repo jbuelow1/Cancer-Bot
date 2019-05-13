@@ -36,7 +36,10 @@ class statsCog:
     @commands.command(name='stats', usage='', brief='Shows bot statistics')
     async def stats(self, ctx):
         await ctx.trigger_typing()
-        await ctx.message.delete()
+        try:
+            await ctx.message.delete()
+        except:
+            pass
 
         diff = relativedelta(datetime.datetime.now(), self.bot.startdate)
         uptime = str(diff.days) + ' days, ' + str(diff.hours) + ' hours, ' + str(diff.minutes) + ' minutes and ' + str(diff.seconds) + ' seconds'

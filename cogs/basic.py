@@ -42,7 +42,10 @@ class basicCog:
         t1 = time.perf_counter()
         await ctx.trigger_typing()
         t2 = time.perf_counter()
-        await ctx.message.delete()
+        try:
+            await ctx.message.delete()
+        except:
+            pass
         typingPing = str(math.floor((t2-t1)*1000)) + ' ms'
         dnsPing = str(math.floor(self.get_ping_time('8.8.8.8'))) + ' ms'
         googlePing = str(math.floor(self.get_ping_time('google.com'))) + ' ms'
@@ -59,7 +62,10 @@ class basicCog:
     @commands.command(name='whois', usage='<User>', brief='Who tf is this?')
     async def whois(self, ctx):
         await ctx.trigger_typing()
-        await ctx.message.delete()
+        try:
+            await ctx.message.delete()
+        except:
+            pass
         if (ctx.message.mention_everyone):
             await ctx.send('Wow, okay. You\'re a fucking asshole! Enjoy your spam, asshole!')
             for user in ctx.guild.users:
