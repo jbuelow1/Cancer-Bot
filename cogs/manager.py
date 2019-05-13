@@ -7,7 +7,7 @@ import os
 import shlex
 from subprocess import Popen, PIPE, STDOUT
 
-class managerCog:
+class managerCog(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot

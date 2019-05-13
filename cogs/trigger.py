@@ -3,7 +3,7 @@ import discord
 import re
 import random
 
-class triggerCog:
+class triggerCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

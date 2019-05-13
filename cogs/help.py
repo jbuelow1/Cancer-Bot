@@ -1,7 +1,7 @@
 from discord.ext import commands
 import discord
 
-class helpCog:
+class helpCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         bot.remove_command('help')

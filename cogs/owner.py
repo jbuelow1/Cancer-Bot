@@ -9,7 +9,7 @@ import random
 import asyncio
 
 
-class ownerCog:
+class ownerCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

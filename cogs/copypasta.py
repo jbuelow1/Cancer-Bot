@@ -6,7 +6,7 @@ import requests
 import textwrap
 import configparser
 
-class copypastaCog:
+class copypastaCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         filename = "ifr.cfg"

@@ -7,7 +7,7 @@ import datetime
 from dateutil.relativedelta import relativedelta
 import time
 
-class statsCog:
+class statsCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

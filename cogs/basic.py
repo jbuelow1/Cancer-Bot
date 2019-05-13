@@ -13,7 +13,7 @@ import numpy as np
 import io
 import json
 
-class basicCog:
+class basicCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -76,7 +76,7 @@ class basicCog:
                 emWhois.add_field(name='ID', value=user.id, inline=True)
                 if ctx.author.bot:
                     emWhois.add_field(name='===== BOT =====', inline=False)
-                emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
+                emWhois.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
                 emWhois.set_image(url=user.avatar_url)
                 await ctx.author.send(embed=emWhois)
         else:
@@ -91,11 +91,11 @@ class basicCog:
                         emWhois.add_field(name='ID', value=user.id, inline=True)
                         if ctx.author.bot:
                             emWhois.add_field(name='===== BOT =====', inline=False)
-                        emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
+                        emWhois.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
                         emWhois.set_image(url=user.avatar_url)
                         await ctx.author.send(embed=emWhois)
                 else:
-                    for user in message.mentions:
+                    for user in ctx.message.mentions:
                         emWhois = discord.Embed(title='User Info', color=0x00ff00)
                         emWhois.add_field(name='Nickname', value=user.display_name, inline=True)
                         emWhois.add_field(name='Global Name', value=user.name, inline=True)
@@ -103,7 +103,7 @@ class basicCog:
                         emWhois.add_field(name='ID', value=user.id, inline=True)
                         if ctx.author.bot:
                             emWhois.add_field(name='===== BOT =====', inline=False)
-                        emWhois.set_footer(icon_url=message.author.avatar_url, text=str(message.author.display_name) + ' requested this command')
+                        emWhois.set_footer(icon_url=ctx.message.author.avatar_url, text=str(ctx.message.author.display_name) + ' requested this command')
                         emWhois.set_image(url=user.avatar_url)
                         await ctx.send(embed=emWhois)
             else:
