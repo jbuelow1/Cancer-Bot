@@ -15,13 +15,6 @@ class triggerCog:
         'https://i.imgur.com/z4u0Juo.png',
         'https://i.imgur.com/z4u0Juo.png',
         'https://i.imgur.com/vcTg4tO.jpg',
-        'https://i.imgur.com/Ffgz8nr.jpg',
-        'https://i.imgur.com/cGSwTCE.jpg',
-        'https://i.imgur.com/A0tyAEz.jpg',
-        'https://i.imgur.com/WBOuuhN.jpg',
-        'https://i.imgur.com/qmAHkg4.png',
-        'https://i.imgur.com/Kkq1d0t.jpg',
-        'https://i.imgur.com/bgQeCOL.jpg'
         ]
 
         self.pingemojis = [
@@ -98,8 +91,7 @@ class triggerCog:
         if message.author.bot:
             return
 
-        word = ['heck', 'hecking', 'heckin', 'hecc', 'hec', 'hek', 'hekk', 'frick', 'fric', 'frik', 'fricc', 'frikk', 'friq']
-        if any(word in message.content.lower() for word in list_):
+        if (self.wordInString('heck', message.content.lower()) or self.wordInString('hek', message.content.lower()) or self.wordInString('hecking', message.content.lower()) or self.wordInString('heckin', message.content.lower()) or self.wordInString('frick', message.content.lower()) or self.wordInString('frik', message.content.lower()) or self.wordInString('fric', message.content.lower()) or self.wordInString('fricc', message.content.lower())):
             self.bot.striggers += 1
             self.bot.utriggers += 1
             await message.channel.trigger_typing()
@@ -112,8 +104,7 @@ class triggerCog:
             await message.channel.trigger_typing()
             await message.channel.send(random.choice(self.pingemojis))
 
-        word = ['die', 'kms', 'kys']
-        if any(word in message.content.lower() for word in list_):): #CBP
+        if (self.wordInString('die', message.content.lower()) or self.wordInString('kys', message.content.lower()) or self.wordInString('kms', message.content.lower())): #CBP
             self.bot.striggers += 1
             self.bot.utriggers += 1
             await message.channel.trigger_typing()
@@ -133,28 +124,24 @@ class triggerCog:
             else:
                 await message.channel.send('H- Hewwo?!')
 
-        word = ['xd']
-        if any(word in message.content.lower() for word in list_)::
+        if self.wordInString('xd', message.content.lower()):
             self.bot.striggers += 1
             self.bot.utriggers += 1
             await message.channel.trigger_typing()
             await message.channel.send('<a:xd:442034831690301461>')
 
-        word = ['🤔']
-        if any(word in message.content.lower() for word in list_):
+        if '🤔' in message.content:
             self.bot.striggers += 1
             self.bot.utriggers += 1
             await message.channel.trigger_typing()
             await message.channel.send(embed=emThink)
 
-        word = ['no u']
-        if any(word in message.content.lower() for word in list_):
+        if 'no u' in message.content.lower():
             self.bot.striggers += 1
             self.bot.utriggers += 1
             await message.channel.trigger_typing()
             await message.channel.send('Ladies and gentlmen, ' + message.author.mention + ' appears to have won this argument. You can stop fighting like little cucklets now.') #CBP
-
-        if any(word in message.content.lower() for word in list_):
+            
 
 def setup(bot):
     bot.add_cog(triggerCog(bot))
