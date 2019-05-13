@@ -1,3 +1,4 @@
+from discord import File
 from discord.ext import commands
 import discord
 
@@ -93,6 +94,12 @@ class ownerCog:
             )
             f.seek(0, 0)
             json.dump(data, f)
+
+    @commands.command(name='suggestions', hidden=True)
+    @commands.is_owner()
+    @commands.dm_only()
+    async def suggestions(self, ctx):
+        ctx.send("Exported suggestions package:", File(open("suggestions.json", 'r'), filename="suggestions.json"))
 
     @commands.command(name='leave', hidden=True)
     @commands.is_owner()
