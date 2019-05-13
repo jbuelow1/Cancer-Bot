@@ -26,8 +26,7 @@ class managerCog:
 
     async def is_dev(ctx):
         devs = [
-        273940917596061698,
-        95274427171733504
+        273940917596061698
         ]
         return ctx.author.id in devs
 
